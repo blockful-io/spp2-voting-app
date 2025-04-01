@@ -1,5 +1,7 @@
 import { Proposal as SSProposal } from '@snapshot-labs/snapshot.js/dist/src/sign/types';
+import snapshot from '@snapshot-labs/snapshot.js';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Web3Provider } from '@ethersproject/providers';
 
 const PROPOSAL_ID = "0x8ccd12442eb55df65eb24c7a292eab4a5988d6cc2699484791c07859eb954784"
 
@@ -12,14 +14,15 @@ export type SnapshotVotes = {
 };
 ;
 
-interface Candidate {
+export interface Candidate {
+  id: number;
   name: string
   basicBudget: number;
   extendedBudget: number;
-  streamDuration: string;
   score: number;
-  isBasicApproved: boolean;
-  isExtendedApproved: boolean;
+  streamDuration?: string;
+  isBasicApproved?: boolean;
+  isExtendedApproved?: boolean;
 }
 
 interface Proposal extends SSProposal {
@@ -134,6 +137,7 @@ export function useGetProposals() {
       raking: proposal.scores.map((score: number, index: number) => {
         const additionalData = mockData[index] || {}
         return {
+          id: index + 1,
           name: proposal.choices[index],
           basicBudget: additionalData.basicBudget,
           extendedBudget: additionalData.extendedBudget,
@@ -163,6 +167,9 @@ export function useGetProposals() {
 export function useVoteOnProposals() {
   const queryClient = useQueryClient()
 
+  const client = new snapshot.Client712('https://hub.snapshot.org');
+  const web3 = new Web3Provider(window.ethereum!);
+
   const { mutateAsync: voteFunc, error, isPending } = useMutation({
     mutationFn: voteOnProposal,
     onSuccess: () => {
@@ -170,16 +177,14 @@ export function useVoteOnProposals() {
     }
   });
 
-  async function voteOnProposal() {
-    // const res = await fetch('https://hub.snapshot.org/graphql', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ query: QUERY }), //, variables: { voter: address } }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // })
-    // const { data: { proposals } } = await res.json()
-
+  async function voteOnProposal(choice: number[]) {
+    const [account] = await web3.listAccounts();
+    await client.vote(web3, account, {
+      space: 'pikonha.eth',
+      proposal: PROPOSAL_ID,
+      type: "ranked-choice",
+      choice,
+    })
   }
 
   return {

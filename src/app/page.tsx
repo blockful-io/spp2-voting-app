@@ -3,6 +3,7 @@
 import { Check } from "lucide-react";
 import Navbar from "./components/navbar";
 import { useGetProposals } from "./hooks/useSnapshot";
+import { formatCurrency } from "@/utils";
 
 export default function Home() {
   const { proposal, isLoading, isError, isFetching } = useGetProposals();
@@ -10,12 +11,6 @@ export default function Home() {
   if (isLoading) return <div>Loading...</div>;
   if (isError || !proposal) return <div>Error</div>;
   if (isFetching) return <div>Fetching...</div>;
-
-  // const formatCurrency = (amount: number) => {
-  //   if (amount >= 1000000) return `$${(amount / 1000000).toFixed(1)}M`;
-  //   if (amount >= 1000) return `$${(amount / 1000).toFixed(0)}k`;
-  //   return `$${amount}`;
-  // };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -25,11 +20,11 @@ export default function Home() {
         <div className="grid grid-cols-2 gap-8 mb-8">
           <div>
             <h2 className="text-2xl font-bold mb-2">
-              Total Budget: {/* {formatCurrency(totalBudget)} */}
+              Total Budget: {formatCurrency(4500000)}
             </h2>
             <div className="flex space-x-8">
-              <p>1 year: {/* {formatCurrency(totalBudget1Year)} */}</p>
-              <p>2 years: {/* {formatCurrency(totalBudget2Years)} */}</p>
+              <p>1 year: {formatCurrency(3000000)}</p>
+              <p>2 years: {formatCurrency(1500000)}</p>
             </div>
           </div>
           <div>
