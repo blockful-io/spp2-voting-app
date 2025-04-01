@@ -10,12 +10,13 @@ interface ElectionCandidate {
   streamDuration: string;
   allocatedBudget: number;
   rejectionReason: string | null;
+  isEligibleForExtendedBudget: boolean;
 }
 
 const mockElectionData: ElectionCandidate[] = [
   {
     name: "Namespace",
-    score: 4,
+    score: 4, // o que ranqueia o candidato - primeira forma / wins
     averageSupport: 863000,
     basicBudget: 500000,
     extendedBudget: 700000,
@@ -23,6 +24,7 @@ const mockElectionData: ElectionCandidate[] = [
     streamDuration: "2-year",
     allocatedBudget: 700000,
     rejectionReason: null,
+    isEligibleForExtendedBudget: true,
   },
   {
     name: "Unruggable",
@@ -34,6 +36,7 @@ const mockElectionData: ElectionCandidate[] = [
     streamDuration: "2-year",
     allocatedBudget: 700000,
     rejectionReason: null,
+    isEligibleForExtendedBudget: true,
   },
   {
     name: "eth.limo",
@@ -45,6 +48,7 @@ const mockElectionData: ElectionCandidate[] = [
     streamDuration: "1-year",
     allocatedBudget: 800000,
     rejectionReason: null,
+    isEligibleForExtendedBudget: false,
   },
   {
     name: "Blockful",
@@ -56,6 +60,7 @@ const mockElectionData: ElectionCandidate[] = [
     streamDuration: "1-year",
     allocatedBudget: 700000,
     rejectionReason: null,
+    isEligibleForExtendedBudget: true,
   },
   {
     name: "EFP",
@@ -67,6 +72,7 @@ const mockElectionData: ElectionCandidate[] = [
     streamDuration: "1-year",
     allocatedBudget: 0,
     rejectionReason: null,
+    isEligibleForExtendedBudget: true,
   },
 ];
 
