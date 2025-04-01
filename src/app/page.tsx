@@ -1,8 +1,8 @@
 "use client";
 
 import { Check } from "lucide-react";
-import Navbar from "./components/navbar";
-import { useGetProposals } from "./hooks/useSnapshot";
+import Navbar from "../components/navbar";
+import { useGetProposals } from "../hooks/useSnapshot";
 import { formatCurrency } from "@/utils";
 
 export default function Home() {

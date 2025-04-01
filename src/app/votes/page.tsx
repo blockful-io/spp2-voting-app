@@ -1,15 +1,15 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card } from "@/components/card";
+import { Button } from "@/components/button";
 import { Save, GripVertical } from "lucide-react";
 
-import Navbar from "../components/navbar";
+import Navbar from "../../components/navbar";
 import {
   Candidate,
   useGetProposals,
   useVoteOnProposals,
-} from "../hooks/useSnapshot";
+} from "../../hooks/useSnapshot";
 import { useEffect, useState, useRef } from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -29,7 +29,7 @@ const DraggableCandidateItem = ({
   index: number;
   moveCandidate: (dragIndex: number, hoverIndex: number) => void;
 }) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLLIElement>(null);
 
   // Setup drag functionality
   const [{ isDragging }, drag] = useDrag({
@@ -60,6 +60,7 @@ const DraggableCandidateItem = ({
 
       // Get mouse position
       const clientOffset = monitor.getClientOffset();
+      if (!clientOffset) return;
 
       // Get pixels to the top
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
