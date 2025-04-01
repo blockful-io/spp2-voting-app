@@ -2,14 +2,14 @@
 
 import { Check } from "lucide-react";
 import Navbar from "./components/navbar";
-import { useGetProposals } from "./hooks/useSnapshot";
+import { useGetRanking } from "./hooks/useSnapshot";
 import { formatCurrency } from "@/utils";
 
 export default function Home() {
-  const { proposal, isLoading, isError, isFetching } = useGetProposals();
+  const { ranking, isLoading, isError, isFetching } = useGetRanking();
 
   if (isLoading) return <div>Loading...</div>;
-  if (isError || !proposal) return <div>Error</div>;
+  if (isError || !ranking) return <div>Error</div>;
   if (isFetching) return <div>Fetching...</div>;
 
   return (
@@ -75,55 +75,52 @@ export default function Home() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {proposal.raking.map((candidate, index) => {
-                const isApproved =
-                  candidate.isBasicApproved || candidate.isExtendedApproved;
-
+              {ranking.map((rank, index) => {
                 return (
-                  <tr key={index} className={isApproved ? "bg-green-50" : ""}>
+                  <tr
+                    key={index}
+                    className={rank.allocated ? "bg-green-50" : ""}
+                  >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div
                         className={`text-sm ${
-                          isApproved ? "font-bold" : "font-normal"
+                          rank.allocated ? "font-bold" : "font-normal"
                         } text-gray-900`}
                       >
-                        {candidate.name}
+                        {rank.name}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div
                         className={`text-sm ${
-                          isApproved ? "font-bold" : "font-normal"
+                          rank.allocated ? "font-bold" : "font-normal"
                         } text-gray-900`}
                       >
-                        {candidate.score.toFixed(3)}
+                        {rank.score.toFixed(3)}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div
                         className={`text-sm ${
-                          isApproved ? "font-bold" : "font-normal"
+                          rank.allocated ? "font-bold" : "font-normal"
                         } text-gray-900 flex items-center`}
                       >
-                        {/* ${candidate.basicBudget.toLocaleString()} */}$
-                        {candidate.basicBudget}
-                        {candidate.isBasicApproved &&
-                          !candidate.isExtendedApproved && (
-                            <span className="ml-2 inline-flex items-center justify-center w-6 h-6 bg-blue-100 text-blue-600 rounded-full">
-                              <Check size={16} />
-                            </span>
-                          )}
+                        {rank.basicBudget}
+                        {rank.allocated && (
+                          <span className="ml-2 inline-flex items-center justify-center w-6 h-6 bg-blue-100 text-blue-600 rounded-full">
+                            <Check size={16} />
+                          </span>
+                        )}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div
                         className={`text-sm ${
-                          isApproved ? "font-bold" : "font-normal"
+                          rank.allocated ? "font-bold" : "font-normal"
                         } text-gray-900 flex items-center`}
                       >
-                        {/* ${candidate.extendedBudget.toLocaleString()} */}
-                        {candidate.extendedBudget}
-                        {candidate.isExtendedApproved && (
+                        {rank.extendedBudget}
+                        {rank.allocated && (
                           <span className="ml-2 inline-flex items-center justify-center w-6 h-6 bg-blue-100 text-blue-600 rounded-full">
                             <Check size={16} />
                           </span>
@@ -134,16 +131,16 @@ export default function Home() {
                       <span
                         className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
                         ${
-                          candidate.streamDuration === "2 Years"
+                          rank.streamDuration === "2 Years"
                             ? "bg-blue-100 text-blue-800"
-                            : candidate.streamDuration === "1 Year"
+                            : rank.streamDuration === "1 Year"
                             ? "bg-blue-100 text-blue-800"
-                            : candidate.streamDuration === "Eligible"
+                            : rank.streamDuration === "Eligible"
                             ? "bg-green-100 text-green-800"
                             : "bg-red-100 text-red-800"
                         }`}
                       >
-                        {candidate.streamDuration}
+                        {rank.streamDuration}
                       </span>
                     </td>
                   </tr>

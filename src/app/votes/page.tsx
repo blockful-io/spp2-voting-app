@@ -6,32 +6,22 @@ import { Save, ChevronUp, ChevronDown } from "lucide-react";
 
 import Navbar from "../components/navbar";
 import {
-  Candidate,
-  useGetProposals,
+  useGetChoices,
+  useGetRanking,
   useVoteOnProposals,
 } from "../hooks/useSnapshot";
 import { useEffect, useState } from "react";
+import { Choice } from "../hooks/useSnapshot";
 
 export default function Votes() {
-  const { proposal, isLoading, isError, isFetching } = useGetProposals();
+  const { choices, isLoading, isError, isFetching } = useGetChoices();
   const { voteFunc } = useVoteOnProposals();
 
-  const [orderedItems, setOrderedItems] = useState<Candidate[]>([]);
+  const [orderedItems, setOrderedItems] = useState<Choice[]>([]);
 
   useEffect(() => {
-    if (proposal)
-      setOrderedItems(() => [
-        ...proposal.raking,
-        // {
-        //   name: "None of the below",
-        //   basicBudget: 0,
-        //   score: 0,
-        //   extendedBudget: 0,
-        //   streamDuration: "Not Eligible",
-        //   id: proposal.raking.length + 1,
-        // },
-      ]);
-  }, [proposal]);
+    if (choices) setOrderedItems(() => choices);
+  }, [choices]);
 
   async function submitVote() {
     const choices = orderedItems.map(({ id }) => id);
@@ -61,7 +51,7 @@ export default function Votes() {
   };
 
   if (isLoading) return <div>Loading...</div>;
-  if (isError || !proposal) return <div>Error</div>;
+  if (isError) return <div>Error</div>;
   if (isFetching) return <div>Fetching...</div>;
 
   return (
