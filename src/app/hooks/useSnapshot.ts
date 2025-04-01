@@ -1,162 +1,131 @@
-import { Proposal as SSProposal } from '@snapshot-labs/snapshot.js/dist/src/sign/types';
 import snapshot from '@snapshot-labs/snapshot.js';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Web3Provider } from '@ethersproject/providers';
 
 const PROPOSAL_ID = "0x8ccd12442eb55df65eb24c7a292eab4a5988d6cc2699484791c07859eb954784"
 
-export type SnapshotVotes = {
-  proposal: {
-    title: string;
-    choices: string[];
-  };
-  choice: number[];
-};
-;
-
-export interface Candidate {
-  id: number;
-  name: string
+export interface Ranking {
+  name: string;
+  score: number;
+  averageSupport: number;
   basicBudget: number;
   extendedBudget: number;
-  score: number;
-  streamDuration?: string;
-  isBasicApproved?: boolean;
-  isExtendedApproved?: boolean;
+  allocated: boolean;
+  streamDuration: string;
+  allocatedBudget: number;
+  rejectionReason: null;
 }
 
-interface Proposal extends SSProposal {
-  id: string;
-  raking: Candidate[];
-  scores: number[];
-  scores_total: number;
-}
 
-const mockData = [
+const mockRanking = [
   {
-    name: "A",
-    basicBudget: 300,
-    extendedBudget: 1000,
-    streamDuration: "FALSE",
+    "name": "Namespace",
+    "score": 4,
+    "averageSupport": 863000,
+    "basicBudget": 500000,
+    "extendedBudget": 700000,
+    "allocated": true,
+    "streamDuration": "2-year",
+    "allocatedBudget": 700000,
+    "rejectionReason": null
   },
   {
-    name: "B",
-    basicBudget: 200,
-    extendedBudget: 400,
-    streamDuration: "FALSE",
+    "name": "Unruggable",
+    "score": 2,
+    "averageSupport": 689750,
+    "basicBudget": 400000,
+    "extendedBudget": 700000,
+    "allocated": true,
+    "streamDuration": "2-year",
+    "allocatedBudget": 700000,
+    "rejectionReason": null
   },
   {
-    name: "C",
-    basicBudget: 100,
-    extendedBudget: 500,
-    streamDuration: "FALSE",
+    "name": "eth.limo",
+    "score": 2,
+    "averageSupport": 613250,
+    "basicBudget": 700000,
+    "extendedBudget": 800000,
+    "allocated": true,
+    "streamDuration": "1-year",
+    "allocatedBudget": 800000,
+    "rejectionReason": null
   },
   {
-    name: "D",
-    basicBudget: 100,
-    extendedBudget: 500,
-    streamDuration: "FALSE",
+    "name": "Blockful",
+    "score": 2,
+    "averageSupport": 596500,
+    "basicBudget": 400000,
+    "extendedBudget": 700000,
+    "allocated": true,
+    "streamDuration": "1-year",
+    "allocatedBudget": 700000,
+    "rejectionReason": null
   },
   {
-    name: "E",
-    basicBudget: 400,
-    extendedBudget: 500,
-    streamDuration: "FALSE",
-  },
-  {
-    name: "F",
-    basicBudget: 200,
-    extendedBudget: 900,
-    streamDuration: "FALSE",
+    "name": "EFP",
+    "score": 0,
+    "averageSupport": 704500,
+    "basicBudget": 0,
+    "extendedBudget": 0,
+    "allocated": false,
+    "streamDuration": "1-year",
+    "allocatedBudget": 0,
+    "rejectionReason": null
   }
 ]
 
-export function useGetProposals() {
+export interface Choice {
+  id: number;
+  name: number;
+}
 
-  // const queryClient = useQueryClient()
-  // const [currentScore, setCurrentScore] = useState(0)
+export function useGetChoices() {
 
-  const { data: proposal, isLoading, isError, isFetching } = useQuery({
-    queryKey: ['snapshot-score'],
-    queryFn: () => fetchProposals(),
+  const { data: choices, isLoading, isError, isFetching } = useQuery({
+    queryKey: ['snapshot-choices'],
+    queryFn: () => fetchChoices(),
   });
 
-  // useQuery({
-  //   queryKey: ['snapshot-total-score'],
-  //   queryFn: () => fetchTotalScore(),
-  //   staleTime: 1000 * 60 * 1, // 1 minute
-  // })
-
-  // async function fetchTotalScore() {
-  //   const res = await fetch('https://hub.snapshot.org/graphql', {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       query: `
-  //         query TotalScore($proposalId: String!) {
-  //           proposal(id: $proposalId) {
-  //             scores_total
-  //           }
-  //         }
-  //         `, variables: { proposalId: PROPOSAL_ID }
-  //     })
-  //   })
-  //   const { data: { proposal } } = await res.json()
-  //   if (proposal.scores_total !== currentScore) {
-  //     setCurrentScore(proposal.scores_total)
-  //     queryClient.invalidateQueries({ queryKey: ['snapshot-score'] })
-  //   }
-  // }
-
-  async function fetchProposals(): Promise<Proposal | undefined> {
+  async function fetchChoices() {
     const res = await fetch('https://hub.snapshot.org/graphql', {
       method: 'POST',
       body: JSON.stringify({
         query: `
-          query Proposal($proposalId: String!) {
+          query TotalScore($proposalId: String!) {
             proposal(id: $proposalId) {
-              id
-              title
-              snapshot
               choices
-              state
-              scores
-              scores_total
             }
           }
-        `, variables: { proposalId: PROPOSAL_ID }
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+          `, variables: { proposalId: PROPOSAL_ID }
+      })
     })
     const { data: { proposal } } = await res.json()
-
-
-    return {
-      ...proposal,
-      raking: proposal.scores.map((score: number, index: number) => {
-        const additionalData = mockData[index] || {}
-        return {
-          id: index + 1,
-          name: proposal.choices[index],
-          basicBudget: additionalData.basicBudget,
-          extendedBudget: additionalData.extendedBudget,
-          streamDuration: additionalData.streamDuration,
-          score,
-          isBasicApproved: index % 2 === 0,
-          isExtendedApproved: index % 2 === 0,
-        }
-      })
-        .sort((a: Candidate, b: Candidate) => {
-          if (a.isExtendedApproved) return -1
-          if (b.isBasicApproved) return 1
-          return b.score - a.score
-        }),
-    };
+    return proposal.choices.map((c: number, index: number) => ({ id: c, name: c }))
   }
 
   return {
-    proposal,
+    choices,
+    isLoading,
+    isError,
+    isFetching,
+  }
+
+}
+
+export function useGetRanking() {
+
+  const { data: ranking, isLoading, isError, isFetching } = useQuery({
+    queryKey: ['snapshot-score'],
+    queryFn: () => fetchRanking(),
+  });
+
+  async function fetchRanking(): Promise<Ranking[] | undefined> {
+    return mockRanking
+  }
+
+  return {
+    ranking,
     isLoading,
     isError,
     isFetching,
