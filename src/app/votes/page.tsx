@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Save, ChevronUp, ChevronDown } from "lucide-react";
+import { Save, GripVertical } from "lucide-react";
 
 import Navbar from "../components/navbar";
 import {
@@ -10,7 +10,102 @@ import {
   useGetProposals,
   useVoteOnProposals,
 } from "../hooks/useSnapshot";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { DndProvider, useDrag, useDrop } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
+// Define drag item type d
+const ItemTypes = {
+  CANDIDATE: "candidate",
+};
+
+// Draggable candidate component
+const DraggableCandidateItem = ({
+  candidate,
+  index,
+  moveCandidate,
+}: {
+  candidate: Candidate;
+  index: number;
+  moveCandidate: (dragIndex: number, hoverIndex: number) => void;
+}) => {
+  const ref = useRef(null);
+
+  // Setup drag functionality
+  const [{ isDragging }, drag] = useDrag({
+    type: ItemTypes.CANDIDATE,
+    item: { index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  const [, drop] = useDrop({
+    accept: ItemTypes.CANDIDATE,
+    hover: (item, monitor) => {
+      if (!ref.current) return;
+
+      const dragIndex = item.index;
+      const hoverIndex = index;
+
+      // Don't replace items with themselves
+      if (dragIndex === hoverIndex) return;
+
+      // Get rectangle on screen
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+
+      // Get vertical middle
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+
+      // Get mouse position
+      const clientOffset = monitor.getClientOffset();
+
+      // Get pixels to the top
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+
+      // Only perform the move when the mouse has crossed half of the items height
+      // When dragging downwards, only move when the cursor is below 50%
+      // When dragging upwards, only move when the cursor is above 50%
+
+      // Dragging downwards
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return;
+
+      // Dragging upwards
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) return;
+
+      // Perform the actual move
+      moveCandidate(dragIndex, hoverIndex);
+
+      // Update drag source index
+      item.index = hoverIndex;
+    },
+  });
+
+  // Connect drag and drop refs
+  drag(drop(ref));
+
+  return (
+    <li
+      ref={ref}
+      className={`p-4 flex items-center ${
+        isDragging ? "opacity-50 bg-gray-100" : ""
+      }`}
+      style={{ cursor: "move" }}
+    >
+      <div className="flex items-center mr-2 text-gray-400">
+        <GripVertical size={20} />
+      </div>
+
+      <div className="flex-1">
+        <div className="flex items-center">
+          <span className="font-medium text-gray-900 mr-2">{index + 1}.</span>
+          <span className="font-medium">{candidate.name}</span>
+        </div>
+      </div>
+    </li>
+  );
+};
 
 export default function Votes() {
   const { proposal, isLoading, isError, isFetching } = useGetProposals();
@@ -38,25 +133,16 @@ export default function Votes() {
     await voteFunc(choices);
   }
 
-  // Move an item up in the list
-  const moveUp = (index: number) => {
-    if (index === 0) return; // Already at the top
-
+  // Function to move candidate based on drag and drop
+  const moveCandidate = (dragIndex: number, hoverIndex: number) => {
     const newItems = [...orderedItems];
-    const temp = newItems[index];
-    newItems[index] = newItems[index - 1];
-    newItems[index - 1] = temp;
-    setOrderedItems(newItems);
-  };
+    const draggedItem = newItems[dragIndex];
 
-  // Move an item down in the list
-  const moveDown = (index: number) => {
-    if (index === orderedItems.length - 1) return; // Already at the bottom
+    // Remove the dragged item
+    newItems.splice(dragIndex, 1);
+    // Insert it at the new position
+    newItems.splice(hoverIndex, 0, draggedItem);
 
-    const newItems = [...orderedItems];
-    const temp = newItems[index];
-    newItems[index] = newItems[index + 1];
-    newItems[index + 1] = temp;
     setOrderedItems(newItems);
   };
 
@@ -83,71 +169,24 @@ export default function Votes() {
             <div className="p-4 bg-blue-50 border-b border-blue-100">
               <h3 className="font-medium text-blue-800">Instructions</h3>
               <p className="text-sm text-blue-700 mt-1">
-                Use the arrows to reorder candidates. Your most preferred
+                Drag and drop candidates to reorder them. Your most preferred
                 candidate should be at the top. Any candidates below &quot;None
                 of the below&quot; will not be counted in your vote.
               </p>
             </div>
 
-            <ul className="divide-y divide-gray-200">
-              {orderedItems.map((candidate, index) => (
-                <li
-                  key={index}
-                  className={`p-4 flex items-center `}
-                  // ${id === "none" ? "bg-gray-100" : ""}
-                >
-                  <div className="flex-1">
-                    <div className="flex items-center">
-                      <span className="font-medium text-gray-900 mr-2">
-                        {index + 1}.
-                      </span>
-                      <span
-                        className={`font-medium`}
-                        //  ${
-                        //   candidate.id === "none"
-                        //     ? "text-red-600"
-                        //     : "text-gray-900"
-                        // }`}
-                      >
-                        {candidate.name}
-                      </span>
-                    </div>
-
-                    {/* {candidate.id !== "none" && (
-                      <div className="mt-1 text-sm text-gray-500 grid grid-cols-2 gap-4">
-                        <div>
-                          <span className="font-medium">Basic:</span>{" "}
-                          {formatCurrency(candidate.basicBudget)}
-                        </div>
-                        <div>
-                          <span className="font-medium">Extended:</span>{" "}
-                          {formatCurrency(candidate.extendedBudget)}
-                        </div>
-                      </div>
-                    )} */}
-                  </div>
-
-                  <div className="flex flex-col space-y-1 ml-4">
-                    <button
-                      onClick={() => moveUp(index)}
-                      disabled={index === 0}
-                      className="p-1 rounded hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed"
-                      aria-label="Move up"
-                    >
-                      <ChevronUp size={20} />
-                    </button>
-                    <button
-                      onClick={() => moveDown(index)}
-                      disabled={index === orderedItems.length - 1}
-                      className="p-1 rounded hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed"
-                      aria-label="Move down"
-                    >
-                      <ChevronDown size={20} />
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <DndProvider backend={HTML5Backend}>
+              <ul className="divide-y divide-gray-200">
+                {orderedItems.map((candidate, index) => (
+                  <DraggableCandidateItem
+                    key={candidate.id}
+                    candidate={candidate}
+                    index={index}
+                    moveCandidate={moveCandidate}
+                  />
+                ))}
+              </ul>
+            </DndProvider>
           </div>
 
           <div className="flex justify-end">
