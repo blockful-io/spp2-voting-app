@@ -1,0 +1,156 @@
+[
+  {
+    "Name": "Curia Lab",
+    "Basic budget": 300,
+    "Extended budget": 300,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-curia-lab-application/20470"
+  },
+  {
+    "Name": "Tally",
+    "Basic budget": 300,
+    "Extended budget": 300,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-tally-application/20491"
+  },
+  {
+    "Name": "Unicorn.eth",
+    "Basic budget": 300,
+    "Extended budget": 300,
+    "2 year eligible": "TRUE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-ens-accounts-powered-by-unicorn-eth/20467"
+  },
+  {
+    "Name": "Records.xyz (Wildcard Labs)",
+    "Basic budget": 300,
+    "Extended budget": 400,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-records-xyz-by-wildcard-labs-application/20481"
+  },
+  {
+    "Name": "Lighthouse Labs",
+    "Basic budget": 400,
+    "Extended budget": 400,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-lighthouse-labs/20404"
+  },
+  {
+    "Name": "ZK Email",
+    "Basic budget": 400,
+    "Extended budget": 800,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-zk-email-application/20450"
+  },
+  {
+    "Name": "Unruggable",
+    "Basic budget": 400,
+    "Extended budget": 700,
+    "2 year eligible": "TRUE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-unruggable-application/20485"
+  },
+  {
+    "Name": "ENScribe",
+    "Basic budget": 400,
+    "Extended budget": 400,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-enscribe-application/20474"
+  },
+  {
+    "Name": "Blockful",
+    "Basic budget": 400,
+    "Extended budget": 700,
+    "2 year eligible": "TRUE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-blockful-application/20463"
+  },
+  {
+    "Name": "Agora",
+    "Basic budget": 300,
+    "Extended budget": 400,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-agora-application/20443"
+  },
+  {
+    "Name": "WebHash.eth",
+    "Basic budget": 300,
+    "Extended budget": 300,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-webhash-eth-application/20466"
+  },
+  {
+    "Name": "x23.ai",
+    "Basic budget": 300,
+    "Extended budget": 300,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-x23-ai-application/20464"
+  },
+  {
+    "Name": "NameStone",
+    "Basic budget": 800,
+    "Extended budget": 800,
+    "2 year eligible": "TRUE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-namestone-application/20462"
+  },
+  {
+    "Name": "Namespace",
+    "Basic budget": 500,
+    "Extended budget": 700,
+    "2 year eligible": "TRUE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-namespace-application/20456"
+  },
+  {
+    "Name": "dWeb.host",
+    "Basic budget": 300,
+    "Extended budget": 400,
+    "2 year eligible": "TRUE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-dweb-host-application/20435"
+  },
+  {
+    "Name": "GovPal",
+    "Basic budget": 300,
+    "Extended budget": 300,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-govpal-application/20459"
+  },
+  {
+    "Name": "Web3.bio",
+    "Basic budget": 500,
+    "Extended budget": 500,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-web3-bio-application/20460"
+  },
+  {
+    "Name": "AlphaGrowth",
+    "Basic budget": 400,
+    "Extended budget": 800,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-alphagrowth-application/20451"
+  },
+  {
+    "Name": "Ethereum Identity Foundation",
+    "Basic budget": 500,
+    "Extended budget": 700,
+    "2 year eligible": "TRUE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-ethereum-identity-foundation-application/20439"
+  },
+  {
+    "Name": "JustaName",
+    "Basic budget": 400,
+    "Extended budget": 600,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-justaname-application/20430"
+  },
+  {
+    "Name": "PYOR",
+    "Basic budget": 300,
+    "Extended budget": 300,
+    "2 year eligible": "FALSE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-pyor-application/20429"
+  },
+  {
+    "Name": "eth.limo",
+    "Basic budget": 700,
+    "Extended budget": 800,
+    "2 year eligible": "TRUE",
+    "Forum Link": "https://discuss.ens.domains/t/spp2-eth-limo-application/20369"
+  }
+]
