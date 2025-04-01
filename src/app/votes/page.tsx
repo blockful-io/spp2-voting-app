@@ -45,7 +45,7 @@ const DraggableCandidateItem = ({
     hover: (item, monitor) => {
       if (!ref.current) return;
 
-      const dragIndex = item.index;
+      const dragIndex = (item as { index: number }).index;
       const hoverIndex = index;
 
       // Don't replace items with themselves
@@ -79,7 +79,7 @@ const DraggableCandidateItem = ({
       moveCandidate(dragIndex, hoverIndex);
 
       // Update drag source index
-      item.index = hoverIndex;
+      (item as { index: number }).index = hoverIndex;
     },
   });
 
@@ -90,7 +90,7 @@ const DraggableCandidateItem = ({
     <li
       ref={ref}
       className={`p-4 flex items-center ${
-        isDragging ? "opacity-50 bg-gray-100" : ""
+        isDragging ? "opacity-50 bg-gray-800" : ""
       }`}
       style={{ cursor: "move" }}
     >
@@ -100,8 +100,8 @@ const DraggableCandidateItem = ({
 
       <div className="flex-1">
         <div className="flex items-center">
-          <span className="font-medium text-gray-900 mr-2">{index + 1}.</span>
-          <span className="font-medium">{candidate.name}</span>
+          <span className="font-medium text-gray-100 mr-2">{index + 1}.</span>
+          <span className="font-medium text-gray-100">{candidate.name}</span>
         </div>
       </div>
     </li>
@@ -152,24 +152,26 @@ export default function Votes() {
   if (isFetching) return <div>Fetching...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-900">
       <Navbar />
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-3xl mx-auto">
           <div className="mb-8">
-            <h2 className="text-2xl font-bold mb-2">Rank Your Preferences</h2>
-            <p className="text-gray-600">
+            <h2 className="text-2xl font-bold mb-2 text-gray-100">
+              Rank Your Preferences
+            </h2>
+            <p className="text-gray-400">
               Drag candidates up or down to rank them in your preferred order.
               Any candidates below &quot;None of the below&quot; will not be
               counted.
             </p>
           </div>
 
-          <div className="bg-white rounded-lg shadow overflow-hidden mb-6">
-            <div className="p-4 bg-blue-50 border-b border-blue-100">
-              <h3 className="font-medium text-blue-800">Instructions</h3>
-              <p className="text-sm text-blue-700 mt-1">
+          <div className="bg-gray-800 rounded-lg shadow overflow-hidden mb-6">
+            <div className="p-4 bg-blue-900/50 border-b border-blue-800">
+              <h3 className="font-medium text-blue-100">Instructions</h3>
+              <p className="text-sm text-blue-200 mt-1">
                 Drag and drop candidates to reorder them. Your most preferred
                 candidate should be at the top. Any candidates below &quot;None
                 of the below&quot; will not be counted in your vote.
@@ -177,7 +179,7 @@ export default function Votes() {
             </div>
 
             <DndProvider backend={HTML5Backend}>
-              <ul className="divide-y divide-gray-200">
+              <ul className="divide-y divide-gray-700">
                 {orderedItems.map((candidate, index) => (
                   <DraggableCandidateItem
                     key={candidate.id}
@@ -197,9 +199,9 @@ export default function Votes() {
             </Button>
           </div>
 
-          <Card className="mt-8 p-4 bg-yellow-50 border-yellow-200">
-            <h3 className="font-medium text-yellow-800">Important Note</h3>
-            <p className="text-sm text-yellow-700 mt-1">
+          <Card className="mt-8 p-4 bg-yellow-900/50 border-yellow-800">
+            <h3 className="font-medium text-yellow-100">Important Note</h3>
+            <p className="text-sm text-yellow-200 mt-1">
               Once submitted, your vote cannot be changed. Please review your
               ranking carefully before submitting.
             </p>
