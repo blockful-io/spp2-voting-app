@@ -39,14 +39,25 @@ export default function EnsElectionPage() {
   const { data, isLoading, error } = useEnsElectionData();
   const [isOpen, setIsOpen] = useState(false);
 
-  // Handle escape key
+  // Handle escape key and body scroll
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsOpen(false);
     };
+
+    // Toggle body scroll
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
     window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, []);
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   if (isLoading) {
     return (
@@ -89,8 +100,8 @@ export default function EnsElectionPage() {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 z-50 h-screen w-[500px] transform shadow-2xl shadow-white transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed top-0 right-0 z-50 h-screen w-[500px] transform overflow-y-auto bg-dark transition-all duration-300 ease-in-out ${
+          isOpen ? "translate-x-0 shadow-2xl shadow-white" : "translate-x-full"
         }`}
       >
         <ResultsDetails onClose={() => setIsOpen(false)} />
