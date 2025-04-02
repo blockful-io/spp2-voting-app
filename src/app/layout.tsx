@@ -38,17 +38,12 @@ export default function RootLayout({
               </Link>
               <div className="flex items-center gap-6">
                 <Link
-                  href="/results"
+                  href="/"
                   className="transition-colors hover:text-blue-400"
                 >
                   Results
                 </Link>
-                <Link
-                  href="/metrics"
-                  className="transition-colors hover:text-blue-400"
-                >
-                  Metrics
-                </Link>
+
                 <Link
                   href="/vote"
                   className="transition-colors hover:text-blue-400"
