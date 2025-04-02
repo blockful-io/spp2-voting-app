@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 interface ElectionCandidate {
   name: string;
@@ -77,22 +77,25 @@ const mockElectionData: ElectionCandidate[] = [
 ];
 
 export function useEnsElectionData() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  const [data, setData] = useState<ElectionCandidate[]>(mockElectionData);
-  const isMounted = useRef(false);
+  const [data, setData] = useState<ElectionCandidate[]>([]);
 
-  const delay = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
+  useEffect(() => {
+    // Simulate a brief loading state
+    const timer = setTimeout(() => {
+      setData(mockElectionData);
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const fetch = async () => {
-    if (isMounted.current) return;
-    isMounted.current = true;
-
     setIsLoading(true);
     setError(null);
     try {
-      await delay(1000); // 1 second delay
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // 1 second delay
       setData(mockElectionData);
       return mockElectionData;
     } catch (err) {
