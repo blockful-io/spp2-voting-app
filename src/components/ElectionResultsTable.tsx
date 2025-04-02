@@ -2,6 +2,7 @@ import { type Candidate } from "@/types/election";
 
 interface ElectionResultsTableProps {
   candidates: Candidate[];
+  onShowDetails?: () => void;
 }
 
 function RankIcon({ rank }: { rank: number }) {
@@ -14,6 +15,7 @@ function RankIcon({ rank }: { rank: number }) {
 
 export function ElectionResultsTable({
   candidates,
+  onShowDetails,
 }: ElectionResultsTableProps) {
   const fundedCandidates = candidates.filter((c) => c.allocatedBudget > 0);
   const notFundedCandidates = candidates.filter((c) => c.allocatedBudget === 0);
@@ -110,7 +112,10 @@ export function ElectionResultsTable({
                 </div>
               </td>
               <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
-                <button className="rounded-full bg-dark/50 px-3 py-1 hover:bg-dark/70">
+                <button
+                  onClick={onShowDetails}
+                  className="rounded-full bg-dark/50 px-3 py-1 hover:bg-dark/70"
+                >
                   Details →
                 </button>
               </td>
@@ -170,7 +175,10 @@ export function ElectionResultsTable({
                 </div>
               </td>
               <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
-                <button className="rounded-full bg-dark/50 px-3 py-1 hover:bg-dark/70">
+                <button
+                  onClick={onShowDetails}
+                  className="rounded-full bg-dark/50 px-3 py-1 hover:bg-dark/70"
+                >
                   Details →
                 </button>
               </td>

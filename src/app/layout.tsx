@@ -31,7 +31,7 @@ export default function RootLayout({
       >
         <Provider>
           <div className="z-20 flex w-full items-center justify-center border-b border-b-lightDark bg-dark px-5 shadow-xl shadow-dark">
-            <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 text-gray-100">
+            <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 text-gray-100">
               <Link href="/" className="flex items-center gap-2">
                 <span className="text-2xl">📊</span>
                 <span className="text-xl font-semibold">Electionful</span>
