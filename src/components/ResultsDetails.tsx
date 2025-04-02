@@ -1,6 +1,3 @@
-import { useState } from "react";
-import { BarChart, Bar, ResponsiveContainer } from "recharts";
-
 interface ResultsDetailsProps {
   onClose: () => void;
 }
@@ -12,18 +9,6 @@ interface HeadToHeadResult {
 }
 
 export function ResultsDetails({ onClose }: ResultsDetailsProps) {
-  const [selectedBudget, setSelectedBudget] = useState<"basic" | "extended">(
-    "basic"
-  );
-
-  const budgetData = [
-    {
-      name: "Budget",
-      basic: 265500,
-      extended: 98500,
-    },
-  ];
-
   const matchResults: HeadToHeadResult[] = [
     { candidate: "Blockful", votes: 100500, winner: true },
     { candidate: "Namespace", votes: 120500, winner: true },
