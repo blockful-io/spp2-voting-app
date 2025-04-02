@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BarChart, Bar, ResponsiveContainer } from "recharts";
 
 interface ResultsDetailsProps {
   onClose: () => void;
@@ -15,16 +16,13 @@ export function ResultsDetails({ onClose }: ResultsDetailsProps) {
     "basic"
   );
 
-  const budgetData = {
-    basic: {
-      label: "Basic ($500k)",
-      votes: 265500,
+  const budgetData = [
+    {
+      name: "Budget",
+      basic: 265500,
+      extended: 98500,
     },
-    extended: {
-      label: "Extended ($700k)",
-      votes: 98500,
-    },
-  };
+  ];
 
   const matchResults: HeadToHeadResult[] = [
     { candidate: "Blockful", votes: 100500, winner: true },
@@ -54,25 +52,30 @@ export function ResultsDetails({ onClose }: ResultsDetailsProps) {
         <h3 className="mb-4 text-lg font-semibold text-gray-100">
           Preferred Budget
         </h3>
-        <div className="flex gap-4">
-          {Object.entries(budgetData).map(([key, data]) => (
-            <button
-              key={key}
-              onClick={() => setSelectedBudget(key as "basic" | "extended")}
-              className={`flex-1 rounded-lg border p-4 ${
-                selectedBudget === key
-                  ? "border-blue-500 bg-blue-500/10"
-                  : "border-lightDark bg-dark/50"
-              }`}
-            >
-              <div className="mb-2 text-sm font-medium text-gray-300">
-                {data.label}
-              </div>
-              <div className="text-xl font-bold text-gray-100">
-                {data.votes.toLocaleString()}
-              </div>
-            </button>
-          ))}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-1">
+            <div className="flex items-center gap-2">
+              <span className="text-blue-400">Basic ($500k)</span>
+              <span className="text-xl">🏆</span>
+            </div>
+            <span className="text-gray-400">Extended ($700k)</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-2xl font-semibold text-gray-300">
+              265,500
+            </span>
+            <span className="text-2xl font-semibold text-gray-500">98,500</span>
+          </div>
+        </div>
+        <div className="h-2 w-full overflow-hidden rounded-full bg-gray-600">
+          <div className="relative h-full w-full">
+            <div
+              className="absolute h-full bg-blue-500"
+              style={{
+                width: `${(265500 / (265500 + 98500)) * 100}%`,
+              }}
+            />
+          </div>
         </div>
       </div>
 
@@ -85,24 +88,39 @@ export function ResultsDetails({ onClose }: ResultsDetailsProps) {
           {matchResults.map((result, index) => (
             <div
               key={index}
-              className="flex items-center justify-between rounded-lg border border-lightDark bg-dark/50 p-4"
+              className="rounded-lg border border-lightDark bg-dark/50 p-4"
             >
-              <div className="flex items-center gap-3">
-                <span className="text-gray-300">
-                  {result.votes.toLocaleString()}
-                </span>
-                <span className="text-gray-100">{result.candidate}</span>
+              <div className="mb-3 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="text-gray-300">
+                    {result.votes.toLocaleString()}
+                  </span>
+                  <span className="text-gray-100">{result.candidate}</span>
+                </div>
+                {result.winner ? (
+                  <span className="flex items-center gap-2 text-emerald-500">
+                    <span className="text-xl">🏆</span>
+                    {(result.votes * 3).toLocaleString()}
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-2 text-gray-500">
+                    ⨯ {(result.votes / 2).toLocaleString()}
+                  </span>
+                )}
               </div>
-              {result.winner ? (
-                <span className="flex items-center gap-2 text-emerald-500">
-                  <span className="text-xl">🏆</span>
-                  {(result.votes * 3).toLocaleString()}
-                </span>
-              ) : (
-                <span className="flex items-center gap-2 text-gray-500">
-                  ⨯ {(result.votes / 2).toLocaleString()}
-                </span>
-              )}
+              <div className="h-[6px] w-full overflow-hidden rounded-full bg-dark">
+                <div className="relative h-full w-full">
+                  <div className="absolute h-full w-full bg-gray-600" />
+                  <div
+                    className="absolute h-full bg-emerald-500"
+                    style={{
+                      width: result.winner
+                        ? `${(result.votes / (result.votes * 3)) * 100}%`
+                        : `${(result.votes / (result.votes * 2)) * 100}%`,
+                    }}
+                  />
+                </div>
+              </div>
             </div>
           ))}
         </div>
