@@ -4,6 +4,8 @@ import { useEnsElectionData } from "@/hooks/useEnsElectionData";
 import { ElectionResultsTable } from "@/components/ElectionResultsTable";
 import { ProjectsOverview } from "@/components/ProjectsOverview";
 import { AllocatedBudget } from "@/components/AllocatedBudget";
+import { ResultsDetails } from "@/components/ResultsDetails";
+import { useState, useEffect } from "react";
 
 const budgetData = [
   {
@@ -35,10 +37,31 @@ const projectsData = [
 
 export default function EnsElectionPage() {
   const { data, isLoading, error } = useEnsElectionData();
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Handle escape key and body scroll
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+
+    // Toggle body scroll
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    window.addEventListener("keydown", handleEsc);
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   if (isLoading) {
     return (
-      <div className="container mx-auto max-w-6xl px-4 py-8">
+      <div className="container mx-auto max-w-7xl px-4 py-8">
         <div className="flex items-center justify-center">
           <div className="text-gray-300">Loading election data...</div>
         </div>
@@ -48,7 +71,7 @@ export default function EnsElectionPage() {
 
   if (error) {
     return (
-      <div className="container mx-auto max-w-6xl px-4 py-8">
+      <div className="container mx-auto max-w-7xl px-4 py-8">
         <div className="flex items-center justify-center">
           <div className="text-red-400">Error loading election data</div>
         </div>
@@ -57,7 +80,7 @@ export default function EnsElectionPage() {
   }
 
   return (
-    <div className="container mx-auto max-w-6xl px-4 py-8">
+    <div className="container mx-auto max-w-7xl px-4 py-8">
       <div className="mb-8 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <span className="text-2xl">📊</span>
@@ -65,7 +88,31 @@ export default function EnsElectionPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      {/* Backdrop */}
+      <div
+        className={`fixed inset-0 bg-black/50 transition-opacity duration-300 ${
+          isOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setIsOpen(false)}
+        style={{ zIndex: 100 }}
+      />
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 right-0 h-screen w-[500px] transform overflow-y-scroll bg-dark transition-all duration-300 ease-in-out ${
+          isOpen ? "translate-x-0 shadow-2xl shadow-black" : "translate-x-full"
+        }`}
+        style={{ zIndex: 101 }}
+      >
+        <ResultsDetails onClose={() => setIsOpen(false)} />
+      </div>
+
+      <div
+        className="relative grid grid-cols-1 gap-6 lg:grid-cols-2"
+        style={{ zIndex: 1 }}
+      >
         {/* Allocated Budget Chart */}
         <AllocatedBudget
           budgetData={budgetData}
@@ -78,7 +125,10 @@ export default function EnsElectionPage() {
 
         {/* Table */}
         <div className="lg:col-span-2">
-          <ElectionResultsTable candidates={data} />
+          <ElectionResultsTable
+            candidates={data}
+            onShowDetails={() => setIsOpen(true)}
+          />
         </div>
       </div>
     </div>
