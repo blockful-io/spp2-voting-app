@@ -4,6 +4,7 @@ export interface Candidate {
   averageSupport: number;
   allocatedBudget: number;
   streamDuration: string;
+  isEligibleForExtendedBudget: boolean;
 }
 
 export interface ProjectData {
