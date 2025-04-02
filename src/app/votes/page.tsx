@@ -1,12 +1,33 @@
-// "use client";
+"use client";
+
+import Navbar from "../../components/navbar";
+
+export default function Votes() {
+  return (
+    <div className="min-h-screen bg-gray-900">
+      <Navbar />
+      <main className="container mx-auto px-4 py-8">
+        <div className="max-w-3xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold mb-2 text-gray-100">
+              Voting Page
+            </h2>
+            <p className="text-gray-400">
+              This page is under construction. Please check back later.
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
 
 // import { Card } from "@/components/card";
 // import { Button } from "@/components/button";
 // import { Save, GripVertical } from "lucide-react";
 
-// import Navbar from "../../components/navbar";
 // import {
-// ,
+//   useGetProposals,
 //   useVoteOnProposals,
 // } from "../../hooks/useSnapshot";
 // import { useEffect, useState, useRef } from "react";
