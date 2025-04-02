@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useEnsElectionData } from "@/hooks/useEnsElectionData";
 import { ElectionResultsTable } from "@/components/ElectionResultsTable";
 import { ProjectsOverview } from "@/components/ProjectsOverview";
@@ -35,11 +34,7 @@ const projectsData = [
 ];
 
 export default function EnsElectionPage() {
-  const { data, isLoading, error, fetch } = useEnsElectionData();
-
-  useEffect(() => {
-    fetch();
-  }, [fetch]);
+  const { data, isLoading, error } = useEnsElectionData();
 
   if (isLoading) {
     return (
