@@ -96,18 +96,23 @@ export default function EnsElectionPage() {
             : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsOpen(false)}
+        style={{ zIndex: 100 }}
       />
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 z-50 h-screen w-[500px] transform overflow-y-scroll bg-dark transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 h-screen w-[500px] transform overflow-y-scroll bg-dark transition-all duration-300 ease-in-out ${
           isOpen ? "translate-x-0 shadow-2xl shadow-black" : "translate-x-full"
         }`}
+        style={{ zIndex: 101 }}
       >
         <ResultsDetails onClose={() => setIsOpen(false)} />
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div
+        className="relative grid grid-cols-1 gap-6 lg:grid-cols-2"
+        style={{ zIndex: 1 }}
+      >
         {/* Allocated Budget Chart */}
         <AllocatedBudget
           budgetData={budgetData}
