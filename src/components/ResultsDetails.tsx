@@ -38,7 +38,7 @@ export function ResultsDetails({ onClose }: ResultsDetailsProps) {
   ];
 
   return (
-    <div className="h-full p-6">
+    <div className="p-6">
       <div className="mb-8 flex items-center justify-between">
         <h2 className="text-2xl font-bold text-gray-100">Results Details</h2>
         <button
