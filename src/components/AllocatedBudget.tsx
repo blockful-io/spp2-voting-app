@@ -41,8 +41,8 @@ export function AllocatedBudget({
           >
             <XAxis type="number" domain={[0, totalBudget]} hide />
             <YAxis type="category" dataKey="name" hide />
-            <Bar dataKey="oneYear" stackId="stack" fill="#F97316" />
-            <Bar dataKey="twoYears" stackId="stack" fill="#22C55E" />
+            <Bar dataKey="oneYear" stackId="stack" fill="#3B82F6" />
+            <Bar dataKey="twoYears" stackId="stack" fill="#EC4899" />
             <Bar dataKey="notAllocated" stackId="stack" fill="#374151" />
           </BarChart>
         </ResponsiveContainer>
