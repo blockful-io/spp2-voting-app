@@ -1,4 +1,5 @@
 import { type Candidate } from "@/types/election";
+import { ChevronRight } from "lucide-react";
 
 interface ElectionResultsTableProps {
   candidates: Candidate[];
@@ -28,6 +29,9 @@ export function ElectionResultsTable({
             <th className="w-16 px-6 py-4 text-left text-sm font-medium text-gray-300">
               Rank
             </th>
+            <th className="w-24 px-6 py-4 text-left text-sm font-medium text-gray-300">
+              Wins
+            </th>
             <th className="px-6 py-4 text-left text-sm font-medium text-gray-300">
               Candidate
             </th>
@@ -54,19 +58,26 @@ export function ElectionResultsTable({
         <tbody className="divide-y divide-lightDark">
           {/* Funded Section */}
           <tr>
-            <td colSpan={8} className="bg-dark/50 px-6 py-2">
+            <td colSpan={9} className="bg-dark/50 px-6 py-2">
               <span className="text-sm font-medium text-orange-500">
                 FUNDED
               </span>
             </td>
           </tr>
           {fundedCandidates.map((candidate, index) => (
-            <tr key={candidate.name} className="hover:bg-dark/50">
+            <tr
+              key={candidate.name}
+              className="group cursor-pointer transition-colors duration-200 hover:bg-gray-800"
+              onClick={() => onShowDetails?.(candidate.name)}
+            >
               <td className="whitespace-nowrap px-6 py-4">
                 <div className="flex items-center gap-2">
                   <RankIcon rank={index + 1} />
                   <span className="text-sm text-gray-300">{index + 1}</span>
                 </div>
+              </td>
+              <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
+                {candidate.wins || 0}
               </td>
               <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
                 {candidate.name}
@@ -112,29 +123,31 @@ export function ElectionResultsTable({
                 </div>
               </td>
               <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
-                <button
-                  onClick={() => onShowDetails?.(candidate.name)}
-                  className="rounded-full bg-dark/50 px-3 py-1 hover:bg-dark/70"
-                >
-                  Details →
-                </button>
+                <ChevronRight className="h-4 w-4 text-gray-500 transition-transform duration-200 group-hover:translate-x-1" />
               </td>
             </tr>
           ))}
           {/* Not Funded Section */}
           <tr>
-            <td colSpan={8} className="bg-dark/50 px-6 py-2">
+            <td colSpan={9} className="bg-dark/50 px-6 py-2">
               <span className="text-sm font-medium text-gray-500">
                 NOT FUNDED
               </span>
             </td>
           </tr>
           {notFundedCandidates.map((candidate, index) => (
-            <tr key={candidate.name} className="hover:bg-dark/50">
+            <tr
+              key={candidate.name}
+              className="group cursor-pointer transition-colors duration-200 hover:bg-gray-800"
+              onClick={() => onShowDetails?.(candidate.name)}
+            >
               <td className="whitespace-nowrap px-6 py-4">
                 <span className="ml-8 text-sm text-gray-300">
                   {fundedCandidates.length + index + 1}
                 </span>
+              </td>
+              <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
+                {candidate.wins || 0}
               </td>
               <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
                 {candidate.name}
@@ -175,12 +188,7 @@ export function ElectionResultsTable({
                 </div>
               </td>
               <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
-                <button
-                  onClick={() => onShowDetails?.(candidate.name)}
-                  className="rounded-full bg-dark/50 px-3 py-1 hover:bg-dark/70"
-                >
-                  Details →
-                </button>
+                <ChevronRight className="h-4 w-4 text-gray-500 transition-transform duration-200 group-hover:translate-x-1" />
               </td>
             </tr>
           ))}

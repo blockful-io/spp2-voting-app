@@ -5,6 +5,7 @@ export interface Candidate {
   allocatedBudget: number;
   streamDuration: string;
   isEligibleForExtendedBudget: boolean;
+  wins: number;
 }
 
 export interface ProjectData {
