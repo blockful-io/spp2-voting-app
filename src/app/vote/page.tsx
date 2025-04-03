@@ -4,11 +4,6 @@ import { useState, useEffect } from "react";
 import { useEnsElectionData } from "@/hooks/useEnsElectionData";
 import { VoteTable } from "@/components/vote/VoteTable";
 import { MenuIcon } from "@/components/vote/MenuIcon";
-import { DndContext } from "@dnd-kit/core";
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
 
 // Define a type for our vote page candidates
 interface VoteCandidate {
@@ -60,7 +55,14 @@ export default function VotePage() {
     setCandidates(newOrder);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="min-h-screen w-full text-white flex flex-col">
+        <div className="container p-4 items-center justify-center flex flex-col max-w-7xl mx-auto gap-4">
+          <div className="p-4">Loading...</div>
+        </div>
+      </div>
+    );
 
   return (
     <div className="min-h-screen w-full text-white flex flex-col">
