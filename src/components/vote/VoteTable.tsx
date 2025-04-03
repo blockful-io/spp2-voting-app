@@ -7,6 +7,8 @@ import {
   useSensor,
   useSensors,
   DragEndEvent,
+  DragStartEvent,
+  TouchSensor,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -14,6 +16,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { useCallback } from "react";
 
 interface VoteCandidate {
   name: string;
@@ -24,19 +27,29 @@ interface VoteCandidate {
 
 interface VoteTableProps {
   candidates: VoteCandidate[];
-  onBudgetSelect: (name: string, type: "basic" | "extended") => void;
+  onBudgetSelect: (
+    name: string,
+    type: "basic" | "extended" | undefined
+  ) => void;
   onReorder: (newOrder: VoteCandidate[]) => void;
+  onDragStart?: () => void;
+  onDragEnd?: () => void;
 }
 
 export function VoteTable({
   candidates,
   onBudgetSelect,
   onReorder,
+  onDragStart,
+  onDragEnd,
 }: VoteTableProps) {
   const sensors = useSensors(
     useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
+      },
     })
   );
 
@@ -51,21 +64,37 @@ export function VoteTable({
     );
   };
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
+  const handleDragStart = useCallback(
+    (event: DragStartEvent) => {
+      onDragStart?.();
+    },
+    [onDragStart]
+  );
 
-    if (over && active.id !== over.id) {
-      const oldIndex = candidates.findIndex((c) => c.name === active.id);
-      const newIndex = candidates.findIndex((c) => c.name === over.id);
-      const newOrder = arrayMove(candidates, oldIndex, newIndex);
-      onReorder(newOrder);
-    }
-  };
+  const handleDragEnd = useCallback(
+    (event: DragEndEvent) => {
+      const { active, over } = event;
+
+      if (active.id !== over?.id) {
+        const oldIndex = candidates.findIndex(
+          (item) => item.name === active.id
+        );
+        const newIndex = candidates.findIndex((item) => item.name === over?.id);
+
+        const newOrder = arrayMove(candidates, oldIndex, newIndex);
+        onReorder(newOrder);
+      }
+
+      onDragEnd?.();
+    },
+    [candidates, onReorder, onDragEnd]
+  );
 
   return (
     <DndContext
       sensors={sensors}
       collisionDetection={closestCenter}
+      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
       <div className="mt-2 border border-gray-800 rounded-lg overflow-hidden">

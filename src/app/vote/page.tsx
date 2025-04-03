@@ -18,6 +18,24 @@ export default function VotePage() {
   const { data: electionData, isLoading } = useEnsElectionData();
   const [candidates, setCandidates] = useState<VoteCandidate[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+
+  // Prevent page scrolling during drag
+  useEffect(() => {
+    if (!isDragging) return;
+
+    const preventDefault = (e: TouchEvent) => {
+      if (isDragging) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener("touchmove", preventDefault, { passive: false });
+
+    return () => {
+      document.removeEventListener("touchmove", preventDefault);
+    };
+  }, [isDragging]);
 
   useEffect(() => {
     if (electionData) {
@@ -55,6 +73,14 @@ export default function VotePage() {
 
   const handleReorder = (newOrder: VoteCandidate[]) => {
     setCandidates(newOrder);
+  };
+
+  const handleDragStart = () => {
+    setIsDragging(true);
+  };
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
   };
 
   const handleSubmit = async () => {
@@ -143,6 +169,8 @@ export default function VotePage() {
             candidates={candidates}
             onBudgetSelect={handleBudgetSelection}
             onReorder={handleReorder}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
           />
           <div className="flex justify-end mt-6">
             <button
