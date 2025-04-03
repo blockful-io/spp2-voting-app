@@ -19,7 +19,7 @@ export interface Ranking {
 
 const mockRanking = [
   {
-    name: "Namespace",
+    name: "A",
     score: 4,
     averageSupport: 863000,
     basicBudget: 500000,
@@ -30,7 +30,7 @@ const mockRanking = [
     rejectionReason: null,
   },
   {
-    name: "Unruggable",
+    name: "B",
     score: 2,
     averageSupport: 689750,
     basicBudget: 400000,
@@ -41,7 +41,7 @@ const mockRanking = [
     rejectionReason: null,
   },
   {
-    name: "eth.limo",
+    name: "C",
     score: 2,
     averageSupport: 613250,
     basicBudget: 700000,
@@ -52,7 +52,7 @@ const mockRanking = [
     rejectionReason: null,
   },
   {
-    name: "Blockful",
+    name: "D",
     score: 2,
     averageSupport: 596500,
     basicBudget: 400000,
@@ -63,7 +63,18 @@ const mockRanking = [
     rejectionReason: null,
   },
   {
-    name: "EFP",
+    name: "E",
+    score: 0,
+    averageSupport: 704500,
+    basicBudget: 0,
+    extendedBudget: 0,
+    allocated: false,
+    streamDuration: "1-year",
+    allocatedBudget: 0,
+    rejectionReason: null,
+  },
+  {
+    name: "F",
     score: 0,
     averageSupport: 704500,
     basicBudget: 0,
@@ -75,47 +86,80 @@ const mockRanking = [
   },
 ];
 
-export interface Choice {
-  id: number;
-  name: number;
+export interface Candidate {
+  name: string;
+  basicBudget: number;
+  extendedBudget: number;
+  budgetType?: "basic" | "extended";
 }
 
-export function useGetChoices() {
+const mockCandidatesMap: Record<string, Omit<Candidate, 'name'>> = {
+  "A": {
+    basicBudget: 500000,
+    extendedBudget: 700000,
+  },
+  "B": {
+    basicBudget: 500000,
+    extendedBudget: 700000,
+  },
+  "C": {
+    basicBudget: 500000,
+    extendedBudget: 700000,
+  },
+  "D": {
+    basicBudget: 500000,
+    extendedBudget: 700000,
+  },
+  "E": {
+    basicBudget: 500000,
+    extendedBudget: 700000,
+  },
+  "F": {
+    basicBudget: 500000,
+    extendedBudget: 700000,
+  },
+};
+
+export function useGetCandidates() {
   const {
-    data: choices,
+    data: candidates,
     isLoading,
     isError,
     isFetching,
   } = useQuery({
     queryKey: ["snapshot-choices"],
-    queryFn: () => fetchChoices(),
+    queryFn: () => fetchCandidates(),
   });
 
-  async function fetchChoices() {
+  async function fetchCandidates(): Promise<Candidate[]> {
     const res = await fetch("https://hub.snapshot.org/graphql", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         query: `
-          query TotalScore($proposalId: String!) {
+          query Choices($proposalId: String!) {
             proposal(id: $proposalId) {
               choices
             }
           }
           `,
         variables: { proposalId: PROPOSAL_ID },
+        operationName: "Choices",
       }),
     });
     const {
-      data: { proposal },
+      data: { proposal: { choices } },
     } = await res.json();
-    return proposal.choices.map((c: number, index: number) => ({
-      id: c,
-      name: c,
+    return choices.map((name: string): Candidate => ({
+      ...mockCandidatesMap[name],
+      name,
     }));
   }
 
   return {
-    choices,
+    candidates,
     isLoading,
     isError,
     isFetching,
