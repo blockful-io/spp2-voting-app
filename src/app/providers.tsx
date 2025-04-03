@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 const queryClient = new QueryClient();
 
-export function Providers({ children }: { children: JSX.Element }) {
+export function Providers({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
   const [config] = useState(() =>
     getDefaultConfig({
