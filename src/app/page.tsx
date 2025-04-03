@@ -6,6 +6,7 @@ import { ProjectsOverview } from "@/components/ProjectsOverview";
 import { AllocatedBudget } from "@/components/AllocatedBudget";
 import { ResultsDetails } from "@/components/ResultsDetails";
 import { useState, useEffect } from "react";
+import { LineChart } from "lucide-react";
 
 const budgetData = [
   {
@@ -18,20 +19,20 @@ const budgetData = [
 
 const budgetLegendItems = [
   {
-    color: "#F97316",
+    color: "#3B82F6",
     label: "1 year (2.9M)",
     subtext: "0.1M not allocated",
   },
   {
-    color: "#22C55E",
+    color: "#EC4899",
     label: "2 years (1.5M)",
     subtext: "100% allocated",
   },
 ];
 
 const projectsData = [
-  { name: "1 year", value: 4, color: "#F97316" },
-  { name: "2 years", value: 2, color: "#22C55E" },
+  { name: "1 year", value: 4, color: "#3B82F6" },
+  { name: "2 years", value: 2, color: "#EC4899" },
   { name: "Not funded", value: 16, color: "#374151" },
 ];
 
@@ -99,7 +100,9 @@ export default function EnsElectionPage() {
     <div className="container mx-auto  max-w-7xl px-4 py-8">
       <div className="mb-8 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="text-2xl">📊</span>
+          <span className="text-2xl">
+            <LineChart />
+          </span>
           <h1 className="text-3xl font-bold text-gray-100">Election results</h1>
         </div>
       </div>

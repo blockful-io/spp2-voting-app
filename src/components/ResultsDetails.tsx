@@ -46,21 +46,15 @@ export function ResultsDetails({
         </button>
       </div>
 
-      {/* Preferred Budget Section */}
+      {/* Preferred Budget */}
       <div className="mb-8">
         <h3 className="mb-4 text-lg font-semibold text-gray-100">
           Preferred Budget
         </h3>
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-1">
+        <div className="rounded-lg border border-lightDark bg-dark/50 p-4">
+          <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span
-                className={
-                  results.budget.basic.selected
-                    ? "text-blue-400"
-                    : "text-gray-300"
-                }
-              >
+              <span className="text-blue-400">
                 Basic (${results.budget.basic.amount / 1000}k)
               </span>
               {results.budget.basic.selected && (
@@ -68,13 +62,7 @@ export function ResultsDetails({
               )}
             </div>
             <div className="flex items-center gap-2">
-              <span
-                className={
-                  results.budget.extended.selected
-                    ? "text-emerald-500"
-                    : "text-gray-300"
-                }
-              >
+              <span className="text-gray-400">
                 Extended (${results.budget.extended.amount / 1000}k)
               </span>
               {results.budget.extended.selected && (
@@ -82,30 +70,30 @@ export function ResultsDetails({
               )}
             </div>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="mb-2 flex items-center justify-between">
             <span className="text-2xl font-semibold text-gray-300">
-              {(results.budget.basic.amount / 1000).toLocaleString()}
+              {results.budget.basic.amount.toLocaleString()}
             </span>
             <span className="text-2xl font-semibold text-gray-500">
               {(
-                (results.budget.extended.amount - results.budget.basic.amount) /
-                1000
+                results.budget.extended.amount - results.budget.basic.amount
               ).toLocaleString()}
             </span>
           </div>
-        </div>
-        <div className="h-2 w-full overflow-hidden rounded-full bg-gray-600">
-          <div className="relative h-full w-full">
-            <div
-              className="absolute h-full bg-blue-500"
-              style={{
-                width: `${
-                  (results.budget.basic.amount /
-                    results.budget.extended.amount) *
-                  100
-                }%`,
-              }}
-            />
+          <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
+            <div className="relative h-full w-full">
+              <div className="absolute h-full w-full bg-gray-600" />
+              <div
+                className="absolute h-full bg-blue-500"
+                style={{
+                  width: `${
+                    (results.budget.basic.amount /
+                      results.budget.extended.amount) *
+                    100
+                  }%`,
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -115,39 +103,37 @@ export function ResultsDetails({
         <h3 className="mb-4 text-lg font-semibold text-gray-100">
           Head-to-head Match Results
         </h3>
+        <div className="mb-2 flex items-center justify-between text-sm text-gray-400">
+          <div>CANDIDATE</div>
+          <div className="uppercase">{candidateName}</div>
+        </div>
         <div className="space-y-3">
           {results.matches.map((match, index) => (
             <div
               key={index}
               className="rounded-lg border border-lightDark bg-dark/50 p-4"
             >
-              <div className="mb-3 flex items-center justify-between">
+              <div className="mb-2 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <span className="text-gray-300">
                     {match.votes.toLocaleString()}
                   </span>
                   <span className="text-gray-100">{match.candidate}</span>
                 </div>
-                {match.winner ? (
-                  <span className="flex items-center gap-2 text-emerald-500">
-                    <span className="text-xl">🏆</span>
-                    {(match.votes * 3).toLocaleString()}
+                <div className="flex items-center gap-2">
+                  <span className="text-emerald-500 text-xl">🏆</span>
+                  <span className="text-emerald-500">
+                    {match.totalVotes.toLocaleString()}
                   </span>
-                ) : (
-                  <span className="flex items-center gap-2 text-gray-500">
-                    ⨯ {(match.votes / 2).toLocaleString()}
-                  </span>
-                )}
+                </div>
               </div>
-              <div className="h-[6px] w-full overflow-hidden rounded-full bg-dark">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
                 <div className="relative h-full w-full">
                   <div className="absolute h-full w-full bg-gray-600" />
                   <div
                     className="absolute h-full bg-emerald-500"
                     style={{
-                      width: match.winner
-                        ? `${(match.votes / (match.votes * 3)) * 100}%`
-                        : `${(match.votes / (match.votes * 2)) * 100}%`,
+                      width: `${(match.votes / match.totalVotes) * 100}%`,
                     }}
                   />
                 </div>

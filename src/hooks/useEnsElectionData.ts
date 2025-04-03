@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 interface ElectionCandidate {
   name: string;
@@ -166,8 +166,23 @@ export function useEnsElectionData() {
     }
   };
 
+  // Memoize the mapped data to prevent unnecessary re-renders
+  const mappedData = useMemo(() => {
+    return data.map((candidate) => ({
+      name: candidate.name,
+      score: candidate.score,
+      averageSupport: candidate.averageSupport,
+      allocatedBudget: candidate.allocatedBudget,
+      streamDuration: candidate.streamDuration,
+      isEligibleForExtendedBudget: candidate.isEligibleForExtendedBudget,
+      wins: candidate.score,
+      basicBudget: candidate.basicBudget,
+      extendedBudget: candidate.extendedBudget,
+    }));
+  }, [data]);
+
   return {
-    data,
+    data: mappedData,
     isLoading,
     error,
     fetch,
