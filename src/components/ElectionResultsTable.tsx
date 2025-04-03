@@ -2,7 +2,7 @@ import { type Candidate } from "@/types/election";
 
 interface ElectionResultsTableProps {
   candidates: Candidate[];
-  onShowDetails?: () => void;
+  onShowDetails?: (candidateName: string) => void;
 }
 
 function RankIcon({ rank }: { rank: number }) {
@@ -113,7 +113,7 @@ export function ElectionResultsTable({
               </td>
               <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
                 <button
-                  onClick={onShowDetails}
+                  onClick={() => onShowDetails?.(candidate.name)}
                   className="rounded-full bg-dark/50 px-3 py-1 hover:bg-dark/70"
                 >
                   Details →
@@ -176,7 +176,7 @@ export function ElectionResultsTable({
               </td>
               <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
                 <button
-                  onClick={onShowDetails}
+                  onClick={() => onShowDetails?.(candidate.name)}
                   className="rounded-full bg-dark/50 px-3 py-1 hover:bg-dark/70"
                 >
                   Details →

@@ -38,11 +38,17 @@ const projectsData = [
 export default function EnsElectionPage() {
   const { data, isLoading, error } = useEnsElectionData();
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedCandidate, setSelectedCandidate] = useState<string | null>(
+    null
+  );
 
   // Handle escape key and body scroll
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsOpen(false);
+      if (e.key === "Escape") {
+        setIsOpen(false);
+        setSelectedCandidate(null);
+      }
     };
 
     // Toggle body scroll
@@ -58,6 +64,16 @@ export default function EnsElectionPage() {
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
+
+  const handleShowDetails = (candidateName: string) => {
+    setSelectedCandidate(candidateName);
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setSelectedCandidate(null);
+  };
 
   if (isLoading) {
     return (
@@ -95,7 +111,7 @@ export default function EnsElectionPage() {
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
-        onClick={() => setIsOpen(false)}
+        onClick={handleClose}
         style={{ zIndex: 100 }}
       />
 
@@ -106,7 +122,12 @@ export default function EnsElectionPage() {
         }`}
         style={{ zIndex: 101 }}
       >
-        <ResultsDetails onClose={() => setIsOpen(false)} />
+        {selectedCandidate && (
+          <ResultsDetails
+            candidateName={selectedCandidate}
+            onClose={handleClose}
+          />
+        )}
       </div>
 
       <div
@@ -127,7 +148,7 @@ export default function EnsElectionPage() {
         <div className="lg:col-span-2">
           <ElectionResultsTable
             candidates={data}
-            onShowDetails={() => setIsOpen(true)}
+            onShowDetails={handleShowDetails}
           />
         </div>
       </div>

@@ -1,27 +1,41 @@
+import { useHeadToHeadData } from "@/hooks/useHeadToHeadData";
+
 interface ResultsDetailsProps {
+  candidateName: string;
   onClose: () => void;
 }
 
-interface HeadToHeadResult {
-  candidate: string;
-  votes: number;
-  winner: boolean;
-}
+export function ResultsDetails({
+  candidateName,
+  onClose,
+}: ResultsDetailsProps) {
+  const { data, isLoading, getCandidateHeadToHead } = useHeadToHeadData();
 
-export function ResultsDetails({ onClose }: ResultsDetailsProps) {
-  const matchResults: HeadToHeadResult[] = [
-    { candidate: "Blockful", votes: 100500, winner: true },
-    { candidate: "Namespace", votes: 120500, winner: true },
-    { candidate: "NameStone", votes: 120500, winner: false },
-    { candidate: "Lighthouse Labs", votes: 100500, winner: true },
-    { candidate: "Unicorn.eth", votes: 120500, winner: false },
-    { candidate: "GovPal", votes: 120500, winner: false },
-    { candidate: "Web3.bio", votes: 100500, winner: true },
-    { candidate: "Tally", votes: 100500, winner: true },
-  ];
+  if (isLoading) {
+    return (
+      <div className="p-6">
+        <div className="flex items-center justify-center">
+          <div className="text-gray-300">Loading results...</div>
+        </div>
+      </div>
+    );
+  }
+
+  const results = getCandidateHeadToHead(candidateName);
+
+  if (!results) {
+    return (
+      <div className="p-6">
+        <div className="flex items-center justify-center">
+          <div className="text-red-400">Candidate not found</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6">
+      {/* Header */}
       <div className="mb-8 flex items-center justify-between">
         <h2 className="text-2xl font-bold text-gray-100">Results Details</h2>
         <button
@@ -33,23 +47,51 @@ export function ResultsDetails({ onClose }: ResultsDetailsProps) {
       </div>
 
       {/* Preferred Budget Section */}
-      <div className="mb-12">
+      <div className="mb-8">
         <h3 className="mb-4 text-lg font-semibold text-gray-100">
           Preferred Budget
         </h3>
         <div className="mb-6">
           <div className="flex items-center justify-between mb-1">
             <div className="flex items-center gap-2">
-              <span className="text-blue-400">Basic ($500k)</span>
-              <span className="text-xl">🏆</span>
+              <span
+                className={
+                  results.budget.basic.selected
+                    ? "text-blue-400"
+                    : "text-gray-300"
+                }
+              >
+                Basic (${results.budget.basic.amount / 1000}k)
+              </span>
+              {results.budget.basic.selected && (
+                <span className="text-blue-400">🏆</span>
+              )}
             </div>
-            <span className="text-gray-400">Extended ($700k)</span>
+            <div className="flex items-center gap-2">
+              <span
+                className={
+                  results.budget.extended.selected
+                    ? "text-emerald-500"
+                    : "text-gray-300"
+                }
+              >
+                Extended (${results.budget.extended.amount / 1000}k)
+              </span>
+              {results.budget.extended.selected && (
+                <span className="text-emerald-500">🏆</span>
+              )}
+            </div>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-2xl font-semibold text-gray-300">
-              265,500
+              {(results.budget.basic.amount / 1000).toLocaleString()}
             </span>
-            <span className="text-2xl font-semibold text-gray-500">98,500</span>
+            <span className="text-2xl font-semibold text-gray-500">
+              {(
+                (results.budget.extended.amount - results.budget.basic.amount) /
+                1000
+              ).toLocaleString()}
+            </span>
           </div>
         </div>
         <div className="h-2 w-full overflow-hidden rounded-full bg-gray-600">
@@ -57,7 +99,11 @@ export function ResultsDetails({ onClose }: ResultsDetailsProps) {
             <div
               className="absolute h-full bg-blue-500"
               style={{
-                width: `${(265500 / (265500 + 98500)) * 100}%`,
+                width: `${
+                  (results.budget.basic.amount /
+                    results.budget.extended.amount) *
+                  100
+                }%`,
               }}
             />
           </div>
@@ -70,7 +116,7 @@ export function ResultsDetails({ onClose }: ResultsDetailsProps) {
           Head-to-head Match Results
         </h3>
         <div className="space-y-3">
-          {matchResults.map((result, index) => (
+          {results.matches.map((match, index) => (
             <div
               key={index}
               className="rounded-lg border border-lightDark bg-dark/50 p-4"
@@ -78,18 +124,18 @@ export function ResultsDetails({ onClose }: ResultsDetailsProps) {
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <span className="text-gray-300">
-                    {result.votes.toLocaleString()}
+                    {match.votes.toLocaleString()}
                   </span>
-                  <span className="text-gray-100">{result.candidate}</span>
+                  <span className="text-gray-100">{match.candidate}</span>
                 </div>
-                {result.winner ? (
+                {match.winner ? (
                   <span className="flex items-center gap-2 text-emerald-500">
                     <span className="text-xl">🏆</span>
-                    {(result.votes * 3).toLocaleString()}
+                    {(match.votes * 3).toLocaleString()}
                   </span>
                 ) : (
                   <span className="flex items-center gap-2 text-gray-500">
-                    ⨯ {(result.votes / 2).toLocaleString()}
+                    ⨯ {(match.votes / 2).toLocaleString()}
                   </span>
                 )}
               </div>
@@ -99,9 +145,9 @@ export function ResultsDetails({ onClose }: ResultsDetailsProps) {
                   <div
                     className="absolute h-full bg-emerald-500"
                     style={{
-                      width: result.winner
-                        ? `${(result.votes / (result.votes * 3)) * 100}%`
-                        : `${(result.votes / (result.votes * 2)) * 100}%`,
+                      width: match.winner
+                        ? `${(match.votes / (match.votes * 3)) * 100}%`
+                        : `${(match.votes / (match.votes * 2)) * 100}%`,
                     }}
                   />
                 </div>
@@ -110,7 +156,7 @@ export function ResultsDetails({ onClose }: ResultsDetailsProps) {
           ))}
         </div>
         <div className="mt-4 text-right text-sm text-gray-400">
-          21 wins / 4 losses
+          {results.wins} wins / {results.losses} losses
         </div>
       </div>
     </div>
