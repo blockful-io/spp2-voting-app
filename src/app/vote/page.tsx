@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useEnsElectionData } from "@/hooks/useEnsElectionData";
 import { VoteTable } from "@/components/vote/VoteTable";
 import { MenuIcon } from "@/components/vote/MenuIcon";
+import toast, { Toaster } from "react-hot-toast";
 
 // Define a type for our vote page candidates
 interface VoteCandidate {
@@ -16,6 +17,7 @@ interface VoteCandidate {
 export default function VotePage() {
   const { data: electionData, isLoading } = useEnsElectionData();
   const [candidates, setCandidates] = useState<VoteCandidate[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (electionData) {
@@ -55,6 +57,43 @@ export default function VotePage() {
     setCandidates(newOrder);
   };
 
+  const handleSubmit = async () => {
+    try {
+      setIsSubmitting(true);
+
+      // Get the index of "None of the below"
+      const dividerIndex = candidates.findIndex(
+        (c) => c.name === "None of the below"
+      );
+
+      // Get only the candidates above "None of the below"
+      const validCandidates = candidates.slice(0, dividerIndex);
+
+      // Validate that all candidates have a budget type selected
+      const allBudgetsSelected = validCandidates.every((c) => c.budgetType);
+
+      if (!allBudgetsSelected) {
+        toast.error(
+          "Please select a budget type for all candidates above 'None of the below'"
+        );
+        return;
+      }
+
+      // Here you would typically send the vote to your backend
+      console.log("Submitting vote with candidates:", validCandidates);
+
+      // Mock API call
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      toast.success("Vote submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting vote:", error);
+      toast.error("Error submitting vote. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   if (isLoading)
     return (
       <div className="min-h-screen w-full text-white flex flex-col">
@@ -66,6 +105,24 @@ export default function VotePage() {
 
   return (
     <div className="min-h-screen w-full text-white flex flex-col">
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          success: {
+            style: {
+              background: "#059669",
+              color: "white",
+            },
+          },
+          error: {
+            style: {
+              background: "#DC2626",
+              color: "white",
+            },
+          },
+          duration: 4000,
+        }}
+      />
       <div className="container p-4 flex flex-col max-w-7xl mx-auto gap-4">
         <div className="p-4">
           <div className="flex items-center mb-4">
@@ -87,6 +144,23 @@ export default function VotePage() {
             onBudgetSelect={handleBudgetSelection}
             onReorder={handleReorder}
           />
+          <div className="flex justify-end mt-6">
+            <button
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className={`
+                px-6 py-3 rounded-lg font-medium
+                ${
+                  isSubmitting
+                    ? "bg-gray-600 cursor-not-allowed"
+                    : "bg-blue-600 hover:bg-blue-700"
+                }
+                transition-colors
+              `}
+            >
+              {isSubmitting ? "Submitting..." : "Submit Vote"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
