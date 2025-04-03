@@ -77,7 +77,7 @@ export default function EnsElectionPage() {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto max-w-7xl px-4 py-8">
+      <div className="container mx-auto  max-w-7xl px-4 py-8">
         <div className="flex items-center justify-center">
           <div className="text-gray-300">Loading election data...</div>
         </div>
@@ -87,7 +87,7 @@ export default function EnsElectionPage() {
 
   if (error) {
     return (
-      <div className="container mx-auto max-w-7xl px-4 py-8">
+      <div className="container mx-auto  max-w-7xl px-4 py-8">
         <div className="flex items-center justify-center">
           <div className="text-red-400">Error loading election data</div>
         </div>
@@ -96,7 +96,7 @@ export default function EnsElectionPage() {
   }
 
   return (
-    <div className="container mx-auto max-w-7xl px-4 py-8">
+    <div className="container mx-auto  max-w-7xl px-4 py-8">
       <div className="mb-8 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <span className="text-2xl">📊</span>
