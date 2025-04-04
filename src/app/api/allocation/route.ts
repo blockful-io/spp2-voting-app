@@ -7,12 +7,20 @@ import { getServiceProviderData } from "@/helpers/csvUtils";
 // Import configuration but we might want to make these configurable via API params later
 import { PROGRAM_BUDGET } from "@/helpers/config";
 
+interface Vote {
+  choice: number[];
+  voter: string;
+  vp: number;
+}
+
 interface ProposalData {
   title: string;
   space: string;
   totalVotes: number;
   totalVotingPower: number;
   state: string;
+  choices: string[];
+  votes: Vote[];
 }
 
 interface RankedCandidate {
