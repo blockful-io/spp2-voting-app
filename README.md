@@ -1,101 +1,226 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SPP2 Voting App - Copeland Ranking System
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This application implements a Service Provider Program (SPP) allocation system using the Copeland method for ranked choice voting. It processes voting data from Snapshot, ranks candidates, and allocates budgets based on configurable rules.
+
+## Features
+
+- Processes ranked choice voting data from Snapshot or CSV files
+- Implements the Copeland method for fair candidate ranking
+- Allocates budgets according to program-specific rules
+- Handles special "None Below" voting marker
+- Generates detailed reports of allocation results
+- Provides head-to-head comparison data for all candidates
+
+## Algorithm: The Copeland Method
+
+The Copeland method is a rank-determination algorithm that works as follows:
+
+1. **Pairwise Comparisons**: Each candidate is compared head-to-head with every other candidate.
+2. **Voting Mechanism**:
+   - For each pair of candidates (A, B), we count how much voting power ranked A above B.
+   - "None Below" option serves as a special marker - any candidate ranked below it is considered unranked.
+   - Ranked candidates always beat unranked candidates in head-to-head contests.
+   - No votes are counted between two unranked candidates.
+
+3. **Scoring**:
+   - A candidate receives 1 point for each head-to-head matchup they win.
+   - No points are awarded for losses or ties.
+   - Total points determine the final ranking.
+   - In case of equal points, average support percentage is used as a tiebreaker.
+
+4. **Budget Allocation**:
+   - Candidates are processed in ranking order
+   - SPP1 projects can receive 2-year funding streams
+   - Remaining projects are allocated 1-year funding streams
+   - Extended budgets are attempted first, falling back to basic budgets if necessary
+   - Any remaining 2-year stream budget is transferred to the 1-year stream
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repository
+git clone https://github.com/yourusername/spp2-voting-app.git
+cd spp2-voting-app
+
+# Install dependencies
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Using the SPP2 Voting Application
-
-This application implements the Service Provider Program (SPP) allocation process using the Copeland voting method. Here's how to use it:
-
-### Data Directory Structure
-
-All data files are stored in the `src/helpers/data` directory:
-
-- **CSV Files**:
-  - `votes.csv` - Contains the votes from the Snapshot proposal
-  - `service-providers.csv` - Contains service provider budget data
-  - `choices.csv` - Contains the choice options for the vote
-  - Sample files (`sample-*.csv`) are provided as templates
-
-- **JSON Files**:
-  - `mocked-votes.json` - Generated from votes.csv for testing
-  - Allocation results are saved as `spp-allocation-[proposal-id].json`
-
-### CSV File Formats
-
-#### votes.csv
-
-```csv
-voter,vp,choice1,choice2,choice3,choice4,...
-0x1234...,1000,Namespace,Unruggable,eth.limo,Blockful,...
-```
-
-- `voter`: Ethereum address of the voter
-- `vp`: Voting power (numeric)
-- `choice1, choice2, ...`: Ranked choices in order of preference
-
-#### service-providers.csv
-
-```csv
-name,basicBudget,extendedBudget,isSpp1
-Unruggable,400000,700000,true
-Blockful,400000,700000,false
-```
-
-- `name`: Name of the service provider (must match names in votes)
-- `basicBudget`: Basic funding request amount
-- `extendedBudget`: Extended funding request amount
-- `isSpp1`: Whether the provider was in SPP1 (true/false)
-
-#### choices.csv
-
-```csv
-name
-Unruggable
-Blockful
-Namespace
-```
-
-- `name`: Name of each choice option
+## Usage
 
 ### Configuration
 
-The application can be configured in `src/helpers/config.js`:
+Edit `src/helpers/config.js` to set your specific parameters:
 
-- `USE_LOCAL_DATA`: Use local JSON data instead of Snapshot API
-- `USE_CSV_DATA`: Use CSV files for service provider data
-- `LOCAL_DATA_PATH`: Path to the mocked votes JSON file
-- `VOTES_CSV_PATH`: Path to the votes CSV file
-- `SERVICE_PROVIDERS_CSV_PATH`: Path to the service providers CSV file
+```javascript
+// Budget parameters
+const PROGRAM_BUDGET = 4500000; // Total budget in USD per year
+const TWO_YEAR_STREAM_RATIO = 1/3; // Proportion allocated to 2-year streams
+const ONE_YEAR_STREAM_RATIO = 2/3; // Proportion allocated to 1-year stream
 
-## Learn More
+// Data source configuration
+const USE_LOCAL_DATA = true; // Set to false to use Snapshot API
+const USE_CSV_DATA = true; // Use CSV files for service provider data
 
-To learn more about Next.js, take a look at the following resources:
+// Snapshot proposal ID
+const PROPOSAL_ID = "0x5dff4695ef4b5a576d132c2d278342a54b1fe5846ebcdc9a908e273611f27ee1";
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### CSV Data Format
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Place your CSV files in the `src/helpers/data` directory:
 
-## Deploy on Vercel
+1. **choices.csv**: Contains service provider data
+   ```
+   Choice,Name,Basic budget,Extended budget,is SPP
+   1,Provider A,"400000","700000",TRUE
+   2,Provider B,"300000","500000",FALSE
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **votes.csv**: Contains voting data
+   ```
+   Name,Votes,Choice 1,Choice 2,Choice 3,Choice 4,Choice 5
+   0xAddress1,1.00,Provider A,Provider B,Provider C,None Below,Provider D
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Running the Application
+
+```bash
+node src/helpers/index.js
+```
+
+## Code Structure
+
+### Core Files
+
+- **index.js**: Main entry point that orchestrates the entire process
+- **voteProcessing.js**: Implements the Copeland ranking algorithm
+- **budgetAllocation.js**: Handles budget allocation logic based on rankings
+- **reporting.js**: Formats and exports results
+- **candidateComparisons.js**: Provides utilities for analyzing head-to-head results
+- **csvUtils.js**: Handles CSV file processing and conversion
+- **snapshot.js**: Interfaces with Snapshot API or loads mock data
+- **config.js**: Contains application configuration parameters
+
+## The Helpers Folder
+
+The `src/helpers` folder is the core of the application, containing modular components that handle different aspects of the voting and allocation process:
+
+### Main Module Files
+
+- **index.js** (292 lines): The orchestrator that ties everything together
+  - Contains the `main()` function that executes the full allocation workflow
+  - Provides wrapper functions for CSV data handling (`getChoiceOptions()`, `getServiceProviderData()`, `prepareVotesFromCsv()`)
+  - Includes detailed logging for the entire process
+  - Exports all key functions for external use
+
+- **voteProcessing.js** (246 lines): The voting algorithm implementation
+  - Implements the Copeland method in `processCopelandRanking()`
+  - Handles the special "None Below" option as both a marker and a candidate
+  - Calculates pairwise comparisons between all candidates
+  - Computes scores and rankings based on head-to-head results
+  - Combines ranking data with service provider metadata
+
+- **budgetAllocation.js** (216 lines): The budget distribution logic
+  - Allocates budgets based on ranking order
+  - Implements the two-stream allocation model (2-year and 1-year funding)
+  - Handles budget transfers between streams
+  - Preserves the original ranking order throughout allocation
+  - Provides detailed allocation statistics
+
+- **reporting.js** (231 lines): Output formatting and report generation
+  - Formats allocation results for display
+  - Generates structured JSON data for reporting
+  - Exports results to timestamped files
+  - Provides currency formatting utilities
+
+- **candidateComparisons.js** (118 lines): Head-to-head analysis tools
+  - Extracts match data for specific candidates
+  - Formats match results for frontend display
+  - Calculates statistics like win percentages and vote shares
+  - Sorts results by votes or other criteria
+
+- **csvUtils.js** (473 lines): Data processing utilities
+  - Low-level CSV parsing for votes and service provider data
+  - Handles complex CSV formats including quoted fields
+  - Converts between CSV and JSON formats
+  - Supports multiple CSV format variations
+
+- **snapshot.js** (~100 lines): Integration with Snapshot
+  - Interfaces with Snapshot API for live vote data
+  - Falls back to local data when configured
+  - Standardizes data format from multiple sources
+
+- **config.js** (32 lines): Application configuration
+  - Defines all configurable parameters
+  - Controls data sources and budget allocation rules
+  - Sets Snapshot proposal IDs and file paths
+
+### Data Directory
+
+The `src/helpers/data` directory holds all input and output files:
+
+- **Input Files**:
+  - `choices.csv`: Service provider options and metadata
+  - `votes.csv`: Raw vote data from Snapshot or other sources
+  
+- **Generated Files**:
+  - `mocked-votes.json`: Processed vote data in JSON format
+  - `spp-allocation-[proposalId]-[timestamp].json`: Allocation results
+  - `spp-allocation-[proposalId]-latest.json`: Latest allocation results
+
+### Function Relationships
+
+- **Data Flow**: 
+  1. CSV data → JSON conversion (`csvUtils.js`)
+  2. Vote processing and ranking (`voteProcessing.js`)
+  3. Budget allocation (`budgetAllocation.js`)
+  4. Reporting and export (`reporting.js`)
+
+- **Helper Layers**:
+  - Low-level utilities (`loadServiceProvidersFromCsv`, `convertVotesFromCsv`)
+  - High-level wrappers (`getServiceProviderData`, `prepareVotesFromCsv`)
+  - Integration functions (in `index.js`)
+
+### Key Functions
+
+| File | Function | Description |
+|------|----------|-------------|
+| voteProcessing.js | `processCopelandRanking()` | Core algorithm for Copeland method ranking |
+| voteProcessing.js | `combineData()` | Merges rankings with provider metadata |
+| budgetAllocation.js | `allocateBudgets()` | Distributes budgets according to rules |
+| csvUtils.js | `loadServiceProvidersFromCsv()` | Low-level CSV parsing for provider data |
+| index.js | `getServiceProviderData()` | High-level wrapper for provider data loading |
+| csvUtils.js | `convertVotesFromCsv()` | Converts vote CSV data to JSON format |
+| candidateComparisons.js | `getCandidateHeadToHeadResults()` | Extracts match data for a candidate |
+| reporting.js | `displayResults()` | Formats allocation results |
+| reporting.js | `exportResults()` | Saves results to JSON file |
+
+## Output
+
+The application generates:
+
+1. Console output showing the full allocation process
+2. JSON files with detailed results in the `src/helpers/data` directory
+3. Head-to-head comparison data that can be accessed programmatically
+
+## Example
+
+When executed, the program will:
+
+1. Load data from CSV files or Snapshot
+2. Process votes using the Copeland method
+3. Display full rankings with scores
+4. Show budget allocations for each service provider
+5. Generate detailed head-to-head match statistics
+6. Export complete results to a timestamped JSON file
+
+## License
+
+[MIT License](LICENSE)
+
+## Contributing
+
+Contributions welcome! Please feel free to submit a Pull Request.

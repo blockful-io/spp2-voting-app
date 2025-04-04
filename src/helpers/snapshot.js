@@ -62,8 +62,7 @@ async function loadLocalData() {
       votes: mockData.data.votes
     };
     
-    console.log(`Successfully loaded mock data with ${proposal.votes.length} votes and ${proposal.choices.length} choice options`);
-    console.log(`Choices: ${proposal.choices.join(', ')}`);
+    console.log(`Successfully loaded mock data with ${proposal.votes.length} votes`);
     return proposal;
   } catch (error) {
     console.error('Error loading mock data:', error);
@@ -141,7 +140,6 @@ async function fetchSnapshotResults(proposalId) {
     }
     
     const proposal = proposalData.data.proposal;
-    console.log(`Successfully fetched proposal: "${proposal.title}"`);
     
     // Fetch votes data
     console.log(`Fetching votes for proposal ${proposalId}...`);

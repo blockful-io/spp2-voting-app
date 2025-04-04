@@ -16,7 +16,9 @@ const {
   PROPOSAL_ID,
   USE_LOCAL_DATA,
   USE_CSV_DATA,
-  CHOICES_CSV_PATH,
+  LOCAL_DATA_PATH,
+  VOTES_CSV_PATH,
+  CHOICES_CSV_PATH
 } = require('./config');
 
 // Import modules
@@ -24,10 +26,17 @@ const { fetchSnapshotResults } = require('./snapshot');
 const { processCopelandRanking, combineData } = require('./voteProcessing');
 const { allocateBudgets } = require('./budgetAllocation');
 const { formatCurrency, displayResults, exportResults } = require('./reporting');
-const { loadServiceProvidersFromCsv } = require('./csvUtils');
+const { 
+  convertVotesFromCsv, 
+  loadServiceProvidersFromCsv, 
+  loadChoiceOptions,
+  getChoiceOptions,
+  getServiceProviderData,
+  prepareVotesFromCsv 
+} = require('./csvUtils');
+const { getCandidateHeadToHeadResults, getCandidateMatchStatistics } = require('./candidateComparisons');
 const fs = require('fs');
 const path = require('path');
-
 
 /**
  * Main function that orchestrates the entire process
@@ -36,16 +45,18 @@ async function main() {
   try {
     console.log("Starting Service Provider Program allocation...");
     console.log(`Budget: ${formatCurrency(PROGRAM_BUDGET)} per year`);
-    console.log(`Two-Year Stream: ${(TWO_YEAR_STREAM_RATIO * 100).toFixed(0)}%, One-Year Stream: ${(ONE_YEAR_STREAM_RATIO * 100).toFixed(0)}%`);
     console.log(`Data Source: ${USE_LOCAL_DATA ? 'Local Data' : 'Snapshot API'}`);
-    console.log(`Service Provider Data Source: ${USE_CSV_DATA ? 'CSV File' : 'Hardcoded'}`);
-    console.log(`Timestamp: ${new Date().toISOString()}`);
     
     // Ensure data directory exists
     const dataDir = path.resolve(__dirname, 'data');
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir, { recursive: true });
       console.log(`Created data directory: ${dataDir}`);
+    }
+    
+    // Check if we need to prepare votes from CSV
+    if (USE_LOCAL_DATA) {
+        await prepareVotesFromCsv();
     }
     
     // Step 1: Fetch results from Snapshot or load from local file
@@ -60,22 +71,20 @@ async function main() {
     console.log("\nProcessing votes using Copeland method...");
     const copelandResults = processCopelandRanking(proposalData);
     const { rankedCandidates, headToHeadMatches } = copelandResults;
-    console.log(rankedCandidates);
+    
     // Step 3: Load service provider data and combine with ranked results
     console.log("\nLoading service provider data...");
-    const choicesCsvPath = path.resolve(__dirname, CHOICES_CSV_PATH);
-    const providerData = loadServiceProvidersFromCsv(choicesCsvPath);
+    const providerData = getServiceProviderData();
     
     console.log("\nCombining with service provider metadata...");
     const combinedData = combineData(rankedCandidates, providerData);
-    console.log(combinedData);
+    
     // Step 4: Allocate budgets
     console.log("\nAllocating budgets based on ranking...");
     const allocationResults = allocateBudgets(combinedData, PROGRAM_BUDGET);
-    console.log(allocationResults);
+    
     // Step 5: Display and export results
     const formattedResults = displayResults(allocationResults, proposalData, headToHeadMatches);
-    console.log(formattedResults);
     const exportedFilename = exportResults(formattedResults);
 
     console.log("\nAllocation process completed successfully!");
@@ -98,8 +107,23 @@ async function main() {
   }
 }
 
-// Execute the script if not being imported
-main().catch(err => {
-  console.error("Unhandled error in main function:", err);
-  process.exit(1);
-});
+// Make functions available for importing
+module.exports = {
+  main,
+  processCopelandRanking,
+  combineData,
+  allocateBudgets,
+  formatCurrency,
+  displayResults,
+  exportResults,
+  getCandidateHeadToHeadResults,
+  getCandidateMatchStatistics
+};
+
+// Execute the script if directly run (not imported)
+if (require.main === module) {
+  main().catch(err => {
+    console.error("Unhandled error in main function:", err);
+    process.exit(1);
+  });
+}

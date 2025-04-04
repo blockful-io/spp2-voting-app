@@ -28,9 +28,6 @@ function processCopelandRanking(proposalData) {
   const candidateChoices = [...choices];
   const numCandidates = candidateChoices.length;
   
-  console.log(`Processing ${votes.length} votes for ${numCandidates} candidates using Copeland method...`);
-  console.log(`"None Below" marker is option #${noneBelowIndex + 1}`);
-  
   // Create matrices for pairwise comparisons and match participation
   const pairwiseMatrix = Array(numCandidates).fill().map(() => Array(numCandidates).fill(0));
   const matchesParticipated = Array(numCandidates).fill().map(() => Array(numCandidates).fill(0));
@@ -178,19 +175,6 @@ function processCopelandRanking(proposalData) {
       return b.wins - a.wins;
     }
     return b.averageSupport - a.averageSupport;
-  });
-  
-  // Log match results
-  console.log("\nHead-to-head Match Results:");
-  matchResults.forEach(match => {
-    console.log(`${match.candidate1} vs ${match.candidate2}: ${match.candidate1Votes} - ${match.candidate2Votes} (Total votes: ${match.totalVotes})`);
-  });
-  
-  // Log candidate results
-  console.log("\nCandidate Rankings:");
-  candidateResults.forEach((candidate, index) => {
-    const noneBelow = candidate.isNoneBelow ? " (None Below)" : "";
-    console.log(`${index + 1}. ${candidate.name}${noneBelow}: ${candidate.wins} wins, Average Support: ${candidate.averageSupport.toFixed(2)}`);
   });
   
   // Return both the ranked results and match details

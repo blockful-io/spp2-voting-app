@@ -10,6 +10,13 @@
 const fs = require('fs');
 const path = require('path');
 
+// Import configuration
+const { 
+  CHOICES_CSV_PATH,
+  VOTES_CSV_PATH,
+  LOCAL_DATA_PATH
+} = require('./config');
+
 /**
  * Resolves a relative path from the current directory
  * 
@@ -38,7 +45,6 @@ function resolvePath(filePath) {
 function loadChoiceOptions(csvFilePath) {
   try {
     const resolvedPath = resolvePath(csvFilePath);
-    console.log(`Loading choice options from CSV file: ${resolvedPath}`);
     
     // Read the CSV file
     if (!fs.existsSync(resolvedPath)) {
@@ -61,7 +67,6 @@ function loadChoiceOptions(csvFilePath) {
     
     // If choices.csv format (has Choice,Name columns)
     if (choiceIdxHeader !== -1 && nameIdxHeader !== -1) {
-      console.log('Detected choices.csv special format with Choice,Name columns');
       const options = [];
       
       // Start from the second line (skip header)
@@ -79,7 +84,6 @@ function loadChoiceOptions(csvFilePath) {
         
         if (name) {
           options.push(name);
-          console.log(`  Added choice option: ${name}`);
         }
       }
       
@@ -87,7 +91,6 @@ function loadChoiceOptions(csvFilePath) {
         throw new Error('No valid choices found in CSV file');
       }
       
-      console.log(`Successfully loaded ${options.length} choice options from CSV`);
       return options;
     }
     // Standard format with just name column
@@ -95,7 +98,6 @@ function loadChoiceOptions(csvFilePath) {
       const nameIndex = header.findIndex(col => col.toLowerCase() === 'name');
       
       if (nameIndex !== -1) {
-        console.log('Found standard format with name column');
         const options = [];
         
         // Start from the second line (skip header)
@@ -113,7 +115,6 @@ function loadChoiceOptions(csvFilePath) {
           
           if (name) {
             options.push(name);
-            console.log(`  Added choice option: ${name}`);
           }
         }
         
@@ -121,12 +122,10 @@ function loadChoiceOptions(csvFilePath) {
           throw new Error('No valid choices found in CSV file');
         }
         
-        console.log(`Successfully loaded ${options.length} choice options from CSV`);
         return options;
       }
       // Fallback to simple list format
       else {
-        console.log('No header found, treating each line as a choice name');
         const options = [];
         
         // Process each line as a choice
@@ -134,7 +133,6 @@ function loadChoiceOptions(csvFilePath) {
           const name = lines[i].trim();
           if (name) {
             options.push(name);
-            console.log(`  Added choice option: ${name}`);
           }
         }
         
@@ -142,7 +140,6 @@ function loadChoiceOptions(csvFilePath) {
           throw new Error('No valid choices found in CSV file');
         }
         
-        console.log(`Successfully loaded ${options.length} choice options from CSV`);
         return options;
       }
     }
@@ -167,7 +164,6 @@ function loadChoiceOptions(csvFilePath) {
 function convertVotesFromCsv(csvFilePath, choiceOptions, outputPath = null) {
   try {
     const resolvedCsvPath = resolvePath(csvFilePath);
-    console.log(`Loading votes from CSV file: ${resolvedCsvPath}`);
     
     // Read the CSV file
     if (!fs.existsSync(resolvedCsvPath)) {
@@ -197,9 +193,6 @@ function convertVotesFromCsv(csvFilePath, choiceOptions, outputPath = null) {
     if (voterIndex === -1 || vpIndex === -1) {
       throw new Error('CSV file must contain "Name/voter" and "Votes/vp" columns');
     }
-    
-    console.log(`Found voter column at index ${voterIndex} and voting power column at index ${vpIndex}`);
-    console.log(`Available choice options: ${choiceOptions.join(', ')}`);
     
     // Prepare result structure
     const votes = [];
@@ -232,8 +225,6 @@ function convertVotesFromCsv(csvFilePath, choiceOptions, outputPath = null) {
         }
       }
       
-      console.log(`Found ${choiceColumns.length} choice columns`);
-      
       // Get choices from each choice column
       for (let j of choiceColumns) {
         if (j < line.length && line[j]) {
@@ -256,8 +247,6 @@ function convertVotesFromCsv(csvFilePath, choiceOptions, outputPath = null) {
         console.warn(`No valid choices found for voter ${voter} in line ${i + 1}`);
         continue;
       }
-      
-      console.log(`Processed vote from ${voter} with choices: ${rankedChoices.join(' > ')}`);
       
       // Create a vote object in the expected format
       votes.push({
@@ -288,7 +277,6 @@ function convertVotesFromCsv(csvFilePath, choiceOptions, outputPath = null) {
       console.log(`Converted votes saved to ${resolvedOutputPath}`);
     }
     
-    console.log(`Successfully converted ${votes.length} votes from CSV`);
     return result;
   } catch (error) {
     console.error('Error converting votes from CSV:', error);
@@ -311,7 +299,6 @@ function convertVotesFromCsv(csvFilePath, choiceOptions, outputPath = null) {
 function loadServiceProvidersFromCsv(csvFilePath) {
   try {
     const resolvedPath = resolvePath(csvFilePath);
-    console.log(`Loading service provider data from CSV file: ${resolvedPath}`);
     
     // Read the CSV file
     if (!fs.existsSync(resolvedPath)) {
@@ -336,8 +323,6 @@ function loadServiceProvidersFromCsv(csvFilePath) {
     
     // Check if we have the choices.csv format
     if (nameIdxHeader !== -1 && (basicBudgetIdxHeader !== -1 || extendedBudgetIdxHeader !== -1)) {
-      console.log(`Found service provider CSV header format with columns: ${header.join(', ')}`);
-      
       // Process each service provider line
       for (let i = 1; i < lines.length; i++) {
         // Handle quoted fields with commas by splitting carefully
@@ -403,12 +388,6 @@ function loadServiceProvidersFromCsv(csvFilePath) {
           isSpp1: isNoneBelow ? false : isSpp1,
           isNoneBelow: isNoneBelow
         };
-        
-        if (isNoneBelow) {
-          console.log(`Loaded "None Below" option: ${name}`);
-        } else {
-          console.log(`Loaded service provider: ${name} (Basic: ${basicBudget}, Extended: ${extendedBudget}, SPP1: ${isSpp1})`);
-        }
       }
     } else {
       // Try standard format for backward compatibility
@@ -468,8 +447,6 @@ function loadServiceProvidersFromCsv(csvFilePath) {
       throw new Error('No valid service providers found in CSV file');
     }
     
-    console.log(`Successfully loaded ${Object.keys(serviceProviderData).length} service providers from CSV`);
-    console.log(serviceProviderData);
     return serviceProviderData;
   } catch (error) {
     console.error('Error loading service providers from CSV:', error);
@@ -477,9 +454,82 @@ function loadServiceProvidersFromCsv(csvFilePath) {
   }
 }
 
+/**
+ * Gets choice options from the CSV file
+ * 
+ * @returns {Array} - Array of choice option names
+ */
+function getChoiceOptions() {
+  try {
+    console.log('Loading choice options from CSV...');
+    const choicesCsvPath = path.resolve(__dirname, CHOICES_CSV_PATH);
+    if (!fs.existsSync(choicesCsvPath)) {
+      throw new Error(`Choices CSV file not found: ${choicesCsvPath}`);
+    }
+    
+    const choices = loadChoiceOptions(choicesCsvPath);
+    return choices;
+  } catch (error) {
+    console.error('Error loading choice options:', error);
+    throw error;
+  }
+}
+
+/**
+ * Prepares service provider data from CSV
+ * 
+ * @returns {Object} - Service provider data for allocation
+ */
+function getServiceProviderData() {
+  try {
+    console.log('Loading service provider data from CSV...');
+    // We're using the choices.csv file for service provider data
+    const csvPath = path.resolve(__dirname, CHOICES_CSV_PATH);
+    if (!fs.existsSync(csvPath)) {
+      throw new Error(`Choices CSV file not found: ${csvPath}`);
+    }
+    
+    const providers = loadServiceProvidersFromCsv(csvPath);
+    return providers;
+  } catch (error) {
+    console.error('Error loading service provider data:', error);
+    throw error;
+  }
+}
+
+/**
+ * Prepares vote data from CSV and converts it to mocked-votes.json format
+ * 
+ * @returns {Promise<void>} - Resolves when conversion is complete
+ */
+async function prepareVotesFromCsv() {
+  try {
+    // Load choice options from CSV
+    const choiceOptions = getChoiceOptions();
+    
+    // Convert votes from CSV to JSON and save to mocked-votes.json
+    const votesCsvPath = path.resolve(__dirname, VOTES_CSV_PATH);
+    if (!fs.existsSync(votesCsvPath)) {
+      throw new Error(`Votes CSV file not found: ${votesCsvPath}`);
+    }
+    
+    const outputPath = path.resolve(__dirname, LOCAL_DATA_PATH);
+    console.log(`Converting votes from ${votesCsvPath} to JSON format...`);
+    
+    convertVotesFromCsv(votesCsvPath, choiceOptions, outputPath);
+    console.log(`Votes converted from CSV and saved to ${outputPath}`);
+  } catch (error) {
+    console.error('Error preparing votes from CSV:', error);
+    throw error;
+  }
+}
+
 module.exports = {
   convertVotesFromCsv,
   loadServiceProvidersFromCsv,
   loadChoiceOptions,
-  resolvePath
+  resolvePath,
+  getChoiceOptions,
+  getServiceProviderData,
+  prepareVotesFromCsv
 }; 
