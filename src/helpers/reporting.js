@@ -2,9 +2,9 @@
  * Reporting functions for the Service Provider Program allocation
  */
 
-const { USE_LOCAL_DATA, PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } = require('./config');
-const fs = require('fs');
-const path = require('path');
+import { USE_LOCAL_DATA, PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from './config';
+import fs from 'fs';
+import path from 'path';
 
 /**
  * Formats currency values in a human-readable way
@@ -12,7 +12,7 @@ const path = require('path');
  * @param {Number} value - The value to format
  * @returns {String} Formatted currency string
  */
-function formatCurrency(value) {
+export const formatCurrency = (value) => {
   return `$${value.toLocaleString()}`;
 }
 
@@ -186,10 +186,7 @@ function exportResults(results) {
       console.log(`Results exported to file: ${filename}`);
     } 
     // In a Node.js environment, write to file
-    else if (typeof require !== 'undefined') {
-      const fs = require('fs');
-      const path = require('path');
-      
+    else if (typeof window === 'undefined') {
       // Get the absolute path to the current directory
       const currentDir = __dirname || process.cwd();
       

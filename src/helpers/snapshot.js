@@ -2,9 +2,9 @@
  * Snapshot API integration for fetching voting data
  */
 
-const { USE_LOCAL_DATA, LOCAL_DATA_PATH, PROPOSAL_ID } = require('./config');
-const fs = require('fs');
-const path = require('path');
+import { USE_LOCAL_DATA, LOCAL_DATA_PATH, PROPOSAL_ID } from './config';
+import fs from 'fs';
+import path from 'path';
 
 /**
  * Load mock data from local JSON file
@@ -17,25 +17,17 @@ async function loadLocalData() {
     
     let mockData;
     
-    // Handle different environments (Node.js vs Browser)
-    if (typeof require !== 'undefined') {
-      // Node.js environment - handle both relative and absolute paths
-      const filePath = LOCAL_DATA_PATH.startsWith('./') 
-        ? path.resolve(__dirname, LOCAL_DATA_PATH)
-        : LOCAL_DATA_PATH;
-      
-      if (!fs.existsSync(filePath)) {
-        throw new Error(`File not found: ${filePath}`);
-      }
-      
-      // Since we're requiring a JSON file dynamically, we need to read and parse it
-      const jsonData = fs.readFileSync(filePath, 'utf8');
-      mockData = JSON.parse(jsonData);
-    } else {
-      // Browser environment
-      const response = await fetch(LOCAL_DATA_PATH);
-      mockData = await response.json();
+    // Get the absolute path to the data file
+    const filePath = path.join(process.cwd(), 'src', 'helpers', 'data', 'mocked-votes.json');
+    console.log('Attempting to load from:', filePath);
+    
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`File not found: ${filePath}`);
     }
+    
+    // Read and parse the JSON file
+    const jsonData = fs.readFileSync(filePath, 'utf8');
+    mockData = JSON.parse(jsonData);
     
     // Check if loaded data is valid
     if (!mockData || !mockData.data || !mockData.data.votes || !mockData.data.votes.length) {
@@ -76,7 +68,7 @@ async function loadLocalData() {
  * @param {String} proposalId - The Snapshot proposal ID
  * @returns {Promise<Object>} - The proposal data including votes
  */
-async function fetchSnapshotResults(proposalId) {
+export const fetchSnapshotResults = async (proposalId) => {
   // Use local data if configured
   if (USE_LOCAL_DATA) {
     return loadLocalData();
@@ -168,8 +160,4 @@ async function fetchSnapshotResults(proposalId) {
     console.error('Error fetching data from Snapshot:', error);
     throw new Error(`Failed to fetch Snapshot data: ${error.message}`);
   }
-}
-
-module.exports = {
-  fetchSnapshotResults
-}; 
+} 

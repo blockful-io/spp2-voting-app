@@ -2,10 +2,10 @@
  * Budget allocation logic for the Service Provider Program
  */
 
-const { 
+import { 
   TWO_YEAR_STREAM_RATIO, 
   ONE_YEAR_STREAM_RATIO 
-} = require('./config');
+} from './config';
 
 /**
  * Allocates budgets to service providers based on the program rules
@@ -21,7 +21,7 @@ const {
  * @param {Number} yearlyBudget - Total program budget per year
  * @returns {Object} Allocation results and summary statistics
  */
-function allocateBudgets(projects, yearlyBudget) {
+export const allocateBudgets = (projects, yearlyBudget) => {
   // Check if the program should be renewed at all
   if (yearlyBudget === 0) {
     return {
