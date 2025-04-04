@@ -4,19 +4,20 @@
       {
         "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
         "vp": 1,
-        "choice": [
-          2,
-          3,
-          1,
-          4,
-          5
-        ],
+        "choice": [8, 10, 11, 1, 12],
         "proposal": {
           "choices": [
-            "sp a",
-            "sp b - basic",
-            "sp b - ext",
             "sp c",
+            "sp -i",
+            "sp d",
+            "sp e",
+            "sp g - basic",
+            "sp f",
+            "sp g - ext",
+            "sp a",
+            "sp h",
+            "sp b - basic",
+            "sp b- ext",
             "None below"
           ]
         }
@@ -24,19 +25,20 @@
       {
         "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
         "vp": 1,
-        "choice": [
-          2,
-          3,
-          1,
-          4,
-          5
-        ],
+        "choice": [8, 10, 11, 1, 12],
         "proposal": {
           "choices": [
-            "sp a",
-            "sp b - basic",
-            "sp b - ext",
             "sp c",
+            "sp -i",
+            "sp d",
+            "sp e",
+            "sp g - basic",
+            "sp f",
+            "sp g - ext",
+            "sp a",
+            "sp h",
+            "sp b - basic",
+            "sp b- ext",
             "None below"
           ]
         }
@@ -44,19 +46,20 @@
       {
         "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
         "vp": 1,
-        "choice": [
-          2,
-          3,
-          1,
-          4,
-          5
-        ],
+        "choice": [8, 10, 11, 1, 12],
         "proposal": {
           "choices": [
-            "sp a",
-            "sp b - basic",
-            "sp b - ext",
             "sp c",
+            "sp -i",
+            "sp d",
+            "sp e",
+            "sp g - basic",
+            "sp f",
+            "sp g - ext",
+            "sp a",
+            "sp h",
+            "sp b - basic",
+            "sp b- ext",
             "None below"
           ]
         }
@@ -64,19 +67,20 @@
       {
         "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
         "vp": 1,
-        "choice": [
-          3,
-          2,
-          1,
-          4,
-          5
-        ],
+        "choice": [11, 10, 8, 1, 12],
         "proposal": {
           "choices": [
-            "sp a",
-            "sp b - basic",
-            "sp b - ext",
             "sp c",
+            "sp -i",
+            "sp d",
+            "sp e",
+            "sp g - basic",
+            "sp f",
+            "sp g - ext",
+            "sp a",
+            "sp h",
+            "sp b - basic",
+            "sp b- ext",
             "None below"
           ]
         }
@@ -84,19 +88,20 @@
       {
         "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
         "vp": 1,
-        "choice": [
-          3,
-          2,
-          1,
-          4,
-          5
-        ],
+        "choice": [11, 10, 8, 1, 12],
         "proposal": {
           "choices": [
-            "sp a",
-            "sp b - basic",
-            "sp b - ext",
             "sp c",
+            "sp -i",
+            "sp d",
+            "sp e",
+            "sp g - basic",
+            "sp f",
+            "sp g - ext",
+            "sp a",
+            "sp h",
+            "sp b - basic",
+            "sp b- ext",
             "None below"
           ]
         }
@@ -104,19 +109,20 @@
       {
         "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
         "vp": 1,
-        "choice": [
-          3,
-          2,
-          1,
-          4,
-          5
-        ],
+        "choice": [11, 10, 8, 1, 12],
         "proposal": {
           "choices": [
-            "sp a",
-            "sp b - basic",
-            "sp b - ext",
             "sp c",
+            "sp -i",
+            "sp d",
+            "sp e",
+            "sp g - basic",
+            "sp f",
+            "sp g - ext",
+            "sp a",
+            "sp h",
+            "sp b - basic",
+            "sp b- ext",
             "None below"
           ]
         }
@@ -124,19 +130,20 @@
       {
         "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
         "vp": 1,
-        "choice": [
-          3,
-          2,
-          1,
-          4,
-          5
-        ],
+        "choice": [11, 10, 8, 1, 12],
         "proposal": {
           "choices": [
-            "sp a",
-            "sp b - basic",
-            "sp b - ext",
             "sp c",
+            "sp -i",
+            "sp d",
+            "sp e",
+            "sp g - basic",
+            "sp f",
+            "sp g - ext",
+            "sp a",
+            "sp h",
+            "sp b - basic",
+            "sp b- ext",
             "None below"
           ]
         }
@@ -144,19 +151,20 @@
       {
         "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
         "vp": 1,
-        "choice": [
-          3,
-          2,
-          1,
-          4,
-          5
-        ],
+        "choice": [11, 10, 8, 1, 12],
         "proposal": {
           "choices": [
-            "sp a",
-            "sp b - basic",
-            "sp b - ext",
             "sp c",
+            "sp -i",
+            "sp d",
+            "sp e",
+            "sp g - basic",
+            "sp f",
+            "sp g - ext",
+            "sp a",
+            "sp h",
+            "sp b - basic",
+            "sp b- ext",
             "None below"
           ]
         }
@@ -164,19 +172,20 @@
       {
         "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
         "vp": 1,
-        "choice": [
-          1,
-          4,
-          5,
-          2,
-          3
-        ],
+        "choice": [8, 1, 12, 10, 11],
         "proposal": {
           "choices": [
-            "sp a",
-            "sp b - basic",
-            "sp b - ext",
             "sp c",
+            "sp -i",
+            "sp d",
+            "sp e",
+            "sp g - basic",
+            "sp f",
+            "sp g - ext",
+            "sp a",
+            "sp h",
+            "sp b - basic",
+            "sp b- ext",
             "None below"
           ]
         }
@@ -184,19 +193,20 @@
       {
         "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
         "vp": 1,
-        "choice": [
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
+        "choice": [8, 10, 11, 1, 12],
         "proposal": {
           "choices": [
-            "sp a",
-            "sp b - basic",
-            "sp b - ext",
             "sp c",
+            "sp -i",
+            "sp d",
+            "sp e",
+            "sp g - basic",
+            "sp f",
+            "sp g - ext",
+            "sp a",
+            "sp h",
+            "sp b - basic",
+            "sp b- ext",
             "None below"
           ]
         }
