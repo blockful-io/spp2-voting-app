@@ -528,7 +528,6 @@ module.exports = {
   convertVotesFromCsv,
   loadServiceProvidersFromCsv,
   loadChoiceOptions,
-  resolvePath,
   getChoiceOptions,
   getServiceProviderData,
   prepareVotesFromCsv

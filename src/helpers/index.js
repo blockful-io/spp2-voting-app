@@ -34,7 +34,7 @@ const {
   getServiceProviderData,
   prepareVotesFromCsv 
 } = require('./csvUtils');
-const { getCandidateHeadToHeadResults, getCandidateMatchStatistics } = require('./candidateComparisons');
+const { getCandidateHeadToHeadResults } = require('./candidateComparisons');
 const fs = require('fs');
 const path = require('path');
 
@@ -116,8 +116,7 @@ module.exports = {
   formatCurrency,
   displayResults,
   exportResults,
-  getCandidateHeadToHeadResults,
-  getCandidateMatchStatistics
+  getCandidateHeadToHeadResults
 };
 
 // Execute the script if directly run (not imported)

@@ -171,6 +171,5 @@ async function fetchSnapshotResults(proposalId) {
 }
 
 module.exports = {
-  loadLocalData,
   fetchSnapshotResults
 }; 

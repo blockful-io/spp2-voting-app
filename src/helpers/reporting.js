@@ -126,7 +126,6 @@ function displayResults(results, proposalData, headToHeadMatches) {
       totalVotingPower: proposalData.scores_total,
       state: proposalData.state,
       dataSource: USE_LOCAL_DATA ? 'Local Data' : 'Snapshot API',
-      timestamp: new Date().toISOString()
     },
     copelandRanking: allocations.map(a => ({ 
       name: a.name, 
