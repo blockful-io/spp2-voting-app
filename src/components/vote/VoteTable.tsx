@@ -18,7 +18,9 @@ import {
 } from "@dnd-kit/sortable";
 import { useCallback } from "react";
 
-interface VoteCandidate {
+// Define a type for our vote page candidates
+export interface VoteCandidate {
+  id: number;
   name: string;
   basicBudget: number;
   extendedBudget: number;
@@ -54,12 +56,12 @@ export function VoteTable({
   );
 
   const isDivider = (candidate: VoteCandidate) => {
-    return candidate.name === "None of the below";
+    return candidate.name === "None below";
   };
 
   const isBelowDivider = (candidate: VoteCandidate) => {
     return (
-      candidates.findIndex((c) => c.name === "None of the below") <
+      candidates.findIndex((c) => c.name === "None below") <
       candidates.findIndex((c) => c.name === candidate.name)
     );
   };
@@ -74,6 +76,8 @@ export function VoteTable({
   const handleDragEnd = useCallback(
     (event: DragEndEvent) => {
       const { active, over } = event;
+
+      debugger;
 
       if (active.id !== over?.id) {
         const oldIndex = candidates.findIndex(

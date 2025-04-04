@@ -49,6 +49,7 @@ interface AllocationResponse {
 }
 
 interface ElectionCandidate {
+  id: number;
   name: string;
   score: number;
   averageSupport: number;
@@ -85,7 +86,7 @@ interface BudgetSummary {
 }
 
 const PROPOSAL_ID =
-  "0x5dff4695ef4b5a576d132c2d278342a54b1fe5846ebcdc9a908e273611f27ee1";
+  "0x4a3a3c8e453e296b4c96ea1e889ab0eb99c3bc19769ec091fc97a3586146c04e";
 
 export function useEnsElectionData() {
   const [isLoading, setIsLoading] = useState(true);
@@ -108,11 +109,13 @@ export function useEnsElectionData() {
       const allocationResponse: AllocationResponse = await response.json();
       setAllocationData(allocationResponse);
 
+      debugger;
+
       // Transform allocation data to match our ElectionCandidate interface
       const transformedData: ElectionCandidate[] =
         allocationResponse.allocations
-          .filter((allocation) => !allocation.isNoneBelow) // Filter out "None Below" option
-          .map((allocation) => ({
+          .map((allocation, index) => ({
+            id: index + 1,
             name: allocation.name,
             score: allocation.score,
             averageSupport: allocation.averageSupport,
@@ -142,22 +145,6 @@ export function useEnsElectionData() {
   useEffect(() => {
     fetch().catch(console.error);
   }, []);
-
-  // Memoize the mapped data to prevent unnecessary re-renders
-  const mappedData = useMemo(() => {
-    return data.map((candidate) => ({
-      name: candidate.name,
-      score: candidate.score,
-      averageSupport: candidate.averageSupport,
-      allocatedBudget: candidate.allocatedBudget,
-      streamDuration: candidate.streamDuration,
-      isEligibleForExtendedBudget: candidate.isEligibleForExtendedBudget,
-      wins: candidate.score,
-      basicBudget: candidate.basicBudget,
-      extendedBudget: candidate.extendedBudget,
-      isNoneBelow: candidate.isNoneBelow,
-    }));
-  }, [data]);
 
   // Memoize the summary data for graphs
   const summary = useMemo((): BudgetSummary | null => {
@@ -191,7 +178,7 @@ export function useEnsElectionData() {
   }, [allocationData]);
 
   return {
-    data: mappedData,
+    data,
     isLoading,
     error,
     fetch,

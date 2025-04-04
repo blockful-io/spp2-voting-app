@@ -2,23 +2,17 @@
 
 import { useState, useEffect } from "react";
 import { useEnsElectionData } from "@/hooks/useEnsElectionData";
-import { VoteTable } from "@/components/vote/VoteTable";
+import { VoteCandidate, VoteTable } from "@/components/vote/VoteTable";
 import { MenuIcon } from "@/components/vote/MenuIcon";
 import toast, { Toaster } from "react-hot-toast";
-
-// Define a type for our vote page candidates
-interface VoteCandidate {
-  name: string;
-  basicBudget: number;
-  extendedBudget: number;
-  budgetType?: "basic" | "extended";
-}
+import { useVoteOnProposal } from "@/hooks/useSnapshot";
 
 export default function VotePage() {
   const { data: electionData, isLoading } = useEnsElectionData();
   const [candidates, setCandidates] = useState<VoteCandidate[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const { voteFunc, isPending } = useVoteOnProposal();
 
   // Prevent page scrolling during drag
   useEffect(() => {
@@ -41,16 +35,14 @@ export default function VotePage() {
     if (electionData) {
       // Convert ElectionCandidate to VoteCandidate format and set default budgetType
       const voteCandidates = electionData.map((candidate) => ({
+        id: candidate.id,
         name: candidate.name,
         basicBudget: candidate.basicBudget,
         extendedBudget: candidate.extendedBudget,
-        budgetType: "basic" as const, // Set default budget type
+        budgetType: undefined,
       }));
 
-      setCandidates([
-        ...voteCandidates,
-        { name: "None of the below", basicBudget: 0, extendedBudget: 0 },
-      ]);
+      setCandidates(voteCandidates);
     }
   }, [electionData]);
 
@@ -92,35 +84,28 @@ export default function VotePage() {
         (c) => c.name === "None of the below"
       );
 
-      // Get only the candidates above "None of the below"
-      const validCandidates = candidates.slice(0, dividerIndex);
-
       // Validate that all candidates have a budget type selected
-      const allBudgetsSelected = validCandidates.every((c) => c.budgetType);
+      const allBudgetsSelected = candidates.every((c, index) =>
+        index < dividerIndex ? c.budgetType : true
+      );
 
       if (!allBudgetsSelected) {
-        toast.error(
+        return toast.error(
           "Please select a budget type for all candidates above 'None of the below'"
         );
-        return;
       }
 
-      // Here you would typically send the vote to your backend
-      console.log("Submitting vote with candidates:", validCandidates);
-
-      // Mock API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
+      await voteFunc(candidates.map((c) => c.id));
       toast.success("Vote submitted successfully!");
     } catch (error) {
-      console.error("Error submitting vote:", error);
+      console.error({ error });
       toast.error("Error submitting vote. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div className="min-h-screen w-full text-white flex flex-col">
         <div className="container p-4 items-center justify-center flex flex-col max-w-7xl mx-auto gap-4">
@@ -128,6 +113,7 @@ export default function VotePage() {
         </div>
       </div>
     );
+  }
 
   return (
     <div className="min-h-screen w-full text-white flex flex-col">

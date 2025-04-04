@@ -1,6 +1,13 @@
-choiceId,choiceName,budgetAmount,isSpp1
-1,sp a,400000,FALSE
-2,sp b - basic,400000,TRUE
-3,sp b - ext,500000,TRUE
-4,sp c,700000,TRUE
-5,None below,0,FALSE
+Choice,Name,Basic budget,Extended budget,is SPP
+1,sp a,"400,000","700,000",FALSE
+2,sp b - basic,"400,000","600,000",TRUE
+3,sp b- ext,"500,000","700,000",FALSE
+4,sp c,"700,000","800,000",TRUE
+5,sp d,"500,000","750,000",TRUE
+6,sp e,"600,000","850,000",FALSE
+7,sp f,"550,000","700,000",FALSE
+8,sp g - basic,"400,000","600,000",TRUE
+9,sp g - ext,"500,000","750,000",TRUE
+10,sp h,"650,000","900,000",TRUE
+11,sp -i,"450,000","650,000",FALSE
+12,None below,0,0,FALSE
