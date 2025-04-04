@@ -9,7 +9,8 @@ import { useState, useEffect } from "react";
 import { LineChart } from "lucide-react";
 
 export default function EnsElectionPage() {
-  const { data, isLoading, error, summary } = useEnsElectionData();
+  const { data, isLoading, error, summary, allocationData } =
+    useEnsElectionData();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCandidate, setSelectedCandidate] = useState<string | null>(
     null
@@ -165,10 +166,14 @@ export default function EnsElectionPage() {
         }`}
         style={{ zIndex: 101 }}
       >
-        {selectedCandidate && (
+        {selectedCandidate && allocationData && (
           <ResultsDetails
             candidateName={selectedCandidate}
             onClose={handleClose}
+            data={{
+              headToHeadMatches: allocationData.headToHeadMatches,
+              allocations: allocationData.allocations,
+            }}
           />
         )}
       </div>
