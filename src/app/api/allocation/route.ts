@@ -2,16 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { fetchSnapshotResults } from "@/helpers/snapshot";
 import { processCopelandRanking, combineData } from "@/helpers/voteProcessing";
 import { allocateBudgets } from "@/helpers/budgetAllocation";
-import { formatCurrency } from "@/helpers/reporting";
 import { getServiceProviderData } from "@/helpers/csvUtils";
-import { getCandidateHeadToHeadResults } from "@/helpers/candidateComparisons";
 
 // Import configuration but we might want to make these configurable via API params later
-import {
-  PROGRAM_BUDGET,
-  TWO_YEAR_STREAM_RATIO,
-  ONE_YEAR_STREAM_RATIO,
-} from "@/helpers/config";
+import { PROGRAM_BUDGET } from "@/helpers/config";
 
 interface ProposalData {
   title: string;
