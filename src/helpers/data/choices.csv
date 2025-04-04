@@ -1,6 +1,6 @@
 Choice,Name,Basic budget,Extended budget,is SPP
 1,sp a,"400,000","700,000",FALSE
-2,sp b - basic ,"400,000","700,000",TRUE
+2,sp b - basic ,"400,000","600,000",TRUE
 3,sp b - ext,"500,000","700,000",FALSE
 4,sp c,"700,000","800,000",TRUE
 5,None below,0,0,FALSE

@@ -8,6 +8,7 @@ export interface Candidate {
   streamDuration: string;
   isEligibleForExtendedBudget: boolean;
   wins: number;
+  isNoneBelow: boolean;
 }
 
 export interface ProjectData {

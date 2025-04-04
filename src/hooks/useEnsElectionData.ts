@@ -64,6 +64,29 @@ interface ElectionCandidate {
   allocatedBudget: number;
   rejectionReason: string | null;
   isEligibleForExtendedBudget: boolean;
+  isNoneBelow: boolean;
+}
+
+interface BudgetSummary {
+  totalBudget: number;
+  totalAllocated: number;
+  unspentBudget: number;
+  streamBreakdown: {
+    oneYear: {
+      budget: number;
+      allocated: number;
+      remaining: number;
+    };
+    twoYear: {
+      budget: number;
+      allocated: number;
+      remaining: number;
+    };
+  };
+  metrics: {
+    allocatedProjects: number;
+    rejectedProjects: number;
+  };
 }
 
 const PROPOSAL_ID =
@@ -106,6 +129,7 @@ export function useEnsElectionData() {
             rejectionReason: allocation.rejectionReason,
             isEligibleForExtendedBudget:
               allocation.extendedBudget > allocation.basicBudget,
+            isNoneBelow: allocation.isNoneBelow,
           }));
 
       setData(transformedData);
@@ -136,8 +160,40 @@ export function useEnsElectionData() {
       wins: candidate.score,
       basicBudget: candidate.basicBudget,
       extendedBudget: candidate.extendedBudget,
+      isNoneBelow: candidate.isNoneBelow,
     }));
   }, [data]);
+
+  // Memoize the summary data for graphs
+  const summary = useMemo((): BudgetSummary | null => {
+    if (!allocationData) return null;
+
+    const { summary: rawSummary } = allocationData;
+
+    return {
+      totalBudget: rawSummary.votedBudget,
+      totalAllocated: rawSummary.totalAllocated,
+      unspentBudget: rawSummary.unspentBudget,
+      streamBreakdown: {
+        oneYear: {
+          budget: rawSummary.oneYearStreamBudget,
+          allocated:
+            rawSummary.oneYearStreamBudget - rawSummary.remainingOneYearBudget,
+          remaining: rawSummary.remainingOneYearBudget,
+        },
+        twoYear: {
+          budget: rawSummary.twoYearStreamBudget,
+          allocated:
+            rawSummary.twoYearStreamBudget - rawSummary.remainingTwoYearBudget,
+          remaining: rawSummary.remainingTwoYearBudget,
+        },
+      },
+      metrics: {
+        allocatedProjects: rawSummary.allocatedProjects,
+        rejectedProjects: rawSummary.rejectedProjects,
+      },
+    };
+  }, [allocationData]);
 
   return {
     data: mappedData,
@@ -145,5 +201,6 @@ export function useEnsElectionData() {
     error,
     fetch,
     allocationData, // Also expose the full allocation data if needed
+    summary, // Expose the processed summary data
   };
 }
