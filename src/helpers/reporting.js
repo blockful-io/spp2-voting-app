@@ -3,6 +3,8 @@
  */
 
 const { USE_LOCAL_DATA, PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } = require('./config');
+const fs = require('fs');
+const path = require('path');
 
 /**
  * Formats currency values in a human-readable way
@@ -34,7 +36,7 @@ function displayResults(results, proposalData, headToHeadMatches) {
   console.log(`Total Votes: ${proposalData.votes?.length || 0}`);
   console.log(`Total Voting Power: ${proposalData.scores_total}`);
   console.log(`State: ${proposalData.state.toUpperCase()}`);
-  console.log(`Data Source: ${USE_LOCAL_DATA ? 'Local Mock Data' : 'Snapshot API'}`);
+  console.log(`Data Source: ${USE_LOCAL_DATA ? 'Local Data' : 'Snapshot API'}`);
   
   // Display summary information
   console.log("\nPROGRAM SUMMARY:");
@@ -105,7 +107,7 @@ function displayResults(results, proposalData, headToHeadMatches) {
       totalVotes: proposalData.votes?.length || 0,
       totalVotingPower: proposalData.scores_total,
       state: proposalData.state,
-      dataSource: USE_LOCAL_DATA ? 'Local Mock Data' : 'Snapshot API',
+      dataSource: USE_LOCAL_DATA ? 'Local Data' : 'Snapshot API',
       timestamp: new Date().toISOString()
     },
     copelandRanking: allocations.map(a => ({ 
@@ -170,7 +172,15 @@ function exportResults(results) {
       
       // Get the absolute path to the current directory
       const currentDir = __dirname || process.cwd();
-      const outputPath = path.join(currentDir, filename);
+      
+      // Create data directory if it doesn't exist
+      const dataDir = path.join(currentDir, 'data');
+      if (!fs.existsSync(dataDir)) {
+        fs.mkdirSync(dataDir, { recursive: true });
+      }
+      
+      // Save to the data directory
+      const outputPath = path.join(dataDir, filename);
       
       fs.writeFileSync(outputPath, jsonResults);
       console.log(`Results exported to file: ${outputPath}`);

@@ -20,6 +20,71 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Using the SPP2 Voting Application
+
+This application implements the Service Provider Program (SPP) allocation process using the Copeland voting method. Here's how to use it:
+
+### Data Directory Structure
+
+All data files are stored in the `src/helpers/data` directory:
+
+- **CSV Files**:
+  - `votes.csv` - Contains the votes from the Snapshot proposal
+  - `service-providers.csv` - Contains service provider budget data
+  - `choices.csv` - Contains the choice options for the vote
+  - Sample files (`sample-*.csv`) are provided as templates
+
+- **JSON Files**:
+  - `mocked-votes.json` - Generated from votes.csv for testing
+  - Allocation results are saved as `spp-allocation-[proposal-id].json`
+
+### CSV File Formats
+
+#### votes.csv
+
+```csv
+voter,vp,choice1,choice2,choice3,choice4,...
+0x1234...,1000,Namespace,Unruggable,eth.limo,Blockful,...
+```
+
+- `voter`: Ethereum address of the voter
+- `vp`: Voting power (numeric)
+- `choice1, choice2, ...`: Ranked choices in order of preference
+
+#### service-providers.csv
+
+```csv
+name,basicBudget,extendedBudget,isSpp1
+Unruggable,400000,700000,true
+Blockful,400000,700000,false
+```
+
+- `name`: Name of the service provider (must match names in votes)
+- `basicBudget`: Basic funding request amount
+- `extendedBudget`: Extended funding request amount
+- `isSpp1`: Whether the provider was in SPP1 (true/false)
+
+#### choices.csv
+
+```csv
+name
+Unruggable
+Blockful
+Namespace
+```
+
+- `name`: Name of each choice option
+
+### Configuration
+
+The application can be configured in `src/helpers/config.js`:
+
+- `USE_LOCAL_DATA`: Use local JSON data instead of Snapshot API
+- `USE_CSV_DATA`: Use CSV files for service provider data
+- `LOCAL_DATA_PATH`: Path to the mocked votes JSON file
+- `VOTES_CSV_PATH`: Path to the votes CSV file
+- `SERVICE_PROVIDERS_CSV_PATH`: Path to the service providers CSV file
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

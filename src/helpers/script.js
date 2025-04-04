@@ -16,7 +16,9 @@ const {
   PROPOSAL_ID,
   USE_LOCAL_DATA,
   USE_CSV_DATA,
-  CHOICES_CSV_PATH,
+  LOCAL_DATA_PATH,
+  VOTES_CSV_PATH,
+  CHOICES_CSV_PATH
 } = require('./config');
 
 // Import modules
@@ -24,10 +26,81 @@ const { fetchSnapshotResults } = require('./snapshot');
 const { processCopelandRanking, combineData } = require('./voteProcessing');
 const { allocateBudgets } = require('./budgetAllocation');
 const { formatCurrency, displayResults, exportResults } = require('./reporting');
-const { loadServiceProvidersFromCsv } = require('./csvUtils');
+const { convertVotesFromCsv, loadServiceProvidersFromCsv, loadChoiceOptions } = require('./csvUtils');
 const fs = require('fs');
 const path = require('path');
 
+/**
+ * Gets choice options from the CSV file
+ * 
+ * @returns {Array} - Array of choice option names
+ */
+function getChoiceOptions() {
+  try {
+    console.log('Loading choice options from CSV...');
+    const choicesCsvPath = path.resolve(__dirname, CHOICES_CSV_PATH);
+    if (!fs.existsSync(choicesCsvPath)) {
+      throw new Error(`Choices CSV file not found: ${choicesCsvPath}`);
+    }
+    
+    const choices = loadChoiceOptions(choicesCsvPath);
+    console.log(`Loaded ${choices.length} choice options from ${choicesCsvPath}`);
+    return choices;
+  } catch (error) {
+    console.error('Error loading choice options:', error);
+    throw error;
+  }
+}
+
+/**
+ * Prepares service provider data from CSV
+ * 
+ * @returns {Object} - Service provider data for allocation
+ */
+function getServiceProviderData() {
+  try {
+    console.log('Loading service provider data from CSV...');
+    // We're using the choices.csv file for service provider data
+    const csvPath = path.resolve(__dirname, CHOICES_CSV_PATH);
+    if (!fs.existsSync(csvPath)) {
+      throw new Error(`Choices CSV file not found: ${csvPath}`);
+    }
+    
+    const providers = loadServiceProvidersFromCsv(csvPath);
+    console.log(`Loaded service provider data for ${Object.keys(providers).length} providers`);
+    return providers;
+  } catch (error) {
+    console.error('Error loading service provider data:', error);
+    throw error;
+  }
+}
+
+/**
+ * Prepares vote data from CSV and converts it to mocked-votes.json format
+ * 
+ * @returns {Promise<void>} - Resolves when conversion is complete
+ */
+async function prepareVotesFromCsv() {
+  try {
+    // Load choice options from CSV
+    const choiceOptions = getChoiceOptions();
+    
+    // Convert votes from CSV to JSON and save to mocked-votes.json
+    const votesCsvPath = path.resolve(__dirname, VOTES_CSV_PATH);
+    if (!fs.existsSync(votesCsvPath)) {
+      throw new Error(`Votes CSV file not found: ${votesCsvPath}`);
+    }
+    
+    const outputPath = path.resolve(__dirname, LOCAL_DATA_PATH);
+    console.log(`Converting votes from ${votesCsvPath} to JSON format...`);
+    
+    convertVotesFromCsv(votesCsvPath, choiceOptions, outputPath);
+    console.log(`Votes converted from CSV and saved to ${outputPath}`);
+  } catch (error) {
+    console.error('Error preparing votes from CSV:', error);
+    throw error;
+  }
+}
 
 /**
  * Main function that orchestrates the entire process
@@ -41,11 +114,15 @@ async function main() {
     console.log(`Service Provider Data Source: ${USE_CSV_DATA ? 'CSV File' : 'Hardcoded'}`);
     console.log(`Timestamp: ${new Date().toISOString()}`);
     
-    // Ensure data directory exists
-    const dataDir = path.resolve(__dirname, 'data');
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
-      console.log(`Created data directory: ${dataDir}`);
+    // Check if we need to prepare votes from CSV
+    if (USE_LOCAL_DATA) {
+      const localDataPath = path.resolve(__dirname, LOCAL_DATA_PATH);
+      if (!fs.existsSync(localDataPath)) {
+        console.log(`Local data file not found. Converting votes from CSV to JSON...`);
+        await prepareVotesFromCsv();
+      } else {
+        console.log(`Using existing JSON data from ${localDataPath}`);
+      }
     }
     
     // Step 1: Fetch results from Snapshot or load from local file
@@ -63,8 +140,7 @@ async function main() {
     
     // Step 3: Load service provider data and combine with ranked results
     console.log("\nLoading service provider data...");
-    const choicesCsvPath = path.resolve(__dirname, CHOICES_CSV_PATH);
-    const providerData = loadServiceProvidersFromCsv(choicesCsvPath);
+    const providerData = getServiceProviderData();
     
     console.log("\nCombining with service provider metadata...");
     const combinedData = combineData(rankedCandidates, providerData);
@@ -97,8 +173,8 @@ async function main() {
   }
 }
 
-// Execute the script if not being imported
+// Execute the script if not being imported or handling specific command
 main().catch(err => {
-  console.error("Unhandled error in main function:", err);
-  process.exit(1);
-});
+    console.error("Unhandled error in main function:", err);
+    process.exit(1);
+  });

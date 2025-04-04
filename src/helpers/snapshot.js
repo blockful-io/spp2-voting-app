@@ -3,6 +3,8 @@
  */
 
 const { USE_LOCAL_DATA, LOCAL_DATA_PATH, PROPOSAL_ID } = require('./config');
+const fs = require('fs');
+const path = require('path');
 
 /**
  * Load mock data from local JSON file
@@ -17,19 +19,40 @@ async function loadLocalData() {
     
     // Handle different environments (Node.js vs Browser)
     if (typeof require !== 'undefined') {
-      // Node.js environment
-      mockData = require(LOCAL_DATA_PATH);
+      // Node.js environment - handle both relative and absolute paths
+      const filePath = LOCAL_DATA_PATH.startsWith('./') 
+        ? path.resolve(__dirname, LOCAL_DATA_PATH)
+        : LOCAL_DATA_PATH;
+      
+      if (!fs.existsSync(filePath)) {
+        throw new Error(`File not found: ${filePath}`);
+      }
+      
+      // Since we're requiring a JSON file dynamically, we need to read and parse it
+      const jsonData = fs.readFileSync(filePath, 'utf8');
+      mockData = JSON.parse(jsonData);
     } else {
       // Browser environment
       const response = await fetch(LOCAL_DATA_PATH);
       mockData = await response.json();
     }
     
+    // Check if loaded data is valid
+    if (!mockData || !mockData.data || !mockData.data.votes || !mockData.data.votes.length) {
+      throw new Error('Loaded mock data has invalid format');
+    }
+    
+    // Make sure votes have choices property
+    const sampleVote = mockData.data.votes[0];
+    if (!sampleVote.proposal || !sampleVote.proposal.choices) {
+      throw new Error('Loaded votes missing required proposal.choices property');
+    }
+    
     // Create a proposal object with the structure expected by the rest of the code
     const proposal = {
       id: PROPOSAL_ID,
       title: "Service Provider Program Renewal",
-      choices: mockData.data.votes[0].proposal.choices,
+      choices: sampleVote.proposal.choices,
       scores_total: mockData.data.votes.reduce((sum, vote) => sum + vote.vp, 0),
       state: "closed",
       space: {
@@ -39,7 +62,8 @@ async function loadLocalData() {
       votes: mockData.data.votes
     };
     
-    console.log(`Successfully loaded mock data with ${proposal.votes.length} votes`);
+    console.log(`Successfully loaded mock data with ${proposal.votes.length} votes and ${proposal.choices.length} choice options`);
+    console.log(`Choices: ${proposal.choices.join(', ')}`);
     return proposal;
   } catch (error) {
     console.error('Error loading mock data:', error);

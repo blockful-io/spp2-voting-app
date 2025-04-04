@@ -1,0 +1,149 @@
+{
+  "proposal": {
+    "id": "0x5dff4695ef4b5a576d132c2d278342a54b1fe5846ebcdc9a908e273611f27ee1",
+    "title": "Service Provider Program Renewal",
+    "space": "ENS DAO",
+    "totalVotes": 10,
+    "totalVotingPower": 10,
+    "state": "closed",
+    "dataSource": "Local Data",
+    "timestamp": "2025-04-04T01:49:53.843Z"
+  },
+  "copelandRanking": [
+    {
+      "name": "sp b - basic",
+      "wins": 2,
+      "averageSupport": 7
+    },
+    {
+      "name": "sp c",
+      "wins": 0,
+      "averageSupport": 0.6666666666666666
+    },
+    {
+      "name": "sp b - ext",
+      "wins": 3,
+      "averageSupport": 7.333333333333333
+    },
+    {
+      "name": "sp a",
+      "wins": 1,
+      "averageSupport": 4.666666666666667
+    }
+  ],
+  "headToHeadMatches": [
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp b - basic",
+      "candidate1Votes": 2,
+      "candidate2Votes": 8,
+      "totalVotes": 10,
+      "winner": "sp b - basic"
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp b - ext",
+      "candidate1Votes": 2,
+      "candidate2Votes": 8,
+      "totalVotes": 10,
+      "winner": "sp b - ext"
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp c",
+      "candidate1Votes": 10,
+      "candidate2Votes": 0,
+      "totalVotes": 10,
+      "winner": "sp a"
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp c",
+      "candidate1Votes": 9,
+      "candidate2Votes": 1,
+      "totalVotes": 10,
+      "winner": "sp b - basic"
+    },
+    {
+      "candidate1": "sp b - ext",
+      "candidate2": "sp c",
+      "candidate1Votes": 9,
+      "candidate2Votes": 1,
+      "totalVotes": 10,
+      "winner": "sp b - ext"
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp b - ext",
+      "candidate1Votes": 4,
+      "candidate2Votes": 5,
+      "totalVotes": 9,
+      "winner": "sp b - ext"
+    }
+  ],
+  "summary": {
+    "votedBudget": 4500000,
+    "twoYearStreamBudget": 1500000,
+    "oneYearStreamBudget": 3000000,
+    "transferredBudget": 0,
+    "adjustedTwoYearBudget": 1500000,
+    "adjustedOneYearBudget": 3000000,
+    "remainingTwoYearBudget": 0,
+    "remainingOneYearBudget": 1600000,
+    "totalAllocated": 2900000,
+    "unspentBudget": 1600000,
+    "allocatedProjects": 4,
+    "rejectedProjects": 0
+  },
+  "allocations": [
+    {
+      "name": "sp b - basic",
+      "score": 2,
+      "averageSupport": 7,
+      "basicBudget": 400000,
+      "extendedBudget": 700000,
+      "allocated": true,
+      "streamDuration": "2-year",
+      "allocatedBudget": 700000,
+      "rejectionReason": null
+    },
+    {
+      "name": "sp c",
+      "score": 0,
+      "averageSupport": 0.6666666666666666,
+      "basicBudget": 700000,
+      "extendedBudget": 800000,
+      "allocated": true,
+      "streamDuration": "2-year",
+      "allocatedBudget": 800000,
+      "rejectionReason": null
+    },
+    {
+      "name": "sp b - ext",
+      "score": 3,
+      "averageSupport": 7.333333333333333,
+      "basicBudget": 500000,
+      "extendedBudget": 700000,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "allocatedBudget": 700000,
+      "rejectionReason": null
+    },
+    {
+      "name": "sp a",
+      "score": 1,
+      "averageSupport": 4.666666666666667,
+      "basicBudget": 400000,
+      "extendedBudget": 700000,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "allocatedBudget": 700000,
+      "rejectionReason": null
+    }
+  ],
+  "programInfo": {
+    "totalBudget": 4500000,
+    "twoYearStreamRatio": 0.3333333333333333,
+    "oneYearStreamRatio": 0.6666666666666666
+  }
+}
