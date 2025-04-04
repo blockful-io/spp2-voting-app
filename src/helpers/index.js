@@ -9,7 +9,7 @@
  */
 
 // Import configuration
-const { 
+import { 
   PROGRAM_BUDGET, 
   TWO_YEAR_STREAM_RATIO, 
   ONE_YEAR_STREAM_RATIO, 
@@ -19,24 +19,24 @@ const {
   LOCAL_DATA_PATH,
   VOTES_CSV_PATH,
   CHOICES_CSV_PATH
-} = require('./config');
+} from './config';
 
 // Import modules
-const { fetchSnapshotResults } = require('./snapshot');
-const { processCopelandRanking, combineData } = require('./voteProcessing');
-const { allocateBudgets } = require('./budgetAllocation');
-const { formatCurrency, displayResults, exportResults } = require('./reporting');
-const { 
+import { fetchSnapshotResults } from './snapshot';
+import { processCopelandRanking, combineData } from './voteProcessing';
+import { allocateBudgets } from './budgetAllocation';
+import { formatCurrency, displayResults, exportResults } from './reporting';
+import { 
   convertVotesFromCsv, 
   loadServiceProvidersFromCsv, 
   loadChoiceOptions,
   getChoiceOptions,
   getServiceProviderData,
   prepareVotesFromCsv 
-} = require('./csvUtils');
-const { getCandidateHeadToHeadResults } = require('./candidateComparisons');
-const fs = require('fs');
-const path = require('path');
+} from './csvUtils';
+import { getCandidateHeadToHeadResults } from './candidateComparisons';
+import fs from 'fs';
+import path from 'path';
 
 /**
  * Main function that orchestrates the entire process

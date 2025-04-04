@@ -175,8 +175,8 @@ export function ElectionResultsTable({
               <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
                 ${candidate.basicBudget.toLocaleString()}
               </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                -
+              <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
+                ${candidate.extendedBudget.toLocaleString()}
               </td>
               <td className="whitespace-nowrap px-6 py-4">
                 <span
