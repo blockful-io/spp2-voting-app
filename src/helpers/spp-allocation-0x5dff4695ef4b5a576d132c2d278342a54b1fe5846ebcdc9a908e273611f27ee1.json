@@ -1,0 +1,197 @@
+{
+  "proposal": {
+    "id": "0x5dff4695ef4b5a576d132c2d278342a54b1fe5846ebcdc9a908e273611f27ee1",
+    "title": "Service Provider Program Renewal",
+    "space": "ENS DAO",
+    "totalVotes": 11,
+    "totalVotingPower": 1952000,
+    "state": "closed",
+    "dataSource": "Local Mock Data",
+    "timestamp": "2025-04-04T00:16:04.340Z"
+  },
+  "copelandRanking": [
+    {
+      "name": "Namespace",
+      "wins": 4,
+      "averageSupport": 863000
+    },
+    {
+      "name": "Unruggable",
+      "wins": 2,
+      "averageSupport": 689750
+    },
+    {
+      "name": "eth.limo",
+      "wins": 2,
+      "averageSupport": 613250
+    },
+    {
+      "name": "Blockful",
+      "wins": 2,
+      "averageSupport": 596500
+    },
+    {
+      "name": "EFP",
+      "wins": 0,
+      "averageSupport": 704500
+    }
+  ],
+  "headToHeadMatches": [
+    {
+      "candidate1": "Namespace",
+      "candidate2": "EFP",
+      "candidate1Votes": 1023000,
+      "candidate2Votes": 818000,
+      "totalVotes": 1841000,
+      "winner": "Namespace"
+    },
+    {
+      "candidate1": "Unruggable",
+      "candidate2": "EFP",
+      "candidate1Votes": 1006000,
+      "candidate2Votes": 560000,
+      "totalVotes": 1566000,
+      "winner": "Unruggable"
+    },
+    {
+      "candidate1": "eth.limo",
+      "candidate2": "EFP",
+      "candidate1Votes": 788000,
+      "candidate2Votes": 751000,
+      "totalVotes": 1539000,
+      "winner": "eth.limo"
+    },
+    {
+      "candidate1": "Blockful",
+      "candidate2": "EFP",
+      "candidate1Votes": 791000,
+      "candidate2Votes": 689000,
+      "totalVotes": 1480000,
+      "winner": "Blockful"
+    },
+    {
+      "candidate1": "Unruggable",
+      "candidate2": "Namespace",
+      "candidate1Votes": 449000,
+      "candidate2Votes": 832000,
+      "totalVotes": 1281000,
+      "winner": "Namespace"
+    },
+    {
+      "candidate1": "Unruggable",
+      "candidate2": "eth.limo",
+      "candidate1Votes": 622000,
+      "candidate2Votes": 659000,
+      "totalVotes": 1281000,
+      "winner": "eth.limo"
+    },
+    {
+      "candidate1": "Blockful",
+      "candidate2": "Namespace",
+      "candidate1Votes": 462000,
+      "candidate2Votes": 819000,
+      "totalVotes": 1281000,
+      "winner": "Namespace"
+    },
+    {
+      "candidate1": "Namespace",
+      "candidate2": "eth.limo",
+      "candidate1Votes": 778000,
+      "candidate2Votes": 503000,
+      "totalVotes": 1281000,
+      "winner": "Namespace"
+    },
+    {
+      "candidate1": "Blockful",
+      "candidate2": "eth.limo",
+      "candidate1Votes": 662000,
+      "candidate2Votes": 503000,
+      "totalVotes": 1165000,
+      "winner": "Blockful"
+    },
+    {
+      "candidate1": "Unruggable",
+      "candidate2": "Blockful",
+      "candidate1Votes": 682000,
+      "candidate2Votes": 471000,
+      "totalVotes": 1153000,
+      "winner": "Unruggable"
+    }
+  ],
+  "summary": {
+    "votedBudget": 4500000,
+    "twoYearStreamBudget": 1500000,
+    "oneYearStreamBudget": 3000000,
+    "transferredBudget": 100000,
+    "adjustedTwoYearBudget": 1400000,
+    "adjustedOneYearBudget": 3100000,
+    "remainingTwoYearBudget": 0,
+    "remainingOneYearBudget": 1600000,
+    "totalAllocated": 2900000,
+    "unspentBudget": 1600000,
+    "allocatedProjects": 5,
+    "rejectedProjects": 0
+  },
+  "allocations": [
+    {
+      "name": "Namespace",
+      "score": 4,
+      "averageSupport": 863000,
+      "basicBudget": 500000,
+      "extendedBudget": 700000,
+      "allocated": true,
+      "streamDuration": "2-year",
+      "allocatedBudget": 700000,
+      "rejectionReason": null
+    },
+    {
+      "name": "Unruggable",
+      "score": 2,
+      "averageSupport": 689750,
+      "basicBudget": 400000,
+      "extendedBudget": 700000,
+      "allocated": true,
+      "streamDuration": "2-year",
+      "allocatedBudget": 700000,
+      "rejectionReason": null
+    },
+    {
+      "name": "eth.limo",
+      "score": 2,
+      "averageSupport": 613250,
+      "basicBudget": 700000,
+      "extendedBudget": 800000,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "allocatedBudget": 800000,
+      "rejectionReason": null
+    },
+    {
+      "name": "Blockful",
+      "score": 2,
+      "averageSupport": 596500,
+      "basicBudget": 400000,
+      "extendedBudget": 700000,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "allocatedBudget": 700000,
+      "rejectionReason": null
+    },
+    {
+      "name": "EFP",
+      "score": 0,
+      "averageSupport": 704500,
+      "basicBudget": 0,
+      "extendedBudget": 0,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "allocatedBudget": 0,
+      "rejectionReason": null
+    }
+  ],
+  "programInfo": {
+    "totalBudget": 4500000,
+    "twoYearStreamRatio": 0.3333333333333333,
+    "oneYearStreamRatio": 0.6666666666666666
+  }
+}
