@@ -24,8 +24,8 @@ function processCopelandRanking(proposalData) {
   const noneBelowIndex = choices.findIndex(choice => 
     choice.toLowerCase() === "none below" || choice.toLowerCase() === "none of the below");
   
-  // Get actual candidate choices (excluding None Below)
-  const candidateChoices = choices.filter((_, index) => index !== noneBelowIndex);
+  // Keep all choices including None Below as candidates
+  const candidateChoices = [...choices];
   const numCandidates = candidateChoices.length;
   
   console.log(`Processing ${votes.length} votes for ${numCandidates} candidates using Copeland method...`);
@@ -48,45 +48,27 @@ function processCopelandRanking(proposalData) {
     // Find where "None Below" is in this particular vote's ranking (if ranked)
     const noneBelowRank = vote.choice.indexOf(noneBelowIndex + 1);
     
-    // Map from the ballot's ranked choices to actual candidate indices
-    // This handles excluding "None Below" from the candidate list
-    function getCandidateIndex(choiceNum) {
-      // Convert 1-indexed to 0-indexed and adjust for "None Below" position
-      const choiceIndex = choiceNum - 1;
-      if (choiceIndex === noneBelowIndex) {
-        return -1; // Not a candidate
-      }
-      // Count how many candidates before this choice in the original array
-      return choiceIndex < noneBelowIndex ? choiceIndex : choiceIndex - 1;
-    }
-    
     // For each vote, determine which candidates are ranked (above "None Below")
     const rankedCandidates = new Set();
     
     // If "None Below" was ranked in this vote, only candidates ranked before it are considered ranked
+    // "None Below" itself is considered ranked
     if (noneBelowRank !== -1) {
-      for (let i = 0; i < noneBelowRank; i++) {
-        const candidateIndex = getCandidateIndex(vote.choice[i]);
-        if (candidateIndex !== -1) {
-          rankedCandidates.add(candidateIndex);
-        }
+      for (let i = 0; i <= noneBelowRank; i++) {
+        const candidateIndex = vote.choice[i] - 1; // Convert to 0-indexed
+        rankedCandidates.add(candidateIndex);
       }
     } 
     // If "None Below" wasn't ranked, all candidates in the vote are considered ranked
     else {
       vote.choice.forEach(choiceNum => {
-        const candidateIndex = getCandidateIndex(choiceNum);
-        if (candidateIndex !== -1) {
-          rankedCandidates.add(candidateIndex);
-        }
+        rankedCandidates.add(choiceNum - 1); // Convert to 0-indexed
       });
     }
     
-    // Helper to get position in ranking (accounting for None Below)
+    // Helper to get position in ranking
     function getPosition(candidateIndex) {
-      // Map back to original choice number
-      const originalIndex = candidateIndex < noneBelowIndex ? candidateIndex : candidateIndex + 1;
-      return vote.choice.indexOf(originalIndex + 1);
+      return vote.choice.indexOf(candidateIndex + 1);
     }
     
     // Compare each pair of candidates
@@ -178,11 +160,15 @@ function processCopelandRanking(proposalData) {
     // Calculate average support (avoid division by zero)
     const averageSupport = totalMatches > 0 ? totalVotesReceived / totalMatches : 0;
     
+    // Track whether this is the None Below option
+    const isNoneBelow = i === noneBelowIndex;
+    
     candidateResults.push({
       name: candidateChoices[i],
       wins: wins,
       averageSupport: averageSupport,
-      index: i
+      index: i,
+      isNoneBelow: isNoneBelow
     });
   }
   
@@ -203,7 +189,8 @@ function processCopelandRanking(proposalData) {
   // Log candidate results
   console.log("\nCandidate Rankings:");
   candidateResults.forEach((candidate, index) => {
-    console.log(`${index + 1}. ${candidate.name}: ${candidate.wins} wins, Average Support: ${candidate.averageSupport.toFixed(2)}`);
+    const noneBelow = candidate.isNoneBelow ? " (None Below)" : "";
+    console.log(`${index + 1}. ${candidate.name}${noneBelow}: ${candidate.wins} wins, Average Support: ${candidate.averageSupport.toFixed(2)}`);
   });
   
   // Return both the ranked results and match details
@@ -211,7 +198,8 @@ function processCopelandRanking(proposalData) {
     rankedCandidates: candidateResults.map(candidate => ({
       name: candidate.name,
       score: candidate.wins,
-      averageSupport: candidate.averageSupport
+      averageSupport: candidate.averageSupport,
+      isNoneBelow: candidate.isNoneBelow
     })),
     headToHeadMatches: matchResults
   };
@@ -235,7 +223,7 @@ function combineData(rankedResults, providerData) {
       basicBudget: metadata.basicBudget || 0,
       extendedBudget: metadata.extendedBudget || 0,
       isSpp1: metadata.isSpp1 || false,
-      isNoneBelow: false // None Below is not included in candidates
+      isNoneBelow: result.isNoneBelow || false // Preserve None Below status
     };
   });
 }

@@ -75,21 +75,39 @@ function displayResults(results, proposalData, headToHeadMatches) {
   
   console.log("\nPROJECT RANKINGS AND ALLOCATIONS:");
   allocations.forEach((project, index) => {
-    console.log(`\n${index + 1}. ${project.name}`);
+    // Add a label for the None Below option
+    const noneBelow = project.isNoneBelow ? " (None Below)" : "";
+    
+    console.log(`\n${index + 1}. ${project.name}${noneBelow}`);
     console.log(`   Wins: ${project.score}`);
     console.log(`   Average Support: ${typeof project.averageSupport === 'number' ? project.averageSupport.toFixed(2) : "N/A"}`);
-    if (project.allocated) {
+    
+    if (project.isNoneBelow) {
+      console.log(`   STATUS: ✗ NOT FUNDED - Reason: None Below indicator does not receive allocation`);
+    } else if (project.allocated) {
       console.log(`   STATUS: ✓ FUNDED - ${formatCurrency(project.allocatedBudget)} (${project.streamDuration} stream)`);
     } else {
       console.log(`   STATUS: ✗ NOT FUNDED - Reason: ${project.rejectionReason || "Unknown"}`);
     }
-    console.log(`   Requested: Basic ${formatCurrency(project.basicBudget)}, Extended ${formatCurrency(project.extendedBudget)}`);
-    console.log(`   SPP1 Participant: ${project.isSpp1 ? "Yes" : "No"}`);
+    
+    // Only show budget info for real service providers
+    if (!project.isNoneBelow) {
+      console.log(`   Requested: Basic ${formatCurrency(project.basicBudget)}, Extended ${formatCurrency(project.extendedBudget)}`);
+      console.log(`   SPP1 Participant: ${project.isSpp1 ? "Yes" : "No"}`);
+    }
   });
   
   console.log("\nHEAD-TO-HEAD MATCH RESULTS:");
   headToHeadMatches.forEach((match, index) => {
-    console.log(`\nMatch ${index + 1}: ${match.candidate1} vs ${match.candidate2}`);
+    // Label None Below candidates in match results
+    const candidate1Label = match.candidate1.toLowerCase() === "none below" || 
+                          match.candidate1.toLowerCase() === "none of the below" 
+                          ? " (None Below)" : "";
+    const candidate2Label = match.candidate2.toLowerCase() === "none below" || 
+                          match.candidate2.toLowerCase() === "none of the below" 
+                          ? " (None Below)" : "";
+                         
+    console.log(`\nMatch ${index + 1}: ${match.candidate1}${candidate1Label} vs ${match.candidate2}${candidate2Label}`);
     console.log(`   ${match.candidate1}: ${match.candidate1Votes} votes`);
     console.log(`   ${match.candidate2}: ${match.candidate2Votes} votes`);
     console.log(`   Winner: ${match.winner}`);
@@ -113,7 +131,8 @@ function displayResults(results, proposalData, headToHeadMatches) {
     copelandRanking: allocations.map(a => ({ 
       name: a.name, 
       wins: a.score,
-      averageSupport: a.averageSupport
+      averageSupport: a.averageSupport,
+      isNoneBelow: a.isNoneBelow || false
     })),
     headToHeadMatches: headToHeadMatches,
     summary,
@@ -127,7 +146,8 @@ function displayResults(results, proposalData, headToHeadMatches) {
       allocated: a.allocated,
       streamDuration: a.streamDuration,
       allocatedBudget: a.allocatedBudget,
-      rejectionReason: a.rejectionReason
+      rejectionReason: a.rejectionReason,
+      isNoneBelow: a.isNoneBelow || false
     })),
     programInfo: {
       totalBudget: PROGRAM_BUDGET,
@@ -146,7 +166,8 @@ function displayResults(results, proposalData, headToHeadMatches) {
 function exportResults(results) {
   // Create a timestamp for the filename
   const timestamp = new Date().toISOString().replace(/[:\-\.]/g, '_').replace('T', '-').slice(0, 19);
-  const filename = `spp-allocation-${results.proposal.id}.json`;
+  const filename = `spp-allocation-${results.proposal.id}-${timestamp}.json`;
+  const filenameLatest = `spp-allocation-${results.proposal.id}-latest.json`;
   
   const jsonResults = JSON.stringify(results, null, 2);
   
@@ -181,8 +202,10 @@ function exportResults(results) {
       
       // Save to the data directory
       const outputPath = path.join(dataDir, filename);
+      const outputPathLatest = path.join(dataDir, filenameLatest);
       
       fs.writeFileSync(outputPath, jsonResults);
+      fs.writeFileSync(outputPathLatest, jsonResults);
       console.log(`Results exported to file: ${outputPath}`);
     }
     // Otherwise, just log the JSON

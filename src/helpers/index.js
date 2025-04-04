@@ -60,7 +60,7 @@ async function main() {
     console.log("\nProcessing votes using Copeland method...");
     const copelandResults = processCopelandRanking(proposalData);
     const { rankedCandidates, headToHeadMatches } = copelandResults;
-    
+    console.log(rankedCandidates);
     // Step 3: Load service provider data and combine with ranked results
     console.log("\nLoading service provider data...");
     const choicesCsvPath = path.resolve(__dirname, CHOICES_CSV_PATH);
@@ -68,15 +68,16 @@ async function main() {
     
     console.log("\nCombining with service provider metadata...");
     const combinedData = combineData(rankedCandidates, providerData);
-    
+    console.log(combinedData);
     // Step 4: Allocate budgets
     console.log("\nAllocating budgets based on ranking...");
     const allocationResults = allocateBudgets(combinedData, PROGRAM_BUDGET);
-    
+    console.log(allocationResults);
     // Step 5: Display and export results
     const formattedResults = displayResults(allocationResults, proposalData, headToHeadMatches);
+    console.log(formattedResults);
     const exportedFilename = exportResults(formattedResults);
-    
+
     console.log("\nAllocation process completed successfully!");
     console.log(`Results saved to: ${exportedFilename}`);
     

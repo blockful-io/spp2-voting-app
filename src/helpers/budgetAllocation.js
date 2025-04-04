@@ -15,6 +15,7 @@ const {
  * 2. Any remaining 2-year budget transfers to 1-year stream
  * 3. Other projects can get 1-year streams with extended budget
  * 4. If extended budget doesn't fit, try basic budget
+ * 5. "None Below" candidate is included in ranking but not allocated budget
  * 
  * @param {Array} projects - Ranked list of service provider projects
  * @param {Number} yearlyBudget - Total program budget per year
@@ -33,6 +34,7 @@ function allocateBudgets(projects, yearlyBudget) {
         allocated: false,
         streamDuration: null,
         allocatedBudget: 0,
+        isNoneBelow: project.isNoneBelow || false,
         rejectionReason: "Program not renewed"
       })),
       summary: {
@@ -57,16 +59,36 @@ function allocateBudgets(projects, yearlyBudget) {
   let remainingOneYearBudget = oneYearStreamBudget;
   let transferredBudget = 0;
   
-  // Results storage
-  const allocations = [];
+  // Initialize allocations array with all projects, preserving original ranking order
+  const allocations = projects.map(project => ({
+    name: project.name,
+    score: project.score,
+    averageSupport: project.averageSupport || 0,
+    basicBudget: project.basicBudget || 0,
+    extendedBudget: project.extendedBudget || 0,
+    allocated: false,
+    streamDuration: null,
+    allocatedBudget: 0,
+    isNoneBelow: project.isNoneBelow || false,
+    rejectionReason: null
+  }));
+  
+  // Set rejection reason for all None Below candidates
+  allocations.forEach(allocation => {
+    if (allocation.isNoneBelow) {
+      allocation.rejectionReason = "None Below indicator does not receive allocation";
+    }
+  });
   
   // Flag to track if any projects qualified for 2-year stream
   let anyQualifiedFor2YearStream = false;
   
   // FIRST PASS: Check for 2-year stream eligibility (SPP1 members only)
-  for (const project of projects) {
-    // Skip non-SPP1 projects
-    if (!project.isSpp1) {
+  for (let i = 0; i < projects.length; i++) {
+    const project = projects[i];
+    
+    // Skip None Below and non-SPP1 projects
+    if (project.isNoneBelow || !project.isSpp1) {
       continue;
     }
     
@@ -75,17 +97,10 @@ function allocateBudgets(projects, yearlyBudget) {
       anyQualifiedFor2YearStream = true;
       remainingTwoYearBudget -= project.extendedBudget;
       
-      allocations.push({
-        name: project.name,
-        score: project.score,
-        averageSupport: project.averageSupport,
-        basicBudget: project.basicBudget,
-        extendedBudget: project.extendedBudget,
-        allocated: true,
-        streamDuration: "2-year",
-        allocatedBudget: project.extendedBudget,
-        rejectionReason: null
-      });
+      // Update the allocation for this project (in its original position)
+      allocations[i].allocated = true;
+      allocations[i].streamDuration = "2-year";
+      allocations[i].allocatedBudget = project.extendedBudget;
     }
   }
   
@@ -104,24 +119,14 @@ function allocateBudgets(projects, yearlyBudget) {
   }
   
   // SECOND PASS: Process all projects for 1-year stream
-  for (const project of projects) {
-    // Skip projects already allocated to 2-year stream
-    if (allocations.some(p => p.name === project.name)) {
+  for (let i = 0; i < projects.length; i++) {
+    const project = projects[i];
+    const allocation = allocations[i];
+    
+    // Skip projects already allocated to 2-year stream or None Below
+    if (allocation.allocated || project.isNoneBelow) {
       continue;
     }
-    
-    // Initialize allocation data for this project
-    const allocation = {
-      name: project.name,
-      score: project.score,
-      averageSupport: project.averageSupport || 0,
-      basicBudget: project.basicBudget,
-      extendedBudget: project.extendedBudget,
-      allocated: false,
-      streamDuration: null,
-      allocatedBudget: 0,
-      rejectionReason: null
-    };
     
     // Try to allocate from 1-year stream
     // First try extended budget
@@ -142,8 +147,6 @@ function allocateBudgets(projects, yearlyBudget) {
     else {
       allocation.rejectionReason = "Insufficient budget remaining";
     }
-    
-    allocations.push(allocation);
   }
   
   // Calculate summary statistics

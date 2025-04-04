@@ -369,11 +369,8 @@ function loadServiceProvidersFromCsv(csvFilePath) {
           continue;
         }
         
-        // Handle special case for "None below"
-        if (name.toLowerCase() === 'none below') {
-          serviceProviderData[name] = { isNoneBelow: true };
-          continue;
-        }
+        // Check if this is the "None Below" option
+        const isNoneBelow = name.toLowerCase() === "none below" || name.toLowerCase() === "none of the below";
         
         // Parse budget values - handle values with commas
         let basicBudget = 0;
@@ -399,13 +396,19 @@ function loadServiceProvidersFromCsv(csvFilePath) {
         }
         
         // Create service provider object
+        // If it's "None Below", set budget values to 0
         serviceProviderData[name] = {
-          basicBudget: isNaN(basicBudget) ? 0 : basicBudget,
-          extendedBudget: isNaN(extendedBudget) ? 0 : extendedBudget,
-          isSpp1
+          basicBudget: isNoneBelow ? 0 : (isNaN(basicBudget) ? 0 : basicBudget),
+          extendedBudget: isNoneBelow ? 0 : (isNaN(extendedBudget) ? 0 : extendedBudget),
+          isSpp1: isNoneBelow ? false : isSpp1,
+          isNoneBelow: isNoneBelow
         };
         
-        console.log(`Loaded service provider: ${name} (Basic: ${basicBudget}, Extended: ${extendedBudget}, SPP1: ${isSpp1})`);
+        if (isNoneBelow) {
+          console.log(`Loaded "None Below" option: ${name}`);
+        } else {
+          console.log(`Loaded service provider: ${name} (Basic: ${basicBudget}, Extended: ${extendedBudget}, SPP1: ${isSpp1})`);
+        }
       }
     } else {
       // Try standard format for backward compatibility
@@ -437,11 +440,8 @@ function loadServiceProvidersFromCsv(csvFilePath) {
           continue;
         }
         
-        // Handle special case for "None below"
-        if (name.toLowerCase() === 'none below') {
-          serviceProviderData[name] = { isNoneBelow: true };
-          continue;
-        }
+        // Check if this is the "None Below" option
+        const isNoneBelow = name.toLowerCase() === "none below" || name.toLowerCase() === "none of the below";
         
         // Parse budget values
         const basicBudget = parseInt(line[basicBudgetIndex], 10);
@@ -456,9 +456,10 @@ function loadServiceProvidersFromCsv(csvFilePath) {
         
         // Create service provider object
         serviceProviderData[name] = {
-          basicBudget: isNaN(basicBudget) ? 0 : basicBudget,
-          extendedBudget: isNaN(extendedBudget) ? 0 : extendedBudget,
-          isSpp1
+          basicBudget: isNoneBelow ? 0 : (isNaN(basicBudget) ? 0 : basicBudget),
+          extendedBudget: isNoneBelow ? 0 : (isNaN(extendedBudget) ? 0 : extendedBudget),
+          isSpp1: isNoneBelow ? false : isSpp1,
+          isNoneBelow: isNoneBelow
         };
       }
     }
@@ -468,7 +469,7 @@ function loadServiceProvidersFromCsv(csvFilePath) {
     }
     
     console.log(`Successfully loaded ${Object.keys(serviceProviderData).length} service providers from CSV`);
-    
+    console.log(serviceProviderData);
     return serviceProviderData;
   } catch (error) {
     console.error('Error loading service providers from CSV:', error);
