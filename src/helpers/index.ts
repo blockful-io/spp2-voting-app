@@ -20,8 +20,6 @@ import { prepareVotesFromCsv } from './csvUtils';
 import { getVotingResultData, VotingResultResponse } from './votingResults';
 import { processCopelandRanking, combineData } from './voteProcessing';
 import { allocateBudgets } from './budgetAllocation';
-import fs from 'fs';
-import path from 'path';
 
 // Import the reporting module (using ES module imports)
 import { formatCurrency, displayResults, exportResults } from './reporting';
@@ -40,13 +38,6 @@ export async function main(): Promise<{
     console.log("Starting Service Provider Program allocation...");
     console.log(`Budget: ${formatCurrency(PROGRAM_BUDGET)} per year`);
     console.log(`Data Source: ${USE_LOCAL_DATA ? 'Local Data' : 'Snapshot API'}`);
-    
-    // Ensure data directory exists
-    const dataDir = path.resolve(__dirname, 'data');
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
-      console.log(`Created data directory: ${dataDir}`);
-    }
     
     // Check if we need to prepare votes from CSV
     if (USE_LOCAL_DATA) {

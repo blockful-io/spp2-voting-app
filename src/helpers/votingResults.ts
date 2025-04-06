@@ -6,11 +6,11 @@
  */
 
 import { fetchSnapshotResults } from "./snapshot";
-import { processCopelandRanking, combineData } from "./voteProcessing";
+import { processCopelandRanking, combineData, postprocessRanking, preprocessVotes } from "./voteProcessing";
 import { allocateBudgets } from "./budgetAllocation";
 import { getServiceProviderData, getChoiceOptions } from "./csvUtils";
 import { PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from "./config";
-import { parseChoiceName } from './choiceParser';
+import { parseChoiceName, processChoices } from './choiceParser';
 
 // Interfaces for vote data
 export interface Vote {
@@ -82,13 +82,13 @@ export interface Allocation {
 }
 
 export interface Choice {
-  name: string;          // Base name of the service provider
-  originalName: string;  // Original full choice name 
-  budget: number;
-  isSpp1: boolean;
-  isNoneBelow: boolean;
-  choiceId: number;
-  budgetType: string;    // Added budget type (basic, extended)
+  originalName: string;  // Original full choice name (e.g., "sp a" or "sp b - basic")
+  name: string;          // Base provider name without budget type (e.g., "sp a" or "sp b")
+  budget: number;        // Budget amount in USD
+  isSpp1: boolean;       // Whether provider was part of SPP1
+  isNoneBelow: boolean;  // Whether this is the "None Below" indicator
+  choiceId: number;      // Numeric ID of the choice
+  budgetType: string;    // Budget type: "basic", "extended", or "none"
 }
 
 export interface AllocationResults {
@@ -140,12 +140,12 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
     throw new Error("Proposal not found");
   }
 
-  // Ensure proposal data has required properties and format it to match the expected interface
+  // Ensure proposal data has required properties
   if (!rawProposalData.choices || !rawProposalData.votes) {
     throw new Error("Proposal data is missing required properties");
   }
 
-  // Format the data to match what processCopelandRanking expects
+  // Format the data for processing
   const proposalData: ProposalData = {
     id: proposalId,
     title: rawProposalData.title,
@@ -156,36 +156,28 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
     state: rawProposalData.state,
     choices: rawProposalData.choices
   };
+  
+  // Step 2: Pre-process votes if bidimensional is enabled
+  proposalData.votes = preprocessVotes(proposalData.votes, proposalData.choices);
+  
+  // Step 3: Process with Copeland method to get rankings
+  const copelandResults = processCopelandRanking(proposalData);
+  
+  // Step 4: Post-process rankings to handle bidimensional filtering and None Below
+  const { rankedCandidates, headToHeadMatches } = postprocessRanking(copelandResults);
 
-  // Step 2: Process with Copeland method to get rankings
-  const copelandResults = processCopelandRanking(proposalData) as CopelandResults;
-  const { rankedCandidates, headToHeadMatches } = copelandResults;
-
-  // Step 3: Load service provider data and combine with ranked results
+  // Step 5: Load service provider data and combine with ranked results
   const providerData = getServiceProviderData();
   const combinedData = combineData(rankedCandidates, providerData);
 
-  // Step 4: Allocate budgets
-  const allocationResults = allocateBudgets(combinedData, PROGRAM_BUDGET) as AllocationResults;
+  // Step 6: Allocate budgets
+  const { summary, allocations } = allocateBudgets(combinedData, PROGRAM_BUDGET) as AllocationResults;
 
-  // Step 5: Get choices data from providers with parsed budget type
-  const choicesData: Choice[] = Object.entries(providerData).map(([name, data], index) => {
-    // Parse the choice name to extract provider name and budget type
-    const parsedChoice = parseChoiceName(name);
-    
-    return {
-      originalName: name,                    // Keep the original full name
-      name: parsedChoice.name,               // Use the parsed name (without budget type)
-      budget: data.basicBudget,
-      isSpp1: data.isSpp1,
-      isNoneBelow: data.isNoneBelow,
-      choiceId: typeof data.choiceId === 'number' ? data.choiceId : index + 1,
-      budgetType: parsedChoice.budgetType    // Add the budget type
-    };
-  });
+  // Step 7: Process choices with name parsing
+  const choicesData = processChoices(providerData);
 
-  // Step 6: Format the response
-  const response: VotingResultResponse = {
+  // Step 8: Prepare the response
+  return {
     proposal: {
       id: proposalId,
       title: proposalData.title,
@@ -197,14 +189,12 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
     },
     choices: choicesData,
     headToHeadMatches,
-    summary: allocationResults.summary,
-    allocations: allocationResults.allocations,
+    summary,
+    allocations,
     programInfo: {
       totalBudget: PROGRAM_BUDGET,
       twoYearStreamRatio: TWO_YEAR_STREAM_RATIO,
       oneYearStreamRatio: ONE_YEAR_STREAM_RATIO
     }
   };
-
-  return response;
 } 
