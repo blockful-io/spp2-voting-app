@@ -173,39 +173,49 @@
   },
   "choices": [
     {
+      "originalName": "sp a",
       "name": "sp a",
       "budget": 400000,
       "isSpp1": false,
       "isNoneBelow": false,
-      "choiceId": 1
+      "choiceId": 1,
+      "budgetType": "basic"
     },
     {
-      "name": "sp b - basic",
+      "originalName": "sp b - basic",
+      "name": "sp b",
       "budget": 400000,
       "isSpp1": true,
       "isNoneBelow": false,
-      "choiceId": 2
+      "choiceId": 2,
+      "budgetType": "basic"
     },
     {
-      "name": "sp b - ext",
+      "originalName": "sp b - ext",
+      "name": "sp b",
       "budget": 500000,
       "isSpp1": true,
       "isNoneBelow": false,
-      "choiceId": 3
+      "choiceId": 3,
+      "budgetType": "extended"
     },
     {
+      "originalName": "sp c",
       "name": "sp c",
       "budget": 700000,
       "isSpp1": true,
       "isNoneBelow": false,
-      "choiceId": 4
+      "choiceId": 4,
+      "budgetType": "basic"
     },
     {
+      "originalName": "None below",
       "name": "None below",
       "budget": 0,
       "isSpp1": false,
       "isNoneBelow": true,
-      "choiceId": 5
+      "choiceId": 5,
+      "budgetType": "none"
     }
   ]
 }

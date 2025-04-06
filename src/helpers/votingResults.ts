@@ -10,6 +10,7 @@ import { processCopelandRanking, combineData } from "./voteProcessing";
 import { allocateBudgets } from "./budgetAllocation";
 import { getServiceProviderData, getChoiceOptions } from "./csvUtils";
 import { PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from "./config";
+import { parseChoiceName } from './choiceParser';
 
 // Interfaces for vote data
 export interface Vote {
@@ -81,11 +82,13 @@ export interface Allocation {
 }
 
 export interface Choice {
-  name: string;
+  name: string;          // Base name of the service provider
+  originalName: string;  // Original full choice name 
   budget: number;
   isSpp1: boolean;
   isNoneBelow: boolean;
   choiceId: number;
+  budgetType: string;    // Added budget type (basic, extended)
 }
 
 export interface AllocationResults {
@@ -165,14 +168,21 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
   // Step 4: Allocate budgets
   const allocationResults = allocateBudgets(combinedData, PROGRAM_BUDGET) as AllocationResults;
 
-  // Step 5: Get choices data from providers
-  const choicesData: Choice[] = Object.entries(providerData).map(([name, data], index) => ({
-    name,
-    budget: data.basicBudget,
-    isSpp1: data.isSpp1,
-    isNoneBelow: data.isNoneBelow,
-    choiceId: typeof data.choiceId === 'number' ? data.choiceId : index + 1
-  }));
+  // Step 5: Get choices data from providers with parsed budget type
+  const choicesData: Choice[] = Object.entries(providerData).map(([name, data], index) => {
+    // Parse the choice name to extract provider name and budget type
+    const parsedChoice = parseChoiceName(name);
+    
+    return {
+      originalName: name,                    // Keep the original full name
+      name: parsedChoice.name,               // Use the parsed name (without budget type)
+      budget: data.basicBudget,
+      isSpp1: data.isSpp1,
+      isNoneBelow: data.isNoneBelow,
+      choiceId: typeof data.choiceId === 'number' ? data.choiceId : index + 1,
+      budgetType: parsedChoice.budgetType    // Add the budget type
+    };
+  });
 
   // Step 6: Format the response
   const response: VotingResultResponse = {
