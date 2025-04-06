@@ -3,7 +3,7 @@
  */
 
 // Testing configuration
-export const USE_LOCAL_DATA = false; // Set to false for production (to fetch from Snapshot API)
+export const USE_LOCAL_DATA = true; // Set to false for production (to fetch from Snapshot API)
 export const LOCAL_DATA_PATH = "mocked-votes.json"; // Path to local JSON data file
 
 // CSV file paths for dynamic data loading
@@ -12,7 +12,7 @@ export const CHOICES_CSV_PATH = "choices.csv"; // Path to CSV file containing ch
 export const USE_CSV_DATA = true; // Always use data from CSV files
 
 // Budget parameters
-export const PROGRAM_BUDGET = 2000000; // Total budget in USD per year
+export const PROGRAM_BUDGET = 1500000; // Total budget in USD per year
 export const TWO_YEAR_STREAM_RATIO = 1 / 3; // Proportion allocated to 2-year streams
 export const ONE_YEAR_STREAM_RATIO = 2 / 3; // Proportion allocated to 1-year stream
 
