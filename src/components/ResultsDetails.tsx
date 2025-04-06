@@ -1,4 +1,4 @@
-import { HeadToHeadMatch } from "@/helpers/voteProcessing";
+import { HeadToHeadMatch } from "@/utils/voteProcessing";
 import {
   FormattedMatch,
   getCandidateHeadToHead,

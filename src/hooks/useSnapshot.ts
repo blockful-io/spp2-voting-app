@@ -1,4 +1,4 @@
-import { PROPOSAL_ID, PROPOSAL_SPACE } from "@/helpers/config";
+import { PROPOSAL_ID, PROPOSAL_SPACE } from "@/utils/config";
 import { Web3Provider } from "@ethersproject/providers";
 import snapshot from "@snapshot-labs/snapshot.js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

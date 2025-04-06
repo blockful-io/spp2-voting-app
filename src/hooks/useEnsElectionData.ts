@@ -1,5 +1,5 @@
-import { PROPOSAL_ID } from "@/helpers/config";
-import { HeadToHeadMatch } from "@/helpers/votingResults";
+import { PROPOSAL_ID } from "@/utils/config";
+import { HeadToHeadMatch } from "@/utils/votingResults";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useMemo } from "react";
 

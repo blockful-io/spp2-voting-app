@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getVotingResultData } from "@/helpers/votingResults";
+import { getVotingResultData } from "@/utils/votingResults";
 
 export async function GET(request: NextRequest) {
   try {
