@@ -6,7 +6,7 @@
  */
 
 import { fetchSnapshotResults } from "./snapshot";
-import { processCopelandRanking, combineData } from "./voteProcessing";
+import { processCopelandRanking, combineData, postprocessRanking, preprocessVotes } from "./voteProcessing";
 import { allocateBudgets } from "./budgetAllocation";
 import { getServiceProviderData, getChoiceOptions } from "./csvUtils";
 import { PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from "./config";
@@ -157,20 +157,26 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
     choices: rawProposalData.choices
   };
   
-  // Step 2: Process with Copeland method to get rankings
-  const { rankedCandidates, headToHeadMatches } = processCopelandRanking(proposalData) as CopelandResults;
+  // Step 2: Pre-process votes if bidimensional is enabled
+  proposalData.votes = preprocessVotes(proposalData.votes, proposalData.choices);
+  
+  // Step 3: Process with Copeland method to get rankings
+  const copelandResults = processCopelandRanking(proposalData);
+  
+  // Step 4: Post-process rankings to handle bidimensional filtering and None Below
+  const { rankedCandidates, headToHeadMatches } = postprocessRanking(copelandResults);
 
-  // Step 3: Load service provider data and combine with ranked results
+  // Step 5: Load service provider data and combine with ranked results
   const providerData = getServiceProviderData();
   const combinedData = combineData(rankedCandidates, providerData);
 
-  // Step 4: Allocate budgets
+  // Step 6: Allocate budgets
   const { summary, allocations } = allocateBudgets(combinedData, PROGRAM_BUDGET) as AllocationResults;
 
-  // Step 5: Process choices with name parsing
+  // Step 7: Process choices with name parsing
   const choicesData = processChoices(providerData);
 
-  // Step 6: Prepare the response
+  // Step 8: Prepare the response
   return {
     proposal: {
       id: proposalId,

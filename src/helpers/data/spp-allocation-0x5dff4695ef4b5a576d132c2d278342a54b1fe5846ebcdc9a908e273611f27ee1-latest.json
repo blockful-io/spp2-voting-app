@@ -11,14 +11,6 @@
   "headToHeadMatches": [
     {
       "candidate1": "sp a",
-      "candidate2": "sp b - basic",
-      "candidate1Votes": 2,
-      "candidate2Votes": 8,
-      "totalVotes": 10,
-      "winner": "sp b - basic"
-    },
-    {
-      "candidate1": "sp a",
       "candidate2": "sp b - ext",
       "candidate1Votes": 2,
       "candidate2Votes": 8,
@@ -40,22 +32,6 @@
       "candidate2Votes": 0,
       "totalVotes": 10,
       "winner": "sp a"
-    },
-    {
-      "candidate1": "sp b - basic",
-      "candidate2": "sp c",
-      "candidate1Votes": 9,
-      "candidate2Votes": 1,
-      "totalVotes": 10,
-      "winner": "sp b - basic"
-    },
-    {
-      "candidate1": "sp b - basic",
-      "candidate2": "None below",
-      "candidate1Votes": 9,
-      "candidate2Votes": 1,
-      "totalVotes": 10,
-      "winner": "sp b - basic"
     },
     {
       "candidate1": "sp b - ext",
@@ -98,10 +74,10 @@
     "adjustedTwoYearBudget": 500000,
     "adjustedOneYearBudget": 1500000,
     "remainingTwoYearBudget": 0,
-    "remainingOneYearBudget": 0,
-    "totalAllocated": 2000000,
-    "unspentBudget": 0,
-    "allocatedProjects": 4,
+    "remainingOneYearBudget": 400000,
+    "totalAllocated": 1600000,
+    "unspentBudget": 400000,
+    "allocatedProjects": 3,
     "rejectedProjects": 1
   },
   "allocations": [
@@ -114,18 +90,6 @@
       "allocated": true,
       "streamDuration": "2-year",
       "allocatedBudget": 500000,
-      "rejectionReason": null,
-      "isNoneBelow": false
-    },
-    {
-      "name": "sp b - basic",
-      "score": 3,
-      "averageSupport": 7.5,
-      "basicBudget": 400000,
-      "extendedBudget": 400000,
-      "allocated": true,
-      "streamDuration": "1-year",
-      "allocatedBudget": 400000,
       "rejectionReason": null,
       "isNoneBelow": false
     },
