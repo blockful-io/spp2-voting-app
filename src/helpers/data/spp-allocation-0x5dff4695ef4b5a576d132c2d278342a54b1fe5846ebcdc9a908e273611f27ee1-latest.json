@@ -8,38 +8,6 @@
     "state": "closed",
     "dataSource": "Local Data"
   },
-  "copelandRanking": [
-    {
-      "name": "sp b - ext",
-      "wins": 4,
-      "averageSupport": 7.75,
-      "isNoneBelow": false
-    },
-    {
-      "name": "sp b - basic",
-      "wins": 3,
-      "averageSupport": 7.5,
-      "isNoneBelow": false
-    },
-    {
-      "name": "sp a",
-      "wins": 2,
-      "averageSupport": 6,
-      "isNoneBelow": false
-    },
-    {
-      "name": "sp c",
-      "wins": 1,
-      "averageSupport": 3,
-      "isNoneBelow": false
-    },
-    {
-      "name": "None below",
-      "wins": 0,
-      "averageSupport": 0.5,
-      "isNoneBelow": true
-    }
-  ],
   "headToHeadMatches": [
     {
       "candidate1": "sp a",
@@ -123,18 +91,18 @@
     }
   ],
   "summary": {
-    "votedBudget": 4500000,
-    "twoYearStreamBudget": 1500000,
-    "oneYearStreamBudget": 3000000,
-    "transferredBudget": 0,
-    "adjustedTwoYearBudget": 1500000,
-    "adjustedOneYearBudget": 3000000,
+    "votedBudget": 2000000,
+    "twoYearStreamBudget": 666666.6666666666,
+    "oneYearStreamBudget": 1333333.3333333333,
+    "transferredBudget": 66666.66666666663,
+    "adjustedTwoYearBudget": 600000,
+    "adjustedOneYearBudget": 1400000,
     "remainingTwoYearBudget": 0,
-    "remainingOneYearBudget": 1600000,
-    "totalAllocated": 2900000,
-    "unspentBudget": 1600000,
-    "allocatedProjects": 4,
-    "rejectedProjects": 1
+    "remainingOneYearBudget": 0,
+    "totalAllocated": 2000000,
+    "unspentBudget": 0,
+    "allocatedProjects": 3,
+    "rejectedProjects": 2
   },
   "allocations": [
     {
@@ -154,10 +122,10 @@
       "score": 3,
       "averageSupport": 7.5,
       "basicBudget": 400000,
-      "extendedBudget": 700000,
+      "extendedBudget": 600000,
       "allocated": true,
       "streamDuration": "2-year",
-      "allocatedBudget": 700000,
+      "allocatedBudget": 600000,
       "rejectionReason": null,
       "isNoneBelow": false
     },
@@ -179,10 +147,10 @@
       "averageSupport": 3,
       "basicBudget": 700000,
       "extendedBudget": 800000,
-      "allocated": true,
-      "streamDuration": "2-year",
-      "allocatedBudget": 800000,
-      "rejectionReason": null,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Insufficient budget remaining",
       "isNoneBelow": false
     },
     {
@@ -199,8 +167,45 @@
     }
   ],
   "programInfo": {
-    "totalBudget": 4500000,
+    "totalBudget": 2000000,
     "twoYearStreamRatio": 0.3333333333333333,
     "oneYearStreamRatio": 0.6666666666666666
-  }
+  },
+  "choices": [
+    {
+      "name": "sp a",
+      "basicBudget": 400000,
+      "extendedBudget": 700000,
+      "isSpp1": false,
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp b - basic",
+      "basicBudget": 400000,
+      "extendedBudget": 600000,
+      "isSpp1": true,
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp b - ext",
+      "basicBudget": 500000,
+      "extendedBudget": 700000,
+      "isSpp1": false,
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp c",
+      "basicBudget": 700000,
+      "extendedBudget": 800000,
+      "isSpp1": true,
+      "isNoneBelow": false
+    },
+    {
+      "name": "None below",
+      "basicBudget": 0,
+      "extendedBudget": 0,
+      "isSpp1": false,
+      "isNoneBelow": true
+    }
+  ]
 }

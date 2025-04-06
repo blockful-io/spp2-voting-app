@@ -23,8 +23,8 @@ import { allocateBudgets } from './budgetAllocation';
 import fs from 'fs';
 import path from 'path';
 
-// Import the reporting module (using require since it's CommonJS)
-const { formatCurrency, displayResults, exportResults } = require('./reporting');
+// Import the reporting module (using ES module imports)
+import { formatCurrency, displayResults, exportResults } from './reporting';
 
 /**
  * Main function that orchestrates the entire process
@@ -61,7 +61,7 @@ export async function main(): Promise<{
     console.log("\nGenerating allocation report...");
     
     // Extract the data from the voting results
-    const { proposal, headToHeadMatches, summary, allocations } = votingData;
+    const { proposal, headToHeadMatches, summary, allocations, choices } = votingData;
     
     // Create a format compatible with displayResults
     const allocationResults = {
@@ -79,16 +79,30 @@ export async function main(): Promise<{
       state: proposal.state
     };
     
+    // Generate and export the final report
     const formattedResults = displayResults(allocationResults, proposalData, headToHeadMatches);
+    
+    // Add choices data from votingResults to the formattedResults
+    formattedResults.choices = choices;
+    
+    // Ensure copelandRanking is completely removed if it somehow exists
+    if ('copelandRanking' in formattedResults) {
+      delete (formattedResults as any).copelandRanking;
+    }
+    
     const exportedFilename = exportResults(formattedResults);
 
     console.log("\nAllocation process completed successfully!");
-    console.log(`Results saved to: ${exportedFilename}`);
+    if (exportedFilename) {
+      console.log(`Results saved to: ${exportedFilename}`);
+    } else {
+      console.log("Results were not saved to a file.");
+    }
     
     // Return the results and filename for potential further processing
     return {
       results: formattedResults,
-      filename: exportedFilename
+      filename: exportedFilename || undefined
     };
   } catch (error: any) {
     console.error("\nERROR: Allocation process failed");
@@ -107,13 +121,11 @@ export {
   processCopelandRanking,
   combineData,
   allocateBudgets,
-  getVotingResultData
+  getVotingResultData,
+  formatCurrency,
+  displayResults,
+  exportResults
 };
-
-// Re-export functions from reporting
-export const formatCurrencyFn = formatCurrency;
-export const displayResultsFn = displayResults;
-export const exportResultsFn = exportResults;
 
 // Execute the script if directly run (not imported)
 if (require.main === module) {

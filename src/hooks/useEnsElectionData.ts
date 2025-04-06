@@ -11,12 +11,6 @@ interface AllocationResponse {
     state: string;
     dataSource: string;
   };
-  copelandRanking: Array<{
-    name: string;
-    score: number;
-    averageSupport: number;
-    isNoneBelow: boolean;
-  }>;
   headToHeadMatches: Array<{
     candidate1: string;
     candidate2: string;
@@ -51,6 +45,7 @@ interface AllocationResponse {
     rejectionReason: string | null;
     isNoneBelow: boolean;
   }>;
+  choices?: Array<string>;
 }
 
 interface ElectionCandidate {

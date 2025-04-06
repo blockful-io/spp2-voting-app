@@ -8,8 +8,8 @@
 import { fetchSnapshotResults } from "./snapshot";
 import { processCopelandRanking, combineData } from "./voteProcessing";
 import { allocateBudgets } from "./budgetAllocation";
-import { getServiceProviderData } from "./csvUtils";
-import { PROGRAM_BUDGET } from "./config";
+import { getServiceProviderData, getChoiceOptions } from "./csvUtils";
+import { PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from "./config";
 
 // Interfaces for vote data
 export interface Vote {
@@ -80,6 +80,14 @@ export interface Allocation {
   isSpp1?: boolean;
 }
 
+export interface Choice {
+  name: string;
+  basicBudget: number;
+  extendedBudget: number;
+  isSpp1: boolean;
+  isNoneBelow: boolean;
+}
+
 export interface AllocationResults {
   summary: AllocationSummary;
   allocations: Allocation[];
@@ -95,10 +103,15 @@ export interface VotingResultResponse {
     state: string;
     dataSource: string;
   };
-  copelandRanking: RankedCandidate[];
+  choices: Choice[];
   headToHeadMatches: HeadToHeadMatch[];
   summary: AllocationSummary;
   allocations: Allocation[];
+  programInfo: {
+    totalBudget: number;
+    twoYearStreamRatio: number;
+    oneYearStreamRatio: number;
+  };
 }
 
 /**
@@ -152,8 +165,17 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
   // Step 4: Allocate budgets
   const allocationResults = allocateBudgets(combinedData, PROGRAM_BUDGET) as AllocationResults;
 
-  // Step 5: Format the response
-  return {
+  // Step 5: Get choices data from providers
+  const choicesData: Choice[] = Object.entries(providerData).map(([name, data]) => ({
+    name,
+    basicBudget: data.basicBudget,
+    extendedBudget: data.extendedBudget,
+    isSpp1: data.isSpp1,
+    isNoneBelow: data.isNoneBelow
+  }));
+
+  // Step 6: Format the response
+  const response: VotingResultResponse = {
     proposal: {
       id: proposalId,
       title: proposalData.title,
@@ -163,9 +185,16 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
       state: proposalData.state,
       dataSource: "Snapshot API",
     },
-    copelandRanking: rankedCandidates,
+    choices: choicesData,
     headToHeadMatches,
     summary: allocationResults.summary,
     allocations: allocationResults.allocations,
+    programInfo: {
+      totalBudget: PROGRAM_BUDGET,
+      twoYearStreamRatio: TWO_YEAR_STREAM_RATIO,
+      oneYearStreamRatio: ONE_YEAR_STREAM_RATIO
+    }
   };
+
+  return response;
 } 
