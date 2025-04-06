@@ -11,37 +11,31 @@
 // Import configuration
 import { 
   PROGRAM_BUDGET, 
-  TWO_YEAR_STREAM_RATIO, 
-  ONE_YEAR_STREAM_RATIO, 
   PROPOSAL_ID,
-  USE_LOCAL_DATA,
-  USE_CSV_DATA,
-  LOCAL_DATA_PATH,
-  VOTES_CSV_PATH,
-  CHOICES_CSV_PATH
+  USE_LOCAL_DATA
 } from './config';
 
 // Import modules
-import { fetchSnapshotResults } from './snapshot';
+import { prepareVotesFromCsv } from './csvUtils';
+import { getVotingResultData, VotingResultResponse } from './votingResults';
 import { processCopelandRanking, combineData } from './voteProcessing';
 import { allocateBudgets } from './budgetAllocation';
-import { formatCurrency, displayResults, exportResults } from './reporting';
-import { 
-  convertVotesFromCsv, 
-  loadServiceProvidersFromCsv, 
-  loadChoiceOptions,
-  getChoiceOptions,
-  getServiceProviderData,
-  prepareVotesFromCsv 
-} from './csvUtils';
-import { getCandidateHeadToHeadResults } from './candidateComparisons';
 import fs from 'fs';
 import path from 'path';
+
+// Import the reporting module (using require since it's CommonJS)
+const { formatCurrency, displayResults, exportResults } = require('./reporting');
 
 /**
  * Main function that orchestrates the entire process
  */
-async function main() {
+export async function main(): Promise<{
+  results?: any;
+  filename?: string;
+  error?: string;
+  stack?: string;
+  timestamp?: string;
+}> {
   try {
     console.log("Starting Service Provider Program allocation...");
     console.log(`Budget: ${formatCurrency(PROGRAM_BUDGET)} per year`);
@@ -56,34 +50,35 @@ async function main() {
     
     // Check if we need to prepare votes from CSV
     if (USE_LOCAL_DATA) {
-        await prepareVotesFromCsv();
+      await prepareVotesFromCsv();
     }
     
-    // Step 1: Fetch results from Snapshot or load from local file
-    const proposalData = await fetchSnapshotResults(PROPOSAL_ID);
+    // Get the voting result data using the votingResults module
+    console.log(`\nProcessing proposal: ${PROPOSAL_ID}`);
+    const votingData: VotingResultResponse = await getVotingResultData(PROPOSAL_ID);
     
-    // Check if proposal exists
-    if (!proposalData) {
-      throw new Error("Proposal not found");
-    }
+    // Display and export results
+    console.log("\nGenerating allocation report...");
     
-    // Step 2: Process with Copeland method to get rankings
-    console.log("\nProcessing votes using Copeland method...");
-    const copelandResults = processCopelandRanking(proposalData);
-    const { rankedCandidates, headToHeadMatches } = copelandResults;
+    // Extract the data from the voting results
+    const { proposal, headToHeadMatches, summary, allocations } = votingData;
     
-    // Step 3: Load service provider data and combine with ranked results
-    console.log("\nLoading service provider data...");
-    const providerData = getServiceProviderData();
+    // Create a format compatible with displayResults
+    const allocationResults = {
+      summary,
+      allocations
+    };
     
-    console.log("\nCombining with service provider metadata...");
-    const combinedData = combineData(rankedCandidates, providerData);
+    // Create a format compatible with the original proposalData
+    const proposalData = {
+      id: proposal.id,
+      title: proposal.title,
+      space: { name: proposal.space },
+      votes: new Array(proposal.totalVotes),
+      scores_total: proposal.totalVotingPower,
+      state: proposal.state
+    };
     
-    // Step 4: Allocate budgets
-    console.log("\nAllocating budgets based on ranking...");
-    const allocationResults = allocateBudgets(combinedData, PROGRAM_BUDGET);
-    
-    // Step 5: Display and export results
     const formattedResults = displayResults(allocationResults, proposalData, headToHeadMatches);
     const exportedFilename = exportResults(formattedResults);
 
@@ -95,7 +90,7 @@ async function main() {
       results: formattedResults,
       filename: exportedFilename
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error("\nERROR: Allocation process failed");
     console.error(error.message);
     console.error(error.stack);
@@ -107,17 +102,18 @@ async function main() {
   }
 }
 
-// Make functions available for importing
-module.exports = {
-  main,
+// Re-export commonly used functions for external use
+export {
   processCopelandRanking,
   combineData,
   allocateBudgets,
-  formatCurrency,
-  displayResults,
-  exportResults,
-  getCandidateHeadToHeadResults
+  getVotingResultData
 };
+
+// Re-export functions from reporting
+export const formatCurrencyFn = formatCurrency;
+export const displayResultsFn = displayResults;
+export const exportResultsFn = exportResults;
 
 // Execute the script if directly run (not imported)
 if (require.main === module) {
@@ -125,4 +121,4 @@ if (require.main === module) {
     console.error("Unhandled error in main function:", err);
     process.exit(1);
   });
-}
+} 
