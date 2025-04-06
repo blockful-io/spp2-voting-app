@@ -27,9 +27,6 @@ export function ElectionResultsTable({
   candidates,
   onShowDetails,
 }: ElectionResultsTableProps) {
-  const fundedCandidates = candidates.filter((c) => c.allocatedBudget > 0);
-  const notFundedCandidates = candidates.filter((c) => c.allocatedBudget === 0);
-
   return (
     <div className="overflow-hidden rounded-lg border border-lightDark bg-dark">
       <table className="w-full">
@@ -65,10 +62,10 @@ export function ElectionResultsTable({
           </tr>
         </thead>
         <tbody className="divide-y divide-lightDark">
-          {fundedCandidates.map((candidate, index) => (
+          {candidates.map((candidate, index) => (
             <tr
               key={candidate.name}
-              className="group cursor-pointer transition-colors duration-200 hover:bg-gray-800"
+              className="group cursor-pointer transition-colors duration-200 hover:bg-gray-800 text-gray-300"
               onClick={() => onShowDetails?.(candidate.name)}
             >
               <td className="whitespace-nowrap px-6 py-4">
@@ -92,8 +89,14 @@ export function ElectionResultsTable({
               <td className="whitespace-nowrap px-6 py-4">
                 {candidate.basicBudget === candidate.allocatedBudget ? (
                   <div className="flex items-center gap-2">
-                    <div className="text-emerald-500">✓</div>
-                    <span className="text-sm text-emerald-500">
+                    {candidate.allocatedBudget > 0 && (
+                      <div className="text-emerald-500">✓</div>
+                    )}
+                    <span
+                      className={`text-sm ${
+                        candidate.allocatedBudget > 0 && "text-emerald-500"
+                      }`}
+                    >
                       ${candidate.basicBudget.toLocaleString()}
                     </span>
                   </div>
@@ -104,79 +107,18 @@ export function ElectionResultsTable({
                 )}
               </td>
               <td className="whitespace-nowrap px-6 py-4">
-                {candidate.extendedBudget === candidate.allocatedBudget ? (
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2">
+                  {candidate.allocatedBudget > 0 && (
                     <div className="text-emerald-500">✓</div>
-                    <span className="text-sm text-emerald-500">
-                      ${candidate.extendedBudget.toLocaleString()}
-                    </span>
-                  </div>
-                ) : (
-                  <span className="text-sm text-gray-300">
+                  )}
+                  <span
+                    className={`text-sm ${
+                      candidate.allocatedBudget > 0 && "text-emerald-500"
+                    }`}
+                  >
                     ${candidate.extendedBudget.toLocaleString()}
                   </span>
-                )}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4">
-                <span
-                  className={`rounded-lg px-3 py-1 text-sm ${
-                    candidate.streamDuration === "2-year" ||
-                    candidate.streamDuration === "2 years"
-                      ? "bg-pink-950/50 text-pink-500"
-                      : "bg-blue-950 text-blue-500"
-                  }`}
-                >
-                  {candidate.streamDuration === "2-year" ||
-                  candidate.streamDuration === "2 years"
-                    ? "2-year"
-                    : "1-year"}
-                </span>
-              </td>
-              <td className="whitespace-nowrap px-6 py-4">
-                <div className="flex items-center gap-2">
-                  {candidate.isEligibleForExtendedBudget ? (
-                    <>
-                      <div className="text-emerald-500">✓</div>
-                      <span className="text-sm text-emerald-500">Yes</span>
-                    </>
-                  ) : (
-                    <>
-                      <div className="text-red-500">✕</div>
-                      <span className="text-sm text-red-500">No</span>
-                    </>
-                  )}
                 </div>
-              </td>
-            </tr>
-          ))}
-          {notFundedCandidates.map((candidate, index) => (
-            <tr
-              key={candidate.name}
-              className="group cursor-pointer transition-colors duration-200 hover:bg-gray-800"
-              onClick={() => onShowDetails?.(candidate.name)}
-            >
-              <td className="whitespace-nowrap px-6 py-4">
-                <span className="text-sm text-gray-300">
-                  {fundedCandidates.length + index + 1}
-                </span>
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
-                {candidate.name}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4">
-                <ChevronRight className="h-4 w-4 text-gray-500 transition-transform duration-200 group-hover:translate-x-1" />
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
-                {candidate.wins || 0}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
-                {candidate.averageSupport.toLocaleString()}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
-                ${candidate.basicBudget.toLocaleString()}
-              </td>
-              <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-300">
-                ${candidate.extendedBudget.toLocaleString()}
               </td>
               <td className="whitespace-nowrap px-6 py-4">
                 <span
