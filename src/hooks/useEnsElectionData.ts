@@ -109,8 +109,6 @@ export function useEnsElectionData() {
       const allocationResponse: AllocationResponse = await response.json();
       setAllocationData(allocationResponse);
 
-      debugger;
-
       // Transform allocation data to match our ElectionCandidate interface
       const transformedData: ElectionCandidate[] =
         allocationResponse.allocations

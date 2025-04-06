@@ -77,8 +77,6 @@ export function VoteTable({
     (event: DragEndEvent) => {
       const { active, over } = event;
 
-      debugger;
-
       if (active.id !== over?.id) {
         const oldIndex = candidates.findIndex(
           (item) => item.name === active.id
