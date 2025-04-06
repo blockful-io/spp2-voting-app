@@ -1,16 +1,16 @@
+import { Web3Provider } from "@ethersproject/providers";
 import snapshot from "@snapshot-labs/snapshot.js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Web3Provider } from "@ethersproject/providers";
+import { useAccount } from "wagmi";
 
 const PROPOSAL_ID =
-  "0x4a3a3c8e453e296b4c96ea1e889ab0eb99c3bc19769ec091fc97a3586146c04e";
+  "0x2d5d195baaa173394d77484787b7220da5ed0a2f48568e309a404eeec1d0004b";
 
 export function useVoteOnProposal() {
   const queryClient = useQueryClient();
+  const { address } = useAccount();
 
   const client = new snapshot.Client712("https://hub.snapshot.org");
-  const web3 =
-    typeof window !== "undefined" ? new Web3Provider(window.ethereum!) : null;
 
   const {
     mutateAsync: voteFunc,
@@ -24,15 +24,17 @@ export function useVoteOnProposal() {
   });
 
   async function voteOnProposal(choice: number[]) {
-    if (!web3) {
-      throw new Error("Web3 provider not available");
+    if (!address) {
+      throw new Error("Wallet not connected");
     }
-    const [account] = await web3.listAccounts();
-    await client.vote(web3, account, {
-      space: "pikonha.eth",
+
+    const web3 = new Web3Provider(window.ethereum!);
+
+    await client.vote(web3, address, {
       proposal: PROPOSAL_ID,
       type: "ranked-choice",
       choice,
+      space: "pikonha.eth",
     });
   }
 

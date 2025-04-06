@@ -1,9 +1,9 @@
 import { Check } from "lucide-react";
+import { Budget } from "@/hooks/useEnsElectionData";
 
 interface BudgetButtonsProps {
-  basicBudget: number;
-  extendedBudget: number;
-  budgetType?: "basic" | "extended";
+  basicBudget: Budget;
+  extendedBudget?: Budget;
   isBelowDivider: boolean;
   onBudgetSelect: (type: "basic" | "extended") => void;
 }
@@ -11,7 +11,6 @@ interface BudgetButtonsProps {
 export function BudgetButtons({
   basicBudget,
   extendedBudget,
-  budgetType,
   isBelowDivider,
   onBudgetSelect,
 }: BudgetButtonsProps) {
@@ -27,7 +26,7 @@ export function BudgetButtons({
           ${
             isBelowDivider
               ? "bg-transparent border-gray-700 text-gray-500"
-              : budgetType === "basic"
+              : basicBudget.selected
               ? "bg-slate-50 text-black hover:bg-slate-100"
               : "border-gray-700 bg-dark text-gray-100"
           }
@@ -37,10 +36,10 @@ export function BudgetButtons({
       >
         <Check
           className={`w-4 h-4 mr-2 
-            ${(isBelowDivider || budgetType !== "basic") && "invisible"}
+            ${(isBelowDivider || !basicBudget.selected) && "invisible"}
           `}
         />
-        Basic: {formatCurrency(basicBudget)}
+        Basic: {formatCurrency(basicBudget.value)}
       </button>
       <button
         className={`
@@ -48,20 +47,23 @@ export function BudgetButtons({
           ${
             isBelowDivider
               ? "bg-transparent border-gray-700 text-gray-500 border-l-0"
-              : budgetType === "extended"
+              : !extendedBudget
+              ? "text-gray-600"
+              : extendedBudget?.selected
               ? "bg-slate-50 text-black hover:bg-slate-100"
               : " border-gray-700 bg-dark text-gray-100"
           }
         `}
         onClick={() => onBudgetSelect("extended")}
-        disabled={isBelowDivider}
+        disabled={isBelowDivider || !extendedBudget}
       >
         <Check
           className={`w-4 h-4 mr-2 
-            ${(isBelowDivider || budgetType !== "extended") && "invisible"}
+            ${(isBelowDivider || !extendedBudget?.selected) && "invisible"}
+            
           `}
         />
-        Extended: {formatCurrency(extendedBudget)}
+        Extended: {extendedBudget ? formatCurrency(extendedBudget.value) : "-"}
       </button>
     </div>
   );

@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useEnsElectionData } from "@/hooks/useEnsElectionData";
-import { VoteCandidate, VoteTable } from "@/components/vote/VoteTable";
+import { useChoices, VoteCandidate } from "@/hooks/useEnsElectionData";
+import { VoteTable } from "@/components/vote/VoteTable";
 import { MenuIcon } from "@/components/vote/MenuIcon";
 import toast, { Toaster } from "react-hot-toast";
 import { useVoteOnProposal } from "@/hooks/useSnapshot";
 
 export default function VotePage() {
-  const { data: electionData, isLoading } = useEnsElectionData();
+  const { fetchChoices, isLoading } = useChoices();
   const [candidates, setCandidates] = useState<VoteCandidate[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -32,33 +32,24 @@ export default function VotePage() {
   }, [isDragging]);
 
   useEffect(() => {
-    if (electionData) {
-      // Convert ElectionCandidate to VoteCandidate format and set default budgetType
-      const voteCandidates = electionData.map((candidate) => ({
-        id: candidate.id,
-        name: candidate.name,
-        basicBudget: candidate.basicBudget,
-        extendedBudget: candidate.extendedBudget,
-        budgetType: undefined,
-      }));
-
-      setCandidates(voteCandidates);
+    async function x() {
+      if (fetchChoices) setCandidates(fetchChoices);
     }
-  }, [electionData]);
 
-  const handleBudgetSelection = (
-    name: string,
-    type: "basic" | "extended" | undefined
-  ) => {
+    x();
+  }, [fetchChoices, isLoading]);
+
+  const handleBudgetSelection = (name: string, type: "basic" | "extended") => {
     setCandidates(
       candidates.map((candidate) => {
-        if (candidate.name === name) {
-          return {
-            ...candidate,
-            budgetType: type,
-          };
-        }
-        return candidate;
+        if (candidate.name !== name) return candidate;
+        return {
+          ...candidate,
+          budgets: candidate.budgets.map((budget) => ({
+            ...budget,
+            selected: budget.type === type,
+          })),
+        };
       })
     );
   };
@@ -79,14 +70,12 @@ export default function VotePage() {
     try {
       setIsSubmitting(true);
 
-      // Get the index of "None of the below"
-      const dividerIndex = candidates.findIndex(
-        (c) => c.name === "None of the below"
+      const dividerIndex = candidates.findIndex((c) =>
+        c.name.toLowerCase().includes("below")
       );
 
-      // Validate that all candidates have a budget type selected
       const allBudgetsSelected = candidates.every((c, index) =>
-        index < dividerIndex ? c.budgetType : true
+        index < dividerIndex ? c.budgets.some((b) => b.selected) : true
       );
 
       if (!allBudgetsSelected) {
@@ -95,10 +84,19 @@ export default function VotePage() {
         );
       }
 
-      await voteFunc(candidates.map((c) => c.id));
+      const selectedChoiceIds = candidates.reduce(
+        (acc, candidate) => [
+          ...acc,
+          ...candidate.budgets
+            .sort((a, b) => (a.selected ? -1 : 1) - (b.selected ? -1 : 1))
+            .map((b) => b.id),
+        ],
+        [] as number[]
+      );
+
+      await voteFunc(selectedChoiceIds);
       toast.success("Vote submitted successfully!");
     } catch (error) {
-      console.error({ error });
       toast.error("Error submitting vote. Please try again.");
     } finally {
       setIsSubmitting(false);

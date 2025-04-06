@@ -1,8 +1,8 @@
+import { VoteCandidate } from "@/hooks/useEnsElectionData";
 import { CandidateRow } from "./CandidateRow";
 import {
   DndContext,
   closestCenter,
-  KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors,
@@ -13,26 +13,13 @@ import {
 import {
   arrayMove,
   SortableContext,
-  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useCallback } from "react";
 
-// Define a type for our vote page candidates
-export interface VoteCandidate {
-  id: number;
-  name: string;
-  basicBudget: number;
-  extendedBudget: number;
-  budgetType?: "basic" | "extended";
-}
-
 interface VoteTableProps {
   candidates: VoteCandidate[];
-  onBudgetSelect: (
-    name: string,
-    type: "basic" | "extended" | undefined
-  ) => void;
+  onBudgetSelect: (name: string, type: "basic" | "extended") => void;
   onReorder: (newOrder: VoteCandidate[]) => void;
   onDragStart?: () => void;
   onDragEnd?: () => void;
@@ -55,23 +42,17 @@ export function VoteTable({
     })
   );
 
-  const isDivider = (candidate: VoteCandidate) => {
-    return candidate.name === "None below";
-  };
+  const isDivider = (candidate: VoteCandidate) =>
+    candidate.name.toLowerCase().includes("below");
 
   const isBelowDivider = (candidate: VoteCandidate) => {
     return (
-      candidates.findIndex((c) => c.name === "None below") <
+      candidates.findIndex((c) => c.name.toLowerCase().includes("below")) <
       candidates.findIndex((c) => c.name === candidate.name)
     );
   };
 
-  const handleDragStart = useCallback(
-    (event: DragStartEvent) => {
-      onDragStart?.();
-    },
-    [onDragStart]
-  );
+  const handleDragStart = useCallback(() => onDragStart?.(), [onDragStart]);
 
   const handleDragEnd = useCallback(
     (event: DragEndEvent) => {
@@ -118,9 +99,12 @@ export function VoteTable({
                   key={candidate.name}
                   name={candidate.name}
                   index={index}
-                  basicBudget={candidate.basicBudget}
-                  extendedBudget={candidate.extendedBudget}
-                  budgetType={candidate.budgetType}
+                  basicBudget={
+                    candidate.budgets.find((b) => b.type === "basic")!
+                  }
+                  extendedBudget={candidate.budgets.find(
+                    (b) => b.type === "extended"
+                  )}
                   isDivider={isDivider(candidate)}
                   isBelowDivider={isBelowDivider(candidate)}
                   isLastRow={index === candidates.length - 1}

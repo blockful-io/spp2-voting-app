@@ -2,13 +2,13 @@ import { DragHandleIcon } from "./DragHandleIcon";
 import { BudgetButtons } from "./BudgetButtons";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { Budget } from "@/hooks/useEnsElectionData";
 
 interface CandidateRowProps {
   name: string;
   index: number;
-  basicBudget: number;
-  extendedBudget: number;
-  budgetType?: "basic" | "extended";
+  basicBudget: Budget;
+  extendedBudget?: Budget;
   isDivider: boolean;
   isBelowDivider: boolean;
   isLastRow: boolean;
@@ -20,7 +20,6 @@ export function CandidateRow({
   index,
   basicBudget,
   extendedBudget,
-  budgetType,
   isDivider,
   isBelowDivider,
   isLastRow,
@@ -84,7 +83,6 @@ export function CandidateRow({
           <BudgetButtons
             basicBudget={basicBudget}
             extendedBudget={extendedBudget}
-            budgetType={budgetType}
             isBelowDivider={isBelowDivider}
             onBudgetSelect={onBudgetSelect}
           />
