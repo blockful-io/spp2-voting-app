@@ -27,7 +27,6 @@ export function useVoteOnProposal() {
     if (!web3) {
       throw new Error("Web3 provider not available");
     }
-    debugger
     const [account] = await web3.listAccounts();
     await client.vote(web3, account, {
       space: "pikonha.eth",
