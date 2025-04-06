@@ -28,7 +28,7 @@ export function BudgetButtons({
               ? "bg-transparent border-gray-700 text-gray-500"
               : basicBudget.selected
               ? "bg-slate-50 text-black hover:bg-slate-100"
-              : "border-gray-700 bg-dark text-gray-100"
+              : "border-gray-700 bg-stone-900 text-gray-100"
           }
         `}
         onClick={() => onBudgetSelect("basic")}
@@ -51,7 +51,7 @@ export function BudgetButtons({
               ? "text-gray-600"
               : extendedBudget?.selected
               ? "bg-slate-50 text-black hover:bg-slate-100"
-              : " border-gray-700 bg-dark text-gray-100"
+              : "border-gray-700 bg-stone-900 text-gray-100"
           }
         `}
         onClick={() => onBudgetSelect("extended")}

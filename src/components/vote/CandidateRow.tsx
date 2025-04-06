@@ -45,7 +45,7 @@ export function CandidateRow({
       ref={setNodeRef}
       style={style}
       className={`
-        ${isDivider ? "bg-red-900/20" : "bg-dark"}
+        ${isDivider ? "bg-red-900/20" : "bg-stone-950"}
         ${!isLastRow && "border-b border-gray-700"}
         ${isDragging && "z-10"}
       `}
@@ -64,7 +64,7 @@ export function CandidateRow({
       <td className="p-4">
         <div className="flex items-center">
           {!isDivider && !isBelowDivider && (
-            <div className="w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center mr-3">
+            <div className="w-6 h-6 rounded-full bg-stone-900 flex items-center justify-center mr-3">
               {index + 1}
             </div>
           )}

@@ -168,7 +168,7 @@ export function ResultsDetails({
               </div>
               <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
                 <div className="relative h-full w-full">
-                  <div className="absolute h-full w-full bg-gray-600" />
+                  <div className="absolute h-full w-full bg-blue-500" />
                   <div
                     className={`absolute h-full ${
                       match.winner !== match.candidate2.name

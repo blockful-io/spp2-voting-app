@@ -50,7 +50,7 @@ interface AllocationResponse {
   choices?: Array<string>;
 }
 
-interface ElectionCandidate {
+export interface ElectionCandidate {
   id: number;
   name: string;
   score: number;
@@ -148,7 +148,7 @@ export function useChoices() {
           id: item.choiceId,
           value: item.budget,
           type: item.budgetType,
-          selected: false,
+          selected: item.budgetType === "basic",
         }))
       });
     }

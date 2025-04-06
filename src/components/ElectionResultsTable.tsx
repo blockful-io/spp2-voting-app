@@ -1,8 +1,8 @@
-import { type Candidate } from "@/types/election";
 import { Trophy } from "lucide-react";
+import { ElectionCandidate } from "@/hooks/useEnsElectionData";
 
 interface ElectionResultsTableProps {
-  candidates: Candidate[];
+  candidates: ElectionCandidate[];
   onShowDetails?: (candidateName: string) => void;
 }
 
@@ -68,7 +68,7 @@ export function ElectionResultsTable({
                   {candidate.name}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  {candidate.wins || 0}
+                  {candidate.score}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   {candidate.averageSupport.toLocaleString()}
