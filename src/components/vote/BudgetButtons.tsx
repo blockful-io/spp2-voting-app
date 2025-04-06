@@ -23,40 +23,44 @@ export function BudgetButtons({
     <div className="flex">
       <button
         className={`
-          rounded-l flex items-center justify-center w-full my-1
+          rounded-l flex items-center justify-center w-full my-1 border
           ${
             isBelowDivider
-              ? "bg-transparent border border-gray-700 text-gray-500"
+              ? "bg-transparent border-gray-700 text-gray-500"
               : budgetType === "basic"
               ? "bg-slate-50 text-black hover:bg-slate-100"
-              : "border border-gray-700 bg-dark text-gray-100"
+              : "border-gray-700 bg-dark text-gray-100"
           }
         `}
         onClick={() => onBudgetSelect("basic")}
         disabled={isBelowDivider}
       >
-        {budgetType === "basic" && !isBelowDivider && (
-          <Check className="w-4 h-4 mr-2" />
-        )}
+        <Check
+          className={`w-4 h-4 mr-2 
+            ${(isBelowDivider || budgetType !== "basic") && "invisible"}
+          `}
+        />
         Basic: {formatCurrency(basicBudget)}
       </button>
       <button
         className={`
-          rounded-r flex items-center justify-center w-full my-1
+          rounded-r flex items-center justify-center w-full my-1 border
           ${
             isBelowDivider
-              ? "bg-transparent border border-gray-700 text-gray-500 border-l-0"
+              ? "bg-transparent border-gray-700 text-gray-500 border-l-0"
               : budgetType === "extended"
               ? "bg-slate-50 text-black hover:bg-slate-100"
-              : "border border-gray-700 bg-dark text-gray-100"
+              : " border-gray-700 bg-dark text-gray-100"
           }
         `}
         onClick={() => onBudgetSelect("extended")}
         disabled={isBelowDivider}
       >
-        {budgetType === "extended" && !isBelowDivider && (
-          <Check className="w-4 h-4 mr-2" />
-        )}
+        <Check
+          className={`w-4 h-4 mr-2 
+            ${(isBelowDivider || budgetType !== "extended") && "invisible"}
+          `}
+        />
         Extended: {formatCurrency(extendedBudget)}
       </button>
     </div>

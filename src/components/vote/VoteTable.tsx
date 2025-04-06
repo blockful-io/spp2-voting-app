@@ -99,13 +99,13 @@ export function VoteTable({
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <div className="mt-2 border border-gray-800 rounded-lg overflow-hidden">
+      <div className="mt-2 border border-gray-800 rounded-lg overflow-hidden text-sm">
         <table className="w-full">
           <thead>
             <tr className="border-b border-gray-700">
               <th className="text-left text-gray-400 p-4 w-[50px]"></th>
-              <th className="text-left text-gray-400 p-4">CANDIDATE</th>
-              <th className="text-left text-gray-400 p-4">PREFERRED BUDGET</th>
+              <th className="text-left text-gray-400 p-4">Candidate</th>
+              <th className="text-left text-gray-400 p-4">Preferred Budget</th>
             </tr>
           </thead>
           <tbody>
