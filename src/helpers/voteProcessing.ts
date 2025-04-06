@@ -31,6 +31,7 @@ interface ProviderData {
     basicBudget: number;
     extendedBudget: number;
     isSpp1: boolean;
+    isNoneBelow: boolean;
   };
 }
 

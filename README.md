@@ -74,9 +74,12 @@ Place your CSV files in the `src/helpers/data` directory:
 
 1. **choices.csv**: Contains service provider data
    ```
-   Choice,Name,Basic budget,Extended budget,is SPP
-   1,Provider A,"400000","700000",TRUE
-   2,Provider B,"300000","500000",FALSE
+   choiceId,choiceName,budgetAmount,isSpp
+   1,sp a,400000,FALSE
+   2,sp b - basic,400000,TRUE
+   3,sp b - ext,500000,FALSE
+   4,sp c,700000,TRUE
+   5,None below,0,FALSE
    ```
 
 2. **votes.csv**: Contains voting data
@@ -224,3 +227,24 @@ When executed, the program will:
 ## Contributing
 
 Contributions welcome! Please feel free to submit a Pull Request.
+
+## CSV Format
+
+### choices.csv
+The choices.csv file contains service provider data with the following columns:
+
+```
+choiceId,choiceName,budgetAmount,isSpp
+1,sp a,400000,FALSE
+2,sp b - basic,400000,TRUE
+3,sp b - ext,500000,FALSE
+4,sp c,700000,TRUE
+5,None below,0,FALSE
+```
+
+- `choiceId`: Numeric ID for the choice option
+- `choiceName`: Display name of the service provider
+- `budgetAmount`: Budget amount requested (in USD without commas)
+- `isSpp`: Boolean flag indicating if the provider was part of SPP1 (TRUE/FALSE)
+
+Note: The "None below" option is special and should always be included.

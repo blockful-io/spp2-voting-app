@@ -32,6 +32,11 @@ function resolvePath(filePath: string) {
  * 1,sp a,"400,000","700,000",FALSE
  * 2,sp b - basic,"400,000","700,000",TRUE
  * ...
+ * 
+ * OR new format:
+ * choiceId,choiceName,amount,isSpp
+ * 1,sp a,400000,FALSE
+ * 2,sp b - basic,400000,TRUE
  *
  * @param {String} csvFilePath - Path to the CSV file containing choice options
  * @returns {Array} - Array of choice options
@@ -55,7 +60,15 @@ function loadChoiceOptions(csvFilePath: string) {
     // Parse header to determine column structure
     const header = lines[0].split(",");
 
-    // First check if this is in the specific format for choices.csv
+    // Check for new column structure with choiceId and choiceName
+    const choiceIdHeader = header.findIndex(
+      (col) => col.toLowerCase() === "choiceid"
+    );
+    const choiceNameHeader = header.findIndex(
+      (col) => col.toLowerCase() === "choicename"
+    );
+
+    // Check for original column structure
     const choiceIdxHeader = header.findIndex(
       (col) => col.toLowerCase() === "choice"
     );
@@ -63,8 +76,36 @@ function loadChoiceOptions(csvFilePath: string) {
       (col) => col.toLowerCase() === "name"
     );
 
+    // If new format (has choiceId,choiceName columns)
+    if (choiceIdHeader !== -1 && choiceNameHeader !== -1) {
+      const options = [];
+
+      // Start from the second line (skip header)
+      for (let i = 1; i < lines.length; i++) {
+        const line = lines[i].split(",");
+
+        // Skip if there aren't enough columns
+        if (line.length <= Math.max(choiceIdHeader, choiceNameHeader)) {
+          console.warn(`Skipping line ${i + 1} - not enough columns`);
+          continue;
+        }
+
+        // Get the name of the choice
+        const name = line[choiceNameHeader].trim();
+
+        if (name) {
+          options.push(name);
+        }
+      }
+
+      if (options.length === 0) {
+        throw new Error("No valid choices found in CSV file");
+      }
+
+      return options;
+    }
     // If choices.csv format (has Choice,Name columns)
-    if (choiceIdxHeader !== -1 && nameIdxHeader !== -1) {
+    else if (choiceIdxHeader !== -1 && nameIdxHeader !== -1) {
       const options = [];
 
       // Start from the second line (skip header)
@@ -331,7 +372,21 @@ function loadServiceProvidersFromCsv(csvFilePath: string) {
     // Parse header to determine column structure
     const header = lines[0].split(",");
 
-    // First check if this is in the specific format for choices.csv (our service provider data)
+    // Check for new column structure: choiceId, choiceName, amount, isSpp
+    const choiceIdHeader = header.findIndex(
+      (col) => col.toLowerCase() === "choiceid"
+    );
+    const choiceNameHeader = header.findIndex(
+      (col) => col.toLowerCase() === "choicename"
+    );
+    const amountHeader = header.findIndex(
+      (col) => col.toLowerCase() === "amount" || col.toLowerCase() === "budgetamount"
+    );
+    const isSppHeader = header.findIndex(
+      (col) => col.toLowerCase() === "isspp"
+    );
+
+    // Check for original column structure
     const choiceIdxHeader = header.findIndex(
       (col) => col.toLowerCase() === "choice"
     );
@@ -362,11 +417,85 @@ function loadServiceProvidersFromCsv(csvFilePath: string) {
       };
     } = {};
 
-    // Check if we have the choices.csv format
+    // Check if we have the NEW column structure (choiceId, choiceName, amount/budgetAmount, isSpp)
     if (
+      choiceIdHeader !== -1 &&
+      choiceNameHeader !== -1 &&
+      amountHeader !== -1
+    ) {
+      console.log("Using new choices.csv format with single budget amount column");
+      
+      // Process each service provider line with the new structure
+      for (let i = 1; i < lines.length; i++) {
+        // Handle quoted fields with commas by splitting carefully
+        const line = [];
+        let currentField = "";
+        let inQuotes = false;
+
+        for (let c = 0; c < lines[i].length; c++) {
+          const char = lines[i][c];
+
+          if (char === '"') {
+            inQuotes = !inQuotes;
+          } else if (char === "," && !inQuotes) {
+            line.push(currentField);
+            currentField = "";
+          } else {
+            currentField += char;
+          }
+        }
+
+        // Don't forget the last field
+        line.push(currentField);
+
+        // Get service provider name
+        const name = line[choiceNameHeader]?.trim();
+
+        if (!name) {
+          console.warn(`Skipping line ${i + 1} due to missing name`);
+          continue;
+        }
+
+        // Check if this is the "None Below" option
+        const isNoneBelow =
+          name.toLowerCase() === "none below" ||
+          name.toLowerCase() === "none of the below";
+
+        // Parse amount value - handle values with commas
+        let amount = 0;
+        if (amountHeader !== -1 && line[amountHeader]) {
+          // Remove quotes and commas for parsing
+          const amountStr = line[amountHeader].replace(/[",]/g, "");
+          amount = parseInt(amountStr, 10);
+        }
+
+        // Parse isSpp1 flag (default to false if not present)
+        let isSpp1 = false;
+        if (isSppHeader !== -1 && line[isSppHeader]) {
+          const isSpp1Value = line[isSppHeader].trim().toUpperCase();
+          isSpp1 =
+            isSpp1Value === "TRUE" ||
+            isSpp1Value === "YES" ||
+            isSpp1Value === "1";
+        }
+
+        // Create service provider object
+        // For the new structure, we set both basicBudget and extendedBudget to the same budget amount
+        serviceProviderData[name] = {
+          basicBudget: isNoneBelow ? 0 : isNaN(amount) ? 0 : amount,
+          extendedBudget: isNoneBelow ? 0 : isNaN(amount) ? 0 : amount,
+          isSpp1: isNoneBelow ? false : isSpp1,
+          isNoneBelow: isNoneBelow,
+        };
+      }
+    }
+    // Check if we have the original choices.csv format
+    else if (
       nameIdxHeader !== -1 &&
       (basicBudgetIdxHeader !== -1 || extendedBudgetIdxHeader !== -1)
     ) {
+      console.log("Using original choices.csv format with separate budget columns");
+      
       // Process each service provider line
       for (let i = 1; i < lines.length; i++) {
         // Handle quoted fields with commas by splitting carefully

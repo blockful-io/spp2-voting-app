@@ -82,8 +82,7 @@ export interface Allocation {
 
 export interface Choice {
   name: string;
-  basicBudget: number;
-  extendedBudget: number;
+  budget: number;
   isSpp1: boolean;
   isNoneBelow: boolean;
 }
@@ -168,8 +167,7 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
   // Step 5: Get choices data from providers
   const choicesData: Choice[] = Object.entries(providerData).map(([name, data]) => ({
     name,
-    basicBudget: data.basicBudget,
-    extendedBudget: data.extendedBudget,
+    budget: data.basicBudget,
     isSpp1: data.isSpp1,
     isNoneBelow: data.isNoneBelow
   }));
