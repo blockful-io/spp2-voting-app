@@ -5,6 +5,7 @@ interface HeadToHeadMatch {
   candidate2Votes: number;
   totalVotes: number;
   winner: string;
+  isInternal: boolean;
 }
 
 interface Candidate {
@@ -31,6 +32,7 @@ interface FormattedMatch {
   };
   totalVotes: number;
   winner: string;
+  isInternal: boolean;
 }
 
 interface CandidateBudget {
@@ -98,6 +100,7 @@ export function getCandidateHeadToHead(
         },
         totalVotes: match.totalVotes,
         winner: match.winner,
+        isInternal: match.isInternal
       });
       if (match.candidate1Votes > match.candidate2Votes) wins++;
       else losses++;
@@ -118,6 +121,7 @@ export function getCandidateHeadToHead(
             : match.winner === match.candidate2
             ? match.candidate2
             : "Tie",
+        isInternal: match.isInternal
       });
       if (match.candidate2Votes > match.candidate1Votes) wins++;
       else losses++;

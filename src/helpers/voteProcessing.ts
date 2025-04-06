@@ -3,7 +3,7 @@
  */
 
 import { BIDIMENSIONAL_ENABLED } from "./config";
-import { reorderChoicesByProvider, parseChoiceName } from "./choiceParser";
+import { reorderChoicesByProvider, parseChoiceName, isSameServiceProvider } from "./choiceParser";
 
 interface Vote {
   choice: number[];
@@ -28,6 +28,7 @@ interface HeadToHeadMatch {
   candidate2Votes: number;
   totalVotes: number;
   winner: string;
+  isInternal: boolean;  // Whether this is a match between options from the same provider
 }
 
 interface RankedCandidate {
@@ -195,6 +196,7 @@ export function processCopelandRanking(proposalData: ProposalData): CopelandResu
   const matchResults = [];
   for (let i = 0; i < numCandidates; i++) {
     for (let j = i + 1; j < numCandidates; j++) {
+      const isInternal = isSameServiceProvider(candidateChoices[i], candidateChoices[j]);
       matchResults.push({
         candidate1: candidateChoices[i],
         candidate2: candidateChoices[j],
@@ -207,6 +209,7 @@ export function processCopelandRanking(proposalData: ProposalData): CopelandResu
             : pairwiseMatrix[j][i] > pairwiseMatrix[i][j]
             ? candidateChoices[j]
             : "tie",
+        isInternal
       });
     }
   }
