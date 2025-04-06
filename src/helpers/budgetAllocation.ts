@@ -208,7 +208,7 @@ function allocateBudgetsBidimensional(
       candidate.extendedBudget : candidate.basicBudget;
 
     // Check if candidate is in top 5 and eligible for two-year stream
-    const isTop5 = candidate.score >= candidates[4]?.score;
+    const isTop5 = candidates.indexOf(candidate) < 5;
     const isEligibleForTwoYear = isTop5 && candidate.isSpp1;
 
     // Try to allocate to two-year stream if eligible
