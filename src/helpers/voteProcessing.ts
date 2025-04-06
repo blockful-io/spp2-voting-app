@@ -51,6 +51,20 @@ interface ProviderData {
   };
 }
 
+interface Allocation {
+  name: string;
+  score: number;
+  averageSupport: number;
+  basicBudget: number;
+  extendedBudget: number;
+  isSpp1: boolean;
+  isNoneBelow: boolean;
+  allocated: boolean;
+  streamDuration: string | null;
+  allocatedBudget: number;
+  rejectionReason: string | null;
+}
+
 /**
  * Pre-process votes to reorder choices by provider if bidimensional is enabled
  * 
@@ -333,7 +347,7 @@ export function postprocessRanking(results: CopelandResults): CopelandResults {
 export function combineData(
   rankedResults: RankedCandidate[],
   providerData: ProviderData
-) {
+): Allocation[] {
   return rankedResults.map((result) => {
     const metadata = providerData[result.name] || {};
 
@@ -345,6 +359,10 @@ export function combineData(
       extendedBudget: metadata.extendedBudget || 0,
       isSpp1: metadata.isSpp1 || false,
       isNoneBelow: result.isNoneBelow || false,
+      allocated: false,
+      streamDuration: null,
+      allocatedBudget: 0,
+      rejectionReason: null
     };
   });
 }

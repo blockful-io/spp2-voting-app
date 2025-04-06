@@ -20,8 +20,6 @@ import { prepareVotesFromCsv } from './csvUtils';
 import { getVotingResultData, VotingResultResponse } from './votingResults';
 import { processCopelandRanking, combineData } from './voteProcessing';
 import { allocateBudgets } from './budgetAllocation';
-import fs from 'fs';
-import path from 'path';
 
 // Import the reporting module (using ES module imports)
 import { formatCurrency, displayResults, exportResults } from './reporting';
