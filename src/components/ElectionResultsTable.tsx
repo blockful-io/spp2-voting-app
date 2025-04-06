@@ -48,11 +48,9 @@ export function ElectionResultsTable({
               <tr
                 key={candidate.name}
                 className={`group cursor-pointer transition-colors duration-200  font-light  hover:bg-gray-800/20 ${
-                  beforeDivider && "bg-gray-800/30 hover:bg-gray-800/20"
-                }
-                ${isDivider && "cursor-default"}
-                `}
-                onClick={() => !isDivider && onShowDetails?.(candidate.name)}
+                  beforeDivider ? "bg-stone-950" : "bg-stone-900"
+                }`}
+                onClick={() => onShowDetails?.(candidate.name)}
               >
                 <td
                   className={`whitespace-nowrap px-6 py-4 ${
@@ -70,10 +68,10 @@ export function ElectionResultsTable({
                   {candidate.name}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  {isDivider ? "-" : candidate.wins || 0}
+                  {candidate.wins || 0}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  {isDivider ? "-" : candidate.averageSupport.toLocaleString()}
+                  {candidate.averageSupport.toLocaleString()}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   <div className="flex items-center gap-2">
