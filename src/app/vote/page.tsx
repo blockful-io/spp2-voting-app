@@ -150,7 +150,6 @@ export default function VotePage() {
           </p>
         </div>
         <div className="grow flex flex-col w-full">
-          <div className="grid grid-cols-1 md:grid-cols-[2fr,1fr] gap-4"></div>
           <VoteTable
             candidates={candidates}
             onBudgetSelect={handleBudgetSelection}

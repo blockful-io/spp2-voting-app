@@ -48,7 +48,7 @@ export function CandidateRow({
       className={`
         ${isDivider ? "bg-red-900/20" : "bg-dark"}
         ${!isLastRow && "border-b border-gray-700"}
-        ${isDragging ? "z-10" : ""}
+        ${isDragging && "z-10"}
       `}
     >
       <td className="p-4">
