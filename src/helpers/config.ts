@@ -19,3 +19,6 @@ export const ONE_YEAR_STREAM_RATIO = 2 / 3; // Proportion allocated to 1-year st
 // Snapshot proposal ID - replace with your proposal ID
 export const PROPOSAL_ID =
   "0x5dff4695ef4b5a576d132c2d278342a54b1fe5846ebcdc9a908e273611f27ee1";
+
+// Feature flags
+export const BIDIMENSIONAL_ENABLED = true; // When enabled, choices from the same provider are grouped together in voting ranks

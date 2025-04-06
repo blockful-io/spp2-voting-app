@@ -13,6 +13,7 @@ This application implements a Service Provider Program (SPP) allocation system u
 - Generates detailed reports of allocation results
 - Provides head-to-head comparison data for all candidates
 - Parses service provider names and budget types from choice options
+- Supports bidimensional voting with automatic grouping of related choices
 
 ## Algorithm: The Copeland Method
 
@@ -37,6 +38,12 @@ The Copeland method is a rank-determination algorithm that works as follows:
    - Remaining projects are allocated 1-year funding streams
    - Extended budgets are attempted first, falling back to basic budgets if necessary
    - Any remaining 2-year stream budget is transferred to the 1-year stream
+
+5. **Bidimensional Voting** (when enabled):
+   - Service providers with multiple budget options (basic/extended) are treated as related
+   - In each voter's ranking, all options from the same provider are grouped together
+   - The highest-ranked option determines the position for all related options
+   - This ensures that voters cannot rank different budget options from the same provider in arbitrary positions
 
 ## Installation
 
@@ -64,6 +71,9 @@ const ONE_YEAR_STREAM_RATIO = 2/3; // Proportion allocated to 1-year stream
 // Data source configuration
 const USE_LOCAL_DATA = true; // Set to false to use Snapshot API
 const USE_CSV_DATA = true; // Use CSV files for service provider data
+
+// Feature flags
+const BIDIMENSIONAL_ENABLED = true; // Group choices from the same provider in voting ranks
 
 // Snapshot proposal ID
 const PROPOSAL_ID = "0x5dff4695ef4b5a576d132c2d278342a54b1fe5846ebcdc9a908e273611f27ee1";

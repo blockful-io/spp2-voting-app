@@ -2,6 +2,9 @@
  * Vote processing logic for the Copeland ranking method
  */
 
+import { BIDIMENSIONAL_ENABLED } from "./config";
+import { reorderChoicesByProvider } from "./choiceParser";
+
 interface Vote {
   choice: number[];
   voter: string;
@@ -47,6 +50,9 @@ interface ProviderData {
  * 6. Each victory awards 1 point, ties or losses award 0 points
  * 7. Average support is used as a tiebreaker
  *
+ * When bidimensional mode is enabled, choices from the same provider are grouped together
+ * in each voter's ranking based on the highest-ranked option.
+ *
  * @param {Object} proposalData - The proposal data from Snapshot
  * @returns {Object} - Candidates ranked by wins and all head-to-head match results
  */
@@ -84,8 +90,16 @@ export function processCopelandRanking(proposalData: ProposalData) {
 
     const vp = vote.vp || 1; // Use voting power or default to 1
 
+    // Apply bidimensional grouping if enabled
+    let processedChoices = [...vote.choice];
+    
+    if (BIDIMENSIONAL_ENABLED) {
+      // Reorder choices to group options from the same provider
+      processedChoices = reorderChoicesByProvider(vote.choice, choices);
+    }
+
     // Find where "None Below" is in this particular vote's ranking (if ranked)
-    const noneBelowRank = vote.choice.indexOf(noneBelowIndex + 1);
+    const noneBelowRank = processedChoices.indexOf(noneBelowIndex + 1);
 
     // For each vote, determine which candidates are ranked (above "None Below")
     const rankedCandidates = new Set();
@@ -94,20 +108,20 @@ export function processCopelandRanking(proposalData: ProposalData) {
     // "None Below" itself is considered ranked
     if (noneBelowRank !== -1) {
       for (let i = 0; i <= noneBelowRank; i++) {
-        const candidateIndex = vote.choice[i] - 1; // Convert to 0-indexed
+        const candidateIndex = processedChoices[i] - 1; // Convert to 0-indexed
         rankedCandidates.add(candidateIndex);
       }
     }
     // If "None Below" wasn't ranked, all candidates in the vote are considered ranked
     else {
-      vote.choice.forEach((choiceNum) => {
+      processedChoices.forEach((choiceNum) => {
         rankedCandidates.add(choiceNum - 1); // Convert to 0-indexed
       });
     }
 
     // Helper to get position in ranking
     function getPosition(candidateIndex: number) {
-      return vote.choice.indexOf(candidateIndex + 1);
+      return processedChoices.indexOf(candidateIndex + 1);
     }
 
     // Compare each pair of candidates
