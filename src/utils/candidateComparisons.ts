@@ -1,4 +1,4 @@
-interface HeadToHeadMatch {
+export interface HeadToHeadMatch {
   candidate1: string;
   candidate2: string;
   candidate1Votes: number;
@@ -21,7 +21,7 @@ interface Candidate {
   isNoneBelow: boolean;
 }
 
-interface FormattedMatch {
+export interface FormattedMatch {
   candidate1: {
     name: string;
     candidateVotes: number;
@@ -64,11 +64,20 @@ export function getCandidateHeadToHead(
   let losses = 0;
 
   // Find the candidate's allocation for budget info
-  const candidate = data.candidates.find(
-    (c) => c.name.toLowerCase() === candidateName?.toLowerCase()
+  const candidates = data.candidates.filter(
+    (c) =>
+      c.name.toLowerCase().includes(candidateName?.toLowerCase())
   );
 
-  if (!candidate) return null;
+  if (candidates.length === 0) return null;
+
+  let candidate = candidates.length == 1 && candidates[0];
+  if (!candidate) {
+    candidate =
+      candidates.find(
+        (c) => c.extendedBudget > 0 && c.allocatedBudget > c.extendedBudget
+      ) || candidates.find((c) => c.basicBudget > 0)!;
+  }
 
   // Get budget information
   const budget: CandidateBudget = {
@@ -88,7 +97,7 @@ export function getCandidateHeadToHead(
     const candidate1Lower = match.candidate1.toLowerCase();
     const candidate2Lower = match.candidate2.toLowerCase();
 
-    if (candidate1Lower === lowerCandidateName) {
+    if (candidate1Lower.includes(lowerCandidateName)) {
       matches.push({
         candidate1: {
           name: match.candidate1,
@@ -104,7 +113,7 @@ export function getCandidateHeadToHead(
       });
       if (match.candidate1Votes > match.candidate2Votes) wins++;
       else losses++;
-    } else if (candidate2Lower === lowerCandidateName) {
+    } else if (candidate2Lower.includes(lowerCandidateName)) {
       matches.push({
         candidate1: {
           name: match.candidate2,
@@ -119,8 +128,8 @@ export function getCandidateHeadToHead(
           match.winner === match.candidate1
             ? match.candidate1
             : match.winner === match.candidate2
-            ? match.candidate2
-            : "Tie",
+              ? match.candidate2
+              : "Tie",
         isInternal: match.isInternal
       });
       if (match.candidate2Votes > match.candidate1Votes) wins++;

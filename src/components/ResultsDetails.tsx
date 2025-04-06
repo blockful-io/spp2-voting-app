@@ -1,18 +1,15 @@
-import { getCandidateHeadToHead } from "@/utils/candidateComparisons";
+import {
+  FormattedMatch,
+  getCandidateHeadToHead,
+  HeadToHeadMatch,
+} from "@/utils/candidateComparisons";
 import { X, Trophy } from "lucide-react";
 
 interface ResultsDetailsProps {
   candidateName: string;
   onClose: () => void;
   data: {
-    headToHeadMatches: Array<{
-      candidate1: string;
-      candidate2: string;
-      candidate1Votes: number;
-      candidate2Votes: number;
-      totalVotes: number;
-      winner: string;
-    }>;
+    headToHeadMatches: HeadToHeadMatch[];
     allocations: Array<{
       name: string;
       score: number;
@@ -26,19 +23,6 @@ interface ResultsDetailsProps {
       isNoneBelow: boolean;
     }>;
   };
-}
-
-interface FormattedMatch {
-  candidate1: {
-    name: string;
-    candidateVotes: number;
-  };
-  candidate2: {
-    name: string;
-    candidateVotes: number;
-  };
-  totalVotes: number;
-  winner: string;
 }
 
 export function ResultsDetails({
@@ -87,35 +71,29 @@ export function ResultsDetails({
         <div className="rounded-lg border border-lightDark bg-dark/50 p-4">
           <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-blue-400">
-                Basic (${(budget.basic.amount / 1000).toFixed(0)}k)
-              </span>
-              {budget.basic.selected && (
-                <span className="text-blue-400">🏆</span>
-              )}
+              <span>Basic (${(budget.basic.amount / 1000).toFixed(0)}k)</span>
+              {budget.basic.selected && <span>🏆</span>}
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-gray-400">
+              {budget.extended.selected && <span>🏆</span>}
+              <span>
                 Extended (${(budget.extended.amount / 1000).toFixed(0)}k)
               </span>
-              {budget.extended.selected && (
-                <span className="text-emerald-500">🏆</span>
-              )}
             </div>
           </div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-2xl font-semibold text-gray-300">
+            <span className="text-2xl font-semibold">
               {budget.basic.amount.toLocaleString()}
             </span>
-            <span className="text-2xl font-semibold text-gray-500">
-              {(budget.extended.amount - budget.basic.amount).toLocaleString()}
+            <span className="text-2xl font-semibold">
+              {budget.extended.amount.toLocaleString()}
             </span>
           </div>
           <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
             <div className="relative h-full w-full">
-              <div className="absolute h-full w-full bg-gray-600" />
+              <div className="absolute h-full w-full bg-emerald-500" />
               <div
-                className="absolute h-full bg-blue-500"
+                className="absolute h-full bg-blue-500 right-0"
                 style={{
                   width: `${
                     (budget.basic.amount / budget.extended.amount) * 100
@@ -133,59 +111,63 @@ export function ResultsDetails({
           Head-to-head Match Results
         </h3>
         <div className="space-y-3">
-          {matches.map((match: FormattedMatch, index: number) => (
-            <div
-              key={index}
-              className="rounded-lg border border-lightDark bg-dark/50 p-4"
-            >
-              <div className="flex items-center mb-2">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-100">
-                      {match.candidate1.name}
-                    </span>
-                    {match.winner !== match.candidate2.name && (
-                      <Trophy className="text-emerald-500 h-4 w-4" />
-                    )}
-                    <span className="text-emerald-500">
-                      {match.candidate1.candidateVotes.toLocaleString()}
-                    </span>
+          {matches.map((match: FormattedMatch, index: number) => {
+            if (!match.isInternal)
+              return (
+                <div
+                  key={index}
+                  className="rounded-lg border border-lightDark bg-dark/50 p-4"
+                >
+                  <div className="flex items-center mb-2">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-100">
+                          {match.candidate1.name}
+                        </span>
+                        {match.winner !== match.candidate2.name && (
+                          <Trophy className="text-emerald-500 h-4 w-4" />
+                        )}
+                        <span className="text-emerald-500">
+                          {match.candidate1.candidateVotes.toLocaleString()}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="px-4">
+                      <span className="text-gray-400">vs</span>
+                    </div>
+                    <div className="flex-1 text-right">
+                      <div className="flex items-center gap-2 justify-end">
+                        <span className="text-gray-400">
+                          {match.candidate2.candidateVotes.toLocaleString()}
+                        </span>
+                        <span className="text-gray-100">
+                          {match.candidate2.name}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
+                    <div className="relative h-full w-full">
+                      <div className="absolute h-full w-full bg-blue-500" />
+                      <div
+                        className={`absolute h-full ${
+                          match.winner !== match.candidate2.name
+                            ? "bg-emerald-500"
+                            : "bg-blue-500"
+                        }`}
+                        style={{
+                          width: `${
+                            (match.candidate1.candidateVotes /
+                              match.totalVotes) *
+                            100
+                          }%`,
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
-                <div className="px-4">
-                  <span className="text-gray-400">vs</span>
-                </div>
-                <div className="flex-1 text-right">
-                  <div className="flex items-center gap-2 justify-end">
-                    <span className="text-gray-400">
-                      {match.candidate2.candidateVotes.toLocaleString()}
-                    </span>
-                    <span className="text-gray-100">
-                      {match.candidate2.name}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
-                <div className="relative h-full w-full">
-                  <div className="absolute h-full w-full bg-blue-500" />
-                  <div
-                    className={`absolute h-full ${
-                      match.winner !== match.candidate2.name
-                        ? "bg-emerald-500"
-                        : "bg-blue-500"
-                    }`}
-                    style={{
-                      width: `${
-                        (match.candidate1.candidateVotes / match.totalVotes) *
-                        100
-                      }%`,
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          ))}
+              );
+          })}
         </div>
         <div className="mt-4 text-right text-sm text-gray-400">
           {wins} wins / {losses} losses

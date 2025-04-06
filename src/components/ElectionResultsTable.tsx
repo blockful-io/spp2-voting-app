@@ -3,7 +3,7 @@ import { ElectionCandidate } from "@/hooks/useEnsElectionData";
 
 interface ElectionResultsTableProps {
   candidates: ElectionCandidate[];
-  onShowDetails?: (candidateName: string) => void;
+  onShowDetails: (candidateName: string) => void;
 }
 
 function FundedBadge() {
@@ -50,7 +50,7 @@ export function ElectionResultsTable({
                 className={`group cursor-pointer transition-colors duration-200  font-light  hover:bg-gray-800/20 ${
                   beforeDivider ? "bg-stone-950" : "bg-stone-900"
                 }`}
-                onClick={() => onShowDetails?.(candidate.name)}
+                onClick={() => onShowDetails(candidate.name)}
               >
                 <td
                   className={`whitespace-nowrap px-6 py-4 ${
