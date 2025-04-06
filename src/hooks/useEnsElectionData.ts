@@ -188,7 +188,9 @@ export function useEnsElectionData() {
         allocationResponse.allocations
           .map((allocation, index) => ({
             id: index + 1,
-            name: allocation.name,
+            name: allocation.name.includes(" - ")
+              ? allocation.name.split(" - ")[0]
+              : allocation.name,
             score: allocation.score,
             averageSupport: allocation.averageSupport,
             basicBudget: allocation.basicBudget,
