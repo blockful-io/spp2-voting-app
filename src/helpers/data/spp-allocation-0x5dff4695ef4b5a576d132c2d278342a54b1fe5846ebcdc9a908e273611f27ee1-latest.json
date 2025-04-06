@@ -94,9 +94,9 @@
     "votedBudget": 2000000,
     "twoYearStreamBudget": 666666.6666666666,
     "oneYearStreamBudget": 1333333.3333333333,
-    "transferredBudget": 666666.6666666666,
-    "adjustedTwoYearBudget": 0,
-    "adjustedOneYearBudget": 2000000,
+    "transferredBudget": 166666.66666666663,
+    "adjustedTwoYearBudget": 500000,
+    "adjustedOneYearBudget": 1500000,
     "remainingTwoYearBudget": 0,
     "remainingOneYearBudget": 0,
     "totalAllocated": 2000000,
@@ -112,7 +112,7 @@
       "basicBudget": 500000,
       "extendedBudget": 500000,
       "allocated": true,
-      "streamDuration": "1-year",
+      "streamDuration": "2-year",
       "allocatedBudget": 500000,
       "rejectionReason": null,
       "isNoneBelow": false
@@ -176,31 +176,36 @@
       "name": "sp a",
       "budget": 400000,
       "isSpp1": false,
-      "isNoneBelow": false
+      "isNoneBelow": false,
+      "choiceId": 1
     },
     {
       "name": "sp b - basic",
       "budget": 400000,
-      "isSpp1": false,
-      "isNoneBelow": false
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 2
     },
     {
       "name": "sp b - ext",
       "budget": 500000,
-      "isSpp1": false,
-      "isNoneBelow": false
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 3
     },
     {
       "name": "sp c",
       "budget": 700000,
-      "isSpp1": false,
-      "isNoneBelow": false
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 4
     },
     {
       "name": "None below",
       "budget": 0,
       "isSpp1": false,
-      "isNoneBelow": true
+      "isNoneBelow": true,
+      "choiceId": 5
     }
   ]
 }

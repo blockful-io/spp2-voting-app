@@ -1,6 +1,6 @@
-choiceId,choiceName,budgetAmount,isSpp
+choiceId,choiceName,budgetAmount,isSpp1
 1,sp a,400000,FALSE
 2,sp b - basic,400000,TRUE
-3,sp b - ext,500000,FALSE
+3,sp b - ext,500000,TRUE
 4,sp c,700000,TRUE
 5,None below,0,FALSE

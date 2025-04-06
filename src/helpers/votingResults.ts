@@ -85,6 +85,7 @@ export interface Choice {
   budget: number;
   isSpp1: boolean;
   isNoneBelow: boolean;
+  choiceId: number;
 }
 
 export interface AllocationResults {
@@ -165,11 +166,12 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
   const allocationResults = allocateBudgets(combinedData, PROGRAM_BUDGET) as AllocationResults;
 
   // Step 5: Get choices data from providers
-  const choicesData: Choice[] = Object.entries(providerData).map(([name, data]) => ({
+  const choicesData: Choice[] = Object.entries(providerData).map(([name, data], index) => ({
     name,
     budget: data.basicBudget,
     isSpp1: data.isSpp1,
-    isNoneBelow: data.isNoneBelow
+    isNoneBelow: data.isNoneBelow,
+    choiceId: typeof data.choiceId === 'number' ? data.choiceId : index + 1
   }));
 
   // Step 6: Format the response
