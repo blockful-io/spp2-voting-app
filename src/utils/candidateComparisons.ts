@@ -124,6 +124,13 @@ export function getCandidateHeadToHead(
     }
   });
 
+  // Sort matches by the ratio of candidate's votes to opponent's votes
+  matches.sort((a, b) => {
+    const ratioA = a.candidate1.candidateVotes / a.candidate2.candidateVotes;
+    const ratioB = b.candidate1.candidateVotes / b.candidate2.candidateVotes;
+    return ratioB - ratioA;
+  });
+
   return {
     matches,
     budget,
