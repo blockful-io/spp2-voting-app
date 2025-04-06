@@ -1,4 +1,5 @@
 import { PROPOSAL_ID } from "@/helpers/config";
+import { HeadToHeadMatch } from "@/helpers/votingResults";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useMemo } from "react";
 
@@ -13,14 +14,7 @@ interface AllocationResponse {
     state: string;
     dataSource: string;
   };
-  headToHeadMatches: Array<{
-    candidate1: string;
-    candidate2: string;
-    candidate1Votes: number;
-    candidate2Votes: number;
-    totalVotes: number;
-    winner: string;
-  }>;
+  headToHeadMatches: Array<HeadToHeadMatch>;
   summary: {
     votedBudget: number;
     twoYearStreamBudget: number;
@@ -35,18 +29,7 @@ interface AllocationResponse {
     allocatedProjects: number;
     rejectedProjects: number;
   };
-  allocations: Array<{
-    name: string;
-    score: number;
-    averageSupport: number;
-    basicBudget: number;
-    extendedBudget: number;
-    allocated: boolean;
-    streamDuration: string | null;
-    allocatedBudget: number;
-    rejectionReason: string | null;
-    isNoneBelow: boolean;
-  }>;
+  allocations: ElectionCandidate[];
   choices?: Array<string>;
 }
 
@@ -63,6 +46,7 @@ export interface ElectionCandidate {
   rejectionReason: string | null;
   isEligibleForExtendedBudget: boolean;
   isNoneBelow: boolean;
+  isSpp1: boolean;
 }
 
 interface BudgetSummary {
@@ -108,7 +92,6 @@ export interface Budget {
   id: number;
   selected: boolean;
 }
-
 
 export function useChoices() {
   const { data: fetchChoicesFunc, isLoading, isError } = useQuery({
@@ -183,6 +166,8 @@ export function useEnsElectionData() {
       const allocationResponse: AllocationResponse = await response.json();
       setAllocationData(allocationResponse);
 
+      console.log(allocationResponse.allocations);
+
       // Transform allocation data to match our ElectionCandidate interface
       const transformedData: ElectionCandidate[] =
         allocationResponse.allocations
@@ -202,6 +187,7 @@ export function useEnsElectionData() {
             isEligibleForExtendedBudget:
               allocation.extendedBudget > allocation.basicBudget,
             isNoneBelow: allocation.isNoneBelow,
+            isSpp1: allocation.isSpp1,
           }));
 
       setData(transformedData);

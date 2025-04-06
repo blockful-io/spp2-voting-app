@@ -77,15 +77,15 @@
     "votedBudget": 1500000,
     "twoYearStreamBudget": 500000,
     "oneYearStreamBudget": 1000000,
-    "transferredBudget": 500000,
-    "adjustedTwoYearBudget": 0,
-    "adjustedOneYearBudget": 1500000,
-    "remainingTwoYearBudget": 0,
-    "remainingOneYearBudget": 0,
-    "totalAllocated": 1500000,
-    "unspentBudget": 0,
-    "allocatedProjects": 3,
-    "rejectedProjects": 0
+    "transferredBudget": 0,
+    "adjustedTwoYearBudget": 500000,
+    "adjustedOneYearBudget": 1000000,
+    "remainingTwoYearBudget": 100000,
+    "remainingOneYearBudget": 600000,
+    "totalAllocated": 800000,
+    "unspentBudget": 700000,
+    "allocatedProjects": 2,
+    "rejectedProjects": 1
   },
   "allocations": [
     {
@@ -96,7 +96,7 @@
       "extendedBudget": 400000,
       "isSpp1": true,
       "allocated": true,
-      "streamDuration": "1-year",
+      "streamDuration": "2-year",
       "allocatedBudget": 400000,
       "rejectionReason": null,
       "isNoneBelow": false
@@ -121,10 +121,10 @@
       "basicBudget": 700000,
       "extendedBudget": 700000,
       "isSpp1": true,
-      "allocated": true,
-      "streamDuration": "1-year",
-      "allocatedBudget": 700000,
-      "rejectionReason": null,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Insufficient budget",
       "isNoneBelow": false
     },
     {

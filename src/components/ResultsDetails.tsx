@@ -1,7 +1,7 @@
+import { HeadToHeadMatch } from "@/helpers/votingResults";
 import {
   FormattedMatch,
   getCandidateHeadToHead,
-  HeadToHeadMatch,
 } from "@/utils/candidateComparisons";
 import { X, Trophy } from "lucide-react";
 

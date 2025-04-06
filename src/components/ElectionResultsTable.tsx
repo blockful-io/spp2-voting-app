@@ -129,7 +129,7 @@ export function ElectionResultsTable({
                 <td className="whitespace-nowrap px-6 py-4">
                   {isDivider ? (
                     <span>-</span>
-                  ) : candidate.isEligibleForExtendedBudget ? (
+                  ) : candidate.isSpp1 ? (
                     <div className="flex justify-evenly max-w-14 bg-emerald-100 bg-opacity-10 rounded-xl py-1 text-emerald-500">
                       <div>✓</div>
                       <span>Yes</span>

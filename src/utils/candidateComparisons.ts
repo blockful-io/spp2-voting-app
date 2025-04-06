@@ -1,12 +1,4 @@
-export interface HeadToHeadMatch {
-  candidate1: string;
-  candidate2: string;
-  candidate1Votes: number;
-  candidate2Votes: number;
-  totalVotes: number;
-  winner: string;
-  isInternal: boolean;
-}
+import { HeadToHeadMatch } from "@/helpers/votingResults";
 
 interface Candidate {
   name: string;
