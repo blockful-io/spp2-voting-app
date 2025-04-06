@@ -1,4 +1,4 @@
-import { HeadToHeadMatch } from "@/helpers/votingResults";
+import { HeadToHeadMatch } from "@/helpers/voteProcessing";
 
 interface Candidate {
   name: string;
@@ -92,11 +92,11 @@ export function getCandidateHeadToHead(
     if (candidate1Lower.includes(lowerCandidateName)) {
       matches.push({
         candidate1: {
-          name: match.candidate1,
+          name: match.candidate1.includes(" - ") ? match.candidate1.split(" - ")[0] : match.candidate1,
           candidateVotes: match.candidate1Votes,
         },
         candidate2: {
-          name: match.candidate2,
+          name: match.candidate2.includes(" - ") ? match.candidate2.split(" - ")[0] : match.candidate2,
           candidateVotes: match.candidate2Votes,
         },
         totalVotes: match.totalVotes,
@@ -108,11 +108,11 @@ export function getCandidateHeadToHead(
     } else if (candidate2Lower.includes(lowerCandidateName)) {
       matches.push({
         candidate1: {
-          name: match.candidate2,
+          name: match.candidate2.includes(" - ") ? match.candidate2.split(" - ")[0] : match.candidate2,
           candidateVotes: match.candidate2Votes,
         },
         candidate2: {
-          name: match.candidate1,
+          name: match.candidate1.includes(" - ") ? match.candidate1.split(" - ")[0] : match.candidate1,
           candidateVotes: match.candidate1Votes,
         },
         totalVotes: match.totalVotes,

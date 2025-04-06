@@ -21,7 +21,7 @@ interface ProposalData {
   state: string;
 }
 
-interface HeadToHeadMatch {
+export interface HeadToHeadMatch {
   candidate1: string;
   candidate2: string;
   candidate1Votes: number;
@@ -207,8 +207,8 @@ export function processCopelandRanking(proposalData: ProposalData): CopelandResu
           pairwiseMatrix[i][j] > pairwiseMatrix[j][i]
             ? candidateChoices[i]
             : pairwiseMatrix[j][i] > pairwiseMatrix[i][j]
-            ? candidateChoices[j]
-            : "tie",
+              ? candidateChoices[j]
+              : "tie",
         isInternal
       });
     }
@@ -327,7 +327,7 @@ export function postprocessRanking(results: CopelandResults): CopelandResults {
     // Case 3: One candidate is None Below and the other is a provider's highest-ranked
     const isNoneBelow1 = match.candidate1.toLowerCase().includes('none below');
     const isNoneBelow2 = match.candidate2.toLowerCase().includes('none below');
-    
+
     if (isNoneBelow1 && topCandidate2?.name === match.candidate2) return true;
     if (isNoneBelow2 && topCandidate1?.name === match.candidate1) return true;
 
