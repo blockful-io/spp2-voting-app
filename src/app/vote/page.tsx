@@ -12,7 +12,7 @@ export default function VotePage() {
   const [candidates, setCandidates] = useState<VoteCandidate[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const { voteFunc, isPending } = useVoteOnProposal();
+  const { voteFunc } = useVoteOnProposal();
 
   // Prevent page scrolling during drag
   useEffect(() => {

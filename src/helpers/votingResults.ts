@@ -6,11 +6,14 @@
  */
 
 import { fetchSnapshotResults } from "./snapshot";
-import { processCopelandRanking, combineData, postprocessRanking, preprocessVotes } from "./voteProcessing";
+import { processCopelandRanking, combineData, postprocessRanking, preprocessVotes, HeadToHeadMatch } from "./voteProcessing";
 import { allocateBudgets } from "./budgetAllocation";
-import { getServiceProviderData, getChoiceOptions } from "./csvUtils";
+import { getServiceProviderData } from "./csvUtils";
 import { PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from "./config";
-import { parseChoiceName, processChoices } from './choiceParser';
+import { processChoices } from './choiceParser';
+
+// Re-export HeadToHeadMatch from voteProcessing
+export type { HeadToHeadMatch } from './voteProcessing';
 
 // Interfaces for vote data
 export interface Vote {
@@ -36,15 +39,6 @@ export interface RankedCandidate {
   score: number;
   averageSupport: number;
   isNoneBelow: boolean;
-}
-
-export interface HeadToHeadMatch {
-  candidate1: string;
-  candidate2: string;
-  candidate1Votes: number;
-  candidate2Votes: number;
-  totalVotes: number;
-  winner: string;
 }
 
 export interface CopelandResults {
@@ -156,13 +150,13 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
     state: rawProposalData.state,
     choices: rawProposalData.choices
   };
-  
+
   // Step 2: Pre-process votes if bidimensional is enabled
   proposalData.votes = preprocessVotes(proposalData.votes, proposalData.choices);
-  
+
   // Step 3: Process with Copeland method to get rankings
   const copelandResults = processCopelandRanking(proposalData);
-  
+
   // Step 4: Post-process rankings to handle bidimensional filtering and None Below
   const { rankedCandidates, headToHeadMatches } = postprocessRanking(copelandResults);
 
