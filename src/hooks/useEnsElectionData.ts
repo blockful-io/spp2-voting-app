@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useMemo } from "react";
 
 interface AllocationResponse {
@@ -86,7 +87,82 @@ interface BudgetSummary {
 }
 
 const PROPOSAL_ID =
-  "0x4a3a3c8e453e296b4c96ea1e889ab0eb99c3bc19769ec091fc97a3586146c04e";
+  "0x77cfd7d5357d43369d918db964010b4822ddb743df8d4e17e0a5a8263b434a7f";
+
+export interface Choice {
+  budget: number;
+  budgetType: "basic" | "extended";
+  choiceId: number;
+  isNoneBelow: boolean;
+  isSpp1: boolean;
+  name: string;
+  originalName: string;
+}
+
+export interface VoteCandidate {
+  name: string;
+  budgets: Budget[];
+}
+
+export interface Budget {
+  value: number;
+  type: string;
+  id: number;
+  selected: boolean;
+}
+
+
+export function useChoices() {
+  const { data: fetchChoicesFunc, isLoading, isError } = useQuery({
+    queryKey: ["choices"],
+    queryFn: fetchChoices,
+  });
+
+  async function fetchChoices() {
+    const response = await window.fetch(
+      `/api/allocation?proposalId=${PROPOSAL_ID}`
+    );
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data: ${response.statusText}`);
+    }
+
+    const { choices } = await response.json();
+
+    // Create a map to group items by name
+    const groupedByName = new Map();
+
+    // Group items by name
+    for (const item of choices) {
+      const name = item.name;
+
+      if (!groupedByName.has(name)) {
+        groupedByName.set(name, []);
+      }
+
+      groupedByName.get(name).push(item);
+    }
+
+    const result = [];
+    for (const [name, items] of groupedByName) {
+      result.push({
+        name: name,
+        budgets: items.map((item: Choice) => ({
+          id: item.choiceId,
+          value: item.budget,
+          type: item.budgetType,
+          selected: false,
+        }))
+      });
+    }
+    return result;
+  }
+
+  return {
+    fetchChoices: fetchChoicesFunc,
+    isLoading,
+    isError,
+  };
+}
 
 export function useEnsElectionData() {
   const [isLoading, setIsLoading] = useState(true);
