@@ -12,6 +12,7 @@ This application implements a Service Provider Program (SPP) allocation system u
 - Handles special "None Below" voting marker
 - Generates detailed reports of allocation results
 - Provides head-to-head comparison data for all candidates
+- Parses service provider names and budget types from choice options
 
 ## Algorithm: The Copeland Method
 
@@ -104,6 +105,7 @@ node src/helpers/index.js
 - **reporting.js**: Formats and exports results
 - **candidateComparisons.js**: Provides utilities for analyzing head-to-head results
 - **csvUtils.js**: Handles CSV file processing and conversion
+- **choiceParser.ts**: Parses service provider names and budget types from choice options
 - **snapshot.js**: Interfaces with Snapshot API or loads mock data
 - **config.js**: Contains application configuration parameters
 
@@ -151,6 +153,12 @@ The `src/helpers` folder is the core of the application, containing modular comp
   - Converts between CSV and JSON formats
   - Supports multiple CSV format variations
 
+- **choiceParser.ts** (~50 lines): Choice name parsing utilities
+  - Parses service provider names and budget types from choice strings
+  - Extracts provider base name from formatted options (e.g., "sp b - basic" → "sp b")
+  - Determines budget type as "basic", "extended", or "none"
+  - Handles special cases like "None Below" option
+
 - **snapshot.js** (~100 lines): Integration with Snapshot
   - Interfaces with Snapshot API for live vote data
   - Falls back to local data when configured
@@ -180,10 +188,11 @@ The `src/helpers/data` directory holds all input and output files:
   1. CSV data → JSON conversion (`csvUtils.js`)
   2. Vote processing and ranking (`voteProcessing.js`)
   3. Budget allocation (`budgetAllocation.js`)
-  4. Reporting and export (`reporting.js`)
+  4. Name and budget type parsing (`choiceParser.ts`)
+  5. Reporting and export (`reporting.js`)
 
 - **Helper Layers**:
-  - Low-level utilities (`loadServiceProvidersFromCsv`, `convertVotesFromCsv`)
+  - Low-level utilities (`loadServiceProvidersFromCsv`, `convertVotesFromCsv`, `parseChoiceName`)
   - High-level wrappers (`getServiceProviderData`, `prepareVotesFromCsv`)
   - Integration functions (in `index.js`)
 
@@ -200,6 +209,7 @@ The `src/helpers/data` directory holds all input and output files:
 | candidateComparisons.js | `getCandidateHeadToHeadResults()` | Extracts match data for a candidate |
 | reporting.js | `displayResults()` | Formats allocation results |
 | reporting.js | `exportResults()` | Saves results to JSON file |
+| choiceParser.ts | `parseChoiceName()` | Parses service provider names and budget types |
 
 ## Output
 
@@ -208,6 +218,7 @@ The application generates:
 1. Console output showing the full allocation process
 2. JSON files with detailed results in the `src/helpers/data` directory
 3. Head-to-head comparison data that can be accessed programmatically
+4. Structured choice data with parsed names and budget types
 
 ## Example
 

@@ -41,13 +41,6 @@ export async function main(): Promise<{
     console.log(`Budget: ${formatCurrency(PROGRAM_BUDGET)} per year`);
     console.log(`Data Source: ${USE_LOCAL_DATA ? 'Local Data' : 'Snapshot API'}`);
     
-    // Ensure data directory exists
-    const dataDir = path.resolve(__dirname, 'data');
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
-      console.log(`Created data directory: ${dataDir}`);
-    }
-    
     // Check if we need to prepare votes from CSV
     if (USE_LOCAL_DATA) {
       await prepareVotesFromCsv();

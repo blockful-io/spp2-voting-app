@@ -59,8 +59,7 @@ function loadChoiceOptions(csvFilePath: string) {
 
     // Parse header to determine column structure
     const header = lines[0].split(",").map(col => col.trim());
-    console.log("Debug - CSV Header (after trim):", header);
-
+    
     // Check for new column structure with choiceId and choiceName
     const choiceIdHeader = header.findIndex(
       (col) => col.toLowerCase() === "choiceid"
@@ -372,8 +371,7 @@ function loadServiceProvidersFromCsv(csvFilePath: string) {
 
     // Parse header to determine column structure
     const header = lines[0].split(",").map(col => col.trim());
-    console.log("Debug - Standard format - CSV Header (after trim):", header);
-
+    
     // Check for new column structure: choiceId, choiceName, amount, isSpp
     const choiceIdHeader = header.findIndex(
       (col) => col.toLowerCase() === "choiceid"
@@ -387,13 +385,6 @@ function loadServiceProvidersFromCsv(csvFilePath: string) {
     const isSppHeader = header.findIndex(
       (col) => col.toLowerCase() === "isspp" || col.toLowerCase() === "isspp1"
     );
-
-    console.log("Debug - Column indexes:", {
-      choiceIdHeader,
-      choiceNameHeader,
-      amountHeader,
-      isSppHeader
-    });
 
     // Check for original column structure
     const choiceIdxHeader = header.findIndex(
@@ -490,12 +481,10 @@ function loadServiceProvidersFromCsv(csvFilePath: string) {
         let isSpp1 = false;
         if (isSppHeader !== -1 && line[isSppHeader]) {
           const isSpp1Value = line[isSppHeader].trim().toUpperCase();
-          console.log(`Debug - isSpp1Value for ${name}: "${isSpp1Value}"`);
           isSpp1 =
             isSpp1Value === "TRUE" ||
             isSpp1Value === "YES" ||
             isSpp1Value === "1";
-          console.log(`Debug - isSpp1 parsed for ${name}: ${isSpp1}`);
         }
 
         // Create service provider object
@@ -585,12 +574,10 @@ function loadServiceProvidersFromCsv(csvFilePath: string) {
         let isSpp1 = false;
         if (isSppIdxHeader !== -1 && line[isSppIdxHeader]) {
           const isSpp1Value = line[isSppIdxHeader].trim().toUpperCase();
-          console.log(`Debug - isSpp1Value for ${name}: "${isSpp1Value}"`);
           isSpp1 =
             isSpp1Value === "TRUE" ||
             isSpp1Value === "YES" ||
             isSpp1Value === "1";
-          console.log(`Debug - isSpp1 parsed for ${name}: ${isSpp1}`);
         }
 
         // Create service provider object
@@ -665,12 +652,10 @@ function loadServiceProvidersFromCsv(csvFilePath: string) {
         let isSpp1 = false;
         if (isSpp1Index !== -1 && line[isSpp1Index]) {
           const isSpp1Value = line[isSpp1Index].trim().toLowerCase();
-          console.log(`Debug - isSpp1Value for ${name} (format 3): "${isSpp1Value}"`);
           isSpp1 =
             isSpp1Value === "true" ||
             isSpp1Value === "yes" ||
             isSpp1Value === "1";
-          console.log(`Debug - isSpp1 parsed for ${name} (format 3): ${isSpp1}`);
         }
 
         // Create service provider object
