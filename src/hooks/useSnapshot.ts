@@ -1,10 +1,8 @@
+import { PROPOSAL_ID, PROPOSAL_SPACE } from "@/helpers/config";
 import { Web3Provider } from "@ethersproject/providers";
 import snapshot from "@snapshot-labs/snapshot.js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAccount } from "wagmi";
-
-const PROPOSAL_ID =
-  "0x2d5d195baaa173394d77484787b7220da5ed0a2f48568e309a404eeec1d0004b";
 
 export function useVoteOnProposal() {
   const queryClient = useQueryClient();
@@ -34,7 +32,7 @@ export function useVoteOnProposal() {
       proposal: PROPOSAL_ID,
       type: "ranked-choice",
       choice,
-      space: "pikonha.eth",
+      space: PROPOSAL_SPACE,
     });
   }
 

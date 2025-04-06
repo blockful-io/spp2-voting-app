@@ -16,9 +16,10 @@ export const PROGRAM_BUDGET = 2000000; // Total budget in USD per year
 export const TWO_YEAR_STREAM_RATIO = 1 / 3; // Proportion allocated to 2-year streams
 export const ONE_YEAR_STREAM_RATIO = 2 / 3; // Proportion allocated to 1-year stream
 
+export const PROPOSAL_SPACE = "pikonha.eth";
 // Snapshot proposal ID - replace with your proposal ID
 export const PROPOSAL_ID =
-  "0x5dff4695ef4b5a576d132c2d278342a54b1fe5846ebcdc9a908e273611f27ee1";
+  "0x2d5d195baaa173394d77484787b7220da5ed0a2f48568e309a404eeec1d0004b";
 
 // Feature flags
 export const BIDIMENSIONAL_ENABLED = true; // When enabled, choices from the same provider are grouped together in voting ranks

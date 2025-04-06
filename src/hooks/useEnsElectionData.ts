@@ -1,3 +1,4 @@
+import { PROPOSAL_ID } from "@/helpers/config";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useMemo } from "react";
 
@@ -85,9 +86,6 @@ interface BudgetSummary {
     rejectedProjects: number;
   };
 }
-
-const PROPOSAL_ID =
-  "0x77cfd7d5357d43369d918db964010b4822ddb743df8d4e17e0a5a8263b434a7f";
 
 export interface Choice {
   budget: number;
