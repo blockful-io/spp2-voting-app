@@ -167,7 +167,9 @@ export function processCopelandRanking(proposalData: ProposalData): CopelandResu
       if (i !== j) {
         // Count wins
         if (pairwiseMatrix[i][j] > pairwiseMatrix[j][i]) {
-          wins++; // Victory = 1 point
+          if (!isSameServiceProvider(candidateChoices[i], candidateChoices[j])) {
+            wins++; // Victory = 1 point
+          }
         }
 
         // Sum up votes received in all matches for average support
