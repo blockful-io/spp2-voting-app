@@ -77,11 +77,6 @@ export async function main(): Promise<{
     // Add choices data from votingResults to the formattedResults
     formattedResults.choices = choices;
     
-    // Ensure copelandRanking is completely removed if it somehow exists
-    if ('copelandRanking' in formattedResults) {
-      delete (formattedResults as any).copelandRanking;
-    }
-    
     const exportedFilename = exportResults(formattedResults);
 
     console.log("\nAllocation process completed successfully!");

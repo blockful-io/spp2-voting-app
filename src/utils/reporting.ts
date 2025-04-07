@@ -17,7 +17,7 @@ export const displayResults = (
   headToHeadMatches: HeadToHeadMatch[]
 ): ReportResults => {
   const { allocations, summary } = results;
-  
+
   console.log("\n===== SERVICE PROVIDER ALLOCATION RESULTS =====\n");
   
   // Display proposal information
@@ -113,8 +113,8 @@ export const displayResults = (
       id: proposalData.id,
       title: proposalData.title,
       space: proposalData.space.name,
-      totalVotes: results.allocations.length,
-      totalVotingPower: results.allocations.reduce((sum, a) => sum + a.score, 0),
+      totalVotes: proposalData.votes?.length || 0,
+      totalVotingPower: proposalData.scores_total || 0,
       state: proposalData.state.toUpperCase() as ProposalState,
       dataSource: USE_LOCAL_DATA ? "Local Data" as DataSource : "Snapshot" as DataSource,
     },

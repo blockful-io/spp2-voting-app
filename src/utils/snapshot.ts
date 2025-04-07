@@ -136,6 +136,7 @@ export async function fetchSnapshotResults(proposalId: string): Promise<Proposal
     console.log(`Successfully fetched ${votes.length} votes`);
 
     // Transform and return data according to ProposalData interface
+    console.log(votes);
     return {
       id: proposal.id,
       title: proposal.title,

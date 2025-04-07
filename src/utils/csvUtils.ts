@@ -708,11 +708,11 @@ function getChoiceOptions() {
 }
 
 /**
- * Prepares service provider data from CSV
- *
- * @returns {Object} - Service provider data for allocation
+ * Gets service provider data
+ * 
+ * @returns ProviderData
  */
-const getServiceProviderData = () => {
+export const getServiceProviderData = () => {
   try {
     console.log("Loading service provider data from CSV...");
     // We're using the choices.csv file for service provider data
@@ -725,11 +725,11 @@ const getServiceProviderData = () => {
 };
 
 /**
- * Prepares vote data from CSV and converts it to mocked-votes.json format
- *
- * @returns {Promise<void>} - Resolves when conversion is complete
+ * Prepares votes from CSV file
+ * 
+ * @returns Promise<void>
  */
-async function prepareVotesFromCsv() {
+export async function prepareVotesFromCsv() {
   try {
     // Load choice options from CSV
     const choiceOptions = getChoiceOptions();
@@ -745,11 +745,72 @@ async function prepareVotesFromCsv() {
   }
 }
 
-export {
-  convertVotesFromCsv,
-  loadServiceProvidersFromCsv,
-  loadChoiceOptions,
-  getChoiceOptions,
-  getServiceProviderData,
-  prepareVotesFromCsv,
-};
+/**
+ * Loads full choice data from a CSV file
+ * 
+ * @param csvFilePath - Path to the CSV file containing choice options
+ * @returns Array of choice data objects
+ */
+export function loadChoiceData(csvFilePath: string): Array<{ choiceId: string; choiceName: string; budgetAmount: string; isSpp1: string }> {
+  try {
+    const resolvedPath = resolvePath(csvFilePath);
+
+    // Read the CSV file
+    if (!fs.existsSync(resolvedPath)) {
+      throw new Error(`File not found: ${resolvedPath}`);
+    }
+
+    const csvData = fs.readFileSync(resolvedPath, "utf8");
+    const lines = csvData.trim().split("\n");
+
+    if (lines.length === 0) {
+      throw new Error("CSV file is empty");
+    }
+
+    // Parse header to determine column structure
+    const header = lines[0].split(",").map(col => col.trim());
+    
+    // Get column indices
+    const choiceIdIndex = header.findIndex(col => col.toLowerCase() === "choiceid");
+    const choiceNameIndex = header.findIndex(col => col.toLowerCase() === "choicename");
+    const budgetAmountIndex = header.findIndex(col => col.toLowerCase() === "budgetamount");
+    const isSpp1Index = header.findIndex(col => col.toLowerCase() === "isspp1");
+
+    if (choiceIdIndex === -1 || choiceNameIndex === -1 || budgetAmountIndex === -1 || isSpp1Index === -1) {
+      throw new Error("CSV file is missing required columns");
+    }
+
+    const choices = [];
+
+    // Start from the second line (skip header)
+    for (let i = 1; i < lines.length; i++) {
+      const line = lines[i].split(",");
+      
+      // Skip if there aren't enough columns
+      if (line.length <= Math.max(choiceIdIndex, choiceNameIndex, budgetAmountIndex, isSpp1Index)) {
+        console.warn(`Skipping line ${i + 1} - not enough columns`);
+        continue;
+      }
+
+      choices.push({
+        choiceId: line[choiceIdIndex].trim(),
+        choiceName: line[choiceNameIndex].trim(),
+        budgetAmount: line[budgetAmountIndex].trim(),
+        isSpp1: line[isSpp1Index].trim()
+      });
+    }
+
+    if (choices.length === 0) {
+      throw new Error("No valid choices found in CSV file");
+    }
+
+    return choices;
+  } catch (error) {
+    console.error("Error loading choice data from CSV:", error);
+    throw new Error(
+      `Failed to load choice data from CSV: ${
+        error instanceof Error ? error.message : String(error)
+      }`
+    );
+  }
+}

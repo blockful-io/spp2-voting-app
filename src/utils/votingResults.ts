@@ -10,7 +10,7 @@ import { processCopelandRanking, combineData, postprocessRanking, preprocessVote
 import { allocateBudgets } from "./budgetAllocation";
 import { getServiceProviderData } from "./csvUtils";
 import { PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from "./config";
-import { processChoices } from './choiceParser';
+import { getChoicesData } from './choiceParser';
 // Import shared types
 import { Vote, ProposalData, HeadToHeadMatch, RankedCandidate, CopelandResults, ProviderData, Allocation, Choice, AllocationResults, VotingResultResponse } from "./types";
 
@@ -86,20 +86,17 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
   }
 
   // Step 1: Fetch results from Snapshot
-  const rawProposalData = await fetchSnapshotResults(proposalId);
+  const proposalData = await fetchSnapshotResults(proposalId);
 
   // Check if proposal exists
-  if (!rawProposalData) {
+  if (!proposalData) {
     throw new Error("Proposal not found");
   }
 
   // Ensure proposal data has required properties
-  if (!rawProposalData.choices || !rawProposalData.votes) {
+  if (!proposalData.choices || !proposalData.votes) {
     throw new Error("Proposal data is missing required properties");
   }
-
-  // Format the data for processing - reuse the same data since it's already in ProposalData format
-  const proposalData: ProposalData = rawProposalData;
 
   // Step 2: Pre-process votes if bidimensional is enabled
   proposalData.votes = preprocessVotes(proposalData.votes, proposalData.choices);
@@ -110,15 +107,16 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
   // Step 4: Post-process rankings to handle bidimensional filtering and None Below
   const { rankedCandidates, headToHeadMatches } = postprocessRanking(copelandResults);
 
-  // Step 5: Load service provider data and combine with ranked results
-  const providerData = getServiceProviderData();
-  const combinedData = combineData(rankedCandidates, providerData);
+  // Step 5: Get choices data from CSV
+  const choicesData = getChoicesData();
+  console.log(choicesData);
 
-  // Step 6: Allocate budgets
-  const { summary, allocations } = allocateBudgets(combinedData, PROGRAM_BUDGET) as AllocationResults;
+  // Step 6: Combine ranked candidates with choices data to create allocations
+  const allocations: Allocation[] = combineData(rankedCandidates, choicesData);
+  console.log(allocations);
 
-  // Step 7: Process choices with name parsing
-  const choicesData = processChoices(providerData);
+  // Step 7: Allocate budgets
+  const { summary, allocations: finalAllocations } = allocateBudgets(allocations, PROGRAM_BUDGET) as AllocationResults;
 
   // Step 8: Prepare the response
   return {
@@ -134,7 +132,7 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
     choices: choicesData,
     headToHeadMatches,
     summary,
-    allocations,
+    allocations: finalAllocations,
     programInfo: {
       totalBudget: PROGRAM_BUDGET,
       twoYearStreamRatio: TWO_YEAR_STREAM_RATIO,

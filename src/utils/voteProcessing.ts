@@ -5,7 +5,7 @@
 import { BIDIMENSIONAL_ENABLED } from "./config";
 import { reorderChoicesByProvider, parseChoiceName, isSameServiceProvider } from "./choiceParser";
 // Import shared types
-import { Vote, ProposalData, HeadToHeadMatch, RankedCandidate, CopelandResults, ProviderData, Allocation } from "./types";
+import { Vote, ProposalData, HeadToHeadMatch, RankedCandidate, CopelandResults, ProviderData, Allocation, Choice } from "./types";
 
 /**
  * Pre-process votes to reorder choices by provider if bidimensional is enabled
@@ -283,23 +283,32 @@ export function postprocessRanking(results: CopelandResults): CopelandResults {
  * Combines Snapshot results with service provider metadata
  *
  * @param {Array} rankedResults - Ranked results from Snapshot
- * @param {Object} providerData - Service provider metadata
+ * @param {Array} choicesData - Service provider choices data
  * @returns {Array} - Combined data for allocation
  */
 export function combineData(
   rankedResults: RankedCandidate[],
-  providerData: ProviderData
+  choicesData: Choice[]
 ): Allocation[] {
   return rankedResults.map((result) => {
-    const metadata = providerData[result.name] || {};
+    // Find all choices for this provider
+    const providerChoices = choicesData.filter(choice => choice.name === parseChoiceName(result.name).name);
+
+    // Get the basic and extended budgets from the choices
+    const basicBudget = providerChoices.find(c => c.budgetType === 'basic')?.budget || 0;
+    const extendedBudget = providerChoices.find(c => c.budgetType === 'extended')?.budget || 0;
+    
+    // Get the first choice's metadata (they should all have the same values for these)
+    const firstChoice = providerChoices[0];
+    const providerName = providerChoices[0].name;
 
     return {
-      name: result.name,
+      name: providerName,
       score: result.score,
       averageSupport: result.averageSupport || 0,
-      basicBudget: metadata.basicBudget || 0,
-      extendedBudget: metadata.extendedBudget || 0,
-      isSpp1: metadata.isSpp1 || false,
+      basicBudget,
+      extendedBudget,
+      isSpp1: firstChoice?.isSpp1 || false,
       isNoneBelow: result.isNoneBelow || false,
       allocated: false,
       streamDuration: null,

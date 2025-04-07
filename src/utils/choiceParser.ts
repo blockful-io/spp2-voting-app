@@ -9,6 +9,7 @@
  */
 
 import { Choice, ParsedChoice, ServiceProviderData, BudgetType } from './types';
+import { loadChoiceData } from './csvUtils';
 
 /**
  * Parses a choice option name to extract the service provider name and budget type
@@ -134,20 +135,22 @@ export function reorderChoicesByProvider(choices: number[], choiceNames: string[
 /**
  * Process an entire set of service provider data and create Choice objects with parsed names
  * 
- * @param providerData - Service provider data from CSV with structure { [providerName: string]: ServiceProviderData }
  * @returns Array of Choice objects with parsed name and budget type information
  */
-export function processChoices(providerData: Record<string, ServiceProviderData>): Choice[] {
-  return Object.entries(providerData).map(([name, data]) => {
-    const { name: parsedName, budgetType } = parseChoiceName(name);
+export function getChoicesData(): Choice[] {
+  // Read choices from CSV file
+  const choices = loadChoiceData('choices.csv');
+
+  return choices.map((row) => {
+    const { name: parsedName, budgetType } = parseChoiceName(row.choiceName);
     return {
-      originalName: name,        // Original choice name (e.g., "sp b - basic")
-      name: parsedName,          // Base provider name (e.g., "sp b")
-      budget: data.basicBudget,  // Budget amount in USD
-      isSpp1: data.isSpp1,       // Whether provider was part of SPP1
-      isNoneBelow: data.isNoneBelow, // Whether this is the "None Below" indicator
-      choiceId: data.choiceId,   // Numeric ID of the choice
-      budgetType                 // Budget type: "basic", "extended", or "none"
+      originalName: row.choiceName,           // Original choice name (e.g., "sp b - basic")
+      name: parsedName,                       // Base provider name (e.g., "sp b")
+      budget: Number(row.budgetAmount),       // Budget amount from CSV
+      isSpp1: row.isSpp1 === 'TRUE',         // SPP1 status from CSV
+      isNoneBelow: row.choiceName.toLowerCase().includes('none below'), // Whether this is the "None Below" indicator
+      choiceId: Number(row.choiceId),         // Choice ID from CSV
+      budgetType                             // Budget type: "basic", "extended", or "none"
     };
   });
 } 
