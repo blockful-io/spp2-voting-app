@@ -1,0 +1,1150 @@
+{
+  "proposal": {
+    "id": "0x14bc28d4202213b2f735be22be131aa5f3b2e790433b8ef232207d0c0ace81e8",
+    "title": "SPP2 election - test",
+    "space": "SPP2 vote",
+    "totalVotes": 0,
+    "totalVotingPower": 0,
+    "state": "ACTIVE",
+    "dataSource": "Snapshot"
+  },
+  "headToHeadMatches": [
+    {
+      "candidate1": "none below",
+      "candidate2": "sp a",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp b - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp c",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp d - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp e - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp f",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp g - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp h",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp i - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp k",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp b - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp c",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp d - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp e - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp f",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp g - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp h",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp i - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp k",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp b - ext",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": true
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp c",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp d - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp e - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp f",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp g - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp h",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp i - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp k",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp d - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp e - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp f",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp g - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp h",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp i - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp k",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp d - basic",
+      "candidate2": "sp d - ext",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": true
+    },
+    {
+      "candidate1": "sp d - basic",
+      "candidate2": "sp e - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp d - basic",
+      "candidate2": "sp f",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp d - basic",
+      "candidate2": "sp g - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp d - basic",
+      "candidate2": "sp h",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp d - basic",
+      "candidate2": "sp i - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp d - basic",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp d - basic",
+      "candidate2": "sp k",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp d - basic",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp e - basic",
+      "candidate2": "sp e - ext",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": true
+    },
+    {
+      "candidate1": "sp e - basic",
+      "candidate2": "sp f",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp e - basic",
+      "candidate2": "sp g - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp e - basic",
+      "candidate2": "sp h",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp e - basic",
+      "candidate2": "sp i - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp e - basic",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp e - basic",
+      "candidate2": "sp k",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp e - basic",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp f",
+      "candidate2": "sp g - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp f",
+      "candidate2": "sp h",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp f",
+      "candidate2": "sp i - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp f",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp f",
+      "candidate2": "sp k",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp f",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp g - basic",
+      "candidate2": "sp g - ext",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": true
+    },
+    {
+      "candidate1": "sp g - basic",
+      "candidate2": "sp h",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp g - basic",
+      "candidate2": "sp i - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp g - basic",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp g - basic",
+      "candidate2": "sp k",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp g - basic",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp h",
+      "candidate2": "sp i - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp h",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp h",
+      "candidate2": "sp k",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp h",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp i - basic",
+      "candidate2": "sp i - ext",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": true
+    },
+    {
+      "candidate1": "sp i - basic",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp i - basic",
+      "candidate2": "sp k",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp i - basic",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp j - basic",
+      "candidate2": "sp j - ext",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": true
+    },
+    {
+      "candidate1": "sp j - basic",
+      "candidate2": "sp k",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp j - basic",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp k",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false
+    },
+    {
+      "candidate1": "sp l - basic",
+      "candidate2": "sp l - ext",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": true
+    }
+  ],
+  "summary": {
+    "votedBudget": 4500000,
+    "twoYearStreamBudget": 1500000,
+    "oneYearStreamBudget": 3000000,
+    "transferredBudget": 0,
+    "adjustedTwoYearBudget": 1500000,
+    "adjustedOneYearBudget": 3000000,
+    "remainingTwoYearBudget": 1500000,
+    "remainingOneYearBudget": 3000000,
+    "totalAllocated": 0,
+    "unspentBudget": 4500000,
+    "allocatedProjects": 0,
+    "rejectedProjects": 13
+  },
+  "allocations": [
+    {
+      "name": "none below",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 0,
+      "extendedBudget": 0,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below None Below option",
+      "isNoneBelow": true
+    },
+    {
+      "name": "sp a",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 300000,
+      "extendedBudget": 0,
+      "isSpp1": true,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below None Below option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp b",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 300000,
+      "extendedBudget": 400000,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below None Below option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp c",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 400000,
+      "extendedBudget": 0,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below None Below option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp d",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 400000,
+      "extendedBudget": 800000,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below None Below option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp e",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 400000,
+      "extendedBudget": 700000,
+      "isSpp1": true,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below None Below option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp f",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 800000,
+      "extendedBudget": 0,
+      "isSpp1": true,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below None Below option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp g",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 300000,
+      "extendedBudget": 400000,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below None Below option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp h",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 300000,
+      "extendedBudget": 0,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below None Below option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp i",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 500000,
+      "extendedBudget": 700000,
+      "isSpp1": true,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below None Below option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp j",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 700000,
+      "extendedBudget": 800000,
+      "isSpp1": true,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below None Below option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp k",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 300000,
+      "extendedBudget": 0,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below None Below option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp l",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 1100000,
+      "extendedBudget": 1300000,
+      "isSpp1": true,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below None Below option",
+      "isNoneBelow": false
+    }
+  ],
+  "programInfo": {
+    "totalBudget": 4500000,
+    "twoYearStreamRatio": 0.3333333333333333,
+    "oneYearStreamRatio": 0.6666666666666666
+  },
+  "choices": [
+    {
+      "originalName": "none below",
+      "name": "none below",
+      "budget": 0,
+      "isSpp1": false,
+      "isNoneBelow": true,
+      "choiceId": 1,
+      "budgetType": "none"
+    },
+    {
+      "originalName": "sp a",
+      "name": "sp a",
+      "budget": 300000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 2,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp b - basic",
+      "name": "sp b",
+      "budget": 300000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 3,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp b - ext",
+      "name": "sp b",
+      "budget": 400000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 4,
+      "budgetType": "extended"
+    },
+    {
+      "originalName": "sp c",
+      "name": "sp c",
+      "budget": 400000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 5,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp d - basic",
+      "name": "sp d",
+      "budget": 400000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 6,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp d - ext",
+      "name": "sp d",
+      "budget": 800000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 7,
+      "budgetType": "extended"
+    },
+    {
+      "originalName": "sp e - basic",
+      "name": "sp e",
+      "budget": 400000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 8,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp e - ext",
+      "name": "sp e",
+      "budget": 700000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 9,
+      "budgetType": "extended"
+    },
+    {
+      "originalName": "sp f",
+      "name": "sp f",
+      "budget": 800000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 10,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp g - basic",
+      "name": "sp g",
+      "budget": 300000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 11,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp g - ext",
+      "name": "sp g",
+      "budget": 400000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 12,
+      "budgetType": "extended"
+    },
+    {
+      "originalName": "sp h",
+      "name": "sp h",
+      "budget": 300000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 13,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp i - basic",
+      "name": "sp i",
+      "budget": 500000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 14,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp i - ext",
+      "name": "sp i",
+      "budget": 700000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 15,
+      "budgetType": "extended"
+    },
+    {
+      "originalName": "sp j - basic",
+      "name": "sp j",
+      "budget": 700000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 16,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp j - ext",
+      "name": "sp j",
+      "budget": 800000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 17,
+      "budgetType": "extended"
+    },
+    {
+      "originalName": "sp k",
+      "name": "sp k",
+      "budget": 300000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 17,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp l - basic",
+      "name": "sp l",
+      "budget": 1100000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 17,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp l - ext",
+      "name": "sp l",
+      "budget": 1300000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 17,
+      "budgetType": "extended"
+    }
+  ]
+}

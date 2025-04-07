@@ -8,36 +8,9 @@ import { ResultsDetails } from "@/components/ResultsDetails";
 import { useState, useEffect } from "react";
 import { LineChart } from "lucide-react";
 
-const budgetData = [
-  {
-    name: "Budget",
-    oneYear: 2900000,
-    twoYears: 1500000,
-    notAllocated: 100000,
-  },
-];
-
-const budgetLegendItems = [
-  {
-    color: "#3B82F6",
-    label: "1 year (2.9M)",
-    subtext: "0.1M not allocated",
-  },
-  {
-    color: "#EC4899",
-    label: "2 years (1.5M)",
-    subtext: "100% allocated",
-  },
-];
-
-const projectsData = [
-  { name: "1 year", value: 4, color: "#3B82F6" },
-  { name: "2 years", value: 2, color: "#EC4899" },
-  { name: "Not funded", value: 16, color: "#374151" },
-];
-
 export default function EnsElectionPage() {
-  const { data, isLoading, error } = useEnsElectionData();
+  const { data, isLoading, error, summary, allocationData } =
+    useEnsElectionData();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCandidate, setSelectedCandidate] = useState<string | null>(
     null
@@ -96,6 +69,74 @@ export default function EnsElectionPage() {
     );
   }
 
+  // Prepare budget data from summary
+  const budgetData = summary
+    ? [
+        {
+          name: "Budget",
+          oneYear: summary.streamBreakdown.oneYear.allocated,
+          twoYears: summary.streamBreakdown.twoYear.allocated,
+          notAllocated: summary.unspentBudget,
+        },
+      ]
+    : [];
+
+  // Prepare legend items with real data
+  const budgetLegendItems = summary
+    ? [
+        {
+          color: "#3B82F6",
+          label: `1 year (${(
+            summary.streamBreakdown.oneYear.budget / 1_000_000
+          ).toFixed(1)}M)`,
+          subtext:
+            summary.streamBreakdown.oneYear.remaining > 0
+              ? `${(
+                  summary.streamBreakdown.oneYear.remaining / 1_000_000
+                ).toFixed(1)}M not allocated`
+              : "100% allocated",
+        },
+        {
+          color: "#EC4899",
+          label: `2 years (${(
+            summary.streamBreakdown.twoYear.budget / 1_000_000
+          ).toFixed(1)}M)`,
+          subtext:
+            summary.streamBreakdown.twoYear.remaining > 0
+              ? `${(
+                  summary.streamBreakdown.twoYear.remaining / 1_000_000
+                ).toFixed(1)}M not allocated`
+              : "100% allocated",
+        },
+      ]
+    : [];
+
+  // Prepare projects data from summary
+  const projectsData = summary
+    ? [
+        {
+          name: "1 year",
+          value: data.filter(
+            (c) => c.streamDuration === "1-year" && c.allocatedBudget > 0
+          ).length,
+          color: "#3B82F6",
+        },
+        {
+          name: "2 years",
+          value: data.filter(
+            (c) => c.streamDuration === "2-year" && c.allocatedBudget > 0
+          ).length,
+          color: "#EC4899",
+        },
+        {
+          name: "Not funded",
+          value: data.filter((c) => !c.isNoneBelow && c.allocatedBudget === 0)
+            .length,
+          color: "#374151",
+        },
+      ]
+    : [];
+
   return (
     <div className="container mx-auto  max-w-7xl px-4 py-8">
       <div className="mb-8 flex items-center justify-between">
@@ -125,10 +166,14 @@ export default function EnsElectionPage() {
         }`}
         style={{ zIndex: 101 }}
       >
-        {selectedCandidate && (
+        {selectedCandidate && allocationData && (
           <ResultsDetails
             candidateName={selectedCandidate}
             onClose={handleClose}
+            data={{
+              headToHeadMatches: allocationData.headToHeadMatches,
+              allocations: allocationData.allocations,
+            }}
           />
         )}
       </div>
@@ -138,11 +183,13 @@ export default function EnsElectionPage() {
         style={{ zIndex: 1 }}
       >
         {/* Allocated Budget Chart */}
-        <AllocatedBudget
-          budgetData={budgetData}
-          legendItems={budgetLegendItems}
-          totalBudget={4500000}
-        />
+        {summary && (
+          <AllocatedBudget
+            budgetData={budgetData}
+            legendItems={budgetLegendItems}
+            totalBudget={summary.totalBudget}
+          />
+        )}
 
         {/* Projects Overview Chart */}
         <ProjectsOverview projectsData={projectsData} />

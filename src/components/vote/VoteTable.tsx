@@ -1,8 +1,8 @@
+import { VoteCandidate } from "@/hooks/useEnsElectionData";
 import { CandidateRow } from "./CandidateRow";
 import {
   DndContext,
   closestCenter,
-  KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors,
@@ -13,24 +13,13 @@ import {
 import {
   arrayMove,
   SortableContext,
-  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useCallback } from "react";
 
-interface VoteCandidate {
-  name: string;
-  basicBudget: number;
-  extendedBudget: number;
-  budgetType?: "basic" | "extended";
-}
-
 interface VoteTableProps {
   candidates: VoteCandidate[];
-  onBudgetSelect: (
-    name: string,
-    type: "basic" | "extended" | undefined
-  ) => void;
+  onBudgetSelect: (name: string, type: "basic" | "extended") => void;
   onReorder: (newOrder: VoteCandidate[]) => void;
   onDragStart?: () => void;
   onDragEnd?: () => void;
@@ -53,23 +42,17 @@ export function VoteTable({
     })
   );
 
-  const isDivider = (candidate: VoteCandidate) => {
-    return candidate.name === "None of the below";
-  };
+  const isDivider = (candidate: VoteCandidate) =>
+    candidate.name.toLowerCase().includes("below");
 
   const isBelowDivider = (candidate: VoteCandidate) => {
     return (
-      candidates.findIndex((c) => c.name === "None of the below") <
+      candidates.findIndex((c) => c.name.toLowerCase().includes("below")) <
       candidates.findIndex((c) => c.name === candidate.name)
     );
   };
 
-  const handleDragStart = useCallback(
-    (event: DragStartEvent) => {
-      onDragStart?.();
-    },
-    [onDragStart]
-  );
+  const handleDragStart = useCallback(() => onDragStart?.(), [onDragStart]);
 
   const handleDragEnd = useCallback(
     (event: DragEndEvent) => {
@@ -97,13 +80,13 @@ export function VoteTable({
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <div className="mt-2 border border-gray-800 rounded-lg overflow-hidden">
+      <div className="mt-2 border border-gray-800 rounded-lg overflow-hidden text-sm">
         <table className="w-full">
           <thead>
             <tr className="border-b border-gray-700">
               <th className="text-left text-gray-400 p-4 w-[50px]"></th>
-              <th className="text-left text-gray-400 p-4">CANDIDATE</th>
-              <th className="text-left text-gray-400 p-4">PREFERRED BUDGET</th>
+              <th className="text-left text-gray-400 p-4">Candidate</th>
+              <th className="text-left text-gray-400 p-4">Preferred Budget</th>
             </tr>
           </thead>
           <tbody>
@@ -116,9 +99,12 @@ export function VoteTable({
                   key={candidate.name}
                   name={candidate.name}
                   index={index}
-                  basicBudget={candidate.basicBudget}
-                  extendedBudget={candidate.extendedBudget}
-                  budgetType={candidate.budgetType}
+                  basicBudget={
+                    candidate.budgets.find((b) => b.type === "basic")!
+                  }
+                  extendedBudget={candidate.budgets.find(
+                    (b) => b.type === "extended"
+                  )}
                   isDivider={isDivider(candidate)}
                   isBelowDivider={isBelowDivider(candidate)}
                   isLastRow={index === candidates.length - 1}

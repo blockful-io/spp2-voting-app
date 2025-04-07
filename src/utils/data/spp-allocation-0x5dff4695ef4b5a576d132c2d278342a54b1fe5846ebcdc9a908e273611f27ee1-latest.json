@@ -1,0 +1,189 @@
+{
+  "proposal": {
+    "id": "0x5dff4695ef4b5a576d132c2d278342a54b1fe5846ebcdc9a908e273611f27ee1",
+    "title": "Service Provider Program Renewal",
+    "space": "ENS DAO",
+    "totalVotes": 10,
+    "totalVotingPower": 10,
+    "state": "closed",
+    "dataSource": "Local Data"
+  },
+  "headToHeadMatches": [
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp b - ext",
+      "candidate1Votes": 2,
+      "candidate2Votes": 8,
+      "totalVotes": 10,
+      "winner": "sp b - ext"
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp c",
+      "candidate1Votes": 10,
+      "candidate2Votes": 0,
+      "totalVotes": 10,
+      "winner": "sp a"
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "None below",
+      "candidate1Votes": 10,
+      "candidate2Votes": 0,
+      "totalVotes": 10,
+      "winner": "sp a"
+    },
+    {
+      "candidate1": "sp b - ext",
+      "candidate2": "sp c",
+      "candidate1Votes": 9,
+      "candidate2Votes": 1,
+      "totalVotes": 10,
+      "winner": "sp b - ext"
+    },
+    {
+      "candidate1": "sp b - ext",
+      "candidate2": "None below",
+      "candidate1Votes": 9,
+      "candidate2Votes": 1,
+      "totalVotes": 10,
+      "winner": "sp b - ext"
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "None below",
+      "candidate1Votes": 10,
+      "candidate2Votes": 0,
+      "totalVotes": 10,
+      "winner": "sp c"
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp b - ext",
+      "candidate1Votes": 4,
+      "candidate2Votes": 5,
+      "totalVotes": 9,
+      "winner": "sp b - ext"
+    }
+  ],
+  "summary": {
+    "votedBudget": 2000000,
+    "twoYearStreamBudget": 666666.6666666666,
+    "oneYearStreamBudget": 1333333.3333333333,
+    "transferredBudget": 666666.6666666666,
+    "adjustedTwoYearBudget": 0,
+    "adjustedOneYearBudget": 2000000,
+    "remainingTwoYearBudget": 0,
+    "remainingOneYearBudget": 400000,
+    "totalAllocated": 1600000,
+    "unspentBudget": 400000,
+    "allocatedProjects": 3,
+    "rejectedProjects": 0
+  },
+  "allocations": [
+    {
+      "name": "sp b - ext",
+      "score": 4,
+      "averageSupport": 7.75,
+      "basicBudget": 500000,
+      "extendedBudget": 500000,
+      "isSpp1": true,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "allocatedBudget": 500000,
+      "rejectionReason": null,
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp a",
+      "score": 2,
+      "averageSupport": 6,
+      "basicBudget": 400000,
+      "extendedBudget": 400000,
+      "isSpp1": false,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "allocatedBudget": 400000,
+      "rejectionReason": null,
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp c",
+      "score": 1,
+      "averageSupport": 3,
+      "basicBudget": 700000,
+      "extendedBudget": 700000,
+      "isSpp1": true,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "allocatedBudget": 700000,
+      "rejectionReason": null,
+      "isNoneBelow": false
+    },
+    {
+      "name": "None below",
+      "score": 0,
+      "averageSupport": 0.5,
+      "basicBudget": 0,
+      "extendedBudget": 0,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "None Below reached",
+      "isNoneBelow": true
+    }
+  ],
+  "programInfo": {
+    "totalBudget": 2000000,
+    "twoYearStreamRatio": 0.3333333333333333,
+    "oneYearStreamRatio": 0.6666666666666666
+  },
+  "choices": [
+    {
+      "originalName": "sp a",
+      "name": "sp a",
+      "budget": 400000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 1,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp b - basic",
+      "name": "sp b",
+      "budget": 400000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 2,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp b - ext",
+      "name": "sp b",
+      "budget": 500000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 3,
+      "budgetType": "extended"
+    },
+    {
+      "originalName": "sp c",
+      "name": "sp c",
+      "budget": 700000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 4,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "None below",
+      "name": "None below",
+      "budget": 0,
+      "isSpp1": false,
+      "isNoneBelow": true,
+      "choiceId": 5,
+      "budgetType": "none"
+    }
+  ]
+}
