@@ -5,90 +5,52 @@
 import { USE_LOCAL_DATA, LOCAL_DATA_PATH, PROPOSAL_ID } from "./config";
 import fs from "fs";
 import path from "path";
+// Import shared types
+import { ProposalData, MockVoteData } from "./types";
 
 /**
  * Load mock data from local JSON file
- *
- * @returns {Promise<Object>} - Mock proposal data
  */
-export async function loadLocalData() {
-  try {
-    console.log(`Loading mock data from ${LOCAL_DATA_PATH}...`);
+export async function loadLocalData(): Promise<ProposalData> {
+  const filePath = path.join(process.cwd(), "src", "utils", "data", "mocked-votes.json");
+  const jsonData = fs.readFileSync(filePath, "utf8");
+  const mockData: MockVoteData = JSON.parse(jsonData);
 
-    // Get the absolute path to the data file
-    const filePath = path.join(
-      process.cwd(),
-      "src",
-      "helpers",
-      "data",
-      "mocked-votes.json"
-    );
-    console.log("Attempting to load from:", filePath);
+  return {
+    id: PROPOSAL_ID,
+    title: "Service Provider Program Renewal",
+    space: "ens.eth",
+    totalVotes: mockData.data.votes.length,
+    votes: mockData.data.votes.map(vote => ({
+      choice: vote.choice,
+      voter: vote.voter,
+      vp: vote.vp
+    })),
+    totalVotingPower: mockData.data.votes.reduce((sum, vote) => sum + vote.vp, 0),
+    state: "CLOSED",
+    choices: mockData.data.votes[0].proposal.choices
+  };
+}
 
-    if (!fs.existsSync(filePath)) {
-      throw new Error(`File not found: ${filePath}`);
-    }
-
-    // Read and parse the JSON file
-    const jsonData = fs.readFileSync(filePath, "utf8");
-    const mockData = JSON.parse(jsonData);
-
-    // Check if loaded data is valid
-    if (
-      !mockData ||
-      !mockData.data ||
-      !mockData.data.votes ||
-      !mockData.data.votes.length
-    ) {
-      throw new Error("Loaded mock data has invalid format");
-    }
-
-    // Make sure votes have choices property
-    const sampleVote = mockData.data.votes[0];
-    if (!sampleVote.proposal || !sampleVote.proposal.choices) {
-      throw new Error(
-        "Loaded votes missing required proposal.choices property"
-      );
-    }
-
-    // Create a proposal object with the structure expected by the rest of the code
-    const proposal = {
-      id: PROPOSAL_ID,
-      title: "Service Provider Program Renewal",
-      choices: sampleVote.proposal.choices,
-      scores_total: mockData.data.votes.reduce(
-        (sum: number, vote: { vp: number }) => sum + vote.vp,
-        0
-      ),
-      state: "closed",
-      space: {
-        id: "ens.eth",
-        name: "ENS DAO",
-      },
-      votes: mockData.data.votes,
-    };
-
-    console.log(
-      `Successfully loaded mock data with ${proposal.votes.length} votes`
-    );
-    return proposal;
-  } catch (error) {
-    console.error("Error loading mock data:", error);
-    throw new Error(
-      `Failed to load mock data: ${
-        error instanceof Error ? error.message : String(error)
-      }`
-    );
+/**
+ * Get proposal data from Snapshot API or local mock data
+ */
+export async function getProposalData(proposalId: string): Promise<ProposalData> {
+  if (USE_LOCAL_DATA) {
+    return loadLocalData();
   }
+  
+  // TODO: Implement actual Snapshot API call
+  throw new Error("Snapshot API integration not implemented");
 }
 
 /**
  * Fetches voting results from Snapshot API
  *
  * @param {String} proposalId - The Snapshot proposal ID
- * @returns {Promise<Object>} - The proposal data including votes
+ * @returns {Promise<ProposalData>} - The proposal data including votes
  */
-export async function fetchSnapshotResults(proposalId: string) {
+export async function fetchSnapshotResults(proposalId: string): Promise<ProposalData> {
   // Use local data if configured
   if (USE_LOCAL_DATA) {
     return loadLocalData();
@@ -173,10 +135,22 @@ export async function fetchSnapshotResults(proposalId: string) {
     const votes = votesData.data.votes;
     console.log(`Successfully fetched ${votes.length} votes`);
 
-    // Combine proposal and votes data
+    // Transform and return data according to ProposalData interface
+    console.log(votes);
     return {
-      ...proposal,
-      votes: votes,
+      id: proposal.id,
+      title: proposal.title,
+      space: proposal.space.name,
+      totalVotes: votes.length,
+      votes: votes.map((vote: { choice: number[]; voter: string; vp: number }) => ({
+        choice: vote.choice,
+        voter: vote.voter,
+        vp: vote.vp
+      })),
+      scores_total: proposal.scores_total,
+      totalVotingPower: votes.reduce((sum: number, vote: { vp: number }) => sum + vote.vp, 0),
+      state: proposal.state,
+      choices: proposal.choices
     };
   } catch (error) {
     console.error("Error fetching data from Snapshot:", error);

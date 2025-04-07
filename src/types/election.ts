@@ -1,16 +1,3 @@
-export interface Candidate {
-  name: string;
-  score: number;
-  averageSupport: number;
-  basicBudget: number;
-  extendedBudget: number;
-  allocatedBudget: number;
-  streamDuration: string;
-  isEligibleForExtendedBudget: boolean;
-  wins: number;
-  isNoneBelow: boolean;
-}
-
 export interface ProjectData {
   name: string;
   value: number;

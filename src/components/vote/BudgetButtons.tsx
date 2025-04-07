@@ -1,9 +1,9 @@
 import { Check } from "lucide-react";
+import { Budget } from "@/hooks/useEnsElectionData";
 
 interface BudgetButtonsProps {
-  basicBudget: number;
-  extendedBudget: number;
-  budgetType?: "basic" | "extended";
+  basicBudget: Budget;
+  extendedBudget?: Budget;
   isBelowDivider: boolean;
   onBudgetSelect: (type: "basic" | "extended") => void;
 }
@@ -11,7 +11,6 @@ interface BudgetButtonsProps {
 export function BudgetButtons({
   basicBudget,
   extendedBudget,
-  budgetType,
   isBelowDivider,
   onBudgetSelect,
 }: BudgetButtonsProps) {
@@ -23,41 +22,48 @@ export function BudgetButtons({
     <div className="flex">
       <button
         className={`
-          rounded-l flex items-center justify-center w-full my-1
+          rounded-l flex items-center justify-center w-full my-1 border
           ${
             isBelowDivider
-              ? "bg-transparent border border-gray-700 text-gray-500"
-              : budgetType === "basic"
+              ? "bg-transparent border-gray-700 text-gray-500"
+              : basicBudget.selected
               ? "bg-slate-50 text-black hover:bg-slate-100"
-              : "border border-gray-700 bg-dark text-gray-100"
+              : "border-gray-700 bg-stone-900 text-gray-100"
           }
         `}
         onClick={() => onBudgetSelect("basic")}
         disabled={isBelowDivider}
       >
-        {budgetType === "basic" && !isBelowDivider && (
-          <Check className="w-4 h-4 mr-2" />
-        )}
-        Basic: {formatCurrency(basicBudget)}
+        <Check
+          className={`w-4 h-4 mr-2 
+            ${(isBelowDivider || !basicBudget.selected) && "invisible"}
+          `}
+        />
+        Basic: {formatCurrency(basicBudget.value)}
       </button>
       <button
         className={`
-          rounded-r flex items-center justify-center w-full my-1
+          rounded-r flex items-center justify-center w-full my-1 border
           ${
             isBelowDivider
-              ? "bg-transparent border border-gray-700 text-gray-500 border-l-0"
-              : budgetType === "extended"
+              ? "bg-transparent border-gray-700 text-gray-500 border-l-0"
+              : !extendedBudget
+              ? "text-gray-600"
+              : extendedBudget?.selected
               ? "bg-slate-50 text-black hover:bg-slate-100"
-              : "border border-gray-700 bg-dark text-gray-100"
+              : "border-gray-700 bg-stone-900 text-gray-100"
           }
         `}
         onClick={() => onBudgetSelect("extended")}
-        disabled={isBelowDivider}
+        disabled={isBelowDivider || !extendedBudget}
       >
-        {budgetType === "extended" && !isBelowDivider && (
-          <Check className="w-4 h-4 mr-2" />
-        )}
-        Extended: {formatCurrency(extendedBudget)}
+        <Check
+          className={`w-4 h-4 mr-2 
+            ${(isBelowDivider || !extendedBudget?.selected) && "invisible"}
+            
+          `}
+        />
+        Extended: {extendedBudget ? formatCurrency(extendedBudget.value) : "-"}
       </button>
     </div>
   );

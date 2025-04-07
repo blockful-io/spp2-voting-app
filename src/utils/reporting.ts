@@ -5,28 +5,19 @@
 import { USE_LOCAL_DATA, PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from './config';
 import fs from 'fs';
 import path from 'path';
+import { AllocationSummary, Allocation, HeadToHeadMatch, Choice, ReportingProposalData, ReportingAllocationResults, ReportResults, ProposalState, DataSource } from './types';
 
-/**
- * Formats currency values in a human-readable way
- * 
- * @param {Number} value - The value to format
- * @returns {String} Formatted currency string
- */
-export const formatCurrency = (value) => {
+export const formatCurrency = (value: number): string => {
   return `$${value.toLocaleString()}`;
-}
+};
 
-/**
- * Displays the allocation results in a readable format
- * 
- * @param {Object} results - The allocation results
- * @param {Object} proposalData - The original proposal data
- * @param {Array} headToHeadMatches - Head-to-head match results
- * @returns {Object} - Formatted results for export
- */
-function displayResults(results, proposalData, headToHeadMatches) {
+export const displayResults = (
+  results: ReportingAllocationResults, 
+  proposalData: ReportingProposalData, 
+  headToHeadMatches: HeadToHeadMatch[]
+): ReportResults => {
   const { allocations, summary } = results;
-  
+
   console.log("\n===== SERVICE PROVIDER ALLOCATION RESULTS =====\n");
   
   // Display proposal information
@@ -123,19 +114,13 @@ function displayResults(results, proposalData, headToHeadMatches) {
       title: proposalData.title,
       space: proposalData.space.name,
       totalVotes: proposalData.votes?.length || 0,
-      totalVotingPower: proposalData.scores_total,
-      state: proposalData.state,
-      dataSource: USE_LOCAL_DATA ? 'Local Data' : 'Snapshot API',
+      totalVotingPower: proposalData.scores_total || 0,
+      state: proposalData.state.toUpperCase() as ProposalState,
+      dataSource: USE_LOCAL_DATA ? "Local Data" as DataSource : "Snapshot" as DataSource,
     },
-    copelandRanking: allocations.map(a => ({ 
-      name: a.name, 
-      wins: a.score,
-      averageSupport: a.averageSupport,
-      isNoneBelow: a.isNoneBelow || false
-    })),
-    headToHeadMatches: headToHeadMatches,
-    summary,
-    allocations: allocations.map(a => ({
+    headToHeadMatches,
+    summary: results.summary,
+    allocations: results.allocations.map(a => ({
       name: a.name,
       score: a.score,
       averageSupport: a.averageSupport,
@@ -146,33 +131,29 @@ function displayResults(results, proposalData, headToHeadMatches) {
       streamDuration: a.streamDuration,
       allocatedBudget: a.allocatedBudget,
       rejectionReason: a.rejectionReason,
-      isNoneBelow: a.isNoneBelow || false
+      isNoneBelow: a.isNoneBelow,
     })),
     programInfo: {
       totalBudget: PROGRAM_BUDGET,
       twoYearStreamRatio: TWO_YEAR_STREAM_RATIO,
-      oneYearStreamRatio: ONE_YEAR_STREAM_RATIO
-    }
+      oneYearStreamRatio: ONE_YEAR_STREAM_RATIO,
+    },
   };
-}
+};
 
-/**
- * Export results to a JSON file
- * 
- * @param {Object} results - The formatted results
- * @returns {String} - The filename of the exported file
- */
-function exportResults(results) {
-  // Create a timestamp for the filename
-  const timestamp = new Date().toISOString().replace(/[:\-\.]/g, '_').replace('T', '-').slice(0, 19);
-  const filename = `spp-allocation-${results.proposal.id}-${timestamp}.json`;
-  const filenameLatest = `spp-allocation-${results.proposal.id}-latest.json`;
-  
-  const jsonResults = JSON.stringify(results, null, 2);
-  
+export const exportResults = (results: ReportResults): string | null => {
   try {
+    // Create a timestamp for the filename
+    const timestamp = new Date().toISOString().replace(/[:\-\.]/g, '_').replace('T', '-').slice(0, 19);
+    const filename = `spp-allocation-${results.proposal.id}-latest.json`;
+    
+    const jsonResults = JSON.stringify(results, null, 2);
+    
+    // Check if we're in a browser environment
+    const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
+    
     // In a browser environment, create a downloadable file
-    if (typeof window !== 'undefined') {
+    if (isBrowser) {
       const blob = new Blob([jsonResults], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       
@@ -186,7 +167,7 @@ function exportResults(results) {
       console.log(`Results exported to file: ${filename}`);
     } 
     // In a Node.js environment, write to file
-    else if (typeof window === 'undefined') {
+    else if (typeof process !== 'undefined' && typeof require === 'function') {
       // Get the absolute path to the current directory
       const currentDir = __dirname || process.cwd();
       
@@ -198,30 +179,24 @@ function exportResults(results) {
       
       // Save to the data directory
       const outputPath = path.join(dataDir, filename);
-      const outputPathLatest = path.join(dataDir, filenameLatest);
       
       fs.writeFileSync(outputPath, jsonResults);
-      fs.writeFileSync(outputPathLatest, jsonResults);
       console.log(`Results exported to file: ${outputPath}`);
     }
     // Otherwise, just log the JSON
     else {
+      console.log("Environment not recognized, couldn't save to file.");
       console.log("Results JSON:");
       console.log(jsonResults);
+      return null;
     }
     
     return filename;
-  } catch (error) {
-    console.error(`Error exporting results to file: ${error.message}`);
+  } catch (error: any) {
+    console.error(`Error saving results: ${error.message}`);
     console.log("Falling back to logging results to console...");
     console.log("Results JSON:");
-    console.log(jsonResults);
+    console.log(JSON.stringify(results, null, 2));
     return null;
   }
-}
-
-module.exports = {
-  formatCurrency,
-  displayResults,
-  exportResults
 }; 
