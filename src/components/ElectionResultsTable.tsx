@@ -1,4 +1,4 @@
-import { Trophy } from "lucide-react";
+import { Trophy, ChevronRight } from "lucide-react";
 import { ElectionCandidate } from "@/utils/types";
 
 interface ElectionResultsTableProps {
@@ -8,9 +8,8 @@ interface ElectionResultsTableProps {
 
 function FundedBadge() {
   return (
-    <span className="rounded-full flex items-center gap-2 text-black bg-[#4ADE80] px-2 py-1 text-xs font-medium">
+    <span className="rounded-full flex items-center gap-2 text-black bg-[#4ADE80] p-[6px] text-xs font-medium">
       <Trophy className="h-4 w-4" />
-      Funded
     </span>
   );
 }
@@ -44,8 +43,11 @@ export function ElectionResultsTable({
           <tr className="border-b border-lightDark">
             <th className="px-6 py-4">Rank</th>
             <th className="px-6 py-4">Candidate</th>
+            <th className="px-6 py-4">Results</th>
             <th className="px-6 py-4">Wins</th>
-            <th className="px-6 py-4">Average ENS Support</th>
+            <th className="px-6 py-4">
+              Average ENS <br /> Support
+            </th>
             <th className="px-6 py-4">Basic Budget</th>
             <th className="px-6 py-4">Extended Budget</th>
             <th className="px-6 py-4">Stream Duration</th>
@@ -83,6 +85,9 @@ export function ElectionResultsTable({
                   {candidate.name}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
+                  <ChevronRight className="h-5 w-5 text-gray-400 transition-all duration-300 ease-in-out group-hover:translate-x-1" />
+                </td>
+                <td className="whitespace-nowrap px-6 py-4">
                   {candidate.score}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
@@ -98,7 +103,9 @@ export function ElectionResultsTable({
                       }`}
                     >
                       {candidate.basicBudget > 0
-                        ? `$${Math.round(candidate.basicBudget).toLocaleString()}`
+                        ? `$${Math.round(
+                            candidate.basicBudget
+                          ).toLocaleString()}`
                         : "-"}
                     </span>
                     {isFunded && !isExtendedFunded && (
@@ -114,7 +121,9 @@ export function ElectionResultsTable({
                       }`}
                     >
                       {candidate.extendedBudget > 0
-                        ? `$${Math.round(candidate.extendedBudget).toLocaleString()}`
+                        ? `$${Math.round(
+                            candidate.extendedBudget
+                          ).toLocaleString()}`
                         : "-"}
                     </span>
                     {isExtendedFunded && (
