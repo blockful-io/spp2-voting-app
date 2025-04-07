@@ -20,10 +20,10 @@ export function Header() {
           )}
           <EnsLogo className="h-6 w-6" />
           <span className="text-xl font-normal">ENS</span>
-          <span className="text-gray-500 group-hover:text-white transition-colors duration-300">
+          <span className="text-gray-500 hidden sm:block group-hover:text-white transition-colors duration-300">
             |
           </span>
-          <span className="text-gray-500 group-hover:text-white transition-colors duration-300">
+          <span className="text-gray-500 group-hover:text-white transition-colors duration-300 hidden sm:block">
             {isVotePage ? "Cast your vote now" : "SPP2 Voting"}
           </span>
         </Link>
@@ -33,7 +33,9 @@ export function Header() {
               href="/vote"
               className="rounded-lg flex items-center gap-2 bg-white px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-gray-200 duration-300"
             >
-              Start voting <ChevronRight className="h-4 w-4" />
+              <span className="hidden sm:block">Start voting</span>
+              <span className="block sm:hidden">Vote</span>
+              <ChevronRight className="h-4 w-4" />
             </Link>
           )}
           <ClientOnly>
