@@ -161,7 +161,7 @@ export default function EnsElectionPage() {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-screen w-[500px] transform overflow-y-scroll bg-dark transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 h-screen w-screen md:w-[500px] transform overflow-y-scroll bg-dark transition-all duration-300 ease-in-out ${
           isOpen ? "translate-x-0 shadow-2xl shadow-black" : "translate-x-full"
         }`}
         style={{ zIndex: 101 }}
