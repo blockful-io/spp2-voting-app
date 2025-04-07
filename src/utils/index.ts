@@ -17,7 +17,8 @@ import {
 
 // Import modules
 import { prepareVotesFromCsv } from './csvUtils';
-import { getVotingResultData, VotingResultResponse } from './votingResults';
+import { getVotingResultData } from './votingResults';
+import { VotingResultResponse } from './types';
 import { processCopelandRanking, combineData } from './voteProcessing';
 import { allocateBudgets } from './budgetAllocation';
 

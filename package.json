@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "script": "ts-node --project tsconfig.node.json ./src/helpers/index.ts"
+    "script": "ts-node --project tsconfig.node.json ./src/utils/index.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

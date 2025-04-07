@@ -12,6 +12,8 @@ import path from "path";
 
 // Import configuration
 import { CHOICES_CSV_PATH, VOTES_CSV_PATH, LOCAL_DATA_PATH } from "./config";
+// Import shared types
+import { Vote, ProposalData, ProviderData, MockVoteData } from "./types";
 
 /**
  * Resolves a relative path from the project root
@@ -20,8 +22,8 @@ import { CHOICES_CSV_PATH, VOTES_CSV_PATH, LOCAL_DATA_PATH } from "./config";
  * @returns {String} - The resolved absolute path
  */
 function resolvePath(filePath: string) {
-  // Always resolve from project root/src/helpers/data
-  return path.join(process.cwd(), "src", "helpers", "data", filePath);
+  // Always resolve from project root/src/utils/data
+  return path.join(process.cwd(), "src", "utils", "data", filePath);
 }
 
 /**

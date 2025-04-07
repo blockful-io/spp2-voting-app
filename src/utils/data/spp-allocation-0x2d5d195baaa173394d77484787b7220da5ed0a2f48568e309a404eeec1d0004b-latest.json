@@ -2,10 +2,10 @@
   "proposal": {
     "id": "0x2d5d195baaa173394d77484787b7220da5ed0a2f48568e309a404eeec1d0004b",
     "title": "Service Provider Program Renewal",
-    "space": "ENS DAO",
-    "totalVotes": 10,
-    "totalVotingPower": 10,
-    "state": "closed",
+    "space": "ens.eth",
+    "totalVotes": 4,
+    "totalVotingPower": 7,
+    "state": "CLOSED",
     "dataSource": "Local Data"
   },
   "headToHeadMatches": [

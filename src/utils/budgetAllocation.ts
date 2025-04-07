@@ -3,41 +3,7 @@
  */
 
 import { TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO, BIDIMENSIONAL_ENABLED } from "./config";
-
-
-interface Allocation {
-  name: string;
-  score: number;
-  averageSupport: number;
-  basicBudget: number;
-  extendedBudget: number;
-  allocated: boolean;
-  streamDuration: string | null;
-  allocatedBudget: number;
-  rejectionReason: string | null;
-  isNoneBelow: boolean;
-  isSpp1?: boolean;
-}
-
-interface AllocationSummary {
-  votedBudget: number;
-  twoYearStreamBudget: number;
-  oneYearStreamBudget: number;
-  transferredBudget: number;
-  adjustedTwoYearBudget: number;
-  adjustedOneYearBudget: number;
-  remainingTwoYearBudget: number;
-  remainingOneYearBudget: number;
-  totalAllocated: number;
-  unspentBudget: number;
-  allocatedProjects: number;
-  rejectedProjects: number;
-}
-
-interface AllocationResults {
-  summary: AllocationSummary;
-  allocations: Allocation[];
-}
+import { Allocation, AllocationResults, AllocationSummary, StreamDuration } from "./types";
 
 /**
  * Allocates budgets to candidates based on their ranking and the new bidimensional rules
@@ -83,7 +49,7 @@ function allocateBudgetsStandard(
       return {
         ...candidate,
         allocated: false,
-        streamDuration: null,
+        streamDuration: null as StreamDuration,
         allocatedBudget: 0,
         rejectionReason: "None Below reached",
       };
@@ -97,7 +63,7 @@ function allocateBudgetsStandard(
       return {
         ...candidate,
         allocated: true,
-        streamDuration: "2-year",
+        streamDuration: "2-year" as StreamDuration,
         allocatedBudget: candidate.extendedBudget,
         rejectionReason: null,
       };
@@ -118,7 +84,7 @@ function allocateBudgetsStandard(
       return {
         ...candidate,
         allocated: true,
-        streamDuration: "1-year",
+        streamDuration: "1-year" as StreamDuration,
         allocatedBudget: candidate.extendedBudget,
         rejectionReason: null,
       };
@@ -132,7 +98,7 @@ function allocateBudgetsStandard(
       return {
         ...candidate,
         allocated: true,
-        streamDuration: "1-year",
+        streamDuration: "1-year" as StreamDuration,
         allocatedBudget: candidate.basicBudget,
         rejectionReason: null,
       };
@@ -143,7 +109,7 @@ function allocateBudgetsStandard(
     return {
       ...candidate,
       allocated: false,
-      streamDuration: null,
+      streamDuration: null as StreamDuration,
       allocatedBudget: 0,
       rejectionReason: "Insufficient budget",
     };
@@ -197,7 +163,7 @@ function allocateBudgetsBidimensional(
       return {
         ...candidate,
         allocated: false,
-        streamDuration: null,
+        streamDuration: null as StreamDuration,
         allocatedBudget: 0,
         rejectionReason: "None Below reached",
       };
@@ -219,7 +185,7 @@ function allocateBudgetsBidimensional(
       return {
         ...candidate,
         allocated: true,
-        streamDuration: "2-year",
+        streamDuration: "2-year" as StreamDuration,
         allocatedBudget: selectedBudget,
         rejectionReason: null,
       };
@@ -240,7 +206,7 @@ function allocateBudgetsBidimensional(
       return {
         ...candidate,
         allocated: true,
-        streamDuration: "1-year",
+        streamDuration: "1-year" as StreamDuration,
         allocatedBudget: selectedBudget,
         rejectionReason: null,
       };
@@ -251,7 +217,7 @@ function allocateBudgetsBidimensional(
     return {
       ...candidate,
       allocated: false,
-      streamDuration: null,
+      streamDuration: null as StreamDuration,
       allocatedBudget: 0,
       rejectionReason: "Insufficient budget",
     };

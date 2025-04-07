@@ -8,26 +8,7 @@
  * from the formatted choice names like "provider - basic" or "provider - ext".
  */
 
-import { Choice } from './votingResults';
-
-/**
- * Interface for parsed choice information
- */
-export interface ParsedChoice {
-  name: string;       // The service provider name (without budget type)
-  budgetType: string; // "basic", "extended", or "none" for None Below
-}
-
-/**
- * Service provider data structure as received from CSV
- */
-export interface ServiceProviderData {
-  basicBudget: number;      // Basic budget amount in USD
-  extendedBudget: number;   // Extended budget amount in USD
-  isSpp1: boolean;          // Whether provider was part of SPP1
-  isNoneBelow: boolean;     // Whether this is the "None Below" indicator
-  choiceId: number;         // Numeric ID of the choice
-}
+import { Choice, ParsedChoice, ServiceProviderData, BudgetType } from './types';
 
 /**
  * Parses a choice option name to extract the service provider name and budget type
@@ -53,7 +34,7 @@ export function parseChoiceName(choiceName: string): ParsedChoice {
     const [name, budgetType] = choiceName.split(" - ");
     
     // Convert "ext" to "extended" but keep "basic" as is
-    const normalizedBudgetType = budgetType.toLowerCase() === "ext" ? "extended" : budgetType.toLowerCase();
+    const normalizedBudgetType: BudgetType = budgetType.toLowerCase() === "ext" ? "extended" : "basic";
     
     return { name: name.trim(), budgetType: normalizedBudgetType };
   }

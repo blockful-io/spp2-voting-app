@@ -4,67 +4,8 @@
 
 import { BIDIMENSIONAL_ENABLED } from "./config";
 import { reorderChoicesByProvider, parseChoiceName, isSameServiceProvider } from "./choiceParser";
-
-interface Vote {
-  choice: number[];
-  voter: string;
-  vp: number;
-}
-
-interface ProposalData {
-  choices: string[];
-  votes: Vote[];
-  title: string;
-  space: string;
-  totalVotes: number;
-  totalVotingPower: number;
-  state: string;
-}
-
-export interface HeadToHeadMatch {
-  candidate1: string;
-  candidate2: string;
-  candidate1Votes: number;
-  candidate2Votes: number;
-  totalVotes: number;
-  winner: string;
-  isInternal: boolean;  // Whether this is a match between options from the same provider
-}
-
-interface RankedCandidate {
-  name: string;
-  score: number;
-  averageSupport: number;
-  isNoneBelow: boolean;
-}
-
-interface CopelandResults {
-  rankedCandidates: RankedCandidate[];
-  headToHeadMatches: HeadToHeadMatch[];
-}
-
-interface ProviderData {
-  [key: string]: {
-    basicBudget: number;
-    extendedBudget: number;
-    isSpp1: boolean;
-    isNoneBelow: boolean;
-  };
-}
-
-interface Allocation {
-  name: string;
-  score: number;
-  averageSupport: number;
-  basicBudget: number;
-  extendedBudget: number;
-  isSpp1: boolean;
-  isNoneBelow: boolean;
-  allocated: boolean;
-  streamDuration: string | null;
-  allocatedBudget: number;
-  rejectionReason: string | null;
-}
+// Import shared types
+import { Vote, ProposalData, HeadToHeadMatch, RankedCandidate, CopelandResults, ProviderData, Allocation } from "./types";
 
 /**
  * Pre-process votes to reorder choices by provider if bidimensional is enabled
@@ -98,9 +39,7 @@ export function processCopelandRanking(proposalData: ProposalData): CopelandResu
 
   // Find the "None Below" option
   const noneBelowIndex = choices.findIndex(
-    (choice) =>
-      choice.toLowerCase() === "none below" ||
-      choice.toLowerCase() === "none of the below"
+    (choice) => choice.toLowerCase() === "none below"
   );
 
   // Keep all choices including None Below as candidates

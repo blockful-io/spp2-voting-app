@@ -6,109 +6,68 @@
  */
 
 import { fetchSnapshotResults } from "./snapshot";
-import { processCopelandRanking, combineData, postprocessRanking, preprocessVotes, HeadToHeadMatch } from "./voteProcessing";
+import { processCopelandRanking, combineData, postprocessRanking, preprocessVotes } from "./voteProcessing";
 import { allocateBudgets } from "./budgetAllocation";
 import { getServiceProviderData } from "./csvUtils";
 import { PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from "./config";
 import { processChoices } from './choiceParser';
+// Import shared types
+import { Vote, ProposalData, HeadToHeadMatch, RankedCandidate, CopelandResults, ProviderData, Allocation, Choice, AllocationResults, VotingResultResponse } from "./types";
 
-// Re-export HeadToHeadMatch from voteProcessing
-export type { HeadToHeadMatch } from './voteProcessing';
+// Re-export HeadToHeadMatch from types
+export type { HeadToHeadMatch } from './types';
 
-// Interfaces for vote data
-export interface Vote {
-  choice: number[];
-  voter: string;
-  vp: number;
-}
-
-export interface ProposalData {
-  id?: string;
+// Add interface for raw proposal data from Snapshot
+interface RawSnapshotProposal {
+  id: string;
   title: string;
-  space: string;
-  totalVotes: number;
-  votes: Vote[];
-  scores_total?: number;
-  totalVotingPower: number;
-  state: string;
-  choices: string[];
-}
-
-export interface RankedCandidate {
-  name: string;
-  score: number;
-  averageSupport: number;
-  isNoneBelow: boolean;
-}
-
-export interface CopelandResults {
-  rankedCandidates: RankedCandidate[];
-  headToHeadMatches: HeadToHeadMatch[];
-}
-
-export interface AllocationSummary {
-  votedBudget: number;
-  twoYearStreamBudget: number;
-  oneYearStreamBudget: number;
-  transferredBudget: number;
-  adjustedTwoYearBudget: number;
-  adjustedOneYearBudget: number;
-  remainingTwoYearBudget: number;
-  remainingOneYearBudget: number;
-  totalAllocated: number;
-  unspentBudget: number;
-  allocatedProjects: number;
-  rejectedProjects: number;
-}
-
-export interface Allocation {
-  name: string;
-  score: number;
-  averageSupport: number;
-  basicBudget: number;
-  extendedBudget: number;
-  allocated: boolean;
-  streamDuration: string | null;
-  allocatedBudget: number;
-  rejectionReason: string | null;
-  isNoneBelow: boolean;
-  isSpp1?: boolean;
-}
-
-export interface Choice {
-  originalName: string;  // Original full choice name (e.g., "sp a" or "sp b - basic")
-  name: string;          // Base provider name without budget type (e.g., "sp a" or "sp b")
-  budget: number;        // Budget amount in USD
-  isSpp1: boolean;       // Whether provider was part of SPP1
-  isNoneBelow: boolean;  // Whether this is the "None Below" indicator
-  choiceId: number;      // Numeric ID of the choice
-  budgetType: string;    // Budget type: "basic", "extended", or "none"
-}
-
-export interface AllocationResults {
-  summary: AllocationSummary;
-  allocations: Allocation[];
-}
-
-export interface VotingResultResponse {
-  proposal: {
+  space: {
     id: string;
-    title: string;
-    space: string;
-    totalVotes: number;
-    totalVotingPower: number;
-    state: string;
-    dataSource: string;
+    name: string;
   };
-  choices: Choice[];
-  headToHeadMatches: HeadToHeadMatch[];
-  summary: AllocationSummary;
-  allocations: Allocation[];
-  programInfo: {
-    totalBudget: number;
-    twoYearStreamRatio: number;
-    oneYearStreamRatio: number;
-  };
+  choices: string[];
+  scores_total: number;
+  state: string;
+  votes: Vote[];
+}
+
+/**
+ * Process voting results and generate allocation report
+ * 
+ * @param proposalData - The proposal data containing votes and choices
+ * @returns The allocation results
+ */
+export async function processVotingResults(proposalData: ProposalData): Promise<AllocationResults> {
+  try {
+    // Process votes using Copeland method
+    const copelandResults = processCopelandRanking(proposalData);
+
+    // Get service provider data
+    const providerData = getServiceProviderData();
+
+    // Convert ranked candidates to allocation format
+    const candidates: Allocation[] = copelandResults.rankedCandidates.map(candidate => ({
+      name: candidate.name,
+      score: candidate.score,
+      averageSupport: candidate.averageSupport,
+      basicBudget: providerData[candidate.name]?.basicBudget || 0,
+      extendedBudget: providerData[candidate.name]?.extendedBudget || 0,
+      allocated: false,
+      streamDuration: null,
+      allocatedBudget: 0,
+      rejectionReason: null,
+      isNoneBelow: candidate.isNoneBelow,
+      isSpp1: providerData[candidate.name]?.isSpp1 || false
+    }));
+
+    // Allocate budgets based on ranking
+    const allocationResults = allocateBudgets(candidates, PROGRAM_BUDGET);
+
+    return allocationResults;
+  } catch (error) {
+    console.error("Error processing voting results:", error);
+    throw error;
+  }
 }
 
 /**
@@ -139,17 +98,8 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
     throw new Error("Proposal data is missing required properties");
   }
 
-  // Format the data for processing
-  const proposalData: ProposalData = {
-    id: proposalId,
-    title: rawProposalData.title,
-    space: typeof rawProposalData.space === 'object' ? rawProposalData.space.name : rawProposalData.space,
-    totalVotes: rawProposalData.votes.length,
-    votes: rawProposalData.votes,
-    totalVotingPower: rawProposalData.scores_total || 0,
-    state: rawProposalData.state,
-    choices: rawProposalData.choices
-  };
+  // Format the data for processing - reuse the same data since it's already in ProposalData format
+  const proposalData: ProposalData = rawProposalData;
 
   // Step 2: Pre-process votes if bidimensional is enabled
   proposalData.votes = preprocessVotes(proposalData.votes, proposalData.choices);

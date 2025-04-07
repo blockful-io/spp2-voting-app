@@ -5,78 +5,15 @@
 import { USE_LOCAL_DATA, PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from './config';
 import fs from 'fs';
 import path from 'path';
-import { AllocationSummary, Allocation, HeadToHeadMatch, Choice } from './votingResults';
+import { AllocationSummary, Allocation, HeadToHeadMatch, Choice, ReportingProposalData, ReportingAllocationResults, ReportResults, ProposalState, DataSource } from './types';
 
-interface ProposalData {
-  id?: string;
-  title: string;
-  space: {
-    name: string;
-  };
-  votes?: any[];
-  scores_total?: number;
-  state: string;
-}
-
-interface AllocationResults {
-  summary: AllocationSummary;
-  allocations: Allocation[];
-}
-
-interface ReportResults {
-  proposal: {
-    id?: string;
-    title: string;
-    space: string;
-    totalVotes: number;
-    totalVotingPower: number;
-    state: string;
-    dataSource: string;
-  };
-  headToHeadMatches: HeadToHeadMatch[];
-  summary: AllocationSummary;
-  allocations: {
-    name: string;
-    score: number;
-    averageSupport: number;
-    basicBudget: number;
-    extendedBudget: number;
-    isSpp1?: boolean;
-    allocated: boolean;
-    streamDuration: string | null;
-    allocatedBudget: number;
-    rejectionReason: string | null;
-    isNoneBelow: boolean;
-  }[];
-  programInfo: {
-    totalBudget: number;
-    twoYearStreamRatio: number;
-    oneYearStreamRatio: number;
-  };
-  choices?: Choice[];
-}
-
-/**
- * Formats currency values in a human-readable way
- * 
- * @param value - The value to format
- * @returns Formatted currency string
- */
 export const formatCurrency = (value: number): string => {
   return `$${value.toLocaleString()}`;
 };
 
-/**
- * Displays the allocation results in a readable format
- * 
- * @param results - The allocation results
- * @param proposalData - The original proposal data
- * @param headToHeadMatches - Head-to-head match results
- * @returns Formatted results for export
- */
 export const displayResults = (
-  results: AllocationResults, 
-  proposalData: ProposalData, 
+  results: ReportingAllocationResults, 
+  proposalData: ReportingProposalData, 
   headToHeadMatches: HeadToHeadMatch[]
 ): ReportResults => {
   const { allocations, summary } = results;
@@ -176,14 +113,14 @@ export const displayResults = (
       id: proposalData.id,
       title: proposalData.title,
       space: proposalData.space.name,
-      totalVotes: proposalData.votes?.length || 0,
-      totalVotingPower: proposalData.scores_total || 0,
-      state: proposalData.state,
-      dataSource: USE_LOCAL_DATA ? 'Local Data' : 'Snapshot API',
+      totalVotes: results.allocations.length,
+      totalVotingPower: results.allocations.reduce((sum, a) => sum + a.score, 0),
+      state: proposalData.state.toUpperCase() as ProposalState,
+      dataSource: USE_LOCAL_DATA ? "Local Data" as DataSource : "Snapshot" as DataSource,
     },
     headToHeadMatches,
-    summary,
-    allocations: allocations.map(a => ({
+    summary: results.summary,
+    allocations: results.allocations.map(a => ({
       name: a.name,
       score: a.score,
       averageSupport: a.averageSupport,
@@ -194,22 +131,16 @@ export const displayResults = (
       streamDuration: a.streamDuration,
       allocatedBudget: a.allocatedBudget,
       rejectionReason: a.rejectionReason,
-      isNoneBelow: a.isNoneBelow || false
+      isNoneBelow: a.isNoneBelow,
     })),
     programInfo: {
       totalBudget: PROGRAM_BUDGET,
       twoYearStreamRatio: TWO_YEAR_STREAM_RATIO,
-      oneYearStreamRatio: ONE_YEAR_STREAM_RATIO
-    }
+      oneYearStreamRatio: ONE_YEAR_STREAM_RATIO,
+    },
   };
 };
 
-/**
- * Export results to a JSON file
- * 
- * @param results - The formatted results
- * @returns The filename of the exported file
- */
 export const exportResults = (results: ReportResults): string | null => {
   try {
     // Create a timestamp for the filename
