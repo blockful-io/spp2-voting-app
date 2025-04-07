@@ -129,7 +129,7 @@ export function ResultsDetails({
                           <Trophy className="text-emerald-500 h-4 w-4" />
                         )}
                         <span className="text-emerald-500">
-                          {match.candidate1.candidateVotes.toLocaleString()}
+                          {Math.round(match.candidate1.candidateVotes).toLocaleString()}
                         </span>
                       </div>
                     </div>
@@ -139,7 +139,7 @@ export function ResultsDetails({
                     <div className="flex-1 text-right">
                       <div className="flex items-center gap-2 justify-end">
                         <span className="text-gray-400">
-                          {match.candidate2.candidateVotes.toLocaleString()}
+                          {Math.round(match.candidate2.candidateVotes).toLocaleString()}
                         </span>
                         <span className="text-gray-100">
                           {match.candidate2.name}

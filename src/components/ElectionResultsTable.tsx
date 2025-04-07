@@ -86,7 +86,7 @@ export function ElectionResultsTable({
                   {candidate.score}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  {candidate.averageSupport.toLocaleString()}
+                  {Math.round(candidate.averageSupport).toLocaleString()}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   <div className="flex items-center gap-2">
@@ -98,7 +98,7 @@ export function ElectionResultsTable({
                       }`}
                     >
                       {candidate.basicBudget > 0
-                        ? `$${candidate.basicBudget.toLocaleString()}`
+                        ? `$${Math.round(candidate.basicBudget).toLocaleString()}`
                         : "-"}
                     </span>
                     {isFunded && !isExtendedFunded && (
@@ -114,7 +114,7 @@ export function ElectionResultsTable({
                       }`}
                     >
                       {candidate.extendedBudget > 0
-                        ? `$${candidate.extendedBudget.toLocaleString()}`
+                        ? `$${Math.round(candidate.extendedBudget).toLocaleString()}`
                         : "-"}
                     </span>
                     {isExtendedFunded && (
