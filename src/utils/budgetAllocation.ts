@@ -42,16 +42,22 @@ function allocateBudgetsStandard(
   let rejectedProjects = 0;
   let transferredBudget = 0;
 
+  // Find the index of None Below option
+  const noneBelowIndex = candidates.findIndex(c => c.isNoneBelow);
+  let reachedNoneBelow = false;
+
   // Process candidates in ranking order
-  const allocations = candidates.map((candidate) => {
-    // Skip if None Below is reached
-    if (candidate.isNoneBelow) {
+  const allocations = candidates.map((candidate, index) => {
+    // If we've reached None Below or are past it, reject all subsequent candidates
+    if (reachedNoneBelow || candidate.isNoneBelow) {
+      reachedNoneBelow = true;
+      rejectedProjects++;
       return {
         ...candidate,
         allocated: false,
         streamDuration: null as StreamDuration,
         allocatedBudget: 0,
-        rejectionReason: "None Below reached",
+        rejectionReason: "Below None Below option",
       };
     }
 
@@ -156,16 +162,22 @@ function allocateBudgetsBidimensional(
   let rejectedProjects = 0;
   let transferredBudget = 0;
 
+  // Find the index of None Below option
+  const noneBelowIndex = candidates.findIndex(c => c.isNoneBelow);
+  let reachedNoneBelow = false;
+
   // Process candidates in ranking order
-  const allocations = candidates.map((candidate) => {
-    // Skip if None Below is reached
-    if (candidate.isNoneBelow) {
+  const allocations = candidates.map((candidate, index) => {
+    // If we've reached None Below or are past it, reject all subsequent candidates
+    if (reachedNoneBelow || candidate.isNoneBelow) {
+      reachedNoneBelow = true;
+      rejectedProjects++;
       return {
         ...candidate,
         allocated: false,
         streamDuration: null as StreamDuration,
         allocatedBudget: 0,
-        rejectionReason: "None Below reached",
+        rejectionReason: "Below None Below option",
       };
     }
 
