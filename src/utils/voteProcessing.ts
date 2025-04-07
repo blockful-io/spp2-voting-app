@@ -3,16 +3,29 @@
  */
 
 import { BIDIMENSIONAL_ENABLED } from "./config";
-import { reorderChoicesByProvider, parseChoiceName, isSameServiceProvider } from "./choiceParser";
+import {
+  reorderChoicesByProvider,
+  isSameServiceProvider,
+} from "./choiceParser";
 // Import shared types
-import { Vote, ProposalData, HeadToHeadMatch, RankedCandidate, CopelandResults, ProviderData, Allocation, Choice } from "./types";
+import {
+  Vote,
+  ProposalData,
+  HeadToHeadMatch,
+  RankedCandidate,
+  CopelandResults,
+  ProviderData,
+  Allocation,
+  Choice,
+} from "./types";
+import { parseChoiceName } from "./parseChoiceName";
 
 // Re-export types needed by components
 export type { HeadToHeadMatch };
 
 /**
  * Pre-process votes to reorder choices by provider if bidimensional is enabled
- * 
+ *
  * @param votes - Array of votes to process
  * @param choices - Array of all available choices
  * @returns Processed votes with choices reordered by provider
@@ -22,19 +35,21 @@ export function preprocessVotes(votes: Vote[], choices: string[]): Vote[] {
     return votes;
   }
 
-  return votes.map(vote => ({
+  return votes.map((vote) => ({
     ...vote,
-    choice: reorderChoicesByProvider(vote.choice, choices)
+    choice: reorderChoicesByProvider(vote.choice, choices),
   }));
 }
 
 /**
  * Process votes using the Copeland method and return ranked results
- * 
+ *
  * @param proposalData - The proposal data containing votes and choices
  * @returns Object containing ranked candidates and head-to-head matches
  */
-export function processCopelandRanking(proposalData: ProposalData): CopelandResults {
+export function processCopelandRanking(
+  proposalData: ProposalData
+): CopelandResults {
   const { choices, votes } = proposalData;
 
   // Pre-process votes to reorder choices by provider if bidimensional is enabled
@@ -138,7 +153,10 @@ export function processCopelandRanking(proposalData: ProposalData): CopelandResu
   const matchResults = [];
   for (let i = 0; i < numCandidates; i++) {
     for (let j = i + 1; j < numCandidates; j++) {
-      const isInternal = isSameServiceProvider(candidateChoices[i], candidateChoices[j]);
+      const isInternal = isSameServiceProvider(
+        candidateChoices[i],
+        candidateChoices[j]
+      );
       matchResults.push({
         candidate1: candidateChoices[i],
         candidate2: candidateChoices[j],
@@ -149,9 +167,9 @@ export function processCopelandRanking(proposalData: ProposalData): CopelandResu
           pairwiseMatrix[i][j] > pairwiseMatrix[j][i]
             ? candidateChoices[i]
             : pairwiseMatrix[j][i] > pairwiseMatrix[i][j]
-              ? candidateChoices[j]
-              : "tie",
-        isInternal
+            ? candidateChoices[j]
+            : "tie",
+        isInternal,
       });
     }
   }
@@ -170,7 +188,9 @@ export function processCopelandRanking(proposalData: ProposalData): CopelandResu
       if (i !== j) {
         // Count wins
         if (pairwiseMatrix[i][j] > pairwiseMatrix[j][i]) {
-          if (!isSameServiceProvider(candidateChoices[i], candidateChoices[j])) {
+          if (
+            !isSameServiceProvider(candidateChoices[i], candidateChoices[j])
+          ) {
             wins++; // Victory = 1 point
           }
         }
@@ -216,7 +236,7 @@ export function processCopelandRanking(proposalData: ProposalData): CopelandResu
 
 /**
  * Post-process Copeland results to handle bidimensional filtering and None Below
- * 
+ *
  * @param results - The original Copeland ranking results
  * @returns Processed results with bidimensional filtering and None Below handling
  */
@@ -227,7 +247,7 @@ export function postprocessRanking(results: CopelandResults): CopelandResults {
 
   // Group candidates by provider
   const providerGroups = new Map<string, RankedCandidate[]>();
-  results.rankedCandidates.forEach(candidate => {
+  results.rankedCandidates.forEach((candidate) => {
     const { name: providerName } = parseChoiceName(candidate.name);
     if (!providerGroups.has(providerName)) {
       providerGroups.set(providerName, []);
@@ -237,7 +257,7 @@ export function postprocessRanking(results: CopelandResults): CopelandResults {
 
   // Keep only the highest-ranked candidate per provider
   const filteredCandidates: RankedCandidate[] = [];
-  providerGroups.forEach(candidates => {
+  providerGroups.forEach((candidates) => {
     // Sort by score and average support to get the highest-ranked
     const sorted = [...candidates].sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score;
@@ -250,7 +270,7 @@ export function postprocessRanking(results: CopelandResults): CopelandResults {
   // 1. Internal matches between options of the same provider
   // 2. Matches between the highest-ranked candidates of different providers
   // 3. Matches between a provider's highest-ranked candidate and None Below
-  const filteredMatches = results.headToHeadMatches.filter(match => {
+  const filteredMatches = results.headToHeadMatches.filter((match) => {
     const { name: provider1 } = parseChoiceName(match.candidate1);
     const { name: provider2 } = parseChoiceName(match.candidate2);
 
@@ -264,13 +284,16 @@ export function postprocessRanking(results: CopelandResults): CopelandResults {
     const topCandidate2 = providerGroups.get(provider2)?.[0];
 
     // Case 2: Both candidates are the highest-ranked for their providers
-    if (topCandidate1?.name === match.candidate1 && topCandidate2?.name === match.candidate2) {
+    if (
+      topCandidate1?.name === match.candidate1 &&
+      topCandidate2?.name === match.candidate2
+    ) {
       return true;
     }
 
     // Case 3: One candidate is None Below and the other is a provider's highest-ranked
-    const isNoneBelow1 = match.candidate1.toLowerCase().includes('none below');
-    const isNoneBelow2 = match.candidate2.toLowerCase().includes('none below');
+    const isNoneBelow1 = match.candidate1.toLowerCase().includes("none below");
+    const isNoneBelow2 = match.candidate2.toLowerCase().includes("none below");
 
     if (isNoneBelow1 && topCandidate2?.name === match.candidate2) return true;
     if (isNoneBelow2 && topCandidate1?.name === match.candidate1) return true;
@@ -280,7 +303,7 @@ export function postprocessRanking(results: CopelandResults): CopelandResults {
 
   return {
     rankedCandidates: filteredCandidates,
-    headToHeadMatches: filteredMatches
+    headToHeadMatches: filteredMatches,
   };
 }
 
@@ -297,12 +320,16 @@ export function combineData(
 ): Allocation[] {
   return rankedResults.map((result) => {
     // Find all choices for this provider
-    const providerChoices = choicesData.filter(choice => choice.name === parseChoiceName(result.name).name);
+    const providerChoices = choicesData.filter(
+      (choice) => choice.name === parseChoiceName(result.name).name
+    );
 
     // Get the basic and extended budgets from the choices
-    const basicBudget = providerChoices.find(c => c.budgetType === 'basic')?.budget || 0;
-    const extendedBudget = providerChoices.find(c => c.budgetType === 'extended')?.budget || 0;
-    
+    const basicBudget =
+      providerChoices.find((c) => c.budgetType === "basic")?.budget || 0;
+    const extendedBudget =
+      providerChoices.find((c) => c.budgetType === "extended")?.budget || 0;
+
     // Get the first choice's metadata (they should all have the same values for these)
     const firstChoice = providerChoices[0];
     const providerName = providerChoices[0].name;
@@ -318,7 +345,7 @@ export function combineData(
       allocated: false,
       streamDuration: null,
       allocatedBudget: 0,
-      rejectionReason: null
+      rejectionReason: null,
     };
   });
 }
