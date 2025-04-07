@@ -80,7 +80,7 @@ export function VoteTable({
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <div className="mt-2 border border-gray-800 rounded-lg overflow-hidden text-sm">
+      <div className="mt-2 border border-gray-800 rounded-lg overflow-scroll text-sm">
         <table className="w-full">
           <thead>
             <tr className="border-b border-gray-700">
