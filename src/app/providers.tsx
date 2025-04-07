@@ -13,7 +13,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
   const [config] = useState(() =>
     getDefaultConfig({
-      appName: "Electionful",
+      appName: "SPP2 voting",
       projectId: "YOUR_PROJECT_ID",
       chains: [mainnet],
     })

@@ -7,8 +7,8 @@ import { Providers } from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Electionful",
-  description: "A simple voting interface for ENS elections",
+  title: "SPP2 voting",
+  description: "A simple voting interface for ENS Service Provider Program 2 election",
 };
 
 export default function RootLayout({
