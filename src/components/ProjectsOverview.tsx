@@ -24,7 +24,7 @@ export function ProjectsOverview({ projectsData }: ProjectsOverviewProps) {
       <h2 className="mb-4 text-lg font-semibold text-gray-100">
         PROJECTS OVERVIEW
       </h2>
-      <div className="flex flex-1 items-center justify-between">
+      <div className="flex flex-col md:flex-row flex-1 items-center justify-around">
         <div className="relative h-[180px] w-[180px]">
           {isMounted && (
             <ResponsiveContainer>
