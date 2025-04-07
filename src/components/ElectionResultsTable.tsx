@@ -1,5 +1,5 @@
-import { type Candidate } from "@/types/election";
-import { ChevronRight, Trophy } from "lucide-react";
+import { Trophy, Info } from "lucide-react";
+import { ElectionCandidate } from "@/hooks/useEnsElectionData";
 
 interface ElectionResultsTableProps {
   candidates: Candidate[];
@@ -20,6 +20,21 @@ function FundedBadge() {
       <Trophy className="h-4 w-4" />
       Funded
     </span>
+  );
+}
+
+function NotFundedBadge({ reason }: { reason: string | null }) {
+  return (
+    <div className="group relative inline-flex items-center">
+      <span className="rounded-xl py-1 px-2 bg-gray-700 bg-opacity-10 text-gray-400">
+        Not funded
+      </span>
+      <div className="absolute left-full ml-2 hidden group-hover:block z-50">
+        <div className="rounded-md bg-gray-800 p-2 text-xs text-gray-200 shadow-lg whitespace-nowrap">
+          {reason || "Unknown reason"}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -126,24 +141,75 @@ export function ElectionResultsTable({
                       : "bg-blue-950 text-blue-500"
                   }`}
                 >
-                  {candidate.streamDuration === "2-year" ||
-                  candidate.streamDuration === "2 years"
-                    ? "2-year"
-                    : "1-year"}
-                </span>
-              </td>
-              <td className="whitespace-nowrap px-6 py-4">
-                <div className="flex items-center gap-2">
-                  {candidate.isEligibleForExtendedBudget ? (
-                    <>
-                      <div className="text-emerald-500">✓</div>
-                      <span className="text-sm text-emerald-500">Yes</span>
-                    </>
+                  <div className="flex items-center gap-4">
+                    <span className={`${isFunded && "text-emerald-500"}`}>
+                      {index + 1}
+                    </span>
+                    {isFunded && <FundedBadge />}
+                  </div>
+                </td>
+                <td className="whitespace-nowrap px-6 py-4 text-gray-300">
+                  {candidate.name}
+                </td>
+                <td className="whitespace-nowrap px-6 py-4">
+                  {candidate.score}
+                </td>
+                <td className="whitespace-nowrap px-6 py-4">
+                  {candidate.averageSupport.toLocaleString()}
+                </td>
+                <td className="whitespace-nowrap px-6 py-4">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`${
+                        isFunded &&
+                        !isExtendedFunded &&
+                        "font-medium text-emerald-500"
+                      }`}
+                    >
+                      {candidate.basicBudget > 0
+                        ? `$${candidate.basicBudget.toLocaleString()}`
+                        : "-"}
+                    </span>
+                    {isFunded && !isExtendedFunded && (
+                      <span className="text-emerald-500">✓</span>
+                    )}
+                  </div>
+                </td>
+                <td className="whitespace-nowrap px-6 py-4">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`${
+                        isExtendedFunded && "font-medium text-emerald-500"
+                      }`}
+                    >
+                      {candidate.extendedBudget > 0
+                        ? `$${candidate.extendedBudget.toLocaleString()}`
+                        : "-"}
+                    </span>
+                    {isExtendedFunded && (
+                      <span className=" text-emerald-500">✓</span>
+                    )}
+                  </div>
+                </td>
+                <td className="whitespace-nowrap px-6 py-4 text-gray-400">
+                  {isDivider ? (
+                    <span>-</span>
+                  ) : isFunded ? (
+                    <span
+                      className={`rounded-xl py-1 px-2 ${
+                        candidate.streamDuration === "2-year" ||
+                        candidate.streamDuration === "2 years"
+                          ? "bg-pink-300 bg-opacity-10 text-pink-400"
+                          : "bg-blue-700 bg-opacity-10 text-blue-500"
+                      }`}
+                    >
+                      {candidate.streamDuration === "2-year" ||
+                      candidate.streamDuration === "2 years"
+                        ? "2 years"
+                        : "1 year"}
+                    </span>
                   ) : (
-                    <>
-                      <div className="text-red-500">✕</div>
-                      <span className="text-sm text-red-500">No</span>
-                    </>
+                    <NotFundedBadge reason={candidate.rejectionReason} />
                   )}
                 </div>
               </td>
