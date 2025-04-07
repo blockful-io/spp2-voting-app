@@ -290,7 +290,7 @@ export interface ReportingProposalData {
   space: {
     name: string;
   };
-  votes?: any[];
+  votes?: Vote[];
   scores_total?: number;
   state: string;
 }

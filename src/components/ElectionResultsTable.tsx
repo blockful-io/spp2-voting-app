@@ -1,5 +1,5 @@
 import { Trophy } from "lucide-react";
-import { ElectionCandidate } from "@/hooks/useEnsElectionData";
+import { ElectionCandidate } from "@/utils/types";
 
 interface ElectionResultsTableProps {
   candidates: ElectionCandidate[];
@@ -128,14 +128,12 @@ export function ElectionResultsTable({
                   ) : isFunded ? (
                     <span
                       className={`rounded-xl py-1 px-2 ${
-                        candidate.streamDuration === "2-year" ||
-                        candidate.streamDuration === "2 years"
+                        candidate.streamDuration === "2-year"
                           ? "bg-pink-300 bg-opacity-10 text-pink-400"
                           : "bg-blue-700 bg-opacity-10 text-blue-500"
                       }`}
                     >
-                      {candidate.streamDuration === "2-year" ||
-                      candidate.streamDuration === "2 years"
+                      {candidate.streamDuration === "2-year"
                         ? "2 years"
                         : "1 year"}
                     </span>

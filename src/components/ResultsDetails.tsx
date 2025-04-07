@@ -4,6 +4,7 @@ import {
   getCandidateHeadToHead,
 } from "@/utils/candidateComparisons";
 import { X, Trophy } from "lucide-react";
+import { StreamDuration } from "@/utils/types";
 
 interface ResultsDetailsProps {
   candidateName: string;
@@ -17,7 +18,7 @@ interface ResultsDetailsProps {
       basicBudget: number;
       extendedBudget: number;
       allocated: boolean;
-      streamDuration: string | null;
+      streamDuration: StreamDuration;
       allocatedBudget: number;
       rejectionReason: string | null;
       isNoneBelow: boolean;

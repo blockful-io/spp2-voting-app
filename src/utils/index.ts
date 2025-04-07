@@ -18,7 +18,7 @@ import {
 // Import modules
 import { prepareVotesFromCsv } from './csvUtils';
 import { getVotingResultData } from './votingResults';
-import { VotingResultResponse } from './types';
+import { VotingResultResponse, ReportResults } from './types';
 import { processCopelandRanking, combineData } from './voteProcessing';
 import { allocateBudgets } from './budgetAllocation';
 
@@ -29,7 +29,7 @@ import { formatCurrency, displayResults, exportResults } from './reporting';
  * Main function that orchestrates the entire process
  */
 export async function main(): Promise<{
-  results?: any;
+  results?: ReportResults;
   filename?: string;
   error?: string;
   stack?: string;
@@ -91,13 +91,14 @@ export async function main(): Promise<{
       results: formattedResults,
       filename: exportedFilename || undefined
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("\nERROR: Allocation process failed");
-    console.error(error.message);
-    console.error(error.stack);
+    const err = error as Error;
+    console.error(err.message);
+    console.error(err.stack);
     return { 
-      error: error.message,
-      stack: error.stack,
+      error: err.message,
+      stack: err.stack,
       timestamp: new Date().toISOString()
     };
   }

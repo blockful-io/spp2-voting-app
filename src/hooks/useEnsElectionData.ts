@@ -3,6 +3,9 @@ import { HeadToHeadMatch, AllocationResponse, ElectionCandidate, BudgetSummary, 
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useMemo } from "react";
 
+// Re-export types needed by components
+export type { VoteCandidate, Budget };
+
 export function useChoices() {
   const { data: fetchChoicesFunc, isLoading, isError } = useQuery({
     queryKey: ["choices"],

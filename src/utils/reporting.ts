@@ -192,8 +192,9 @@ export const exportResults = (results: ReportResults): string | null => {
     }
     
     return filename;
-  } catch (error: any) {
-    console.error(`Error saving results: ${error.message}`);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error(`Error saving results: ${err.message}`);
     console.log("Falling back to logging results to console...");
     console.log("Results JSON:");
     console.log(JSON.stringify(results, null, 2));

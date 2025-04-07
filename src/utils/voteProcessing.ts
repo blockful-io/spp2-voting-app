@@ -7,6 +7,9 @@ import { reorderChoicesByProvider, parseChoiceName, isSameServiceProvider } from
 // Import shared types
 import { Vote, ProposalData, HeadToHeadMatch, RankedCandidate, CopelandResults, ProviderData, Allocation, Choice } from "./types";
 
+// Re-export types needed by components
+export type { HeadToHeadMatch };
+
 /**
  * Pre-process votes to reorder choices by provider if bidimensional is enabled
  * 
