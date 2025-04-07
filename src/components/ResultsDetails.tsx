@@ -6,7 +6,7 @@ import {
 import { X, Trophy } from "lucide-react";
 import { StreamDuration } from "@/utils/types";
 import { parseChoiceName } from "@/utils/parseChoiceName";
-
+import cc from "classcat";
 interface ResultsDetailsProps {
   candidateName: string;
   onClose: () => void;
@@ -136,6 +136,7 @@ export function ResultsDetails({
         </h3>
         <div className="space-y-3">
           {matches.map((match: FormattedMatch, index: number) => {
+            console.log("match", match);
             if (!match.isInternal)
               return (
                 <div
@@ -148,10 +149,16 @@ export function ResultsDetails({
                         <span className="text-gray-100">
                           {match.candidate1.name}
                         </span>
-                        {match.winner !== match.candidate2.name && (
+                        {match.winner.includes(match.candidate1.name) && (
                           <Trophy className="text-emerald-500 h-4 w-4" />
                         )}
-                        <span className="text-emerald-500">
+                        <span
+                          className={cc([
+                            match.winner.includes(match.candidate1.name)
+                              ? "text-emerald-500"
+                              : "text-gray-400",
+                          ])}
+                        >
                           {Math.round(
                             match.candidate1.candidateVotes
                           ).toLocaleString()}
@@ -163,11 +170,21 @@ export function ResultsDetails({
                     </div>
                     <div className="flex-1 text-right">
                       <div className="flex items-center gap-2 justify-end">
-                        <span className="text-gray-400">
+                        {match.winner.includes(match.candidate2.name) && (
+                          <Trophy className="text-blue-500 h-4 w-4" />
+                        )}
+                        <span
+                          className={cc([
+                            match.winner.includes(match.candidate2.name)
+                              ? "text-blue-500"
+                              : "text-gray-400",
+                          ])}
+                        >
                           {Math.round(
                             match.candidate2.candidateVotes
                           ).toLocaleString()}
                         </span>
+
                         <span className="text-gray-100">
                           {match.candidate2.name}
                         </span>
