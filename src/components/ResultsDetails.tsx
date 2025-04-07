@@ -5,6 +5,7 @@ import {
 } from "@/utils/candidateComparisons";
 import { X, Trophy } from "lucide-react";
 import { StreamDuration } from "@/utils/types";
+import { parseChoiceName } from "@/utils/parseChoiceName";
 
 interface ResultsDetailsProps {
   candidateName: string;
@@ -37,6 +38,20 @@ export function ResultsDetails({
       candidates: data.allocations,
     },
     candidateName
+  );
+
+  const parsedChoice = parseChoiceName(candidateName);
+
+  // Find the head-to-head match between basic and extended versions
+  const basicVsExtMatch = data.headToHeadMatches.find(
+    (match) =>
+      match.candidate1 === `${parsedChoice.name} - basic` &&
+      match.candidate2 === `${parsedChoice.name} - ext`
+  );
+
+  // Find the allocation data for the parsed choice name
+  const allocationData = data.allocations.find(
+    (allocation) => allocation.name === parsedChoice.name
   );
 
   if (!headToHeadResults) {
@@ -84,10 +99,16 @@ export function ResultsDetails({
           </div>
           <div className="mb-2 flex items-center justify-between">
             <span className="text-2xl font-semibold">
-              {budget.basic.amount.toLocaleString()}
+              {Math.round(
+                basicVsExtMatch?.candidate1Votes ||
+                  allocationData?.averageSupport ||
+                  0
+              ).toLocaleString()}
             </span>
             <span className="text-2xl font-semibold">
-              {budget.extended.amount.toLocaleString()}
+              {Math.round(
+                basicVsExtMatch?.candidate2Votes || 0
+              ).toLocaleString()}
             </span>
           </div>
           <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
@@ -97,7 +118,9 @@ export function ResultsDetails({
                 className="absolute h-full bg-blue-500 right-0"
                 style={{
                   width: `${
-                    (budget.basic.amount / budget.extended.amount) * 100
+                    ((basicVsExtMatch?.candidate2Votes || 0) /
+                      (basicVsExtMatch?.totalVotes || 0)) *
+                    100
                   }%`,
                 }}
               />
@@ -129,7 +152,9 @@ export function ResultsDetails({
                           <Trophy className="text-emerald-500 h-4 w-4" />
                         )}
                         <span className="text-emerald-500">
-                          {Math.round(match.candidate1.candidateVotes).toLocaleString()}
+                          {Math.round(
+                            match.candidate1.candidateVotes
+                          ).toLocaleString()}
                         </span>
                       </div>
                     </div>
@@ -139,7 +164,9 @@ export function ResultsDetails({
                     <div className="flex-1 text-right">
                       <div className="flex items-center gap-2 justify-end">
                         <span className="text-gray-400">
-                          {Math.round(match.candidate2.candidateVotes).toLocaleString()}
+                          {Math.round(
+                            match.candidate2.candidateVotes
+                          ).toLocaleString()}
                         </span>
                         <span className="text-gray-100">
                           {match.candidate2.name}
