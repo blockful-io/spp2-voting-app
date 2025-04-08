@@ -1,10 +1,10 @@
-import { HeadToHeadMatch, Candidate, FormattedMatch, CandidateBudget, CandidateHeadToHeadResults } from "@/utils/types";
+import { HeadToHeadMatch, Allocation, FormattedMatch, CandidateBudget, CandidateHeadToHeadResults } from "@/utils/types";
 
 // Re-export types needed by components
 export type { FormattedMatch };
 
 export function getCandidateHeadToHead(
-  data: { headToHeadMatches: HeadToHeadMatch[]; candidates: Candidate[] },
+  data: { headToHeadMatches: HeadToHeadMatch[]; candidates: Allocation[] },
   candidateName: string
 ): CandidateHeadToHeadResults | null {
   if (!data || !candidateName) return null;

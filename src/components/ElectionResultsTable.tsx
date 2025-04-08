@@ -1,8 +1,8 @@
 import { Trophy, ChevronRight } from "lucide-react";
-import { ElectionCandidate } from "@/utils/types";
+import { Allocation } from "@/utils/types";
 
 interface ElectionResultsTableProps {
-  candidates: ElectionCandidate[];
+  candidates: Allocation[];
   onShowDetails: (candidateName: string) => void;
 }
 
@@ -57,9 +57,6 @@ export function ElectionResultsTable({
           </thead>
           <tbody className="divide-y divide-lightDark">
             {candidates.map((candidate, index) => {
-              const isFunded = candidate.allocatedBudget > 0;
-              const isExtendedFunded =
-                isFunded && candidate.isEligibleForExtendedBudget;
               const isDivider = index === dividerIndex;
               const beforeDivider = index < dividerIndex;
               return (
@@ -72,14 +69,14 @@ export function ElectionResultsTable({
                 >
                   <td
                     className={`whitespace-nowrap px-6 py-4 ${
-                      isFunded && "border-l-2 border-emerald-500"
+                      candidate.allocated && "border-l-2 border-emerald-500"
                     }`}
                   >
                     <div className="flex items-center gap-4">
-                      <span className={`${isFunded && "text-emerald-500"}`}>
+                      <span className={`${candidate.allocated && "text-emerald-500"}`}>
                         {index + 1}
                       </span>
-                      {isFunded && <FundedBadge />}
+                      {candidate.allocated && <FundedBadge />}
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-gray-300">
@@ -98,8 +95,7 @@ export function ElectionResultsTable({
                     <div className="flex items-center gap-2">
                       <span
                         className={`${
-                          isFunded &&
-                          !isExtendedFunded &&
+                          candidate.budgetType === "basic" &&
                           "font-medium text-emerald-500"
                         }`}
                       >
@@ -109,7 +105,7 @@ export function ElectionResultsTable({
                             ).toLocaleString()}`
                           : "-"}
                       </span>
-                      {isFunded && !isExtendedFunded && (
+                      {candidate.budgetType === "basic" && (
                         <span className="text-emerald-500">✓</span>
                       )}
                     </div>
@@ -118,7 +114,8 @@ export function ElectionResultsTable({
                     <div className="flex items-center gap-2">
                       <span
                         className={`${
-                          isExtendedFunded && "font-medium text-emerald-500"
+                          candidate.budgetType === "extended" &&
+                          "font-medium text-emerald-500"
                         }`}
                       >
                         {candidate.extendedBudget > 0
@@ -127,7 +124,7 @@ export function ElectionResultsTable({
                             ).toLocaleString()}`
                           : "-"}
                       </span>
-                      {isExtendedFunded && (
+                      {candidate.budgetType === "extended" && (
                         <span className=" text-emerald-500">✓</span>
                       )}
                     </div>
@@ -135,7 +132,7 @@ export function ElectionResultsTable({
                   <td className="whitespace-nowrap px-6 py-4 text-gray-400">
                     {isDivider ? (
                       <span>-</span>
-                    ) : isFunded ? (
+                    ) : candidate.allocated ? (
                       <span
                         className={`rounded-xl py-1 px-2 ${
                           candidate.streamDuration === "2-year"

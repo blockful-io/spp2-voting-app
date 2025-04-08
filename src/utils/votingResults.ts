@@ -6,69 +6,16 @@
  */
 
 import { fetchSnapshotResults } from "./snapshot";
-import { processCopelandRanking, combineData, postprocessRanking, preprocessVotes } from "./voteProcessing";
+import { processCopelandRanking, postprocessRanking, preprocessVotes } from "./voteProcessing";
 import { allocateBudgets } from "./budgetAllocation";
-import { getServiceProviderData } from "./csvUtils";
-import { PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from "./config";
 import { getChoicesData } from './choiceParser';
+import { PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from "./config";
 // Import shared types
-import { Vote, ProposalData, HeadToHeadMatch, RankedCandidate, CopelandResults, ProviderData, Allocation, Choice, AllocationResults, VotingResultResponse } from "./types";
+import { AllocationResults, VotingResultResponse } from "./types";
 
 // Re-export HeadToHeadMatch from types
 export type { HeadToHeadMatch } from './types';
 
-// Add interface for raw proposal data from Snapshot
-interface RawSnapshotProposal {
-  id: string;
-  title: string;
-  space: {
-    id: string;
-    name: string;
-  };
-  choices: string[];
-  scores_total: number;
-  state: string;
-  votes: Vote[];
-}
-
-/**
- * Process voting results and generate allocation report
- * 
- * @param proposalData - The proposal data containing votes and choices
- * @returns The allocation results
- */
-export async function processVotingResults(proposalData: ProposalData): Promise<AllocationResults> {
-  try {
-    // Process votes using Copeland method
-    const copelandResults = processCopelandRanking(proposalData);
-
-    // Get service provider data
-    const providerData = getServiceProviderData();
-
-    // Convert ranked candidates to allocation format
-    const candidates: Allocation[] = copelandResults.rankedCandidates.map(candidate => ({
-      name: candidate.name,
-      score: candidate.score,
-      averageSupport: candidate.averageSupport,
-      basicBudget: providerData[candidate.name]?.basicBudget || 0,
-      extendedBudget: providerData[candidate.name]?.extendedBudget || 0,
-      allocated: false,
-      streamDuration: null,
-      allocatedBudget: 0,
-      rejectionReason: null,
-      isNoneBelow: candidate.isNoneBelow,
-      isSpp1: providerData[candidate.name]?.isSpp1 || false
-    }));
-
-    // Allocate budgets based on ranking
-    const allocationResults = allocateBudgets(candidates, PROGRAM_BUDGET);
-
-    return allocationResults;
-  } catch (error) {
-    console.error("Error processing voting results:", error);
-    throw error;
-  }
-}
 
 /**
  * Get voting result data for a specific proposal
@@ -111,14 +58,13 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
   const choicesData = getChoicesData();
   console.log(choicesData);
 
-  // Step 6: Combine ranked candidates with choices data to create allocations
-  const allocations: Allocation[] = combineData(rankedCandidates, choicesData);
-  console.log(allocations);
+  // Step 6: Allocate budgets using the original Copeland results and choices data
+  const { summary, allocations: finalAllocations } = allocateBudgets({
+    rankedCandidates,
+    headToHeadMatches
+  }, PROGRAM_BUDGET, choicesData) as AllocationResults;
 
-  // Step 7: Allocate budgets
-  const { summary, allocations: finalAllocations } = allocateBudgets(allocations, PROGRAM_BUDGET) as AllocationResults;
-
-  // Step 8: Prepare the response
+  // Step 7: Prepare the response
   return {
     proposal: {
       id: proposalId,

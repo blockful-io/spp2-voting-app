@@ -1,5 +1,5 @@
 import { PROPOSAL_ID } from "@/utils/config";
-import { HeadToHeadMatch, AllocationResponse, ElectionCandidate, BudgetSummary, Choice, VoteCandidate, Budget } from "@/utils/types";
+import { AllocationResponse, Allocation, BudgetSummary, Choice, VoteCandidate, Budget } from "@/utils/types";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useMemo } from "react";
 
@@ -61,7 +61,7 @@ export function useChoices() {
 export function useEnsElectionData() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  const [data, setData] = useState<ElectionCandidate[]>([]);
+  const [data, setData] = useState<Allocation[]>([]);
   const [allocationData, setAllocationData] =
     useState<AllocationResponse | null>(null);
 
@@ -79,11 +79,10 @@ export function useEnsElectionData() {
       const allocationResponse: AllocationResponse = await response.json();
       setAllocationData(allocationResponse);
 
-      // Transform allocation data to match our ElectionCandidate interface
-      const transformedData: ElectionCandidate[] =
+      // Transform allocation data to match our Allocation interface
+      const transformedData: Allocation[] =
         allocationResponse.allocations
           .map((allocation, index) => ({
-            id: index + 1,
             name: allocation.name.includes(" - ")
               ? allocation.name.split(" - ")[0]
               : allocation.name,
@@ -95,10 +94,9 @@ export function useEnsElectionData() {
             streamDuration: allocation.streamDuration || "1-year", // Default to 1-year if null
             allocatedBudget: allocation.allocatedBudget,
             rejectionReason: allocation.rejectionReason,
-            isEligibleForExtendedBudget:
-              allocation.extendedBudget > allocation.basicBudget,
             isNoneBelow: allocation.isNoneBelow,
             isSpp1: allocation.isSpp1,
+            budgetType: allocation.budgetType
           }));
 
       setData(transformedData);
