@@ -1,14 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
 import { GET_VOTES_QUERY } from "@/graphql/queries/getVotes";
+import { PROPOSAL_ID } from "@/utils/config";
 
 const SNAPSHOT_API = "https://hub.snapshot.org/graphql";
-const PROPOSAL_ID = process.env.NEXT_PUBLIC_PROPOSAL_ID;
-
-if (!PROPOSAL_ID) {
-  throw new Error("NEXT_PUBLIC_PROPOSAL_ID environment variable is not set");
-}
-
 const graphQLClient = new GraphQLClient(SNAPSHOT_API);
 
 interface VoteMetadata {
@@ -17,7 +12,7 @@ interface VoteMetadata {
   [key: string]: unknown;
 }
 
-interface Vote {
+export interface Vote {
   id: string;
   ipfs: string;
   voter: string;
@@ -31,7 +26,7 @@ interface Vote {
   vp_state: string;
 }
 
-interface VotesResponse {
+export interface VotesResponse {
   votes: Vote[];
 }
 

@@ -1,15 +1,5 @@
 import { VoteCandidate, Budget } from "@/hooks/useEnsElectionData";
-
-interface Vote {
-  choice: number | number[];
-  voter: string;
-  created: number;
-  metadata: Record<string, unknown>;
-}
-
-interface VotesResponse {
-  votes: Vote[];
-}
+import { VotesResponse } from "@/hooks/useVotes";
 
 export function loadChoices(
   fetchChoices: VoteCandidate[],
