@@ -6,6 +6,9 @@ import { VoteTable } from "@/components/vote/VoteTable";
 import { MenuIcon } from "@/components/vote/MenuIcon";
 import toast, { Toaster } from "react-hot-toast";
 import { useVoteOnProposal } from "@/hooks/useSnapshot";
+import { useVotes } from "@/hooks/useVotes";
+import { useAccount } from "wagmi";
+import { loadChoices } from "@/utils/loadChoices";
 
 export default function VotePage() {
   const { fetchChoices, isLoading } = useChoices();
@@ -13,6 +16,8 @@ export default function VotePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const { voteFunc } = useVoteOnProposal();
+  const { address } = useAccount();
+  const { data: previousVote, isLoading: isLoadingVote } = useVotes(address);
 
   // Prevent page scrolling during drag
   useEffect(() => {
@@ -32,12 +37,9 @@ export default function VotePage() {
   }, [isDragging]);
 
   useEffect(() => {
-    async function x() {
-      if (fetchChoices) setCandidates(fetchChoices);
-    }
-
-    x();
-  }, [fetchChoices, isLoading]);
+    if (!fetchChoices) return;
+    setCandidates(loadChoices(fetchChoices, previousVote));
+  }, [fetchChoices, previousVote]);
 
   const handleBudgetSelection = (name: string, type: "basic" | "extended") => {
     setCandidates(
@@ -117,7 +119,7 @@ export default function VotePage() {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || isLoadingVote) {
     return (
       <div className="min-h-screen w-full text-white flex flex-col">
         <div className="container p-4 items-center justify-center flex flex-col max-w-7xl mx-auto gap-4">
@@ -160,6 +162,14 @@ export default function VotePage() {
             won&apos;t be counted. You can also select between basic or extended
             budget for each candidate.
           </p>
+          {previousVote?.votes?.length && previousVote.votes.length > 0 && (
+            <div className="bg-blue-900/50 p-4 rounded-lg mb-6">
+              <p className="text-blue-200">
+                Your previous vote has been loaded. You can modify your choices
+                and submit again if you wish.
+              </p>
+            </div>
+          )}
         </div>
         <div className="grow flex flex-col w-full">
           <VoteTable
