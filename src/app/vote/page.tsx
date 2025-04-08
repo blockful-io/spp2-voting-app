@@ -97,7 +97,21 @@ export default function VotePage() {
       await voteFunc(selectedChoiceIds);
       toast.success("Vote submitted successfully!");
     } catch (error) {
-      toast.error("Error submitting vote. Please try again.");
+      // Check for no voting power error
+      if (
+        error &&
+        typeof error === "object" &&
+        "error" in error &&
+        error.error === "client_error" &&
+        "error_description" in error &&
+        error.error_description === "no voting power"
+      ) {
+        toast.error(
+          "You don't have voting power. Please ensure you hold the required tokens to participate in this vote."
+        );
+      } else {
+        toast.error("Error submitting vote. Please try again.");
+      }
     } finally {
       setIsSubmitting(false);
     }
