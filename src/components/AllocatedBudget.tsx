@@ -12,7 +12,11 @@ export function AllocatedBudget({
   legendItems,
   totalBudget,
 }: AllocatedBudgetProps) {
-  const totalAllocated = budgetData[0].oneYear + budgetData[0].twoYears;
+  const totalAllocated =
+    budgetData[0].oneYear +
+    budgetData[0].twoYears +
+    budgetData[0].oneYearRemaining +
+    budgetData[0].twoYearsRemaining;
   const formattedTotal = (totalAllocated / 1_000_000).toFixed(1);
   const formattedBudget = (totalBudget / 1_000_000).toFixed(1);
 
@@ -43,7 +47,8 @@ export function AllocatedBudget({
             <YAxis type="category" dataKey="name" hide />
             <Bar dataKey="oneYear" stackId="stack" fill="#3B82F6" />
             <Bar dataKey="twoYears" stackId="stack" fill="#EC4899" />
-            <Bar dataKey="notAllocated" stackId="stack" fill="#374151" />
+            <Bar dataKey="oneYearRemaining" stackId="stack" fill="#93C5FD" />
+            <Bar dataKey="twoYearsRemaining" stackId="stack" fill="#F9A8D4" />
           </BarChart>
         </ResponsiveContainer>
       </div>
