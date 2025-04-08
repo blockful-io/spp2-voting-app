@@ -160,6 +160,7 @@ export interface Allocation {
   rejectionReason: string | null;
   isNoneBelow: boolean;
   isSpp1?: boolean;
+  budgetType: BudgetType;
 }
 
 /**

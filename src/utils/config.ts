@@ -22,4 +22,4 @@ export const PROPOSAL_ID =
   "0x14bc28d4202213b2f735be22be131aa5f3b2e790433b8ef232207d0c0ace81e8";
 
 // Feature flags
-export const BIDIMENSIONAL_ENABLED = true; // When enabled, choices from the same provider are grouped together in voting ranks
+// All code now always uses bidimensional logic

@@ -2,11 +2,7 @@
  * Vote processing logic for the Copeland ranking method
  */
 
-import { BIDIMENSIONAL_ENABLED } from "./config";
-import {
-  reorderChoicesByProvider,
-  isSameServiceProvider,
-} from "./choiceParser";
+import { reorderChoicesByProvider, parseChoiceName, isSameServiceProvider } from "./choiceParser";
 // Import shared types
 import {
   Vote,
@@ -24,18 +20,14 @@ import { parseChoiceName } from "./parseChoiceName";
 export type { HeadToHeadMatch };
 
 /**
- * Pre-process votes to reorder choices by provider if bidimensional is enabled
- *
+ * Pre-process votes to reorder choices by provider
+ * 
  * @param votes - Array of votes to process
  * @param choices - Array of all available choices
  * @returns Processed votes with choices reordered by provider
  */
 export function preprocessVotes(votes: Vote[], choices: string[]): Vote[] {
-  if (!BIDIMENSIONAL_ENABLED) {
-    return votes;
-  }
-
-  return votes.map((vote) => ({
+  return votes.map(vote => ({
     ...vote,
     choice: reorderChoicesByProvider(vote.choice, choices),
   }));
@@ -52,7 +44,7 @@ export function processCopelandRanking(
 ): CopelandResults {
   const { choices, votes } = proposalData;
 
-  // Pre-process votes to reorder choices by provider if bidimensional is enabled
+  // Pre-process votes to reorder choices by provider
   const processedVotes = preprocessVotes(votes, choices);
 
   // Find the "None Below" option
@@ -241,10 +233,6 @@ export function processCopelandRanking(
  * @returns Processed results with bidimensional filtering and None Below handling
  */
 export function postprocessRanking(results: CopelandResults): CopelandResults {
-  if (!BIDIMENSIONAL_ENABLED) {
-    return results;
-  }
-
   // Group candidates by provider
   const providerGroups = new Map<string, RankedCandidate[]>();
   results.rankedCandidates.forEach((candidate) => {
@@ -346,6 +334,7 @@ export function combineData(
       streamDuration: null,
       allocatedBudget: 0,
       rejectionReason: null,
+      budgetType: basicBudget > 0 ? "basic" : "none" // Default value, will be determined in allocateBudgets
     };
   });
 }

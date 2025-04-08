@@ -2,34 +2,25 @@
  * Budget allocation logic for the Service Provider Program
  */
 
-import { TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO, BIDIMENSIONAL_ENABLED } from "./config";
-import { Allocation, AllocationResults, AllocationSummary, StreamDuration } from "./types";
+import { TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from "./config";
+import { Allocation, AllocationResults, AllocationSummary, StreamDuration, HeadToHeadMatch, CopelandResults, Choice, BudgetType } from "./types";
+import { parseChoiceName } from "./choiceParser";
 
 /**
- * Allocates budgets to candidates based on their ranking and the new bidimensional rules
+ * Allocates budgets to candidates based on their ranking
  * 
- * @param candidates - Array of candidates with their rankings and budgets
+ * @param copelandResults - Results from Copeland ranking including ranked candidates and head-to-head matches
  * @param totalBudget - Total budget available for allocation
+ * @param choicesData - Choice data containing budget information for service providers
  * @returns Object containing allocation results and summary
  */
 export function allocateBudgets(
-  candidates: Allocation[],
-  totalBudget: number
+  copelandResults: CopelandResults,
+  totalBudget: number,
+  choicesData: Choice[]
 ): AllocationResults {
-  if (BIDIMENSIONAL_ENABLED) {
-    return allocateBudgetsBidimensional(candidates, totalBudget);
-  } else {
-    return allocateBudgetsStandard(candidates, totalBudget);
-  }
-}
-
-/**
- * Allocates budgets using the standard allocation method
- */
-function allocateBudgetsStandard(
-  candidates: Allocation[],
-  totalBudget: number
-): AllocationResults {
+  console.log("Starting budget allocation with choices data");
+  
   // Initialize budget streams
   const twoYearStreamBudget = totalBudget * TWO_YEAR_STREAM_RATIO;
   const oneYearStreamBudget = totalBudget * ONE_YEAR_STREAM_RATIO;
@@ -43,163 +34,92 @@ function allocateBudgetsStandard(
   let transferredBudget = 0;
 
   // Find the index of None Below option
-  const noneBelowIndex = candidates.findIndex(c => c.isNoneBelow);
   let reachedNoneBelow = false;
 
-  // Process candidates in ranking order
-  const allocations = candidates.map((candidate, index) => {
+  // Extract head-to-head matches for budget determination
+  const { headToHeadMatches } = copelandResults;
+
+  // Process candidates in ranking order - convert to allocations and apply allocation logic in one pass
+  const allocations: Allocation[] = copelandResults.rankedCandidates.map((candidate, index) => {
+    // Extract base provider name from the candidate name
+    const { name: providerName } = parseChoiceName(candidate.name);
+    
+    // Find all choices for this provider
+    const providerChoices = choicesData.filter(choice => choice.name === providerName);
+    
+    // Get the basic and extended budgets from the choices
+    const basicBudget = providerChoices.find(c => c.budgetType === 'basic')?.budget || 0;
+    const extendedBudget = providerChoices.find(c => c.budgetType === 'extended')?.budget || 0;
+    
+    // Get other provider metadata
+    const firstChoice = providerChoices[0];
+    const isSpp1 = firstChoice?.isSpp1 || false;
+    
+    console.log(`Candidate: ${candidate.name}, Provider: ${providerName}, Basic: $${basicBudget}, Extended: $${extendedBudget}, SPP1: ${isSpp1}`);
+    
     // If we've reached None Below or are past it, reject all subsequent candidates
     if (reachedNoneBelow || candidate.isNoneBelow) {
       reachedNoneBelow = true;
       rejectedProjects++;
       return {
-        ...candidate,
+        name: providerName,
+        score: candidate.score,
+        averageSupport: candidate.averageSupport,
+        basicBudget,
+        extendedBudget,
         allocated: false,
-        streamDuration: null as StreamDuration,
+        streamDuration: null,  
         allocatedBudget: 0,
-        rejectionReason: "Below None Below option",
-      };
+        rejectionReason: "Below 'none below' option",
+        isNoneBelow: candidate.isNoneBelow,
+        isSpp1,
+        budgetType: "none" as BudgetType
+      } as Allocation;
     }
 
-    // Try extended budget first
-    if (candidate.isSpp1 && candidate.extendedBudget <= remainingTwoYearBudget) {
-      remainingTwoYearBudget -= candidate.extendedBudget;
-      totalAllocated += candidate.extendedBudget;
-      allocatedProjects++;
-      return {
-        ...candidate,
-        allocated: true,
-        streamDuration: "2-year" as StreamDuration,
-        allocatedBudget: candidate.extendedBudget,
-        rejectionReason: null,
-      };
+    // Determine budget type based on head-to-head match results
+    let budgetType: BudgetType = "basic"; // Default budget type
+    
+    // Find internal head-to-head match for this provider
+    const internalMatch = headToHeadMatches.find(match => 
+      match.isInternal && 
+      match.candidate1.includes(providerName) && match.candidate2.includes(providerName)
+    );
+    
+    if (internalMatch) {
+      // If there's a clear winner in the internal match
+      if (internalMatch.winner !== "tie") {
+        budgetType = internalMatch.winner.includes("ext") ? "extended" : "basic";
+        console.log(`Internal match found for ${providerName}: Winner is ${internalMatch.winner}, budgetType set to ${budgetType}`);
+      }
     }
 
-    // Transfer remaining two-year budget to one-year stream
-    if (remainingTwoYearBudget > 0) {
-      transferredBudget = remainingTwoYearBudget;
-      remainingOneYearBudget += remainingTwoYearBudget;
-      remainingTwoYearBudget = 0;
-    }
-
-    // Try extended budget in one-year stream
-    if (candidate.extendedBudget <= remainingOneYearBudget) {
-      remainingOneYearBudget -= candidate.extendedBudget;
-      totalAllocated += candidate.extendedBudget;
-      allocatedProjects++;
-      return {
-        ...candidate,
-        allocated: true,
-        streamDuration: "1-year" as StreamDuration,
-        allocatedBudget: candidate.extendedBudget,
-        rejectionReason: null,
-      };
-    }
-
-    // Try basic budget in one-year stream
-    if (candidate.basicBudget <= remainingOneYearBudget) {
-      remainingOneYearBudget -= candidate.basicBudget;
-      totalAllocated += candidate.basicBudget;
-      allocatedProjects++;
-      return {
-        ...candidate,
-        allocated: true,
-        streamDuration: "1-year" as StreamDuration,
-        allocatedBudget: candidate.basicBudget,
-        rejectionReason: null,
-      };
-    }
-
-    // If no allocation possible, mark as rejected
-    rejectedProjects++;
-    return {
-      ...candidate,
-      allocated: false,
-      streamDuration: null as StreamDuration,
-      allocatedBudget: 0,
-      rejectionReason: "Insufficient budget",
-    };
-  });
-
-  // Calculate summary
-  const summary: AllocationSummary = {
-    votedBudget: totalBudget,
-    twoYearStreamBudget,
-    oneYearStreamBudget,
-    transferredBudget,
-    adjustedTwoYearBudget: twoYearStreamBudget - transferredBudget,
-    adjustedOneYearBudget: oneYearStreamBudget + transferredBudget,
-    remainingTwoYearBudget,
-    remainingOneYearBudget,
-    totalAllocated,
-    unspentBudget: remainingTwoYearBudget + remainingOneYearBudget,
-    allocatedProjects,
-    rejectedProjects,
-  };
-
-  return {
-    summary,
-    allocations,
-  };
-}
-
-/**
- * Allocates budgets using the bidimensional allocation method
- */
-function allocateBudgetsBidimensional(
-  candidates: Allocation[],
-  totalBudget: number
-): AllocationResults {
-  // Initialize budget streams
-  const twoYearStreamBudget = totalBudget * TWO_YEAR_STREAM_RATIO;
-  const oneYearStreamBudget = totalBudget * ONE_YEAR_STREAM_RATIO;
-
-  // Initialize allocation tracking
-  let remainingTwoYearBudget = twoYearStreamBudget;
-  let remainingOneYearBudget = oneYearStreamBudget;
-  let totalAllocated = 0;
-  let allocatedProjects = 0;
-  let rejectedProjects = 0;
-  let transferredBudget = 0;
-
-  // Find the index of None Below option
-  const noneBelowIndex = candidates.findIndex(c => c.isNoneBelow);
-  let reachedNoneBelow = false;
-
-  // Process candidates in ranking order
-  const allocations = candidates.map((candidate, index) => {
-    // If we've reached None Below or are past it, reject all subsequent candidates
-    if (reachedNoneBelow || candidate.isNoneBelow) {
-      reachedNoneBelow = true;
-      rejectedProjects++;
-      return {
-        ...candidate,
-        allocated: false,
-        streamDuration: null as StreamDuration,
-        allocatedBudget: 0,
-        rejectionReason: "Below None Below option",
-      };
-    }
-
-    // Get the selected budget based on internal head-to-head comparison
-    const selectedBudget = candidate.extendedBudget > candidate.basicBudget ? 
-      candidate.extendedBudget : candidate.basicBudget;
+    // Get the selected budget based on the determined budget type
+    const selectedBudget = budgetType === "extended" ? extendedBudget : basicBudget;
 
     // Check if candidate is in top 5 and eligible for two-year stream
-    const isTop5 = candidates.indexOf(candidate) < 5;
-    const isEligibleForTwoYear = isTop5 && candidate.isSpp1;
+    const isTop5 = index < 5;
+    const isEligibleForTwoYear = isTop5 && isSpp1;
 
     // Try to allocate to two-year stream if eligible
     if (isEligibleForTwoYear && selectedBudget <= remainingTwoYearBudget) {
       remainingTwoYearBudget -= selectedBudget;
       totalAllocated += selectedBudget;
       allocatedProjects++;
+      console.log(`Allocated ${providerName} to 2-year stream: $${selectedBudget}`);
       return {
-        ...candidate,
+        name: providerName,
+        score: candidate.score,
+        averageSupport: candidate.averageSupport,
+        basicBudget,
+        extendedBudget,
         allocated: true,
         streamDuration: "2-year" as StreamDuration,
         allocatedBudget: selectedBudget,
         rejectionReason: null,
+        isNoneBelow: candidate.isNoneBelow,
+        isSpp1,
+        budgetType
       };
     }
 
@@ -208,6 +128,7 @@ function allocateBudgetsBidimensional(
       transferredBudget = remainingTwoYearBudget;
       remainingOneYearBudget += remainingTwoYearBudget;
       remainingTwoYearBudget = 0;
+      console.log(`Transferred remaining 2-year budget ($${transferredBudget}) to 1-year stream`);
     }
 
     // Try to allocate to one-year stream
@@ -215,23 +136,39 @@ function allocateBudgetsBidimensional(
       remainingOneYearBudget -= selectedBudget;
       totalAllocated += selectedBudget;
       allocatedProjects++;
+      console.log(`Allocated ${providerName} to 1-year stream: $${selectedBudget}`);
       return {
-        ...candidate,
+        name: providerName,
+        score: candidate.score,
+        averageSupport: candidate.averageSupport,
+        basicBudget,
+        extendedBudget,
         allocated: true,
         streamDuration: "1-year" as StreamDuration,
         allocatedBudget: selectedBudget,
         rejectionReason: null,
+        isNoneBelow: candidate.isNoneBelow,
+        isSpp1,
+        budgetType
       };
     }
 
     // If no allocation possible, mark as rejected
     rejectedProjects++;
+    console.log(`Rejected ${providerName}: Insufficient budget`);
     return {
-      ...candidate,
+      name: providerName,
+      score: candidate.score,
+      averageSupport: candidate.averageSupport,
+      basicBudget,
+      extendedBudget,
       allocated: false,
-      streamDuration: null as StreamDuration,
+      streamDuration: null,
       allocatedBudget: 0,
       rejectionReason: "Insufficient budget",
+      isNoneBelow: candidate.isNoneBelow,
+      isSpp1,
+      budgetType
     };
   });
 
