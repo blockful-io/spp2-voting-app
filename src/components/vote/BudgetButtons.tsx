@@ -19,7 +19,7 @@ export function BudgetButtons({
   };
 
   return (
-    <div className="flex gap-px">
+    <div className="flex gap-0">
       <button
         className={`
           rounded-md flex items-center justify-center w-full my-1 border px-2 py-1
@@ -37,7 +37,7 @@ export function BudgetButtons({
         disabled={isBelowDivider}
       >
         <Check
-          className={`w-4 h-4 mr-3 transition-opacity duration-200
+          className={`w-4 h-4 mr-3 transition-opacity duration-200 hidden sm:block
             ${
               isBelowDivider || !basicBudget.selected
                 ? "opacity-0"
@@ -45,7 +45,8 @@ export function BudgetButtons({
             }
           `}
         />
-        Basic: {formatCurrency(basicBudget.value)}
+        <span className="hidden sm:block">Basic:</span>{" "}
+        {formatCurrency(basicBudget.value)}
       </button>
       {extendedBudget && (
         <button
@@ -64,7 +65,7 @@ export function BudgetButtons({
           disabled={isBelowDivider}
         >
           <Check
-            className={`w-4 h-4 mr-3 transition-opacity duration-200
+            className={`w-4 h-4 mr-3 transition-opacity duration-200 hidden sm:block
               ${
                 isBelowDivider || !extendedBudget?.selected
                   ? "opacity-0"
@@ -72,7 +73,8 @@ export function BudgetButtons({
               }
             `}
           />
-          Extended: {formatCurrency(extendedBudget.value)}
+          <span className="hidden sm:block">Extended:</span>{" "}
+          {formatCurrency(extendedBudget.value)}
         </button>
       )}
     </div>
