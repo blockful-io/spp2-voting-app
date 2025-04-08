@@ -215,27 +215,8 @@ export interface AllocationResponse {
     allocatedProjects: number;
     rejectedProjects: number;
   };
-  allocations: ElectionCandidate[];
+  allocations: Allocation[];
   choices?: Array<string>;
-}
-
-/**
- * Election candidate data
- */
-export interface ElectionCandidate {
-  id: number;
-  name: string;
-  score: number;
-  averageSupport: number;
-  basicBudget: number;
-  extendedBudget: number;
-  allocated: boolean;
-  streamDuration: StreamDuration;
-  allocatedBudget: number;
-  rejectionReason: string | null;
-  isEligibleForExtendedBudget: boolean;
-  isNoneBelow: boolean;
-  isSpp1: boolean;
 }
 
 /**
@@ -341,22 +322,6 @@ export interface ReportResults {
 }
 
 // ===== Candidate Comparison Types =====
-/**
- * Candidate data for comparisons
- */
-export interface Candidate {
-  name: string;
-  score: number;
-  averageSupport: number;
-  basicBudget: number;
-  extendedBudget: number;
-  allocated: boolean;
-  streamDuration: StreamDuration;
-  allocatedBudget: number;
-  rejectionReason: string | null;
-  isNoneBelow: boolean;
-}
-
 /**
  * Formatted head-to-head match
  */

@@ -4,7 +4,7 @@
 
 import { TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from "./config";
 import { Allocation, AllocationResults, AllocationSummary, StreamDuration, HeadToHeadMatch, CopelandResults, Choice, BudgetType } from "./types";
-import { parseChoiceName } from "./choiceParser";
+import { parseChoiceName } from "./parseChoiceName";
 
 /**
  * Allocates budgets to candidates based on their ranking

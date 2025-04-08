@@ -4,7 +4,7 @@ import {
   getCandidateHeadToHead,
 } from "@/utils/candidateComparisons";
 import { X, Trophy } from "lucide-react";
-import { StreamDuration } from "@/utils/types";
+import { StreamDuration, Allocation } from "@/utils/types";
 import { parseChoiceName } from "@/utils/parseChoiceName";
 import cc from "classcat";
 interface ResultsDetailsProps {
@@ -12,18 +12,7 @@ interface ResultsDetailsProps {
   onClose: () => void;
   data: {
     headToHeadMatches: HeadToHeadMatch[];
-    allocations: Array<{
-      name: string;
-      score: number;
-      averageSupport: number;
-      basicBudget: number;
-      extendedBudget: number;
-      allocated: boolean;
-      streamDuration: StreamDuration;
-      allocatedBudget: number;
-      rejectionReason: string | null;
-      isNoneBelow: boolean;
-    }>;
+    allocations: Allocation[];
   };
 }
 

@@ -2,7 +2,7 @@
  * Vote processing logic for the Copeland ranking method
  */
 
-import { reorderChoicesByProvider, parseChoiceName, isSameServiceProvider } from "./choiceParser";
+import { reorderChoicesByProvider, isSameServiceProvider } from "./choiceParser";
 // Import shared types
 import {
   Vote,
@@ -10,7 +10,6 @@ import {
   HeadToHeadMatch,
   RankedCandidate,
   CopelandResults,
-  ProviderData,
   Allocation,
   Choice,
 } from "./types";
