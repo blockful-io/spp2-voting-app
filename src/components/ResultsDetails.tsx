@@ -4,7 +4,7 @@ import {
   getCandidateHeadToHead,
 } from "@/utils/candidateComparisons";
 import { X, Trophy } from "lucide-react";
-import { StreamDuration, Allocation } from "@/utils/types";
+import { Allocation } from "@/utils/types";
 import { parseChoiceName } from "@/utils/parseChoiceName";
 import cc from "classcat";
 interface ResultsDetailsProps {

@@ -8,6 +8,8 @@ export interface BudgetData {
   name: string;
   oneYear: number;
   twoYears: number;
+  oneYearRemaining: number;
+  twoYearsRemaining: number;
   notAllocated: number;
 }
 

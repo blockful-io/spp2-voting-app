@@ -77,6 +77,8 @@ export default function EnsElectionPage() {
           oneYear: summary.streamBreakdown.oneYear.allocated,
           twoYears: summary.streamBreakdown.twoYear.allocated,
           notAllocated: summary.unspentBudget,
+          oneYearRemaining: summary.streamBreakdown.oneYear.remaining,
+          twoYearsRemaining: summary.streamBreakdown.twoYear.remaining,
         },
       ]
     : [];
@@ -107,6 +109,18 @@ export default function EnsElectionPage() {
                   summary.streamBreakdown.twoYear.remaining / 1_000_000
                 ).toFixed(1)}M not allocated`
               : "100% allocated",
+        },
+        {
+          color: "#93C5FD", // Lighter blue (disabled 3B82F6)
+          label: `1 year remaining (${(
+            summary.streamBreakdown.oneYear.remaining / 1_000_000
+          ).toFixed(1)}M)`,
+        },
+        {
+          color: "#F9A8D4", // Lighter pink (disabled EC4899)
+          label: `2 years remaining (${(
+            summary.streamBreakdown.twoYear.remaining / 1_000_000
+          ).toFixed(1)}M)`,
         },
       ]
     : [];
