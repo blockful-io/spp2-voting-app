@@ -19,10 +19,10 @@ export function BudgetButtons({
   };
 
   return (
-    <div className="flex">
+    <div className="flex gap-0">
       <button
         className={`
-          rounded-l flex items-center justify-center w-full my-1 border
+          rounded-md flex items-center justify-center w-full my-1 border px-2 py-1
           ${
             isBelowDivider
               ? "bg-transparent border-gray-700 text-gray-500"
@@ -30,41 +30,53 @@ export function BudgetButtons({
               ? "bg-slate-50 text-black hover:bg-slate-100"
               : "border-gray-700 bg-stone-900 text-gray-100"
           }
+          ${extendedBudget ? "rounded-r-none" : ""}
+          transition-all duration-200 ease-in-out
         `}
         onClick={() => onBudgetSelect("basic")}
         disabled={isBelowDivider}
       >
         <Check
-          className={`w-4 h-4 mr-2 
-            ${(isBelowDivider || !basicBudget.selected) && "invisible"}
+          className={`w-4 h-4 mr-3 transition-opacity duration-200 hidden sm:block
+            ${
+              isBelowDivider || !basicBudget.selected
+                ? "opacity-0"
+                : "opacity-100"
+            }
           `}
         />
-        Basic: {formatCurrency(basicBudget.value)}
+        <span className="hidden sm:block">Basic:</span>{" "}
+        {formatCurrency(basicBudget.value)}
       </button>
-      <button
-        className={`
-          rounded-r flex items-center justify-center w-full my-1 border
-          ${
-            isBelowDivider
-              ? "bg-transparent border-gray-700 text-gray-500 border-l-0"
-              : !extendedBudget
-              ? "text-gray-600"
-              : extendedBudget?.selected
-              ? "bg-slate-50 text-black hover:bg-slate-100"
-              : "border-gray-700 bg-stone-900 text-gray-100"
-          }
-        `}
-        onClick={() => onBudgetSelect("extended")}
-        disabled={isBelowDivider || !extendedBudget}
-      >
-        <Check
-          className={`w-4 h-4 mr-2 
-            ${(isBelowDivider || !extendedBudget?.selected) && "invisible"}
-            
+      {extendedBudget && (
+        <button
+          className={`
+            rounded-md rounded-l-none flex items-center justify-center w-full my-1 border px-2 py-1
+            transition-all duration-200 ease-in-out
+            ${
+              isBelowDivider
+                ? "bg-transparent border-gray-700 text-gray-500 border-l-0"
+                : extendedBudget?.selected
+                ? "bg-slate-50 text-black hover:bg-slate-100"
+                : "border-gray-700 bg-stone-900 text-gray-100"
+            }
           `}
-        />
-        Extended: {extendedBudget ? formatCurrency(extendedBudget.value) : "-"}
-      </button>
+          onClick={() => onBudgetSelect("extended")}
+          disabled={isBelowDivider}
+        >
+          <Check
+            className={`w-4 h-4 mr-3 transition-opacity duration-200 hidden sm:block
+              ${
+                isBelowDivider || !extendedBudget?.selected
+                  ? "opacity-0"
+                  : "opacity-100"
+              }
+            `}
+          />
+          <span className="hidden sm:block">Extended:</span>{" "}
+          {formatCurrency(extendedBudget.value)}
+        </button>
+      )}
     </div>
   );
 }

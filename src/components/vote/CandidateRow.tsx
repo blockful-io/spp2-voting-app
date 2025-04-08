@@ -61,15 +61,23 @@ export function CandidateRow({
           </div>
         </div>
       </td>
-      <td className="p-4">
+      <td className="p-0 md:p-4">
         <div className="flex items-center">
           {!isDivider && !isBelowDivider && (
-            <div className="w-6 h-6 rounded-full bg-stone-900 flex items-center justify-center mr-3">
+            <div className="w-6 h-6 rounded-full bg-stone-900 flex items-center justify-center mr-1 sm:mr-3">
               {index + 1}
             </div>
           )}
-          <div className={`${isBelowDivider ? "text-gray-500" : ""}`}>
-            {isDivider ? <span className="text-red-500">{name}</span> : name}
+          <div
+            className={`overflow-hidden text-ellipsis whitespace-nowrap max-w-[100px] w-full sm:max-w-full ${
+              isBelowDivider ? "text-gray-500" : ""
+            }`}
+          >
+            {isDivider ? (
+              <span className="text-red-500 whitespace-nowrap">{name}</span>
+            ) : (
+              name
+            )}
             {isDivider && (
               <span className="text-sm text-gray-500 ml-2">
                 (candidates below won&apos;t count)
