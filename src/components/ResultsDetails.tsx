@@ -7,7 +7,11 @@ import { X, Trophy, ChevronDown, ChevronUp, Copy, Check } from "lucide-react";
 import { Allocation } from "@/utils/types";
 import { parseChoiceName } from "@/utils/parseChoiceName";
 import cc from "classcat";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Web3Provider } from "@ethersproject/providers";
+
+// Cache for ENS names to avoid redundant lookups
+const ensCache: Record<string, string | null> = {};
 
 interface ResultsDetailsProps {
   candidateName: string;
@@ -25,6 +29,76 @@ export function ResultsDetails({
 }: ResultsDetailsProps) {
   const [expandedMatches, setExpandedMatches] = useState<number[]>([]);
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
+  const [ensNames, setEnsNames] = useState<Record<string, string | null>>({});
+  const [provider, setProvider] = useState<Web3Provider | null>(null);
+
+  const headToHeadResults = getCandidateHeadToHead(
+    {
+      headToHeadMatches: data.headToHeadMatches,
+      candidates: data.allocations,
+    },
+    candidateName
+  );
+
+  // Initialize provider when component mounts
+  useEffect(() => {
+    if (window.ethereum) {
+      setProvider(new Web3Provider(window.ethereum));
+    }
+  }, []);
+
+  // Resolve ENS names for addresses
+  useEffect(() => {
+    if (!provider || !headToHeadResults) return;
+    
+    const { matches } = headToHeadResults;
+
+    async function resolveEnsNames() {
+      const addresses: string[] = [];
+      
+      // Collect all unique addresses from expanded matches
+      expandedMatches.forEach(index => {
+        const match = matches[index];
+        if (!match) return;
+        
+        match.candidate1.voters.forEach((voter: { voter: string; vp: number }) => {
+          if (!ensCache[voter.voter] && !addresses.includes(voter.voter)) {
+            addresses.push(voter.voter);
+          }
+        });
+        
+        match.candidate2.voters.forEach((voter: { voter: string; vp: number }) => {
+          if (!ensCache[voter.voter] && !addresses.includes(voter.voter)) {
+            addresses.push(voter.voter);
+          }
+        });
+      });
+      
+      // If no addresses to resolve, don't continue
+      if (addresses.length === 0) return;
+      
+      // Lookup ENS names for all collected addresses
+      const newEnsNames: Record<string, string | null> = { ...ensNames };
+      
+      await Promise.all(addresses.map(async (address) => {
+        try {
+          if (provider) {
+            const ensName = await provider.lookupAddress(address);
+            newEnsNames[address] = ensName;
+            ensCache[address] = ensName; // Cache the result
+          }
+        } catch (error) {
+          console.error(`Error resolving ENS for ${address}:`, error);
+          newEnsNames[address] = null;
+          ensCache[address] = null; // Cache the failure
+        }
+      }));
+      
+      setEnsNames(newEnsNames);
+    }
+    
+    resolveEnsNames();
+  }, [expandedMatches, provider, headToHeadResults, ensNames]);
 
   const toggleMatchExpand = (index: number) => {
     if (expandedMatches.includes(index)) {
@@ -45,13 +119,10 @@ export function ResultsDetails({
     setTimeout(() => setCopiedAddress(null), 2000);
   };
 
-  const headToHeadResults = getCandidateHeadToHead(
-    {
-      headToHeadMatches: data.headToHeadMatches,
-      candidates: data.allocations,
-    },
-    candidateName
-  );
+  const getDisplayName = (address: string) => {
+    // Return ENS name if available, otherwise return truncated address
+    return ensNames[address] || ensCache[address] || truncateAddress(address);
+  };
 
   const parsedChoice = parseChoiceName(candidateName);
 
@@ -256,8 +327,11 @@ export function ResultsDetails({
                                       <button 
                                         onClick={() => copyToClipboard(voter.voter)}
                                         className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1"
+                                        title={voter.voter}
                                       >
-                                        <span className="font-mono truncate">{truncateAddress(voter.voter)}</span>
+                                        <span className="font-mono truncate">
+                                          {getDisplayName(voter.voter)}
+                                        </span>
                                         {copiedAddress === voter.voter ? (
                                           <Check className="h-3 w-3 ml-1 text-green-500 flex-shrink-0" />
                                         ) : (
@@ -288,13 +362,16 @@ export function ResultsDetails({
                                       <button 
                                         onClick={() => copyToClipboard(voter.voter)}
                                         className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1 justify-end"
+                                        title={voter.voter}
                                       >
                                         {copiedAddress === voter.voter ? (
                                           <Check className="h-3 w-3 mr-1 text-green-500 flex-shrink-0" />
                                         ) : (
                                           <Copy className="h-3 w-3 mr-1 opacity-50 flex-shrink-0" />
                                         )}
-                                        <span className="font-mono truncate">{truncateAddress(voter.voter)}</span>
+                                        <span className={"font-mono truncate"}>
+                                          {getDisplayName(voter.voter)}
+                                        </span>
                                       </button>
                                     </li>
                                   ))}
