@@ -125,7 +125,6 @@ export function ResultsDetails({
         </h3>
         <div className="space-y-3">
           {matches.map((match: FormattedMatch, index: number) => {
-            console.log("match", match);
             if (!match.isInternal)
               return (
                 <div
