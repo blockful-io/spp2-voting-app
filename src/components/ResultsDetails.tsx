@@ -313,9 +313,9 @@ export function ResultsDetails({
                   {isExpanded && (
                     <div className="mt-4 pt-4 border-t border-lightDark">
                       <div className="grid grid-cols-1 gap-4">
-                        <div className="flex">
+                        <div className="flex flex-col md:flex-row">
                           {/* Left side - Candidate 1 Voters */}
-                          <div className="flex-1">
+                          <div className="flex-1 mb-4 md:mb-0">
                             <h4 className="text-sm font-medium text-gray-300 mb-2">
                               {match.candidate1.name} ({match.candidate1.voters.length})
                             </h4>
@@ -326,7 +326,7 @@ export function ResultsDetails({
                                     <li key={i} className="text-xs flex items-center">
                                       <button 
                                         onClick={() => copyToClipboard(voter.voter)}
-                                        className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1"
+                                        className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1 min-w-0"
                                         title={voter.voter}
                                       >
                                         <span className="font-mono truncate">
@@ -338,7 +338,7 @@ export function ResultsDetails({
                                           <Copy className="h-3 w-3 ml-1 opacity-50 flex-shrink-0" />
                                         )}
                                       </button>
-                                      <span className="text-gray-300 ml-auto text-right w-16 mr-4">{Math.round(voter.vp).toLocaleString()}</span>
+                                      <span className="text-gray-300 ml-auto text-right w-14 md:w-16 mr-2 md:mr-4">{Math.round(voter.vp).toLocaleString()}</span>
                                     </li>
                                   ))}
                                 </ul>
@@ -349,25 +349,25 @@ export function ResultsDetails({
                           </div>
                           
                           {/* Right side - Candidate 2 Voters */}
-                          <div className="flex-1 pl-4 border-l border-lightDark">
-                            <h4 className="text-sm font-medium text-gray-300 mb-2 text-right">
+                          <div className="flex-1 md:pl-4 md:border-l border-lightDark">
+                            <h4 className="text-sm font-medium text-gray-300 mb-2 md:text-right">
                               {match.candidate2.name} ({match.candidate2.voters.length})
                             </h4>
                             <div className="max-h-40 overflow-y-auto">
                               {match.candidate2.voters.length > 0 ? (
                                 <ul className="space-y-1">
                                   {match.candidate2.voters.map((voter, i) => (
-                                    <li key={i} className="text-xs flex items-center justify-end">
-                                      <span className="text-gray-300 mr-auto text-left w-16">{Math.round(voter.vp).toLocaleString()}</span>
+                                    <li key={i} className="text-xs flex items-center md:justify-end">
+                                      <span className="text-gray-300 mr-auto md:ml-0 text-left w-14 md:w-16 order-2 md:order-1">{Math.round(voter.vp).toLocaleString()}</span>
                                       <button 
                                         onClick={() => copyToClipboard(voter.voter)}
-                                        className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1 justify-end"
+                                        className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1 min-w-0 md:justify-end order-1 md:order-2"
                                         title={voter.voter}
                                       >
                                         {copiedAddress === voter.voter ? (
-                                          <Check className="h-3 w-3 mr-1 text-green-500 flex-shrink-0" />
+                                          <Check className="h-3 w-3 mr-1 md:mr-1 ml-1 md:ml-0 order-last md:order-first text-green-500 flex-shrink-0" />
                                         ) : (
-                                          <Copy className="h-3 w-3 mr-1 opacity-50 flex-shrink-0" />
+                                          <Copy className="h-3 w-3 mr-1 md:mr-1 ml-1 md:ml-0 order-last md:order-first opacity-50 flex-shrink-0" />
                                         )}
                                         <span className={"font-mono truncate"}>
                                           {getDisplayName(voter.voter)}
@@ -377,7 +377,7 @@ export function ResultsDetails({
                                   ))}
                                 </ul>
                               ) : (
-                                <p className="text-xs text-gray-500 text-right">No voters</p>
+                                <p className="text-xs text-gray-500 md:text-right">No voters</p>
                               )}
                             </div>
                           </div>
