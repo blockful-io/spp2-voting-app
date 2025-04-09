@@ -125,6 +125,10 @@ export interface HeadToHeadMatch {
   totalVotes: number;
   winner: string;
   isInternal: boolean;  // Whether this is a match between options from the same provider
+  voters: {
+    candidate1: Array<{ voter: string; vp: number }>;
+    candidate2: Array<{ voter: string; vp: number }>;
+  };
 }
 
 export interface CopelandResults {
@@ -329,10 +333,12 @@ export interface FormattedMatch {
   candidate1: {
     name: string;
     candidateVotes: number;
+    voters: Array<{ voter: string; vp: number }>;
   };
   candidate2: {
     name: string;
     candidateVotes: number;
+    voters: Array<{ voter: string; vp: number }>;
   };
   totalVotes: number;
   winner: string;
