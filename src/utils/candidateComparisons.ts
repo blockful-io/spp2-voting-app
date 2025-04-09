@@ -52,10 +52,12 @@ export function getCandidateHeadToHead(
         candidate1: {
           name: match.candidate1.includes(" - ") ? match.candidate1.split(" - ")[0] : match.candidate1,
           candidateVotes: match.candidate1Votes,
+          voters: match.voters.candidate1,
         },
         candidate2: {
           name: match.candidate2.includes(" - ") ? match.candidate2.split(" - ")[0] : match.candidate2,
           candidateVotes: match.candidate2Votes,
+          voters: match.voters.candidate2,
         },
         totalVotes: match.totalVotes,
         winner: match.winner,
@@ -68,10 +70,12 @@ export function getCandidateHeadToHead(
         candidate1: {
           name: match.candidate2.includes(" - ") ? match.candidate2.split(" - ")[0] : match.candidate2,
           candidateVotes: match.candidate2Votes,
+          voters: match.voters.candidate2,
         },
         candidate2: {
           name: match.candidate1.includes(" - ") ? match.candidate1.split(" - ")[0] : match.candidate1,
           candidateVotes: match.candidate1Votes,
+          voters: match.voters.candidate1,
         },
         totalVotes: match.totalVotes,
         winner:

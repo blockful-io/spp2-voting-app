@@ -56,7 +56,6 @@ export async function getVotingResultData(proposalId: string): Promise<VotingRes
 
   // Step 5: Get choices data from CSV
   const choicesData = getChoicesData();
-  console.log(choicesData);
 
   // Step 6: Allocate budgets using the original Copeland results and choices data
   const { summary, allocations: finalAllocations } = allocateBudgets({

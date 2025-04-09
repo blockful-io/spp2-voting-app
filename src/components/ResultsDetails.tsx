@@ -3,10 +3,16 @@ import {
   FormattedMatch,
   getCandidateHeadToHead,
 } from "@/utils/candidateComparisons";
-import { X, Trophy } from "lucide-react";
+import { X, Trophy, ChevronDown, ChevronUp, Copy, Check } from "lucide-react";
 import { Allocation } from "@/utils/types";
 import { parseChoiceName } from "@/utils/parseChoiceName";
 import cc from "classcat";
+import { useState, useEffect } from "react";
+import { Web3Provider } from "@ethersproject/providers";
+
+// Cache for ENS names to avoid redundant lookups
+const ensCache: Record<string, string | null> = {};
+
 interface ResultsDetailsProps {
   candidateName: string;
   onClose: () => void;
@@ -21,6 +27,11 @@ export function ResultsDetails({
   onClose,
   data,
 }: ResultsDetailsProps) {
+  const [expandedMatches, setExpandedMatches] = useState<number[]>([]);
+  const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
+  const [ensNames, setEnsNames] = useState<Record<string, string | null>>({});
+  const [provider, setProvider] = useState<Web3Provider | null>(null);
+
   const headToHeadResults = getCandidateHeadToHead(
     {
       headToHeadMatches: data.headToHeadMatches,
@@ -28,6 +39,90 @@ export function ResultsDetails({
     },
     candidateName
   );
+
+  // Initialize provider when component mounts
+  useEffect(() => {
+    if (window.ethereum) {
+      setProvider(new Web3Provider(window.ethereum));
+    }
+  }, []);
+
+  // Resolve ENS names for addresses
+  useEffect(() => {
+    if (!provider || !headToHeadResults) return;
+    
+    const { matches } = headToHeadResults;
+
+    async function resolveEnsNames() {
+      const addresses: string[] = [];
+      
+      // Collect all unique addresses from expanded matches
+      expandedMatches.forEach(index => {
+        const match = matches[index];
+        if (!match) return;
+        
+        match.candidate1.voters.forEach((voter: { voter: string; vp: number }) => {
+          if (!ensCache[voter.voter] && !addresses.includes(voter.voter)) {
+            addresses.push(voter.voter);
+          }
+        });
+        
+        match.candidate2.voters.forEach((voter: { voter: string; vp: number }) => {
+          if (!ensCache[voter.voter] && !addresses.includes(voter.voter)) {
+            addresses.push(voter.voter);
+          }
+        });
+      });
+      
+      // If no addresses to resolve, don't continue
+      if (addresses.length === 0) return;
+      
+      // Lookup ENS names for all collected addresses
+      const newEnsNames: Record<string, string | null> = { ...ensNames };
+      
+      await Promise.all(addresses.map(async (address) => {
+        try {
+          if (provider) {
+            const ensName = await provider.lookupAddress(address);
+            newEnsNames[address] = ensName;
+            ensCache[address] = ensName; // Cache the result
+          }
+        } catch (error) {
+          console.error(`Error resolving ENS for ${address}:`, error);
+          newEnsNames[address] = null;
+          ensCache[address] = null; // Cache the failure
+        }
+      }));
+      
+      setEnsNames(newEnsNames);
+    }
+    
+    resolveEnsNames();
+  }, [expandedMatches, provider, headToHeadResults, ensNames]);
+
+  const toggleMatchExpand = (index: number) => {
+    if (expandedMatches.includes(index)) {
+      setExpandedMatches(expandedMatches.filter((i) => i !== index));
+    } else {
+      setExpandedMatches([...expandedMatches, index]);
+    }
+  };
+
+  const truncateAddress = (address: string) => {
+    if (!address) return "";
+    return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+  };
+
+  const copyToClipboard = (address: string) => {
+    navigator.clipboard.writeText(address);
+    setCopiedAddress(address);
+    setTimeout(() => setCopiedAddress(null), 2000);
+  };
+
+  const getDisplayName = (address: string) => {
+    // Return ENS name if available, otherwise return truncated address
+    return ensNames[address] || ensCache[address] || truncateAddress(address);
+  };
 
   const parsedChoice = parseChoiceName(candidateName);
 
@@ -125,60 +220,76 @@ export function ResultsDetails({
         </h3>
         <div className="space-y-3">
           {matches.map((match: FormattedMatch, index: number) => {
+            const isExpanded = expandedMatches.includes(index);
+            
             if (!match.isInternal)
               return (
                 <div
                   key={index}
                   className="rounded-lg border border-lightDark bg-dark/50 p-4"
                 >
-                  <div className="flex items-center mb-2">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="text-gray-100">
-                          {match.candidate1.name}
-                        </span>
-                        {match.winner.includes(match.candidate1.name) && (
-                          <Trophy className="text-emerald-500 h-4 w-4" />
-                        )}
-                        <span
-                          className={cc([
-                            match.winner.includes(match.candidate1.name)
-                              ? "text-emerald-500"
-                              : "text-gray-400",
-                          ])}
-                        >
-                          {Math.round(
-                            match.candidate1.candidateVotes
-                          ).toLocaleString()}
-                        </span>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center flex-1">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-100">
+                            {match.candidate1.name}
+                          </span>
+                          {match.winner.includes(match.candidate1.name) && (
+                            <Trophy className="text-emerald-500 h-4 w-4" />
+                          )}
+                          <span
+                            className={cc([
+                              match.winner.includes(match.candidate1.name)
+                                ? "text-emerald-500"
+                                : "text-gray-400",
+                            ])}
+                          >
+                            {Math.round(
+                              match.candidate1.candidateVotes
+                            ).toLocaleString()}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="px-4">
-                      <span className="text-gray-400">vs</span>
-                    </div>
-                    <div className="flex-1 text-right">
-                      <div className="flex items-center gap-2 justify-end">
-                        {match.winner.includes(match.candidate2.name) && (
-                          <Trophy className="text-blue-500 h-4 w-4" />
-                        )}
-                        <span
-                          className={cc([
-                            match.winner.includes(match.candidate2.name)
-                              ? "text-blue-500"
-                              : "text-gray-400",
-                          ])}
-                        >
-                          {Math.round(
-                            match.candidate2.candidateVotes
-                          ).toLocaleString()}
-                        </span>
+                      <div className="px-4">
+                        <span className="text-gray-400">vs</span>
+                      </div>
+                      <div className="flex-1 text-right">
+                        <div className="flex items-center gap-2 justify-end">
+                          {match.winner.includes(match.candidate2.name) && (
+                            <Trophy className="text-blue-500 h-4 w-4" />
+                          )}
+                          <span
+                            className={cc([
+                              match.winner.includes(match.candidate2.name)
+                                ? "text-blue-500"
+                                : "text-gray-400",
+                            ])}
+                          >
+                            {Math.round(
+                              match.candidate2.candidateVotes
+                            ).toLocaleString()}
+                          </span>
 
-                        <span className="text-gray-100">
-                          {match.candidate2.name}
-                        </span>
+                          <span className="text-gray-100">
+                            {match.candidate2.name}
+                          </span>
+                        </div>
                       </div>
                     </div>
+                    
+                    <button 
+                      className="ml-2 p-1 rounded-full hover:bg-gray-700 transition-colors"
+                      onClick={() => toggleMatchExpand(index)}
+                    >
+                      {isExpanded ? (
+                        <ChevronUp className="h-4 w-4 text-gray-400" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4 text-gray-400" />
+                      )}
+                    </button>
                   </div>
+                  
                   <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
                     <div className="relative h-full w-full">
                       <div className="absolute h-full w-full bg-blue-500" />
@@ -198,6 +309,82 @@ export function ResultsDetails({
                       />
                     </div>
                   </div>
+                  
+                  {isExpanded && (
+                    <div className="mt-4 pt-4 border-t border-lightDark">
+                      <div className="grid grid-cols-1 gap-4">
+                        <div className="flex">
+                          {/* Left side - Candidate 1 Voters */}
+                          <div className="flex-1">
+                            <h4 className="text-sm font-medium text-gray-300 mb-2">
+                              {match.candidate1.name} ({match.candidate1.voters.length})
+                            </h4>
+                            <div className="max-h-40 overflow-y-auto">
+                              {match.candidate1.voters.length > 0 ? (
+                                <ul className="space-y-1">
+                                  {match.candidate1.voters.map((voter, i) => (
+                                    <li key={i} className="text-xs flex items-center">
+                                      <button 
+                                        onClick={() => copyToClipboard(voter.voter)}
+                                        className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1"
+                                        title={voter.voter}
+                                      >
+                                        <span className="font-mono truncate">
+                                          {getDisplayName(voter.voter)}
+                                        </span>
+                                        {copiedAddress === voter.voter ? (
+                                          <Check className="h-3 w-3 ml-1 text-green-500 flex-shrink-0" />
+                                        ) : (
+                                          <Copy className="h-3 w-3 ml-1 opacity-50 flex-shrink-0" />
+                                        )}
+                                      </button>
+                                      <span className="text-gray-300 ml-auto text-right w-16 mr-4">{Math.round(voter.vp).toLocaleString()}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                <p className="text-xs text-gray-500">No voters</p>
+                              )}
+                            </div>
+                          </div>
+                          
+                          {/* Right side - Candidate 2 Voters */}
+                          <div className="flex-1 pl-4 border-l border-lightDark">
+                            <h4 className="text-sm font-medium text-gray-300 mb-2 text-right">
+                              {match.candidate2.name} ({match.candidate2.voters.length})
+                            </h4>
+                            <div className="max-h-40 overflow-y-auto">
+                              {match.candidate2.voters.length > 0 ? (
+                                <ul className="space-y-1">
+                                  {match.candidate2.voters.map((voter, i) => (
+                                    <li key={i} className="text-xs flex items-center justify-end">
+                                      <span className="text-gray-300 mr-auto text-left w-16">{Math.round(voter.vp).toLocaleString()}</span>
+                                      <button 
+                                        onClick={() => copyToClipboard(voter.voter)}
+                                        className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1 justify-end"
+                                        title={voter.voter}
+                                      >
+                                        {copiedAddress === voter.voter ? (
+                                          <Check className="h-3 w-3 mr-1 text-green-500 flex-shrink-0" />
+                                        ) : (
+                                          <Copy className="h-3 w-3 mr-1 opacity-50 flex-shrink-0" />
+                                        )}
+                                        <span className={"font-mono truncate"}>
+                                          {getDisplayName(voter.voter)}
+                                        </span>
+                                      </button>
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                <p className="text-xs text-gray-500 text-right">No voters</p>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
           })}
