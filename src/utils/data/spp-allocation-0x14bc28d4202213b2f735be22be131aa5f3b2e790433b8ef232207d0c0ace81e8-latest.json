@@ -3,8 +3,8 @@
     "id": "0x14bc28d4202213b2f735be22be131aa5f3b2e790433b8ef232207d0c0ace81e8",
     "title": "SPP2 election - test",
     "space": "SPP2 vote",
-    "totalVotes": 6,
-    "totalVotingPower": 179438.71324673112,
+    "totalVotes": 11,
+    "totalVotingPower": 458708.25414639246,
     "state": "ACTIVE",
     "dataSource": "Snapshot"
   },
@@ -12,814 +12,5039 @@
     {
       "candidate1": "none below",
       "candidate2": "sp a",
-      "candidate1Votes": 17.44003482,
-      "candidate2Votes": 179421.27321191112,
-      "totalVotes": 179438.71324673112,
+      "candidate1Votes": 101125.57551511313,
+      "candidate2Votes": 357582.6786312793,
+      "totalVotes": 458708.25414639246,
       "winner": "sp a",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          }
+        ]
+      }
     },
     {
       "candidate1": "none below",
-      "candidate2": "sp b - ext",
-      "candidate1Votes": 17.44003482,
-      "candidate2Votes": 179421.27321191112,
-      "totalVotes": 179438.71324673112,
-      "winner": "sp b - ext",
-      "isInternal": false
+      "candidate2": "sp b - basic",
+      "candidate1Votes": 101125.57551511313,
+      "candidate2Votes": 357582.6786312793,
+      "totalVotes": 458708.25414639246,
+      "winner": "sp b - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          }
+        ]
+      }
     },
     {
       "candidate1": "none below",
       "candidate2": "sp c",
-      "candidate1Votes": 17.44003482,
-      "candidate2Votes": 179421.27321191112,
-      "totalVotes": 179438.71324673112,
+      "candidate1Votes": 166215.28287469636,
+      "candidate2Votes": 292492.9712716961,
+      "totalVotes": 458708.25414639246,
       "winner": "sp c",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          }
+        ]
+      }
     },
     {
       "candidate1": "none below",
       "candidate2": "sp d - ext",
-      "candidate1Votes": 11090.462040293156,
-      "candidate2Votes": 168348.25120643797,
-      "totalVotes": 179438.71324673112,
+      "candidate1Votes": 112181.15748576629,
+      "candidate2Votes": 346527.0966606262,
+      "totalVotes": 458708.25414639246,
       "winner": "sp d - ext",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ]
+      }
     },
     {
       "candidate1": "none below",
       "candidate2": "sp e - basic",
-      "candidate1Votes": 17.44003482,
-      "candidate2Votes": 179421.27321191112,
-      "totalVotes": 179438.71324673112,
+      "candidate1Votes": 101125.57551511313,
+      "candidate2Votes": 357582.6786312793,
+      "totalVotes": 458708.25414639246,
       "winner": "sp e - basic",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          }
+        ]
+      }
     },
     {
       "candidate1": "none below",
       "candidate2": "sp f",
-      "candidate1Votes": 11090.462040293156,
-      "candidate2Votes": 168348.25120643797,
-      "totalVotes": 179438.71324673112,
+      "candidate1Votes": 76180.1693998764,
+      "candidate2Votes": 382528.0847465161,
+      "totalVotes": 458708.25414639246,
       "winner": "sp f",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
     },
     {
       "candidate1": "none below",
       "candidate2": "sp g - basic",
-      "candidate1Votes": 11090.462040293156,
-      "candidate2Votes": 168348.25120643797,
-      "totalVotes": 179438.71324673112,
-      "winner": "sp g - basic",
-      "isInternal": false
+      "candidate1Votes": 278573.67376785446,
+      "candidate2Votes": 180134.580378538,
+      "totalVotes": 458708.25414639246,
+      "winner": "none below",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
     },
     {
       "candidate1": "none below",
       "candidate2": "sp h",
-      "candidate1Votes": 1017.44003482,
-      "candidate2Votes": 178421.27321191112,
-      "totalVotes": 179438.71324673112,
+      "candidate1Votes": 220605.6947877164,
+      "candidate2Votes": 238102.55935867605,
+      "totalVotes": 458708.25414639246,
       "winner": "sp h",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
     },
     {
       "candidate1": "none below",
       "candidate2": "sp i - basic",
-      "candidate1Votes": 11090.462040293156,
-      "candidate2Votes": 168348.25120643797,
-      "totalVotes": 179438.71324673112,
+      "candidate1Votes": 112198.59752058629,
+      "candidate2Votes": 346509.6566258062,
+      "totalVotes": 458708.25414639246,
       "winner": "sp i - basic",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
     },
     {
       "candidate1": "none below",
       "candidate2": "sp j - basic",
-      "candidate1Votes": 14633.294837592519,
-      "candidate2Votes": 164805.41840913863,
-      "totalVotes": 179438.71324673112,
-      "winner": "sp j - basic",
-      "isInternal": false
+      "candidate1Votes": 358992.54309683706,
+      "candidate2Votes": 99715.71104955538,
+      "totalVotes": 458708.25414639246,
+      "winner": "none below",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
     },
     {
       "candidate1": "none below",
       "candidate2": "sp k",
-      "candidate1Votes": 4560.272832119363,
-      "candidate2Votes": 174878.44041461177,
-      "totalVotes": 179438.71324673112,
-      "winner": "sp k",
-      "isInternal": false
+      "candidate1Votes": 347133.1919192639,
+      "candidate2Votes": 111575.06222712854,
+      "totalVotes": 458708.25414639246,
+      "winner": "none below",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
     },
     {
       "candidate1": "none below",
-      "candidate2": "sp l - ext",
-      "candidate1Votes": 14633.294837592519,
-      "candidate2Votes": 164805.41840913863,
-      "totalVotes": 179438.71324673112,
-      "winner": "sp l - ext",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp a",
-      "candidate2": "sp b - ext",
-      "candidate1Votes": 110788.73305502854,
-      "candidate2Votes": 68632.5401568826,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp a",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp a",
-      "candidate2": "sp c",
-      "candidate1Votes": 79705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp c",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp a",
-      "candidate2": "sp d - ext",
-      "candidate1Votes": 14615.85480277252,
-      "candidate2Votes": 164805.41840913863,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp d - ext",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp a",
-      "candidate2": "sp e - basic",
-      "candidate1Votes": 14615.85480277252,
-      "candidate2Votes": 164805.41840913863,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp e - basic",
-      "isInternal": false
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 257884.40761654393,
+      "candidate2Votes": 200823.84652984852,
+      "totalVotes": 458708.25414639246,
+      "winner": "none below",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp a",
       "candidate2": "sp f",
-      "candidate1Votes": 179421.27321191112,
-      "candidate2Votes": 0,
-      "totalVotes": 179421.27321191112,
+      "candidate1Votes": 299687.7216566144,
+      "candidate2Votes": 159003.09245495804,
+      "totalVotes": 458690.81411157246,
       "winner": "sp a",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 257866.96758172393,
+      "candidate2Votes": 200823.84652984852,
+      "totalVotes": 458690.81411157246,
+      "winner": "sp a",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp f",
+      "candidate1Votes": 199972.01060705903,
+      "candidate2Votes": 258718.8035045134,
+      "totalVotes": 458690.81411157246,
+      "winner": "sp f",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 257866.96758172393,
+      "candidate2Votes": 200823.84652984852,
+      "totalVotes": 458690.81411157246,
+      "winner": "sp b - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp e - basic",
+      "candidate2": "sp f",
+      "candidate1Votes": 297901.3924845144,
+      "candidate2Votes": 160789.42162705804,
+      "totalVotes": 458690.81411157246,
+      "winner": "sp e - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp e - basic",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 257866.96758172393,
+      "candidate2Votes": 200823.84652984852,
+      "totalVotes": 458690.81411157246,
+      "winner": "sp e - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp f",
+      "candidate2": "sp h",
+      "candidate1Votes": 380741.7555744161,
+      "candidate2Votes": 76949.05853715641,
+      "totalVotes": 457690.81411157246,
+      "winner": "sp f",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp d - ext",
+      "candidate2": "sp f",
+      "candidate1Votes": 344740.7674885262,
+      "candidate2Votes": 102894.46465239313,
+      "totalVotes": 447635.2321409193,
+      "winner": "sp d - ext",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp d - ext",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 346527.0966606262,
+      "candidate2Votes": 101108.13548029313,
+      "totalVotes": 447635.2321409193,
+      "winner": "sp d - ext",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp f",
+      "candidate2": "sp g - basic",
+      "candidate1Votes": 282812.3736969607,
+      "candidate2Votes": 164805.41840913863,
+      "totalVotes": 447617.7921060993,
+      "winner": "sp f",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp f",
+      "candidate2": "sp i - basic",
+      "candidate1Votes": 164332.2544243574,
+      "candidate2Votes": 283285.5376817419,
+      "totalVotes": 447617.7921060993,
+      "winner": "sp i - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp i - basic",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 346509.6566258062,
+      "candidate2Votes": 101108.13548029313,
+      "totalVotes": 447617.7921060993,
+      "winner": "sp i - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp f",
+      "candidate1Votes": 234598.01429703116,
+      "candidate2Votes": 159003.09245495804,
+      "totalVotes": 393601.1067519892,
+      "winner": "sp c",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 292492.9712716961,
+      "candidate2Votes": 101108.13548029313,
+      "totalVotes": 393601.1067519892,
+      "winner": "sp c",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp f",
+      "candidate2": "sp k",
+      "candidate1Votes": 282812.3736969607,
+      "candidate2Votes": 109788.73305502854,
+      "totalVotes": 392601.1067519892,
+      "winner": "sp f",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp f",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 382528.0847465161,
+      "candidate2Votes": 0,
+      "totalVotes": 382528.0847465161,
+      "winner": "sp f",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp f",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 181704.23821666755,
+      "candidate2Votes": 200823.84652984852,
+      "totalVotes": 382528.0847465161,
+      "winner": "sp l - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp d - ext",
+      "candidate1Votes": 124882.3032474758,
+      "candidate2Votes": 232717.8154186235,
+      "totalVotes": 357600.1186660993,
+      "winner": "sp d - ext",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp b - basic",
+      "candidate2": "sp d - ext",
+      "candidate1Votes": 189972.01060705903,
+      "candidate2Votes": 167628.10805904027,
+      "totalVotes": 357600.1186660993,
+      "winner": "sp b - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp d - ext",
+      "candidate1Votes": 126117.8950244279,
+      "candidate2Votes": 231482.22364167141,
+      "totalVotes": 357600.1186660993,
+      "winner": "sp d - ext",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp d - ext",
+      "candidate2": "sp e - basic",
+      "candidate1Votes": 346527.0966606262,
+      "candidate2Votes": 11073.022005473156,
+      "totalVotes": 357600.1186660993,
+      "winner": "sp d - ext",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp b - basic",
+      "candidate1Votes": 120788.73305502854,
+      "candidate2Votes": 236793.9455762508,
+      "totalVotes": 357582.6786312793,
+      "winner": "sp b - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp c",
+      "candidate1Votes": 189972.01060705903,
+      "candidate2Votes": 167610.66802422027,
+      "totalVotes": 357582.6786312793,
+      "winner": "sp a",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp a",
+      "candidate2": "sp e - basic",
+      "candidate1Votes": 199972.01060705903,
+      "candidate2Votes": 157610.6680242203,
+      "totalVotes": 357582.6786312793,
+      "winner": "sp a",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp a",
       "candidate2": "sp g - basic",
-      "candidate1Votes": 14615.85480277252,
-      "candidate2Votes": 164805.41840913863,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp g - basic",
-      "isInternal": false
+      "candidate1Votes": 257866.96758172393,
+      "candidate2Votes": 99715.71104955538,
+      "totalVotes": 357582.6786312793,
+      "winner": "sp a",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp a",
       "candidate2": "sp h",
-      "candidate1Votes": 114331.5658523279,
-      "candidate2Votes": 65089.70735958324,
-      "totalVotes": 179421.27321191112,
+      "candidate1Votes": 299687.7216566144,
+      "candidate2Votes": 57894.956974664914,
+      "totalVotes": 357582.6786312793,
       "winner": "sp a",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp a",
       "candidate2": "sp i - basic",
-      "candidate1Votes": 79705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp i - basic",
-      "isInternal": false
+      "candidate1Votes": 199972.01060705903,
+      "candidate2Votes": 157610.6680242203,
+      "totalVotes": 357582.6786312793,
+      "winner": "sp a",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp a",
       "candidate2": "sp j - basic",
-      "candidate1Votes": 114331.5658523279,
-      "candidate2Votes": 65089.70735958324,
-      "totalVotes": 179421.27321191112,
+      "candidate1Votes": 357582.6786312793,
+      "candidate2Votes": 0,
+      "totalVotes": 357582.6786312793,
       "winner": "sp a",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": []
+      }
     },
     {
       "candidate1": "sp a",
       "candidate2": "sp k",
-      "candidate1Votes": 179421.27321191112,
+      "candidate1Votes": 357582.6786312793,
       "candidate2Votes": 0,
-      "totalVotes": 179421.27321191112,
+      "totalVotes": 357582.6786312793,
       "winner": "sp a",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp a",
-      "candidate2": "sp l - ext",
-      "candidate1Votes": 79705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp l - ext",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": []
+      }
     },
     {
       "candidate1": "sp b - basic",
       "candidate2": "sp b - ext",
-      "candidate1Votes": 65089.70735958324,
-      "candidate2Votes": 114331.5658523279,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp b - ext",
-      "isInternal": true
+      "candidate1Votes": 233251.1127789514,
+      "candidate2Votes": 124331.5658523279,
+      "totalVotes": 357582.6786312793,
+      "winner": "sp b - basic",
+      "isInternal": true,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          }
+        ]
+      }
     },
     {
-      "candidate1": "sp b - ext",
+      "candidate1": "sp b - basic",
       "candidate2": "sp c",
-      "candidate1Votes": 79705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp c",
-      "isInternal": false
+      "candidate1Votes": 189972.01060705903,
+      "candidate2Votes": 167610.66802422027,
+      "totalVotes": 357582.6786312793,
+      "winner": "sp b - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          }
+        ]
+      }
     },
     {
-      "candidate1": "sp b - ext",
-      "candidate2": "sp d - ext",
-      "candidate1Votes": 14615.85480277252,
-      "candidate2Votes": 164805.41840913863,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp d - ext",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp b - ext",
+      "candidate1": "sp b - basic",
       "candidate2": "sp e - basic",
-      "candidate1Votes": 79705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp e - basic",
-      "isInternal": false
+      "candidate1Votes": 199972.01060705903,
+      "candidate2Votes": 157610.6680242203,
+      "totalVotes": 357582.6786312793,
+      "winner": "sp b - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          }
+        ]
+      }
     },
     {
-      "candidate1": "sp b - ext",
-      "candidate2": "sp f",
-      "candidate1Votes": 79705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp f",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp b - ext",
+      "candidate1": "sp b - basic",
       "candidate2": "sp g - basic",
-      "candidate1Votes": 79705.56216235577,
+      "candidate1Votes": 257866.96758172393,
       "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp g - basic",
-      "isInternal": false
+      "totalVotes": 357582.6786312793,
+      "winner": "sp b - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
     },
     {
-      "candidate1": "sp b - ext",
+      "candidate1": "sp b - basic",
       "candidate2": "sp h",
-      "candidate1Votes": 179421.27321191112,
-      "candidate2Votes": 0,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp b - ext",
-      "isInternal": false
+      "candidate1Votes": 299687.7216566144,
+      "candidate2Votes": 57894.956974664914,
+      "totalVotes": 357582.6786312793,
+      "winner": "sp b - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          }
+        ]
+      }
     },
     {
-      "candidate1": "sp b - ext",
+      "candidate1": "sp b - basic",
       "candidate2": "sp i - basic",
-      "candidate1Votes": 79705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp i - basic",
-      "isInternal": false
+      "candidate1Votes": 247866.96758172393,
+      "candidate2Votes": 109715.71104955538,
+      "totalVotes": 357582.6786312793,
+      "winner": "sp b - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          }
+        ]
+      }
     },
     {
-      "candidate1": "sp b - ext",
+      "candidate1": "sp b - basic",
       "candidate2": "sp j - basic",
-      "candidate1Votes": 179421.27321191112,
+      "candidate1Votes": 357582.6786312793,
       "candidate2Votes": 0,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp b - ext",
-      "isInternal": false
+      "totalVotes": 357582.6786312793,
+      "winner": "sp b - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": []
+      }
     },
     {
-      "candidate1": "sp b - ext",
+      "candidate1": "sp b - basic",
       "candidate2": "sp k",
-      "candidate1Votes": 79705.56216235577,
+      "candidate1Votes": 257866.96758172393,
       "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp k",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp b - ext",
-      "candidate2": "sp l - ext",
-      "candidate1Votes": 79705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp l - ext",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp c",
-      "candidate2": "sp d - ext",
-      "candidate1Votes": 114331.5658523279,
-      "candidate2Votes": 65089.70735958324,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp c",
-      "isInternal": false
+      "totalVotes": 357582.6786312793,
+      "winner": "sp b - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp c",
       "candidate2": "sp e - basic",
-      "candidate1Votes": 113331.5658523279,
+      "candidate1Votes": 291492.9712716961,
       "candidate2Votes": 66089.70735958323,
-      "totalVotes": 179421.27321191112,
+      "totalVotes": 357582.6786312793,
       "winner": "sp c",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp c",
-      "candidate2": "sp f",
-      "candidate1Votes": 179421.27321191112,
-      "candidate2Votes": 0,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp c",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp c",
       "candidate2": "sp g - basic",
-      "candidate1Votes": 114331.5658523279,
+      "candidate1Votes": 292492.9712716961,
       "candidate2Votes": 65089.70735958324,
-      "totalVotes": 179421.27321191112,
+      "totalVotes": 357582.6786312793,
       "winner": "sp c",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp c",
       "candidate2": "sp h",
-      "candidate1Votes": 114331.5658523279,
+      "candidate1Votes": 292492.9712716961,
       "candidate2Votes": 65089.70735958324,
-      "totalVotes": 179421.27321191112,
+      "totalVotes": 357582.6786312793,
       "winner": "sp c",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp c",
       "candidate2": "sp i - basic",
-      "candidate1Votes": 79705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp i - basic",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp c",
-      "candidate2": "sp j - basic",
-      "candidate1Votes": 114331.5658523279,
-      "candidate2Votes": 65089.70735958324,
-      "totalVotes": 179421.27321191112,
+      "candidate1Votes": 192777.2602221407,
+      "candidate2Votes": 164805.41840913863,
+      "totalVotes": 357582.6786312793,
       "winner": "sp c",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp c",
-      "candidate2": "sp k",
-      "candidate1Votes": 179421.27321191112,
-      "candidate2Votes": 0,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp c",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp c",
-      "candidate2": "sp l - ext",
-      "candidate1Votes": 114331.5658523279,
-      "candidate2Votes": 65089.70735958324,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp c",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp d - ext",
-      "candidate2": "sp e - basic",
-      "candidate1Votes": 168348.25120643797,
-      "candidate2Votes": 11073.022005473156,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp d - ext",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp e - basic",
       "candidate2": "sp e - ext",
-      "candidate1Votes": 110788.73305502854,
-      "candidate2Votes": 68632.5401568826,
-      "totalVotes": 179421.27321191112,
+      "candidate1Votes": 286144.888859315,
+      "candidate2Votes": 71437.78977196426,
+      "totalVotes": 357582.6786312793,
       "winner": "sp e - basic",
-      "isInternal": true
-    },
-    {
-      "candidate1": "sp e - basic",
-      "candidate2": "sp f",
-      "candidate1Votes": 179421.27321191112,
-      "candidate2Votes": 0,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp e - basic",
-      "isInternal": false
+      "isInternal": true,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp e - basic",
       "candidate2": "sp g - basic",
-      "candidate1Votes": 79705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp g - basic",
-      "isInternal": false
+      "candidate1Votes": 190990.9310500407,
+      "candidate2Votes": 166591.74758123863,
+      "totalVotes": 357582.6786312793,
+      "winner": "sp e - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp e - basic",
       "candidate2": "sp h",
-      "candidate1Votes": 169348.25120643797,
-      "candidate2Votes": 10073.022005473156,
-      "totalVotes": 179421.27321191112,
+      "candidate1Votes": 280633.62009412295,
+      "candidate2Votes": 76949.05853715641,
+      "totalVotes": 357582.6786312793,
       "winner": "sp e - basic",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp e - basic",
       "candidate2": "sp i - basic",
-      "candidate1Votes": 79705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp i - basic",
-      "isInternal": false
+      "candidate1Votes": 182777.2602221407,
+      "candidate2Votes": 174805.41840913863,
+      "totalVotes": 357582.6786312793,
+      "winner": "sp e - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp e - basic",
       "candidate2": "sp j - basic",
-      "candidate1Votes": 179421.27321191112,
+      "candidate1Votes": 357582.6786312793,
       "candidate2Votes": 0,
-      "totalVotes": 179421.27321191112,
+      "totalVotes": 357582.6786312793,
       "winner": "sp e - basic",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": []
+      }
     },
     {
       "candidate1": "sp e - basic",
       "candidate2": "sp k",
-      "candidate1Votes": 179421.27321191112,
-      "candidate2Votes": 0,
-      "totalVotes": 179421.27321191112,
+      "candidate1Votes": 355796.3494591793,
+      "candidate2Votes": 1786.3291721,
+      "totalVotes": 357582.6786312793,
       "winner": "sp e - basic",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp e - basic",
-      "candidate2": "sp l - ext",
-      "candidate1Votes": 79705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 179421.27321191112,
-      "winner": "sp l - ext",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp d - ext",
       "candidate2": "sp h",
-      "candidate1Votes": 168348.25120643797,
-      "candidate2Votes": 10073.022005473156,
-      "totalVotes": 178421.27321191112,
+      "candidate1Votes": 344740.7674885262,
+      "candidate2Votes": 11859.351177573157,
+      "totalVotes": 356600.1186660993,
       "winner": "sp d - ext",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp d - ext",
       "candidate2": "sp k",
-      "candidate1Votes": 168348.25120643797,
-      "candidate2Votes": 10073.022005473156,
-      "totalVotes": 178421.27321191112,
+      "candidate1Votes": 344740.7674885262,
+      "candidate2Votes": 11859.351177573157,
+      "totalVotes": 356600.1186660993,
       "winner": "sp d - ext",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp f",
-      "candidate2": "sp h",
-      "candidate1Votes": 103258.54384685474,
-      "candidate2Votes": 75162.7293650564,
-      "totalVotes": 178421.27321191112,
-      "winner": "sp f",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp f",
-      "candidate2": "sp k",
-      "candidate1Votes": 68632.5401568826,
-      "candidate2Votes": 109788.73305502854,
-      "totalVotes": 178421.27321191112,
-      "winner": "sp k",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp g - basic",
-      "candidate2": "sp h",
-      "candidate1Votes": 168348.25120643797,
-      "candidate2Votes": 10073.022005473156,
-      "totalVotes": 178421.27321191112,
-      "winner": "sp g - basic",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp g - basic",
-      "candidate2": "sp k",
-      "candidate1Votes": 168348.25120643797,
-      "candidate2Votes": 10073.022005473156,
-      "totalVotes": 178421.27321191112,
-      "winner": "sp g - basic",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp h",
       "candidate2": "sp i - basic",
-      "candidate1Votes": 75162.7293650564,
-      "candidate2Votes": 103258.54384685474,
-      "totalVotes": 178421.27321191112,
+      "candidate1Votes": 69754.30815223807,
+      "candidate2Votes": 286828.37047904124,
+      "totalVotes": 356582.6786312793,
       "winner": "sp i - basic",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp h",
-      "candidate2": "sp j - basic",
-      "candidate1Votes": 178421.27321191112,
-      "candidate2Votes": 0,
-      "totalVotes": 178421.27321191112,
-      "winner": "sp h",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp h",
-      "candidate2": "sp k",
-      "candidate1Votes": 78705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 178421.27321191112,
-      "winner": "sp k",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp h",
-      "candidate2": "sp l - ext",
-      "candidate1Votes": 78705.56216235577,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 178421.27321191112,
-      "winner": "sp l - ext",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp i - basic",
       "candidate2": "sp k",
-      "candidate1Votes": 168348.25120643797,
-      "candidate2Votes": 10073.022005473156,
-      "totalVotes": 178421.27321191112,
+      "candidate1Votes": 344723.3274537062,
+      "candidate2Votes": 11859.351177573157,
+      "totalVotes": 356582.6786312793,
       "winner": "sp i - basic",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp j - basic",
-      "candidate2": "sp k",
-      "candidate1Votes": 65089.70735958324,
-      "candidate2Votes": 109788.73305502854,
-      "totalVotes": 174878.44041461177,
-      "winner": "sp k",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp k",
-      "candidate2": "sp l - ext",
-      "candidate1Votes": 10073.022005473156,
-      "candidate2Votes": 164805.41840913863,
-      "totalVotes": 174878.44041461177,
-      "winner": "sp l - ext",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp d - basic",
       "candidate2": "sp d - ext",
-      "candidate1Votes": 65089.70735958324,
-      "candidate2Votes": 103258.54384685474,
-      "totalVotes": 168348.25120643797,
+      "candidate1Votes": 66893.47656650325,
+      "candidate2Votes": 279633.62009412295,
+      "totalVotes": 346527.0966606262,
       "winner": "sp d - ext",
-      "isInternal": true
-    },
-    {
-      "candidate1": "sp d - ext",
-      "candidate2": "sp f",
-      "candidate1Votes": 168348.25120643797,
-      "candidate2Votes": 0,
-      "totalVotes": 168348.25120643797,
-      "winner": "sp d - ext",
-      "isInternal": false
+      "isInternal": true,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp d - ext",
       "candidate2": "sp g - basic",
-      "candidate1Votes": 168348.25120643797,
-      "candidate2Votes": 0,
-      "totalVotes": 168348.25120643797,
+      "candidate1Votes": 344740.7674885262,
+      "candidate2Votes": 1786.3291721,
+      "totalVotes": 346527.0966606262,
       "winner": "sp d - ext",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp d - ext",
       "candidate2": "sp i - basic",
-      "candidate1Votes": 68632.5401568826,
+      "candidate1Votes": 246811.3856110708,
       "candidate2Votes": 99715.71104955538,
-      "totalVotes": 168348.25120643797,
-      "winner": "sp i - basic",
-      "isInternal": false
+      "totalVotes": 346527.0966606262,
+      "winner": "sp d - ext",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp d - ext",
       "candidate2": "sp j - basic",
-      "candidate1Votes": 168348.25120643797,
+      "candidate1Votes": 346527.0966606262,
       "candidate2Votes": 0,
-      "totalVotes": 168348.25120643797,
+      "totalVotes": 346527.0966606262,
       "winner": "sp d - ext",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp d - ext",
-      "candidate2": "sp l - ext",
-      "candidate1Votes": 168348.25120643797,
-      "candidate2Votes": 0,
-      "totalVotes": 168348.25120643797,
-      "winner": "sp d - ext",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp f",
-      "candidate2": "sp g - basic",
-      "candidate1Votes": 3542.832797299363,
-      "candidate2Votes": 164805.41840913863,
-      "totalVotes": 168348.25120643797,
-      "winner": "sp g - basic",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp f",
-      "candidate2": "sp i - basic",
-      "candidate1Votes": 3542.832797299363,
-      "candidate2Votes": 164805.41840913863,
-      "totalVotes": 168348.25120643797,
-      "winner": "sp i - basic",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp f",
-      "candidate2": "sp j - basic",
-      "candidate1Votes": 103258.54384685474,
-      "candidate2Votes": 65089.70735958324,
-      "totalVotes": 168348.25120643797,
-      "winner": "sp f",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp f",
-      "candidate2": "sp l - ext",
-      "candidate1Votes": 3542.832797299363,
-      "candidate2Votes": 164805.41840913863,
-      "totalVotes": 168348.25120643797,
-      "winner": "sp l - ext",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp g - basic",
-      "candidate2": "sp g - ext",
-      "candidate1Votes": 164805.41840913863,
-      "candidate2Votes": 3542.832797299363,
-      "totalVotes": 168348.25120643797,
-      "winner": "sp g - basic",
-      "isInternal": true
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": []
+      }
     },
     {
       "candidate1": "sp g - basic",
       "candidate2": "sp i - basic",
-      "candidate1Votes": 68632.5401568826,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 168348.25120643797,
+      "candidate1Votes": 70418.8693289826,
+      "candidate2Votes": 276090.7872968236,
+      "totalVotes": 346509.6566258062,
       "winner": "sp i - basic",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp g - basic",
-      "candidate2": "sp j - basic",
-      "candidate1Votes": 168348.25120643797,
-      "candidate2Votes": 0,
-      "totalVotes": 168348.25120643797,
-      "winner": "sp g - basic",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp g - basic",
-      "candidate2": "sp l - ext",
-      "candidate1Votes": 168348.25120643797,
-      "candidate2Votes": 0,
-      "totalVotes": 168348.25120643797,
-      "winner": "sp g - basic",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp i - basic",
       "candidate2": "sp i - ext",
-      "candidate1Votes": 103258.54384685474,
-      "candidate2Votes": 65089.70735958324,
-      "totalVotes": 168348.25120643797,
+      "candidate1Votes": 288614.69965114124,
+      "candidate2Votes": 57894.956974664914,
+      "totalVotes": 346509.6566258062,
       "winner": "sp i - basic",
-      "isInternal": true
+      "isInternal": true,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp i - basic",
       "candidate2": "sp j - basic",
-      "candidate1Votes": 103258.54384685474,
-      "candidate2Votes": 65089.70735958324,
-      "totalVotes": 168348.25120643797,
+      "candidate1Votes": 346509.6566258062,
+      "candidate2Votes": 0,
+      "totalVotes": 346509.6566258062,
       "winner": "sp i - basic",
-      "isInternal": false
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": []
+      }
     },
     {
-      "candidate1": "sp i - basic",
+      "candidate1": "sp h",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 138386.84830912066,
+      "candidate2Votes": 200823.84652984852,
+      "totalVotes": 339210.69483896915,
+      "winner": "sp l - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 292492.9712716961,
+      "candidate2Votes": 0,
+      "totalVotes": 292492.9712716961,
+      "winner": "sp c",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp c",
+      "candidate2": "sp k",
+      "candidate1Votes": 292492.9712716961,
+      "candidate2Votes": 0,
+      "totalVotes": 292492.9712716961,
+      "winner": "sp c",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp g - basic",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 180134.580378538,
+      "candidate2Votes": 101108.13548029313,
+      "totalVotes": 281242.7158588311,
+      "winner": "sp g - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp g - basic",
+      "candidate2": "sp h",
+      "candidate1Votes": 178348.251206438,
+      "candidate2Votes": 69754.30815223807,
+      "totalVotes": 248102.55935867608,
+      "winner": "sp g - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp h",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 238102.55935867605,
+      "candidate2Votes": 0,
+      "totalVotes": 238102.55935867605,
+      "winner": "sp h",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp h",
+      "candidate2": "sp k",
+      "candidate1Votes": 138386.84830912066,
+      "candidate2Votes": 99715.71104955538,
+      "totalVotes": 238102.55935867605,
+      "winner": "sp h",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp k",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 11859.351177573157,
+      "candidate2Votes": 200823.84652984852,
+      "totalVotes": 212683.19770742167,
+      "winner": "sp l - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp j - basic",
+      "candidate2": "sp l - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 200823.84652984852,
+      "totalVotes": 200823.84652984852,
+      "winner": "sp l - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp l - basic",
       "candidate2": "sp l - ext",
-      "candidate1Votes": 103258.54384685474,
-      "candidate2Votes": 65089.70735958324,
-      "totalVotes": 168348.25120643797,
-      "winner": "sp i - basic",
-      "isInternal": false
+      "candidate1Votes": 101108.13548029313,
+      "candidate2Votes": 99715.71104955538,
+      "totalVotes": 200823.84652984852,
+      "winner": "sp l - basic",
+      "isInternal": true,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp g - basic",
+      "candidate2": "sp k",
+      "candidate1Votes": 178348.251206438,
+      "candidate2Votes": 11859.351177573157,
+      "totalVotes": 190207.60238401114,
+      "winner": "sp g - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp g - basic",
+      "candidate2": "sp g - ext",
+      "candidate1Votes": 166591.74758123863,
+      "candidate2Votes": 13542.832797299363,
+      "totalVotes": 180134.580378538,
+      "winner": "sp g - basic",
+      "isInternal": true,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          }
+        ]
+      }
+    },
+    {
+      "candidate1": "sp g - basic",
+      "candidate2": "sp j - basic",
+      "candidate1Votes": 180134.580378538,
+      "candidate2Votes": 0,
+      "totalVotes": 180134.580378538,
+      "winner": "sp g - basic",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp j - basic",
+      "candidate2": "sp k",
+      "candidate1Votes": 0,
+      "candidate2Votes": 111575.06222712854,
+      "totalVotes": 111575.06222712854,
+      "winner": "sp k",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": [
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      }
     },
     {
       "candidate1": "sp j - basic",
       "candidate2": "sp j - ext",
       "candidate1Votes": 99715.71104955538,
-      "candidate2Votes": 65089.70735958324,
-      "totalVotes": 164805.41840913863,
+      "candidate2Votes": 0,
+      "totalVotes": 99715.71104955538,
       "winner": "sp j - basic",
-      "isInternal": true
-    },
-    {
-      "candidate1": "sp j - basic",
-      "candidate2": "sp l - ext",
-      "candidate1Votes": 65089.70735958324,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 164805.41840913863,
-      "winner": "sp l - ext",
-      "isInternal": false
-    },
-    {
-      "candidate1": "sp l - basic",
-      "candidate2": "sp l - ext",
-      "candidate1Votes": 65089.70735958324,
-      "candidate2Votes": 99715.71104955538,
-      "totalVotes": 164805.41840913863,
-      "winner": "sp l - ext",
-      "isInternal": true
+      "isInternal": true,
+      "voters": {
+        "candidate1": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108480.11927260328
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99715.71104955538
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 65089.70735958324
+          },
+          {
+            "voter": "0xA7860E99e3ce0752D1ac53b974E309fFf80277C6",
+            "vp": 57894.956974664914
+          },
+          {
+            "voter": "0x035eBd096AFa6b98372494C7f08f3402324117D3",
+            "vp": 10073.022005473156
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 10000
+          },
+          {
+            "voter": "0x60dbF50076206F60bCc2Edf9295f5734561B8d77",
+            "vp": 3542.832797299363
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 1000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 17.44003482
+          }
+        ],
+        "candidate2": []
+      }
     }
   ],
   "summary": {
     "votedBudget": 4500000,
     "twoYearStreamBudget": 1500000,
     "oneYearStreamBudget": 3000000,
-    "transferredBudget": 1000000,
-    "adjustedTwoYearBudget": 500000,
-    "adjustedOneYearBudget": 4000000,
+    "transferredBudget": 800000,
+    "adjustedTwoYearBudget": 700000,
+    "adjustedOneYearBudget": 3800000,
     "remainingTwoYearBudget": 0,
-    "remainingOneYearBudget": 200000,
-    "totalAllocated": 4300000,
-    "unspentBudget": 200000,
-    "allocatedProjects": 8,
-    "rejectedProjects": 5
+    "remainingOneYearBudget": 1000000,
+    "totalAllocated": 3500000,
+    "unspentBudget": 1000000,
+    "allocatedProjects": 7,
+    "rejectedProjects": 6
   },
   "allocations": [
     {
-      "name": "sp i",
-      "score": 18,
-      "averageSupport": 111484.75233677351,
-      "basicBudget": 500000,
-      "extendedBudget": 700000,
-      "isSpp1": true,
-      "allocated": true,
-      "streamDuration": "2-year",
-      "allocatedBudget": 500000,
-      "rejectionReason": null,
-      "isNoneBelow": false
-    },
-    {
-      "name": "sp c",
+      "name": "sp b",
       "score": 17,
-      "averageSupport": 118551.01586761673,
-      "basicBudget": 400000,
-      "extendedBudget": 0,
+      "averageSupport": 252493.77119053033,
+      "basicBudget": 300000,
+      "extendedBudget": 400000,
       "isSpp1": false,
       "allocated": true,
       "streamDuration": "1-year",
-      "allocatedBudget": 400000,
+      "allocatedBudget": 300000,
       "rejectionReason": null,
       "isNoneBelow": false
     },
     {
       "name": "sp d",
-      "score": 15,
-      "averageSupport": 148432.0316434145,
+      "score": 16,
+      "averageSupport": 301163.48213482386,
       "basicBudget": 400000,
       "extendedBudget": 800000,
       "isSpp1": false,
@@ -830,38 +5055,25 @@
       "isNoneBelow": false
     },
     {
-      "name": "sp g",
-      "score": 13,
-      "averageSupport": 119687.9813444238,
+      "name": "sp a",
+      "score": 15,
+      "averageSupport": 239072.4291476603,
       "basicBudget": 300000,
-      "extendedBudget": 400000,
-      "isSpp1": false,
+      "extendedBudget": 0,
+      "isSpp1": true,
       "allocated": true,
-      "streamDuration": "1-year",
+      "streamDuration": "2-year",
       "allocatedBudget": 300000,
       "rejectionReason": null,
       "isNoneBelow": false
     },
     {
-      "name": "sp l",
-      "score": 11,
-      "averageSupport": 83532.9882501139,
-      "basicBudget": 1100000,
-      "extendedBudget": 1300000,
-      "isSpp1": true,
-      "allocated": true,
-      "streamDuration": "1-year",
-      "allocatedBudget": 1300000,
-      "rejectionReason": null,
-      "isNoneBelow": false
-    },
-    {
-      "name": "sp e",
-      "score": 9,
-      "averageSupport": 110944.7007986282,
+      "name": "sp c",
+      "score": 14,
+      "averageSupport": 241612.79015007822,
       "basicBudget": 400000,
-      "extendedBudget": 700000,
-      "isSpp1": true,
+      "extendedBudget": 0,
+      "isSpp1": false,
       "allocated": true,
       "streamDuration": "1-year",
       "allocatedBudget": 400000,
@@ -869,87 +5081,48 @@
       "isNoneBelow": false
     },
     {
-      "name": "sp a",
-      "score": 8,
-      "averageSupport": 83634.68015427305,
-      "basicBudget": 300000,
-      "extendedBudget": 0,
+      "name": "sp e",
+      "score": 12,
+      "averageSupport": 216713.80841799843,
+      "basicBudget": 400000,
+      "extendedBudget": 700000,
       "isSpp1": true,
       "allocated": true,
-      "streamDuration": "1-year",
-      "allocatedBudget": 300000,
+      "streamDuration": "2-year",
+      "allocatedBudget": 400000,
       "rejectionReason": null,
       "isNoneBelow": false
     },
     {
-      "name": "sp k",
-      "score": 7,
-      "averageSupport": 46525.04993537625,
-      "basicBudget": 300000,
-      "extendedBudget": 0,
-      "isSpp1": false,
+      "name": "sp i",
+      "score": 10,
+      "averageSupport": 241003.76633885092,
+      "basicBudget": 500000,
+      "extendedBudget": 700000,
+      "isSpp1": true,
       "allocated": true,
       "streamDuration": "1-year",
-      "allocatedBudget": 300000,
+      "allocatedBudget": 500000,
       "rejectionReason": null,
       "isNoneBelow": false
     },
     {
       "name": "sp f",
-      "score": 6,
-      "averageSupport": 40391.83377825219,
+      "score": 9,
+      "averageSupport": 233244.61477182843,
       "basicBudget": 800000,
       "extendedBudget": 0,
       "isSpp1": true,
-      "allocated": false,
-      "streamDuration": null,
-      "allocatedBudget": 0,
-      "rejectionReason": "Insufficient budget",
-      "isNoneBelow": false
-    },
-    {
-      "name": "sp b",
-      "score": 4,
-      "averageSupport": 95086.42590780597,
-      "basicBudget": 300000,
-      "extendedBudget": 400000,
-      "isSpp1": false,
-      "allocated": false,
-      "streamDuration": null,
-      "allocatedBudget": 0,
-      "rejectionReason": "Insufficient budget",
-      "isNoneBelow": false
-    },
-    {
-      "name": "sp h",
-      "score": 3,
-      "averageSupport": 62499.27584052501,
-      "basicBudget": 300000,
-      "extendedBudget": 0,
-      "isSpp1": false,
-      "allocated": false,
-      "streamDuration": null,
-      "allocatedBudget": 0,
-      "rejectionReason": "Insufficient budget",
-      "isNoneBelow": false
-    },
-    {
-      "name": "sp j",
-      "score": 1,
-      "averageSupport": 41328.35728080841,
-      "basicBudget": 700000,
-      "extendedBudget": 800000,
-      "isSpp1": true,
-      "allocated": false,
-      "streamDuration": null,
-      "allocatedBudget": 0,
-      "rejectionReason": "Insufficient budget",
+      "allocated": true,
+      "streamDuration": "1-year",
+      "allocatedBudget": 800000,
+      "rejectionReason": null,
       "isNoneBelow": false
     },
     {
       "name": "none below",
-      "score": 0,
-      "averageSupport": 7465.724563593765,
+      "score": 7,
+      "averageSupport": 187127.52502801555,
       "basicBudget": 0,
       "extendedBudget": 0,
       "isSpp1": false,
@@ -958,6 +5131,71 @@
       "allocatedBudget": 0,
       "rejectionReason": "Below 'none below' option",
       "isNoneBelow": true
+    },
+    {
+      "name": "sp g",
+      "score": 6,
+      "averageSupport": 127926.17384046502,
+      "basicBudget": 300000,
+      "extendedBudget": 400000,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below 'none below' option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp l",
+      "score": 5,
+      "averageSupport": 158838.28398266723,
+      "basicBudget": 1100000,
+      "extendedBudget": 1300000,
+      "isSpp1": true,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below 'none below' option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp h",
+      "score": 4,
+      "averageSupport": 100096.10062434398,
+      "basicBudget": 300000,
+      "extendedBudget": 0,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below 'none below' option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp k",
+      "score": 2,
+      "averageSupport": 44321.50108683504,
+      "basicBudget": 300000,
+      "extendedBudget": 0,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below 'none below' option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp j",
+      "score": 0,
+      "averageSupport": 10496.390636795302,
+      "basicBudget": 700000,
+      "extendedBudget": 800000,
+      "isSpp1": true,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below 'none below' option",
+      "isNoneBelow": false
     }
   ],
   "programInfo": {

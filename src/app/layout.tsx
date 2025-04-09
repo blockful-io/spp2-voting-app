@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Providers } from "./providers";
-
+import HotjarScript from "@/lib/behavior";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,6 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <HotjarScript />
+      </head>
       <body className={`${inter.className} bg-black min-h-screen`}>
         <Providers>
           <>
