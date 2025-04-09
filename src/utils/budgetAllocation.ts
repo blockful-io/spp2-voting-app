@@ -54,9 +54,7 @@ export function allocateBudgets(
     // Get other provider metadata
     const firstChoice = providerChoices[0];
     const isSpp1 = firstChoice?.isSpp1 || false;
-    
-    console.log(`Candidate: ${candidate.name}, Provider: ${providerName}, Basic: $${basicBudget}, Extended: $${extendedBudget}, SPP1: ${isSpp1}`);
-    
+        
     // If we've reached None Below or are past it, reject all subsequent candidates
     if (reachedNoneBelow || candidate.isNoneBelow) {
       reachedNoneBelow = true;
@@ -90,7 +88,6 @@ export function allocateBudgets(
       // If there's a clear winner in the internal match
       if (internalMatch.winner !== "tie") {
         budgetType = internalMatch.winner.includes("ext") ? "extended" : "basic";
-        console.log(`Internal match found for ${providerName}: Winner is ${internalMatch.winner}, budgetType set to ${budgetType}`);
       }
     }
 
@@ -106,7 +103,6 @@ export function allocateBudgets(
       remainingTwoYearBudget -= selectedBudget;
       totalAllocated += selectedBudget;
       allocatedProjects++;
-      console.log(`Allocated ${providerName} to 2-year stream: $${selectedBudget}`);
       return {
         name: providerName,
         score: candidate.score,
@@ -136,7 +132,6 @@ export function allocateBudgets(
       remainingOneYearBudget -= selectedBudget;
       totalAllocated += selectedBudget;
       allocatedProjects++;
-      console.log(`Allocated ${providerName} to 1-year stream: $${selectedBudget}`);
       return {
         name: providerName,
         score: candidate.score,

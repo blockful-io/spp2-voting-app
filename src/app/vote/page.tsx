@@ -162,7 +162,7 @@ export default function VotePage() {
             won&apos;t be counted. You can also select between basic or extended
             budget for each candidate.
           </p>
-          {previousVote?.votes?.length && previousVote.votes.length > 0 && (
+          {previousVote?.votes && previousVote.votes.length > 0 && (
             <div className="bg-blue-900/50 p-4 rounded-lg mb-6">
               <p className="text-blue-200">
                 Your previous vote has been loaded. You can modify your choices

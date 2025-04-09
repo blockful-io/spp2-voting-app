@@ -45,7 +45,7 @@ export function BudgetButtons({
             }
           `}
         />
-        <span className="hidden sm:block">Basic:</span>{" "}
+        <span className="hidden sm:block">Basic</span>{": "}
         {formatCurrency(basicBudget.value)}
       </button>
       {extendedBudget && (
@@ -73,7 +73,7 @@ export function BudgetButtons({
               }
             `}
           />
-          <span className="hidden sm:block">Extended:</span>{" "}
+          <span className="hidden sm:block">Extended</span>{": "}
           {formatCurrency(extendedBudget.value)}
         </button>
       )}

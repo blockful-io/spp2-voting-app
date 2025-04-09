@@ -7,7 +7,6 @@ import {
   useSensor,
   useSensors,
   DragEndEvent,
-  DragStartEvent,
   TouchSensor,
 } from "@dnd-kit/core";
 import {
