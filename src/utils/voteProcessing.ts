@@ -148,6 +148,37 @@ export function processCopelandRanking(
         candidateChoices[i],
         candidateChoices[j]
       );
+
+      // Track voters for each candidate
+      const candidate1Voters: Array<{ voter: string; vp: number }> = [];
+      const candidate2Voters: Array<{ voter: string; vp: number }> = [];
+
+      // Process each vote to determine which voters supported each candidate
+      processedVotes.forEach((vote) => {
+        const vp = vote.vp || 1;
+        const posI = vote.choice.indexOf(i + 1);
+        const posJ = vote.choice.indexOf(j + 1);
+
+        // If both candidates are ranked
+        if (posI !== -1 && posJ !== -1) {
+          if (posI < posJ) {
+            candidate1Voters.push({ voter: vote.voter, vp });
+          } else if (posJ < posI) {
+            candidate2Voters.push({ voter: vote.voter, vp });
+          }
+        }
+        // If only one candidate is ranked
+        else if (posI !== -1) {
+          candidate1Voters.push({ voter: vote.voter, vp });
+        } else if (posJ !== -1) {
+          candidate2Voters.push({ voter: vote.voter, vp });
+        }
+      });
+
+      // Sort voters by voting power (descending)
+      candidate1Voters.sort((a, b) => b.vp - a.vp);
+      candidate2Voters.sort((a, b) => b.vp - a.vp);
+
       matchResults.push({
         candidate1: candidateChoices[i],
         candidate2: candidateChoices[j],
@@ -161,6 +192,10 @@ export function processCopelandRanking(
             ? candidateChoices[j]
             : "tie",
         isInternal,
+        voters: {
+          candidate1: candidate1Voters,
+          candidate2: candidate2Voters,
+        },
       });
     }
   }
