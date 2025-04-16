@@ -16,10 +16,10 @@ export const PROGRAM_BUDGET = 4500000; // Total budget in USD per year
 export const TWO_YEAR_STREAM_RATIO = 1 / 3; // Proportion allocated to 2-year streams
 export const ONE_YEAR_STREAM_RATIO = 2 / 3; // Proportion allocated to 1-year stream
 
-export const PROPOSAL_SPACE = "spp-test.eth";
+export const PROPOSAL_SPACE = "pikonha.eth";
 // Snapshot proposal ID - replace with your proposal ID
 export const PROPOSAL_ID =
-  "0x14bc28d4202213b2f735be22be131aa5f3b2e790433b8ef232207d0c0ace81e8";
+  "0x021746a24e77908be5d01dec0bfa0762643b431e64619dd45d84295a45916a4e";
 
 // Feature flags
 // All code now always uses bidimensional logic

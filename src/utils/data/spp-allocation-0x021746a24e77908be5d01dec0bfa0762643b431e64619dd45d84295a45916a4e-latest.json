@@ -1,0 +1,429 @@
+{
+  "proposal": {
+    "id": "0x021746a24e77908be5d01dec0bfa0762643b431e64619dd45d84295a45916a4e",
+    "title": "f5",
+    "space": "sppjhonson",
+    "totalVotes": 0,
+    "totalVotingPower": 0,
+    "state": "ACTIVE",
+    "dataSource": "Snapshot"
+  },
+  "headToHeadMatches": [
+    {
+      "candidate1": "none below",
+      "candidate2": "sp 1 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp 2 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp 3 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp 4 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "none below",
+      "candidate2": "sp 5 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp 1 - basic",
+      "candidate2": "sp 1 - ext",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": true,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp 1 - basic",
+      "candidate2": "sp 2 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp 1 - basic",
+      "candidate2": "sp 3 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp 1 - basic",
+      "candidate2": "sp 4 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp 1 - basic",
+      "candidate2": "sp 5 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp 2 - basic",
+      "candidate2": "sp 3 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp 2 - basic",
+      "candidate2": "sp 4 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp 2 - basic",
+      "candidate2": "sp 5 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp 3 - basic",
+      "candidate2": "sp 3 - ext",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": true,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp 3 - basic",
+      "candidate2": "sp 4 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp 3 - basic",
+      "candidate2": "sp 5 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp 4 - basic",
+      "candidate2": "sp 5 - basic",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": false,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    },
+    {
+      "candidate1": "sp 5 - basic",
+      "candidate2": "sp 5 - ext",
+      "candidate1Votes": 0,
+      "candidate2Votes": 0,
+      "totalVotes": 0,
+      "winner": "tie",
+      "isInternal": true,
+      "voters": {
+        "candidate1": [],
+        "candidate2": []
+      }
+    }
+  ],
+  "summary": {
+    "votedBudget": 4500000,
+    "twoYearStreamBudget": 1500000,
+    "oneYearStreamBudget": 3000000,
+    "transferredBudget": 0,
+    "adjustedTwoYearBudget": 1500000,
+    "adjustedOneYearBudget": 3000000,
+    "remainingTwoYearBudget": 1500000,
+    "remainingOneYearBudget": 3000000,
+    "totalAllocated": 0,
+    "unspentBudget": 4500000,
+    "allocatedProjects": 0,
+    "rejectedProjects": 6
+  },
+  "allocations": [
+    {
+      "name": "none below",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 0,
+      "extendedBudget": 0,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below 'none below' option",
+      "isNoneBelow": true
+    },
+    {
+      "name": "sp 1",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 1000,
+      "extendedBudget": 1500,
+      "isSpp1": true,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below 'none below' option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp 2",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 2000,
+      "extendedBudget": 0,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below 'none below' option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp 3",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 1200,
+      "extendedBudget": 1800,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below 'none below' option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp 4",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 2500,
+      "extendedBudget": 0,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below 'none below' option",
+      "isNoneBelow": false
+    },
+    {
+      "name": "sp 5",
+      "score": 0,
+      "averageSupport": 0,
+      "basicBudget": 3000,
+      "extendedBudget": 3500,
+      "isSpp1": false,
+      "allocated": false,
+      "streamDuration": null,
+      "allocatedBudget": 0,
+      "rejectionReason": "Below 'none below' option",
+      "isNoneBelow": false
+    }
+  ],
+  "programInfo": {
+    "totalBudget": 4500000,
+    "twoYearStreamRatio": 0.3333333333333333,
+    "oneYearStreamRatio": 0.6666666666666666
+  },
+  "choices": [
+    {
+      "originalName": "none below",
+      "name": "none below",
+      "budget": 0,
+      "isSpp1": false,
+      "isNoneBelow": true,
+      "choiceId": 1,
+      "budgetType": "none"
+    },
+    {
+      "originalName": "sp 1 - basic",
+      "name": "sp 1",
+      "budget": 1000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 2,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp 1 - ext",
+      "name": "sp 1",
+      "budget": 1500,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 3,
+      "budgetType": "extended"
+    },
+    {
+      "originalName": "sp 2 - basic",
+      "name": "sp 2",
+      "budget": 2000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 4,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp 3 - basic",
+      "name": "sp 3",
+      "budget": 1200,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 5,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp 3 - ext",
+      "name": "sp 3",
+      "budget": 1800,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 6,
+      "budgetType": "extended"
+    },
+    {
+      "originalName": "sp 4 - basic",
+      "name": "sp 4",
+      "budget": 2500,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 7,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp 5 - basic",
+      "name": "sp 5",
+      "budget": 3000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 8,
+      "budgetType": "basic"
+    },
+    {
+      "originalName": "sp 5 - ext",
+      "name": "sp 5",
+      "budget": 3500,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 9,
+      "budgetType": "extended"
+    }
+  ]
+}

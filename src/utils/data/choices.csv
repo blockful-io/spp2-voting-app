@@ -1,21 +1,10 @@
 choiceId,choiceName,budgetAmount,isSpp1
 1,none below,0,FALSE
-2,sp a,300000,TRUE
-3,sp b - basic,300000,FALSE
-4,sp b - ext,400000,FALSE
-5,sp c,400000,FALSE
-6,sp d - basic,400000,FALSE
-7,sp d - ext,800000,FALSE
-8,sp e - basic,400000,TRUE
-9,sp e - ext,700000,TRUE
-10,sp f,800000,TRUE
-11,sp g - basic,300000,FALSE
-12,sp g - ext,400000,FALSE
-13,sp h,300000,FALSE
-14,sp i - basic,500000,TRUE
-15,sp i - ext,700000,TRUE
-16,sp j - basic,700000,TRUE
-17,sp j - ext,800000,TRUE
-18,sp k,300000,FALSE
-19,sp l - basic,1100000,TRUE
-20,sp l - ext,1300000,TRUE
+2, sp 1 - basic,1000,TRUE
+3, sp 1 - ext,1500,TRUE
+4, sp 2 - basic,2000,FALSE
+5, sp 3 - basic,1200,FALSE
+6, sp 3 - ext,1800,FALSE
+7, sp 4 - basic,2500,FALSE
+8, sp 5 - basic,3000,FALSE
+9, sp 5 - ext,3500,FALSE
