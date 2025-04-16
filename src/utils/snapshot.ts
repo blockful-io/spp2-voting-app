@@ -12,7 +12,13 @@ import { ProposalData, MockVoteData } from "./types";
  * Load mock data from local JSON file
  */
 export async function loadLocalData(): Promise<ProposalData> {
-  const filePath = path.join(process.cwd(), "src", "utils", "data", "mocked-votes.json");
+  const filePath = path.join(
+    process.cwd(),
+    "src",
+    "utils",
+    "data",
+    "mocked-votes.json"
+  );
   const jsonData = fs.readFileSync(filePath, "utf8");
   const mockData: MockVoteData = JSON.parse(jsonData);
 
@@ -21,25 +27,32 @@ export async function loadLocalData(): Promise<ProposalData> {
     title: "Service Provider Program Renewal",
     space: "ens.eth",
     totalVotes: mockData.data.votes.length,
-    votes: mockData.data.votes.map(vote => ({
+    votes: mockData.data.votes.map((vote) => ({
       choice: vote.choice,
       voter: vote.voter,
-      vp: vote.vp
+      vp: vote.vp,
     })),
-    totalVotingPower: mockData.data.votes.reduce((sum, vote) => sum + vote.vp, 0),
+    totalVotingPower: mockData.data.votes.reduce(
+      (sum, vote) => sum + vote.vp,
+      0
+    ),
     state: "CLOSED",
-    choices: mockData.data.votes[0].proposal.choices
+    choices: mockData.data.votes[0].proposal.choices,
+    start: String(Date.now() / 1000),
+    end: String(Date.now() / 1000 + 30 * 24 * 60 * 60), // 30 days from now
   };
 }
 
 /**
  * Get proposal data from Snapshot API or local mock data
  */
-export async function getProposalData(proposalId: string): Promise<ProposalData> {
+export async function getProposalData(
+  proposalId: string
+): Promise<ProposalData> {
   if (USE_LOCAL_DATA) {
     return loadLocalData();
   }
-  
+
   // TODO: Implement actual Snapshot API call
   throw new Error("Snapshot API integration not implemented");
 }
@@ -50,7 +63,9 @@ export async function getProposalData(proposalId: string): Promise<ProposalData>
  * @param {String} proposalId - The Snapshot proposal ID
  * @returns {Promise<ProposalData>} - The proposal data including votes
  */
-export async function fetchSnapshotResults(proposalId: string): Promise<ProposalData> {
+export async function fetchSnapshotResults(
+  proposalId: string
+): Promise<ProposalData> {
   // Use local data if configured
   if (USE_LOCAL_DATA) {
     return loadLocalData();
@@ -73,7 +88,10 @@ export async function fetchSnapshotResults(proposalId: string): Promise<Proposal
             id
             name
           }
+            start
+            end
         }
+
       }
     `;
 
@@ -141,15 +159,22 @@ export async function fetchSnapshotResults(proposalId: string): Promise<Proposal
       title: proposal.title,
       space: proposal.space.name,
       totalVotes: votes.length,
-      votes: votes.map((vote: { choice: number[]; voter: string; vp: number }) => ({
-        choice: vote.choice,
-        voter: vote.voter,
-        vp: vote.vp
-      })),
+      votes: votes.map(
+        (vote: { choice: number[]; voter: string; vp: number }) => ({
+          choice: vote.choice,
+          voter: vote.voter,
+          vp: vote.vp,
+        })
+      ),
       scores_total: proposal.scores_total,
-      totalVotingPower: votes.reduce((sum: number, vote: { vp: number }) => sum + vote.vp, 0),
+      totalVotingPower: votes.reduce(
+        (sum: number, vote: { vp: number }) => sum + vote.vp,
+        0
+      ),
       state: proposal.state,
-      choices: proposal.choices
+      choices: proposal.choices,
+      start: proposal.start,
+      end: proposal.end,
     };
   } catch (error) {
     console.error("Error fetching data from Snapshot:", error);
