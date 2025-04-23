@@ -12,9 +12,15 @@ export const CHOICES_CSV_PATH = "choices.csv"; // Path to CSV file containing ch
 export const USE_CSV_DATA = true; // Always use data from CSV files
 
 // Budget parameters
-export const PROGRAM_BUDGET = 4500000; // Total budget in USD per year
-export const TWO_YEAR_STREAM_RATIO = 1 / 3; // Proportion allocated to 2-year streams
-export const ONE_YEAR_STREAM_RATIO = 2 / 3; // Proportion allocated to 1-year stream
+export const PROGRAM_BUDGET = 4500000; // Total budget in USD ($4.5 million)
+export const TWO_YEAR_STREAM_RATIO = 1 / 3; // Proportion allocated to 2-year streams ($1.5 million)
+export const ONE_YEAR_STREAM_RATIO = 2 / 3; // Proportion allocated to 1-year stream ($3 million)
+export const TWO_YEAR_STREAM_CAP = 1500000; // Hard cap on 2-year stream budget
+
+// Copeland method scoring parameters
+export const WIN_POINTS: number = 1;       // Points awarded for winning a head-to-head match
+export const TIE_POINTS: number = 0.5;     // Points awarded for a tie in a head-to-head match
+export const LOSS_POINTS: number = 0;      // Points awarded for losing a head-to-head match
 
 export const PROPOSAL_SPACE = "spp-test.eth";
 // Snapshot proposal ID - replace with your proposal ID
@@ -22,4 +28,4 @@ export const PROPOSAL_ID =
   "0x14bc28d4202213b2f735be22be131aa5f3b2e790433b8ef232207d0c0ace81e8";
 
 // Feature flags
-// All code now always uses bidimensional logic
+// The system now treats all entries as separate candidates

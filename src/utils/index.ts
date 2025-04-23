@@ -89,7 +89,7 @@ export async function main(): Promise<{
     // Return the results and filename for potential further processing
     return {
       results: formattedResults,
-      filename: exportedFilename || undefined
+      filename: undefined
     };
   } catch (error: unknown) {
     console.error("\nERROR: Allocation process failed");

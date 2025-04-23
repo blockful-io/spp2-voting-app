@@ -132,21 +132,20 @@ export default function EnsElectionPage() {
         {
           name: "1 year",
           value: data.filter(
-            (c) => c.streamDuration === "1-year" && c.allocatedBudget > 0
+            (c) => c.streamDuration === "1-year" && c.budget > 0 && c.allocated
           ).length,
           color: "#3B82F6",
         },
         {
           name: "2 years",
           value: data.filter(
-            (c) => c.streamDuration === "2-year" && c.allocatedBudget > 0
+            (c) => c.streamDuration === "2-year" && c.budget > 0 && c.allocated
           ).length,
           color: "#EC4899",
         },
         {
           name: "Not funded",
-          value: data.filter((c) => !c.isNoneBelow && c.allocatedBudget === 0)
-            .length,
+          value: data.filter((c) => !c.isNoneBelow && !c.allocated).length,
           color: "#374151",
         },
       ]

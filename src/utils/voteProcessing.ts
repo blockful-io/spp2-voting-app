@@ -8,28 +8,87 @@ import {
   Vote,
   ProposalData,
   HeadToHeadMatch,
-  RankedCandidate,
+  RankedChoice,
   CopelandResults,
   Allocation,
   Choice,
+  BudgetType,
 } from "./types";
 import { parseChoiceName } from "./parseChoiceName";
+import { WIN_POINTS, TIE_POINTS, LOSS_POINTS } from "./config";
 
 // Re-export types needed by components
 export type { HeadToHeadMatch };
 
 /**
- * Pre-process votes to reorder choices by provider
+ * Pre-process votes to ensure basic budgets are ranked above extended budgets for the same provider
  * 
  * @param votes - Array of votes to process
  * @param choices - Array of all available choices
- * @returns Processed votes with choices reordered by provider
+ * @returns Processed votes with choices correctly ordered
  */
 export function preprocessVotes(votes: Vote[], choices: string[]): Vote[] {
-  return votes.map(vote => ({
-    ...vote,
-    choice: reorderChoicesByProvider(vote.choice, choices),
-  }));
+  return votes.map(vote => {
+    // Create a map of providers to their basic and extended budget positions
+    const providerBudgets = new Map<string, { basic: number, extended: number }>();
+    
+    // Track the position of each budget type for each provider
+    vote.choice.forEach((choiceIndex, position) => {
+      const choiceName = choices[choiceIndex - 1];
+      const { name, budgetType } = parseChoiceName(choiceName);
+      
+      if (!providerBudgets.has(name)) {
+        providerBudgets.set(name, { basic: -1, extended: -1 });
+      }
+      
+      const entry = providerBudgets.get(name)!;
+      if (budgetType === "basic") {
+        entry.basic = position;
+      } else if (budgetType === "extended") {
+        entry.extended = position;
+      }
+    });
+    
+    // Create a new array for the reordered choices
+    const newChoice = [...vote.choice];
+    
+    // Apply reordering rule: if extended is ranked higher than basic, move basic above extended
+    for (const [provider, positions] of providerBudgets.entries()) {
+      if (positions.basic !== -1 && positions.extended !== -1) {
+        // If extended is ranked higher (lower position number) than basic
+        if (positions.extended < positions.basic) {
+          // Find the actual choice indices
+          const basicIndex = vote.choice.findIndex((c, i) => {
+            const choiceName = choices[c - 1];
+            const parsed = parseChoiceName(choiceName);
+            return parsed.name === provider && parsed.budgetType === "basic";
+          });
+          
+          const extendedIndex = vote.choice.findIndex((c, i) => {
+            const choiceName = choices[c - 1];
+            const parsed = parseChoiceName(choiceName);
+            return parsed.name === provider && parsed.budgetType === "extended";
+          });
+          
+          // Move basic choice right above extended by rearranging the array
+          if (basicIndex !== -1 && extendedIndex !== -1) {
+            const basicValue = newChoice[basicIndex];
+            // Remove the basic entry
+            newChoice.splice(basicIndex, 1);
+            // Insert it right before the extended entry
+            // If extended was before basic, the extended index has now decreased by 1
+            const adjustedExtendedIndex = extendedIndex > basicIndex ? extendedIndex - 1 : extendedIndex;
+            newChoice.splice(adjustedExtendedIndex, 0, basicValue);
+          }
+        }
+      }
+    }
+    // Return vote with correctly ordered choices
+    return {
+      ...vote,
+      choice: newChoice,
+    };
+  });
 }
 
 /**
@@ -43,28 +102,24 @@ export function processCopelandRanking(
 ): CopelandResults {
   const { choices, votes } = proposalData;
 
-  // Pre-process votes to reorder choices by provider
-  const processedVotes = preprocessVotes(votes, choices);
-
   // Find the "None Below" option
   const noneBelowIndex = choices.findIndex(
     (choice) => choice.toLowerCase() === "none below"
   );
 
-  // Keep all choices including None Below as candidates
-  const candidateChoices = [...choices];
-  const numCandidates = candidateChoices.length;
+  // Keep all choices including None Below as options
+  const numChoices = choices.length;
 
   // Create matrices for pairwise comparisons and match participation
-  const pairwiseMatrix = Array(numCandidates)
+  const pairwiseMatrix = Array(numChoices)
     .fill(undefined)
-    .map(() => Array(numCandidates).fill(0));
-  const matchesParticipated = Array(numCandidates)
+    .map(() => Array(numChoices).fill(0));
+  const matchesParticipated = Array(numChoices)
     .fill(undefined)
-    .map(() => Array(numCandidates).fill(0));
+    .map(() => Array(numChoices).fill(0));
 
   // Process each vote to update the pairwise matrix
-  processedVotes.forEach((vote: Vote, voteIndex: number) => {
+  votes.forEach((vote: Vote, voteIndex: number) => {
     // Skip invalid votes (non-array choices)
     if (!Array.isArray(vote.choice)) {
       console.warn(
@@ -73,64 +128,45 @@ export function processCopelandRanking(
       return;
     }
 
-    const vp = vote.vp || 1; // Use voting power or default to 1
+    const vp = vote.vp;
 
-    // Find where "None Below" is in this particular vote's ranking (if ranked)
-    const noneBelowRank = vote.choice.indexOf(noneBelowIndex + 1);
+    // For each vote, determine which choices are ranked
+    // Treat all choices in the vote as ranked, including "None Below"
+    const rankedChoices = new Set();
+    vote.choice.forEach((choiceNum) => {
+      rankedChoices.add(choiceNum - 1); // Convert to 0-indexed
+    });
 
-    // For each vote, determine which candidates are ranked (above "None Below")
-    const rankedCandidates = new Set();
-
-    // If "None Below" was ranked in this vote, only candidates ranked before it are considered ranked
-    // "None Below" itself is considered ranked
-    if (noneBelowRank !== -1) {
-      for (let i = 0; i <= noneBelowRank; i++) {
-        const candidateIndex = vote.choice[i] - 1; // Convert to 0-indexed
-        rankedCandidates.add(candidateIndex);
-      }
-    }
-    // If "None Below" wasn't ranked, all candidates in the vote are considered ranked
-    else {
-      vote.choice.forEach((choiceNum) => {
-        rankedCandidates.add(choiceNum - 1); // Convert to 0-indexed
-      });
-    }
-
-    // Helper to get position in ranking
-    function getPosition(candidateIndex: number) {
-      return vote.choice.indexOf(candidateIndex + 1);
-    }
-
-    // Compare each pair of candidates
-    for (let i = 0; i < numCandidates; i++) {
-      for (let j = i + 1; j < numCandidates; j++) {
-        // Both candidates are ranked
-        if (rankedCandidates.has(i) && rankedCandidates.has(j)) {
+    // Compare each pair of choices
+    for (let i = 0; i < numChoices; i++) {
+      for (let j = i + 1; j < numChoices; j++) {
+        // Both choices are ranked
+        if (rankedChoices.has(i) && rankedChoices.has(j)) {
           // Find their positions in the ranking
-          const posI = getPosition(i);
-          const posJ = getPosition(j);
+          const posI = vote.choice.indexOf(i + 1);
+          const posJ = vote.choice.indexOf(j + 1);
 
           // Lower position value means higher rank
           if (posI < posJ) {
-            // Candidate i is ranked higher
+            // Choice i is ranked higher
             pairwiseMatrix[i][j] += vp;
             matchesParticipated[i][j] += vp;
             matchesParticipated[j][i] += vp;
           } else if (posJ < posI) {
-            // Candidate j is ranked higher
+            // Choice j is ranked higher
             pairwiseMatrix[j][i] += vp;
             matchesParticipated[i][j] += vp;
             matchesParticipated[j][i] += vp;
           }
         }
-        // One candidate ranked, one not ranked
-        else if (rankedCandidates.has(i) && !rankedCandidates.has(j)) {
-          // Ranked candidate (i) wins against unranked (j)
+        // One choice ranked, one not ranked
+        else if (rankedChoices.has(i) && !rankedChoices.has(j)) {
+          // Ranked choice (i) wins against unranked (j)
           pairwiseMatrix[i][j] += vp;
           matchesParticipated[i][j] += vp;
           matchesParticipated[j][i] += vp;
-        } else if (!rankedCandidates.has(i) && rankedCandidates.has(j)) {
-          // Ranked candidate (j) wins against unranked (i)
+        } else if (!rankedChoices.has(i) && rankedChoices.has(j)) {
+          // Ranked choice (j) wins against unranked (i)
           pairwiseMatrix[j][i] += vp;
           matchesParticipated[i][j] += vp;
           matchesParticipated[j][i] += vp;
@@ -142,59 +178,73 @@ export function processCopelandRanking(
 
   // Store match results for display
   const matchResults = [];
-  for (let i = 0; i < numCandidates; i++) {
-    for (let j = i + 1; j < numCandidates; j++) {
+  for (let i = 0; i < numChoices; i++) {
+    for (let j = i + 1; j < numChoices; j++) {
+      // Track if choices are from the same provider (for information only, doesn't affect scoring)
       const isInternal = isSameServiceProvider(
-        candidateChoices[i],
-        candidateChoices[j]
+        choices[i],
+        choices[j]
       );
 
-      // Track voters for each candidate
-      const candidate1Voters: Array<{ voter: string; vp: number }> = [];
-      const candidate2Voters: Array<{ voter: string; vp: number }> = [];
+      // Track voters for each choice
+      const choice1Voters: Array<{ voter: string; vp: number }> = [];
+      const choice2Voters: Array<{ voter: string; vp: number }> = [];
 
-      // Process each vote to determine which voters supported each candidate
-      processedVotes.forEach((vote) => {
-        const vp = vote.vp || 1;
+      // Process each vote to determine which voters supported each choice
+      votes.forEach((vote) => {
+        const vp = vote.vp;
         const posI = vote.choice.indexOf(i + 1);
         const posJ = vote.choice.indexOf(j + 1);
 
-        // If both candidates are ranked
+        // If both choices are ranked
         if (posI !== -1 && posJ !== -1) {
           if (posI < posJ) {
-            candidate1Voters.push({ voter: vote.voter, vp });
+            choice1Voters.push({ voter: vote.voter, vp });
           } else if (posJ < posI) {
-            candidate2Voters.push({ voter: vote.voter, vp });
+            choice2Voters.push({ voter: vote.voter, vp });
           }
         }
-        // If only one candidate is ranked
+        // If only one choice is ranked
         else if (posI !== -1) {
-          candidate1Voters.push({ voter: vote.voter, vp });
+          choice1Voters.push({ voter: vote.voter, vp });
         } else if (posJ !== -1) {
-          candidate2Voters.push({ voter: vote.voter, vp });
+          choice2Voters.push({ voter: vote.voter, vp });
         }
       });
 
       // Sort voters by voting power (descending)
-      candidate1Voters.sort((a, b) => b.vp - a.vp);
-      candidate2Voters.sort((a, b) => b.vp - a.vp);
+      choice1Voters.sort((a, b) => b.vp - a.vp);
+      choice2Voters.sort((a, b) => b.vp - a.vp);
+
+      // Determine the winner of the match
+      const choice1Votes = pairwiseMatrix[i][j];
+      const choice2Votes = pairwiseMatrix[j][i];
+      let winner: string;
+      let resultType: "win" | "loss" | "tie";
+      
+      if (choice1Votes > choice2Votes) {
+        winner = choices[i];
+        resultType = "win";
+      } else if (choice2Votes > choice1Votes) {
+        winner = choices[j];
+        resultType = "loss";
+      } else {
+        winner = "tie";
+        resultType = "tie";
+      }
 
       matchResults.push({
-        candidate1: candidateChoices[i],
-        candidate2: candidateChoices[j],
-        candidate1Votes: pairwiseMatrix[i][j],
-        candidate2Votes: pairwiseMatrix[j][i],
+        choice1: choices[i],
+        choice2: choices[j],
+        choice1Votes,
+        choice2Votes,
         totalVotes: matchesParticipated[i][j],
-        winner:
-          pairwiseMatrix[i][j] > pairwiseMatrix[j][i]
-            ? candidateChoices[i]
-            : pairwiseMatrix[j][i] > pairwiseMatrix[i][j]
-            ? candidateChoices[j]
-            : "tie",
+        winner,
+        resultType,
         isInternal,
         voters: {
-          candidate1: candidate1Voters,
-          candidate2: candidate2Voters,
+          choice1: choice1Voters,
+          choice2: choice2Voters,
         },
       });
     }
@@ -203,28 +253,31 @@ export function processCopelandRanking(
   // Sort matches by total votes (highest first)
   matchResults.sort((a, b) => b.totalVotes - a.totalVotes);
 
-  // Calculate Copeland scores and average support for each candidate
-  const candidateResults = [];
-  for (let i = 0; i < numCandidates; i++) {
-    let wins = 0;
+  // Calculate Copeland scores and average support for each choice
+  const choiceResults = [];
+  for (let i = 0; i < numChoices; i++) {
+    let score = 0;
     let totalVotesReceived = 0;
     let totalMatches = 0;
 
-    for (let j = 0; j < numCandidates; j++) {
+    for (let j = 0; j < numChoices; j++) {
       if (i !== j) {
-        // Count wins
+        // Calculate points based on match outcome
         if (pairwiseMatrix[i][j] > pairwiseMatrix[j][i]) {
-          if (
-            !isSameServiceProvider(candidateChoices[i], candidateChoices[j])
-          ) {
-            wins++; // Victory = 1 point
-          }
+          // Win - award points regardless of provider
+          score += WIN_POINTS;
+        } else if (pairwiseMatrix[i][j] === pairwiseMatrix[j][i] && pairwiseMatrix[i][j] > 0) {
+          // Tie (only count if both received votes)
+          score += TIE_POINTS;
+        } else if (pairwiseMatrix[i][j] < pairwiseMatrix[j][i]) {
+          // Loss
+          score += LOSS_POINTS;
         }
 
         // Sum up votes received in all matches for average support
         totalVotesReceived += pairwiseMatrix[i][j];
 
-        // Count matches where this candidate received votes
+        // Count matches where this choice received votes
         if (matchesParticipated[i][j] > 0) {
           totalMatches++;
         }
@@ -238,16 +291,16 @@ export function processCopelandRanking(
     // Track whether this is the None Below option
     const isNoneBelow = i === noneBelowIndex;
 
-    candidateResults.push({
-      name: candidateChoices[i],
-      score: wins,
-      averageSupport: averageSupport,
-      isNoneBelow: isNoneBelow,
+    choiceResults.push({
+      name: choices[i],
+      score,
+      averageSupport,
+      isNoneBelow,
     });
   }
 
   // Sort by wins (descending), then by average support (descending) as tiebreaker
-  candidateResults.sort((a, b) => {
+  choiceResults.sort((a, b) => {
     if (b.score !== a.score) {
       return b.score - a.score;
     }
@@ -255,77 +308,23 @@ export function processCopelandRanking(
   });
 
   return {
-    rankedCandidates: candidateResults,
+    rankedChoices: choiceResults,
     headToHeadMatches: matchResults,
   };
 }
 
 /**
- * Post-process Copeland results to handle bidimensional filtering and None Below
+ * Post-process Copeland results to handle any final ranking adjustments
  *
  * @param results - The original Copeland ranking results
- * @returns Processed results with bidimensional filtering and None Below handling
+ * @returns Processed results
  */
 export function postprocessRanking(results: CopelandResults): CopelandResults {
-  // Group candidates by provider
-  const providerGroups = new Map<string, RankedCandidate[]>();
-  results.rankedCandidates.forEach((candidate) => {
-    const { name: providerName } = parseChoiceName(candidate.name);
-    if (!providerGroups.has(providerName)) {
-      providerGroups.set(providerName, []);
-    }
-    providerGroups.get(providerName)!.push(candidate);
-  });
-
-  // Keep only the highest-ranked candidate per provider
-  const filteredCandidates: RankedCandidate[] = [];
-  providerGroups.forEach((candidates) => {
-    // Sort by score and average support to get the highest-ranked
-    const sorted = [...candidates].sort((a, b) => {
-      if (b.score !== a.score) return b.score - a.score;
-      return b.averageSupport - a.averageSupport;
-    });
-    filteredCandidates.push(sorted[0]);
-  });
-
-  // Filter head-to-head matches to include:
-  // 1. Internal matches between options of the same provider
-  // 2. Matches between the highest-ranked candidates of different providers
-  // 3. Matches between a provider's highest-ranked candidate and None Below
-  const filteredMatches = results.headToHeadMatches.filter((match) => {
-    const { name: provider1 } = parseChoiceName(match.candidate1);
-    const { name: provider2 } = parseChoiceName(match.candidate2);
-
-    // Case 1: Internal provider match (both candidates from same provider)
-    if (provider1 === provider2) {
-      return true;
-    }
-
-    // Get the highest-ranked candidate for each provider
-    const topCandidate1 = providerGroups.get(provider1)?.[0];
-    const topCandidate2 = providerGroups.get(provider2)?.[0];
-
-    // Case 2: Both candidates are the highest-ranked for their providers
-    if (
-      topCandidate1?.name === match.candidate1 &&
-      topCandidate2?.name === match.candidate2
-    ) {
-      return true;
-    }
-
-    // Case 3: One candidate is None Below and the other is a provider's highest-ranked
-    const isNoneBelow1 = match.candidate1.toLowerCase().includes("none below");
-    const isNoneBelow2 = match.candidate2.toLowerCase().includes("none below");
-
-    if (isNoneBelow1 && topCandidate2?.name === match.candidate2) return true;
-    if (isNoneBelow2 && topCandidate1?.name === match.candidate1) return true;
-
-    return false;
-  });
-
+  // Each entry is treated as a separate choice, so we don't filter or modify the rankings
+  // Simply return the original results
   return {
-    rankedCandidates: filteredCandidates,
-    headToHeadMatches: filteredMatches,
+    rankedChoices: results.rankedChoices,
+    headToHeadMatches: results.headToHeadMatches
   };
 }
 
@@ -337,7 +336,7 @@ export function postprocessRanking(results: CopelandResults): CopelandResults {
  * @returns {Array} - Combined data for allocation
  */
 export function combineData(
-  rankedResults: RankedCandidate[],
+  rankedResults: RankedChoice[],
   choicesData: Choice[]
 ): Allocation[] {
   return rankedResults.map((result) => {
@@ -346,29 +345,30 @@ export function combineData(
       (choice) => choice.name === parseChoiceName(result.name).name
     );
 
-    // Get the basic and extended budgets from the choices
-    const basicBudget =
-      providerChoices.find((c) => c.budgetType === "basic")?.budget || 0;
-    const extendedBudget =
-      providerChoices.find((c) => c.budgetType === "extended")?.budget || 0;
+    // Get the budget from the choice that matches this ranked result
+    const { name: resultName, budgetType: resultBudgetType } = parseChoiceName(result.name);
+    const matchingChoice = choicesData.find(
+      c => c.name === resultName && c.budgetType === resultBudgetType
+    );
+    
+    // Get budget amount for this specific choice
+    const budget = matchingChoice?.budget || 0;
 
-    // Get the first choice's metadata (they should all have the same values for these)
+    // Get the first choice's metadata for common properties
     const firstChoice = providerChoices[0];
-    const providerName = providerChoices[0].name;
+    const providerName = firstChoice?.name || resultName;
 
     return {
       name: providerName,
       score: result.score,
       averageSupport: result.averageSupport || 0,
-      basicBudget,
-      extendedBudget,
-      isSpp1: firstChoice?.isSpp1 || false,
+      budget,
+      isSpp1: matchingChoice?.isSpp1 || false,
       isNoneBelow: result.isNoneBelow || false,
       allocated: false,
       streamDuration: null,
-      allocatedBudget: 0,
       rejectionReason: null,
-      budgetType: basicBudget > 0 ? "basic" : "none" // Default value, will be determined in allocateBudgets
+      budgetType: matchingChoice?.budgetType || "none"
     };
   });
 }

@@ -114,7 +114,7 @@ export interface VotingResultResponse {
 }
 
 // ===== Vote Processing Types =====
-export interface RankedCandidate {
+export interface RankedChoice {
   name: string;
   score: number;
   averageSupport: number;
@@ -122,21 +122,22 @@ export interface RankedCandidate {
 }
 
 export interface HeadToHeadMatch {
-  candidate1: string;
-  candidate2: string;
-  candidate1Votes: number;
-  candidate2Votes: number;
+  choice1: string;
+  choice2: string;
+  choice1Votes: number;
+  choice2Votes: number;
   totalVotes: number;
   winner: string;
-  isInternal: boolean; // Whether this is a match between options from the same provider
+  resultType: "win" | "loss" | "tie";  // The type of result
+  isInternal: boolean;  // Whether options are from the same provider (for information only, doesn't affect scoring)
   voters: {
-    candidate1: Array<{ voter: string; vp: number }>;
-    candidate2: Array<{ voter: string; vp: number }>;
+    choice1: Array<{ voter: string; vp: number }>;
+    choice2: Array<{ voter: string; vp: number }>;
   };
 }
 
 export interface CopelandResults {
-  rankedCandidates: RankedCandidate[];
+  rankedChoices: RankedChoice[];
   headToHeadMatches: HeadToHeadMatch[];
 }
 
@@ -160,11 +161,9 @@ export interface Allocation {
   name: string;
   score: number;
   averageSupport: number;
-  basicBudget: number;
-  extendedBudget: number;
+  budget: number;        // Budget amount for this specific choice
   allocated: boolean;
   streamDuration: StreamDuration;
-  allocatedBudget: number;
   rejectionReason: string | null;
   isNoneBelow: boolean;
   isSpp1?: boolean;
@@ -314,12 +313,10 @@ export interface ReportResults {
     name: string;
     score: number;
     averageSupport: number;
-    basicBudget: number;
-    extendedBudget: number;
+    budget: number;
     isSpp1?: boolean;
     allocated: boolean;
     streamDuration: StreamDuration;
-    allocatedBudget: number;
     rejectionReason: string | null;
     isNoneBelow: boolean;
   }[];
@@ -374,3 +371,57 @@ export interface CandidateHeadToHeadResults {
   wins: number;
   losses: number;
 }
+
+export type Space = {
+  id: string;
+  name: string;
+};
+
+export type AppState = "LOADING" | "ERROR" | "READY" | "PROCESSING" | "COMPLETE";
+
+/**
+ * Snapshot API Types
+ */
+
+export interface SnapshotApiQuery {
+  variables: {
+    id: string;
+  };
+  query: string;
+}
+
+export interface VoteChoice {
+  [key: string]: number;
+}
+
+export interface SnapshotVote {
+  voter: string;
+  vp: number;
+  choice: VoteChoice;
+}
+
+export interface SnapshotProposal {
+  id: string;
+  title: string;
+  body: string;
+  choices: string[];
+  start: number;
+  end: number;
+  snapshot: string;
+  state: string;
+  author: string;
+  space: {
+    id: string;
+    name: string;
+  };
+  scores?: number[];
+  scores_by_strategy?: number[][];
+  scores_total?: number;
+  votes?: SnapshotVote[];
+}
+
+export interface SnapshotAPIResponse {
+  data: {
+    proposal: SnapshotProposal;
+  };
+} 

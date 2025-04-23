@@ -2,189 +2,154 @@
  * Budget allocation logic for the Service Provider Program
  */
 
-import { TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from "./config";
 import { Allocation, AllocationResults, AllocationSummary, StreamDuration, HeadToHeadMatch, CopelandResults, Choice, BudgetType } from "./types";
 import { parseChoiceName } from "./parseChoiceName";
 
+// Constants for new budget allocation rules
+export const TOTAL_BUDGET = 4500000; // $4.5 million total budget
+export const TWO_YEAR_STREAM_CAP = 1500000; // $1.5 million cap for 2-year stream
+export const TOP_RANK_THRESHOLD = 10; // Top 10 entries eligible for 2-year stream
+
 /**
- * Allocates budgets to candidates based on their ranking
+ * Allocates budgets to choices based on their ranking
  * 
- * @param copelandResults - Results from Copeland ranking including ranked candidates and head-to-head matches
+ * @param copelandResults - Results from Copeland ranking including ranked choices and head-to-head matches
  * @param totalBudget - Total budget available for allocation
  * @param choicesData - Choice data containing budget information for service providers
  * @returns Object containing allocation results and summary
  */
 export function allocateBudgets(
   copelandResults: CopelandResults,
-  totalBudget: number,
+  totalBudget: number = TOTAL_BUDGET,
   choicesData: Choice[]
 ): AllocationResults {
   console.log("Starting budget allocation with choices data");
   
-  // Initialize budget streams
-  const twoYearStreamBudget = totalBudget * TWO_YEAR_STREAM_RATIO;
-  const oneYearStreamBudget = totalBudget * ONE_YEAR_STREAM_RATIO;
-
-  // Initialize allocation tracking
-  let remainingTwoYearBudget = twoYearStreamBudget;
-  let remainingOneYearBudget = oneYearStreamBudget;
+  // Initialize budget tracking
+  let remainingTwoYearBudget = TWO_YEAR_STREAM_CAP;
+  let remainingTotalBudget = totalBudget;
+  let twoYearAllocated = 0;
+  let oneYearAllocated = 0;
   let totalAllocated = 0;
   let allocatedProjects = 0;
   let rejectedProjects = 0;
-  let transferredBudget = 0;
-
-  // Find the index of None Below option
-  let reachedNoneBelow = false;
-
-  // Extract head-to-head matches for budget determination
-  const { headToHeadMatches } = copelandResults;
-
-  // Process candidates in ranking order - convert to allocations and apply allocation logic in one pass
-  const allocations: Allocation[] = copelandResults.rankedCandidates.map((candidate, index) => {
-    // Extract base provider name from the candidate name
-    const { name: providerName } = parseChoiceName(candidate.name);
+  
+  // Find the "None Below" entry if it exists
+  const noneBelowIndex = copelandResults.rankedChoices.findIndex(c => c.isNoneBelow);
+  
+  // Process choices in ranking order - convert to allocations and apply allocation logic
+  const allocations: Allocation[] = [];
+  
+  // Process ranked choices
+  for (let i = 0; i < copelandResults.rankedChoices.length; i++) {
+    const choice = copelandResults.rankedChoices[i];
     
-    // Find all choices for this provider
-    const providerChoices = choicesData.filter(choice => choice.name === providerName);
-    
-    // Get the basic and extended budgets from the choices
-    const basicBudget = providerChoices.find(c => c.budgetType === 'basic')?.budget || 0;
-    const extendedBudget = providerChoices.find(c => c.budgetType === 'extended')?.budget || 0;
-    
-    // Get other provider metadata
-    const firstChoice = providerChoices[0];
-    const isSpp1 = firstChoice?.isSpp1 || false;
-        
-    // If we've reached None Below or are past it, reject all subsequent candidates
-    if (reachedNoneBelow || candidate.isNoneBelow) {
-      reachedNoneBelow = true;
-      rejectedProjects++;
-      return {
-        name: providerName,
-        score: candidate.score,
-        averageSupport: candidate.averageSupport,
-        basicBudget,
-        extendedBudget,
+    // Check if we've reached "None Below" - if so, stop allocation
+    if (choice.isNoneBelow) {
+      allocations.push({
+        name: choice.name,
+        score: choice.score,
+        averageSupport: choice.averageSupport,
+        budget: 0,
         allocated: false,
-        streamDuration: null,  
-        allocatedBudget: 0,
-        rejectionReason: "Below 'none below' option",
-        isNoneBelow: candidate.isNoneBelow,
-        isSpp1,
-        budgetType: "none" as BudgetType
-      } as Allocation;
+        streamDuration: null,
+        rejectionReason: "None Below reached",
+        isNoneBelow: true,
+        budgetType: "none"
+      });
+      break; // Stop allocation process
     }
-
-    // Determine budget type based on head-to-head match results
-    let budgetType: BudgetType = "basic"; // Default budget type
     
-    // Find internal head-to-head match for this provider
-    const internalMatch = headToHeadMatches.find(match => 
-      match.isInternal && 
-      match.candidate1.includes(providerName) && match.candidate2.includes(providerName)
+    // Parse the choice name
+    const { name: providerName, budgetType } = parseChoiceName(choice.name);
+    
+    // Find the choice data for this entry
+    const choiceData = choicesData.find(c => 
+      c.name === providerName && c.budgetType === budgetType
     );
     
-    if (internalMatch) {
-      // If there's a clear winner in the internal match
-      if (internalMatch.winner !== "tie") {
-        budgetType = internalMatch.winner.includes("ext") ? "extended" : "basic";
-      }
+    if (!choiceData) {
+      console.warn(`No choice data found for ${choice.name}`);
+      continue;
     }
-
-    // Get the selected budget based on the determined budget type
-    const selectedBudget = budgetType === "extended" ? extendedBudget : basicBudget;
-
-    // Check if candidate is in top 5 and eligible for two-year stream
-    const isTop5 = index < 5;
-    const isEligibleForTwoYear = isTop5 && isSpp1;
-
-    // Try to allocate to two-year stream if eligible
-    if (isEligibleForTwoYear && selectedBudget <= remainingTwoYearBudget) {
-      remainingTwoYearBudget -= selectedBudget;
-      totalAllocated += selectedBudget;
+    
+    // Determine if this entry is from a current service provider (SPP1)
+    const isSpp1 = choiceData.isSpp1;
+    
+    // Get budget amount for this specific choice
+    const budget = choiceData.budget;
+    
+    // Determine stream assignment according to the rules:
+    let streamDuration: StreamDuration = null;
+    let allocated = false;
+    let rejectionReason: string | null = null;
+    
+    // Rule 1: Assign to 2-year stream if:
+    // - Current service provider (SPP1)
+    // - Ranked in top 10
+    // - Won't exceed 2-year stream cap ($1.5M)
+    if (isSpp1 && i < TOP_RANK_THRESHOLD && budget <= remainingTwoYearBudget) {
+      streamDuration = "2-year";
+      remainingTwoYearBudget -= budget;
+      remainingTotalBudget -= budget;
+      twoYearAllocated += budget;
+      totalAllocated += budget;
+      allocated = true;
       allocatedProjects++;
-      return {
-        name: providerName,
-        score: candidate.score,
-        averageSupport: candidate.averageSupport,
-        basicBudget,
-        extendedBudget,
-        allocated: true,
-        streamDuration: "2-year" as StreamDuration,
-        allocatedBudget: selectedBudget,
-        rejectionReason: null,
-        isNoneBelow: candidate.isNoneBelow,
-        isSpp1,
-        budgetType
-      };
-    }
-
-    // After top 5, transfer remaining two-year budget to one-year stream
-    if (!isTop5 && remainingTwoYearBudget > 0) {
-      transferredBudget = remainingTwoYearBudget;
-      remainingOneYearBudget += remainingTwoYearBudget;
-      remainingTwoYearBudget = 0;
-      console.log(`Transferred remaining 2-year budget ($${transferredBudget}) to 1-year stream`);
-    }
-
-    // Try to allocate to one-year stream
-    if (selectedBudget <= remainingOneYearBudget) {
-      remainingOneYearBudget -= selectedBudget;
-      totalAllocated += selectedBudget;
+    } 
+    // Rule 2: Otherwise, assign to 1-year stream if budget fits in remaining total
+    else if (budget <= remainingTotalBudget) {
+      streamDuration = "1-year";
+      remainingTotalBudget -= budget;
+      oneYearAllocated += budget;
+      totalAllocated += budget;
+      allocated = true;
       allocatedProjects++;
-      return {
-        name: providerName,
-        score: candidate.score,
-        averageSupport: candidate.averageSupport,
-        basicBudget,
-        extendedBudget,
-        allocated: true,
-        streamDuration: "1-year" as StreamDuration,
-        allocatedBudget: selectedBudget,
-        rejectionReason: null,
-        isNoneBelow: candidate.isNoneBelow,
-        isSpp1,
-        budgetType
-      };
     }
-
-    // If no allocation possible, mark as rejected
-    rejectedProjects++;
-    console.log(`Rejected ${providerName}: Insufficient budget`);
-    return {
+    // Rule 3: Reject if budget doesn't fit in remaining total
+    else {
+      rejectionReason = "Insufficient budget";
+      rejectedProjects++;
+    }
+    
+    // Add the allocation result
+    allocations.push({
       name: providerName,
-      score: candidate.score,
-      averageSupport: candidate.averageSupport,
-      basicBudget,
-      extendedBudget,
-      allocated: false,
-      streamDuration: null,
-      allocatedBudget: 0,
-      rejectionReason: "Insufficient budget",
-      isNoneBelow: candidate.isNoneBelow,
+      score: choice.score,
+      averageSupport: choice.averageSupport,
+      budget,
+      allocated,
+      streamDuration,
+      rejectionReason,
+      isNoneBelow: false,
       isSpp1,
       budgetType
-    };
-  });
-
+    });
+    
+    // Rule 3: Stop if total budget is fully allocated
+    if (remainingTotalBudget <= 0) {
+      break;
+    }
+  }
+  
   // Calculate summary
   const summary: AllocationSummary = {
     votedBudget: totalBudget,
-    twoYearStreamBudget,
-    oneYearStreamBudget,
-    transferredBudget,
-    adjustedTwoYearBudget: twoYearStreamBudget - transferredBudget,
-    adjustedOneYearBudget: oneYearStreamBudget + transferredBudget,
+    twoYearStreamBudget: TWO_YEAR_STREAM_CAP,
+    oneYearStreamBudget: totalBudget - TWO_YEAR_STREAM_CAP,
+    transferredBudget: 0, // No budget transfer in new model
+    adjustedTwoYearBudget: TWO_YEAR_STREAM_CAP,
+    adjustedOneYearBudget: totalBudget - TWO_YEAR_STREAM_CAP,
     remainingTwoYearBudget,
-    remainingOneYearBudget,
+    remainingOneYearBudget: remainingTotalBudget - remainingTwoYearBudget,
     totalAllocated,
-    unspentBudget: remainingTwoYearBudget + remainingOneYearBudget,
+    unspentBudget: remainingTotalBudget,
     allocatedProjects,
-    rejectedProjects,
+    rejectedProjects
   };
-
+  
   return {
     summary,
-    allocations,
+    allocations
   };
 }
