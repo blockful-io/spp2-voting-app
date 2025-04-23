@@ -158,7 +158,9 @@ export default function EnsElectionPage() {
           <span className="text-2xl">
             <LineChart />
           </span>
-          <h1 className="text-3xl font-bold text-gray-100">Election results</h1>
+          <h1 className="text-3xl font-bold text-gray-100">
+            Election Overview
+          </h1>
         </div>
       </div>
 
