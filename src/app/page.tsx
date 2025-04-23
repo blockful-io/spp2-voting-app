@@ -7,6 +7,7 @@ import { AllocatedBudget } from "@/components/AllocatedBudget";
 import { ResultsDetails } from "@/components/ResultsDetails";
 import { useState, useEffect } from "react";
 import { LineChart } from "lucide-react";
+import { ElectionStatus } from "@/components/ElectionStatus";
 
 export default function EnsElectionPage() {
   const { data, isLoading, error, summary, allocationData } =
@@ -154,13 +155,19 @@ export default function EnsElectionPage() {
   return (
     <div className="container mx-auto max-w-7xl px-4 py-8">
       <div className="mb-8 flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <div className="flex w-full items-center gap-3">
           <span className="text-2xl">
             <LineChart />
           </span>
-          <h1 className="text-3xl font-bold text-gray-100">
-            Election Overview
-          </h1>
+          <div className="flex items-center justify-between w-full gap-3">
+            <h1 className="text-3xl font-bold text-gray-100">
+              Election Overview
+            </h1>
+            <ElectionStatus
+              startDate={new Date("2025-04-25")}
+              endDate={new Date("2025-04-29")}
+            />
+          </div>
         </div>
       </div>
 
