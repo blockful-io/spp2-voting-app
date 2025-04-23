@@ -207,6 +207,8 @@ export interface AllocationResponse {
     };
     state: ProposalState;
     dataSource: DataSource;
+    start: number;
+    end: number;
   };
   headToHeadMatches: Array<HeadToHeadMatch>;
   summary: {

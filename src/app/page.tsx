@@ -163,10 +163,12 @@ export default function EnsElectionPage() {
             <h1 className="text-3xl font-bold text-gray-100">
               Election Overview
             </h1>
-            <ElectionStatus
-              startDate={new Date("2025-04-25")}
-              endDate={new Date("2025-04-29")}
-            />
+            {allocationData?.proposal?.start && (
+              <ElectionStatus
+                startDate={new Date(allocationData?.proposal?.start * 1000)}
+                endDate={new Date(allocationData?.proposal?.end * 1000)}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -75,7 +75,7 @@ export const ElectionStatus: React.FC<ElectionStatusProps> = ({
           <div className="flex items-center bg-[#1E2532] py-4 px-6 rounded-md">
             <span className="text-[#60A5FA] mr-3">✓</span>
             <span className="text-gray-400">Election ended on </span>
-            <span className="text-white">
+            <span className="text-white pl-2">
               {endDate.toLocaleDateString("en-US", {
                 month: "long",
                 day: "numeric",
@@ -90,7 +90,7 @@ export const ElectionStatus: React.FC<ElectionStatusProps> = ({
           <div className="flex items-center bg-[#1E2532] py-4 px-6 rounded-md">
             <span className="text-[#60A5FA] mr-3">•</span>
             <span className="text-gray-400">Election ends in: </span>
-            <span className="text-white">
+            <span className="text-white pl-2">
               {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m{" "}
               {timeLeft.seconds}s
             </span>
@@ -103,7 +103,7 @@ export const ElectionStatus: React.FC<ElectionStatusProps> = ({
             <span className="text-[#60A5FA] mr-3">
               <CalendarDays className="w-4 h-4" />
             </span>
-            <span className="text-gray-400">Election starts on </span>{" "}
+            <span className="text-gray-400">Election starts on </span>
             <span className="text-white pl-2">
               {startDate.toLocaleDateString("en-US", {
                 month: "long",
