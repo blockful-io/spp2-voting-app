@@ -7,11 +7,11 @@
  * Service provider data structure as received from CSV
  */
 export interface ServiceProviderData {
-  choiceId: number;         // Numeric ID of the choice
-  basicBudget: number;      // Basic budget amount in USD
-  extendedBudget: number;   // Extended budget amount in USD
-  isSpp1: boolean;          // Whether provider was part of SPP1
-  isNoneBelow: boolean;     // Whether this is the "None Below" indicator
+  choiceId: number; // Numeric ID of the choice
+  basicBudget: number; // Basic budget amount in USD
+  extendedBudget: number; // Extended budget amount in USD
+  isSpp1: boolean; // Whether provider was part of SPP1
+  isNoneBelow: boolean; // Whether this is the "None Below" indicator
 }
 
 // ===== Vote Types =====
@@ -51,18 +51,18 @@ export type BudgetType = "basic" | "extended" | "none";
  * Interface for parsed choice information
  */
 export interface ParsedChoice {
-  name: string;       // The service provider name (without budget type)
+  name: string; // The service provider name (without budget type)
   budgetType: BudgetType; // Enforced budget type values
 }
 
 export interface Choice {
-  originalName: string;  // Original full choice name (e.g., "sp a" or "sp b - basic")
-  name: string;          // Base provider name without budget type (e.g., "sp a" or "sp b")
-  budget: number;        // Budget amount in USD
-  isSpp1: boolean;       // Whether provider was part of SPP1
-  isNoneBelow: boolean;  // Whether this is the "None Below" indicator
-  choiceId: number;      // Numeric ID of the choice
-  budgetType: BudgetType;    // Budget type: "basic", "extended", or "none"
+  originalName: string; // Original full choice name (e.g., "sp a" or "sp b - basic")
+  name: string; // Base provider name without budget type (e.g., "sp a" or "sp b")
+  budget: number; // Budget amount in USD
+  isSpp1: boolean; // Whether provider was part of SPP1
+  isNoneBelow: boolean; // Whether this is the "None Below" indicator
+  choiceId: number; // Numeric ID of the choice
+  budgetType: BudgetType; // Budget type: "basic", "extended", or "none"
 }
 
 // ===== Voting Results Types =====
@@ -76,6 +76,8 @@ export interface ProposalData {
   totalVotingPower: number;
   state: string;
   choices: string[];
+  start: string;
+  end: string;
 }
 
 export interface ProviderData {
@@ -97,6 +99,8 @@ export interface VotingResultResponse {
     totalVotingPower: number;
     state: string;
     dataSource: string;
+    start: string;
+    end: string;
   };
   choices: Choice[];
   headToHeadMatches: HeadToHeadMatch[];
@@ -124,7 +128,7 @@ export interface HeadToHeadMatch {
   candidate2Votes: number;
   totalVotes: number;
   winner: string;
-  isInternal: boolean;  // Whether this is a match between options from the same provider
+  isInternal: boolean; // Whether this is a match between options from the same provider
   voters: {
     candidate1: Array<{ voter: string; vp: number }>;
     candidate2: Array<{ voter: string; vp: number }>;
@@ -203,6 +207,8 @@ export interface AllocationResponse {
     };
     state: ProposalState;
     dataSource: DataSource;
+    start: number;
+    end: number;
   };
   headToHeadMatches: Array<HeadToHeadMatch>;
   summary: {
@@ -367,4 +373,4 @@ export interface CandidateHeadToHeadResults {
   budget: CandidateBudget;
   wins: number;
   losses: number;
-} 
+}

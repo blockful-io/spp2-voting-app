@@ -1,5 +1,12 @@
 import { PROPOSAL_ID } from "@/utils/config";
-import { AllocationResponse, Allocation, BudgetSummary, Choice, VoteCandidate, Budget } from "@/utils/types";
+import {
+  AllocationResponse,
+  Allocation,
+  BudgetSummary,
+  Choice,
+  VoteCandidate,
+  Budget,
+} from "@/utils/types";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useMemo } from "react";
 
@@ -7,7 +14,11 @@ import { useState, useEffect, useMemo } from "react";
 export type { VoteCandidate, Budget };
 
 export function useChoices() {
-  const { data: fetchChoicesFunc, isLoading, isError } = useQuery({
+  const {
+    data: fetchChoicesFunc,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["choices"],
     queryFn: fetchChoices,
   });
@@ -45,7 +56,7 @@ export function useChoices() {
           value: item.budget,
           type: item.budgetType,
           selected: item.budgetType === "basic",
-        }))
+        })),
       });
     }
     return result;
@@ -80,24 +91,24 @@ export function useEnsElectionData() {
       setAllocationData(allocationResponse);
 
       // Transform allocation data to match our Allocation interface
-      const transformedData: Allocation[] =
-        allocationResponse.allocations
-          .map((allocation, index) => ({
-            name: allocation.name.includes(" - ")
-              ? allocation.name.split(" - ")[0]
-              : allocation.name,
-            score: allocation.score,
-            averageSupport: allocation.averageSupport,
-            basicBudget: allocation.basicBudget,
-            extendedBudget: allocation.extendedBudget,
-            allocated: allocation.allocated,
-            streamDuration: allocation.streamDuration || "1-year", // Default to 1-year if null
-            allocatedBudget: allocation.allocatedBudget,
-            rejectionReason: allocation.rejectionReason,
-            isNoneBelow: allocation.isNoneBelow,
-            isSpp1: allocation.isSpp1,
-            budgetType: allocation.budgetType
-          }));
+      const transformedData: Allocation[] = allocationResponse.allocations.map(
+        (allocation, index) => ({
+          name: allocation.name.includes(" - ")
+            ? allocation.name.split(" - ")[0]
+            : allocation.name,
+          score: allocation.score,
+          averageSupport: allocation.averageSupport,
+          basicBudget: allocation.basicBudget,
+          extendedBudget: allocation.extendedBudget,
+          allocated: allocation.allocated,
+          streamDuration: allocation.streamDuration || "1-year", // Default to 1-year if null
+          allocatedBudget: allocation.allocatedBudget,
+          rejectionReason: allocation.rejectionReason,
+          isNoneBelow: allocation.isNoneBelow,
+          isSpp1: allocation.isSpp1,
+          budgetType: allocation.budgetType,
+        })
+      );
 
       setData(transformedData);
       return transformedData;
