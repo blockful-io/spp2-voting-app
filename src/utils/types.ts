@@ -121,21 +121,35 @@ export interface RankedChoice {
   isNoneBelow: boolean;
 }
 
+/**
+ * Formatted head-to-head match
+ */
 export interface HeadToHeadMatch {
-  choice1: string;
-  choice2: string;
-  choice1Votes: number;
-  choice2Votes: number;
+  choice1: {
+    name: string;
+    totalVotes: number;
+    voters: Array<{ voter: string; vp: number }>;
+  };
+  choice2: {
+    name: string;
+    totalVotes: number;
+    voters: Array<{ voter: string; vp: number }>;
+  };
+  isInternal: boolean;
   totalVotes: number;
   winner: string;
-  resultType: "win" | "loss" | "tie";  // The type of result
-  isInternal: boolean;  // Whether options are from the same provider (for information only, doesn't affect scoring)
-  voters: {
-    choice1: Array<{ voter: string; vp: number }>;
-    choice2: Array<{ voter: string; vp: number }>;
-  };
 }
 
+export interface CandidateHeadToHeadResults {
+  matches: HeadToHeadMatch[];
+  wins: number;
+  losses: number;
+  ties: number;
+}
+
+/**
+ * Copeland results
+ */
 export interface CopelandResults {
   rankedChoices: RankedChoice[];
   headToHeadMatches: HeadToHeadMatch[];
@@ -317,36 +331,6 @@ export interface ReportResults {
     oneYearStreamRatio: number;
   };
   choices?: Choice[];
-}
-
-// ===== Candidate Comparison Types =====
-/**
- * Formatted head-to-head match
- */
-export interface FormattedMatch {
-  choice1: {
-    name: string;
-    candidateVotes: number;
-    voters: Array<{ voter: string; vp: number }>;
-  };
-  choice2: {
-    name: string;
-    candidateVotes: number;
-    voters: Array<{ voter: string; vp: number }>;
-  };
-  totalVotes: number;
-  winner: string;
-  isInternal: boolean;
-}
-
-
-/**
- * Candidate head-to-head results
- */
-export interface CandidateHeadToHeadResults {
-  matches: FormattedMatch[];
-  wins: number;
-  losses: number;
 }
 
 export type Space = {

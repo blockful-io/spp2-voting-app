@@ -97,25 +97,25 @@ export const displayResults = (
   console.log("\nHEAD-TO-HEAD MATCH RESULTS:");
   headToHeadMatches.forEach((match, index) => {
     // Label None Below choices in match results
-    const choice1Label = match.choice1.toLowerCase() === "none below" || 
-                          match.choice1.toLowerCase() === "none of the below" 
-                          ? " (None Below)" : "";
-    const choice2Label = match.choice2.toLowerCase() === "none below" || 
-                          match.choice2.toLowerCase() === "none of the below" 
-                          ? " (None Below)" : "";
+    const choice1Label = match.choice1.name.toLowerCase() === "none below" || 
+                         match.choice1.name.toLowerCase() === "none of the below" 
+                         ? " (None Below)" : "";
+    const choice2Label = match.choice2.name.toLowerCase() === "none below" || 
+                         match.choice2.name.toLowerCase() === "none of the below" 
+                         ? " (None Below)" : "";
     
     // Display result type icon                     
-    const resultIcon = match.resultType === "win" ? "✓" : 
-                      match.resultType === "loss" ? "✗" : 
+    const resultIcon = match.winner === match.choice1.name ? "✓" : 
+                      match.winner === match.choice2.name ? "✗" : 
                       "=";
                       
     // Display internal match indicator  
     const internalLabel = match.isInternal ? " [Same Provider]" : "";
                          
-    console.log(`\nMatch ${index + 1}: ${match.choice1}${choice1Label} vs ${match.choice2}${choice2Label}${internalLabel}`);
-    console.log(`   ${match.choice1}: ${match.choice1Votes} votes ${match.resultType === "win" ? resultIcon : ""}`);
-    console.log(`   ${match.choice2}: ${match.choice2Votes} votes ${match.resultType === "loss" ? resultIcon : ""}`);
-    console.log(`   Result: ${match.resultType === "tie" ? "Tie" : `${match.winner} wins`} ${match.resultType === "tie" ? resultIcon : ""}`);
+    console.log(`\nMatch ${index + 1}: ${match.choice1.name}${choice1Label} vs ${match.choice2.name}${choice2Label}${internalLabel}`);
+    console.log(`   ${match.choice1.name}: ${match.choice1.totalVotes} votes ${match.winner === match.choice1.name ? resultIcon : ""}`);
+    console.log(`   ${match.choice2.name}: ${match.choice2.totalVotes} votes ${match.winner === match.choice2.name ? resultIcon : ""}`);
+    console.log(`   Result: ${match.winner === "tie" ? "Tie" : `${match.winner} wins`} ${match.winner === "tie" ? resultIcon : ""}`);
     console.log(`   Total Votes: ${match.totalVotes}`);
   });
   
