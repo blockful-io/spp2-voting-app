@@ -50,53 +50,59 @@ export function ResultsDetails({
   // Resolve ENS names for addresses
   useEffect(() => {
     if (!provider || !headToHeadResults) return;
-    
+
     const { matches } = headToHeadResults;
 
     async function resolveEnsNames() {
       const addresses: string[] = [];
-      
+
       // Collect all unique addresses from expanded matches
-      expandedMatches.forEach(index => {
+      expandedMatches.forEach((index) => {
         const match = matches[index];
         if (!match) return;
-        
-        match.candidate1.voters.forEach((voter: { voter: string; vp: number }) => {
-          if (!ensCache[voter.voter] && !addresses.includes(voter.voter)) {
-            addresses.push(voter.voter);
+
+        match.candidate1.voters.forEach(
+          (voter: { voter: string; vp: number }) => {
+            if (!ensCache[voter.voter] && !addresses.includes(voter.voter)) {
+              addresses.push(voter.voter);
+            }
           }
-        });
-        
-        match.candidate2.voters.forEach((voter: { voter: string; vp: number }) => {
-          if (!ensCache[voter.voter] && !addresses.includes(voter.voter)) {
-            addresses.push(voter.voter);
+        );
+
+        match.candidate2.voters.forEach(
+          (voter: { voter: string; vp: number }) => {
+            if (!ensCache[voter.voter] && !addresses.includes(voter.voter)) {
+              addresses.push(voter.voter);
+            }
           }
-        });
+        );
       });
-      
+
       // If no addresses to resolve, don't continue
       if (addresses.length === 0) return;
-      
+
       // Lookup ENS names for all collected addresses
       const newEnsNames: Record<string, string | null> = { ...ensNames };
-      
-      await Promise.all(addresses.map(async (address) => {
-        try {
-          if (provider) {
-            const ensName = await provider.lookupAddress(address);
-            newEnsNames[address] = ensName;
-            ensCache[address] = ensName; // Cache the result
+
+      await Promise.all(
+        addresses.map(async (address) => {
+          try {
+            if (provider) {
+              const ensName = await provider.lookupAddress(address);
+              newEnsNames[address] = ensName;
+              ensCache[address] = ensName; // Cache the result
+            }
+          } catch (error) {
+            console.error(`Error resolving ENS for ${address}:`, error);
+            newEnsNames[address] = null;
+            ensCache[address] = null; // Cache the failure
           }
-        } catch (error) {
-          console.error(`Error resolving ENS for ${address}:`, error);
-          newEnsNames[address] = null;
-          ensCache[address] = null; // Cache the failure
-        }
-      }));
-      
+        })
+      );
+
       setEnsNames(newEnsNames);
     }
-    
+
     resolveEnsNames();
   }, [expandedMatches, provider, headToHeadResults, ensNames]);
 
@@ -110,7 +116,9 @@ export function ResultsDetails({
 
   const truncateAddress = (address: string) => {
     if (!address) return "";
-    return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+    return `${address.substring(0, 6)}...${address.substring(
+      address.length - 4
+    )}`;
   };
 
   const copyToClipboard = (address: string) => {
@@ -129,8 +137,8 @@ export function ResultsDetails({
   // Find the head-to-head match between basic and extended versions
   const basicVsExtMatch = data.headToHeadMatches.find(
     (match) =>
-      match.candidate1 === `${parsedChoice.name} - basic` &&
-      match.candidate2 === `${parsedChoice.name} - ext`
+      match.choice1 === `${parsedChoice.name} - basic` &&
+      match.choice2 === `${parsedChoice.name} - ext`
   );
 
   // Find the allocation data for the parsed choice name
@@ -184,15 +192,13 @@ export function ResultsDetails({
           <div className="mb-2 flex items-center justify-between">
             <span className="text-2xl font-semibold">
               {Math.round(
-                basicVsExtMatch?.candidate1Votes ||
+                basicVsExtMatch?.choice1Votes ||
                   allocationData?.averageSupport ||
                   0
               ).toLocaleString()}
             </span>
             <span className="text-2xl font-semibold">
-              {Math.round(
-                basicVsExtMatch?.candidate2Votes || 0
-              ).toLocaleString()}
+              {Math.round(basicVsExtMatch?.choice2Votes || 0).toLocaleString()}
             </span>
           </div>
           <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
@@ -202,7 +208,7 @@ export function ResultsDetails({
                 className="absolute h-full bg-blue-500 right-0"
                 style={{
                   width: `${
-                    ((basicVsExtMatch?.candidate2Votes || 0) /
+                    ((basicVsExtMatch?.choice2Votes || 0) /
                       (basicVsExtMatch?.totalVotes || 0)) *
                     100
                   }%`,
@@ -221,7 +227,7 @@ export function ResultsDetails({
         <div className="space-y-3">
           {matches.map((match: FormattedMatch, index: number) => {
             const isExpanded = expandedMatches.includes(index);
-            
+
             if (!match.isInternal)
               return (
                 <div
@@ -277,8 +283,8 @@ export function ResultsDetails({
                         </div>
                       </div>
                     </div>
-                    
-                    <button 
+
+                    <button
                       className="ml-2 p-1 rounded-full hover:bg-gray-700 transition-colors"
                       onClick={() => toggleMatchExpand(index)}
                     >
@@ -289,7 +295,7 @@ export function ResultsDetails({
                       )}
                     </button>
                   </div>
-                  
+
                   <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
                     <div className="relative h-full w-full">
                       <div className="absolute h-full w-full bg-blue-500" />
@@ -309,7 +315,7 @@ export function ResultsDetails({
                       />
                     </div>
                   </div>
-                  
+
                   {isExpanded && (
                     <div className="mt-4 pt-4 border-t border-lightDark">
                       <div className="grid grid-cols-1 gap-4">
@@ -317,15 +323,21 @@ export function ResultsDetails({
                           {/* Left side - Candidate 1 Voters */}
                           <div className="flex-1 mb-4 md:mb-0">
                             <h4 className="text-sm font-medium text-gray-300 mb-2">
-                              {match.candidate1.name} ({match.candidate1.voters.length})
+                              {match.candidate1.name} (
+                              {match.candidate1.voters.length})
                             </h4>
                             <div className="max-h-40 overflow-y-auto">
                               {match.candidate1.voters.length > 0 ? (
                                 <ul className="space-y-1">
                                   {match.candidate1.voters.map((voter, i) => (
-                                    <li key={i} className="text-xs flex items-center">
-                                      <button 
-                                        onClick={() => copyToClipboard(voter.voter)}
+                                    <li
+                                      key={i}
+                                      className="text-xs flex items-center"
+                                    >
+                                      <button
+                                        onClick={() =>
+                                          copyToClipboard(voter.voter)
+                                        }
                                         className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1 min-w-0"
                                         title={voter.voter}
                                       >
@@ -338,29 +350,41 @@ export function ResultsDetails({
                                           <Copy className="h-3 w-3 ml-1 opacity-50 flex-shrink-0" />
                                         )}
                                       </button>
-                                      <span className="text-gray-300 ml-auto text-right w-14 md:w-16 mr-2 md:mr-4">{Math.round(voter.vp).toLocaleString()}</span>
+                                      <span className="text-gray-300 ml-auto text-right w-14 md:w-16 mr-2 md:mr-4">
+                                        {Math.round(voter.vp).toLocaleString()}
+                                      </span>
                                     </li>
                                   ))}
                                 </ul>
                               ) : (
-                                <p className="text-xs text-gray-500">No voters</p>
+                                <p className="text-xs text-gray-500">
+                                  No voters
+                                </p>
                               )}
                             </div>
                           </div>
-                          
+
                           {/* Right side - Candidate 2 Voters */}
                           <div className="flex-1 md:pl-4 md:border-l border-lightDark">
                             <h4 className="text-sm font-medium text-gray-300 mb-2 md:text-right">
-                              {match.candidate2.name} ({match.candidate2.voters.length})
+                              {match.candidate2.name} (
+                              {match.candidate2.voters.length})
                             </h4>
                             <div className="max-h-40 overflow-y-auto">
                               {match.candidate2.voters.length > 0 ? (
                                 <ul className="space-y-1">
                                   {match.candidate2.voters.map((voter, i) => (
-                                    <li key={i} className="text-xs flex items-center md:justify-end">
-                                      <span className="text-gray-300 mr-auto md:ml-0 text-left w-14 md:w-16 order-2 md:order-1">{Math.round(voter.vp).toLocaleString()}</span>
-                                      <button 
-                                        onClick={() => copyToClipboard(voter.voter)}
+                                    <li
+                                      key={i}
+                                      className="text-xs flex items-center md:justify-end"
+                                    >
+                                      <span className="text-gray-300 mr-auto md:ml-0 text-left w-14 md:w-16 order-2 md:order-1">
+                                        {Math.round(voter.vp).toLocaleString()}
+                                      </span>
+                                      <button
+                                        onClick={() =>
+                                          copyToClipboard(voter.voter)
+                                        }
                                         className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1 min-w-0 md:justify-end order-1 md:order-2"
                                         title={voter.voter}
                                       >
@@ -377,7 +401,9 @@ export function ResultsDetails({
                                   ))}
                                 </ul>
                               ) : (
-                                <p className="text-xs text-gray-500 md:text-right">No voters</p>
+                                <p className="text-xs text-gray-500 md:text-right">
+                                  No voters
+                                </p>
                               )}
                             </div>
                           </div>

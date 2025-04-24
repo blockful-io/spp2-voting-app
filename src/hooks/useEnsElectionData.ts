@@ -98,11 +98,10 @@ export function useEnsElectionData() {
             : allocation.name,
           score: allocation.score,
           averageSupport: allocation.averageSupport,
-          basicBudget: allocation.basicBudget,
-          extendedBudget: allocation.extendedBudget,
+          budget: allocation.budget,
+
           allocated: allocation.allocated,
           streamDuration: allocation.streamDuration || "1-year", // Default to 1-year if null
-          allocatedBudget: allocation.allocatedBudget,
           rejectionReason: allocation.rejectionReason,
           isNoneBelow: allocation.isNoneBelow,
           isSpp1: allocation.isSpp1,

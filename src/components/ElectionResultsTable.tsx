@@ -1,11 +1,19 @@
 import { Trophy, ChevronRight } from "lucide-react";
 import { Allocation } from "@/utils/types";
 
+/**
+ * ElectionResultsTable props interface
+ * @param candidates - Array of allocation objects representing election candidates
+ * @param onShowDetails - Callback function to show details for a specific candidate
+ */
 interface ElectionResultsTableProps {
   candidates: Allocation[];
   onShowDetails: (candidateName: string) => void;
 }
 
+/**
+ * Badge component displayed for funded/winning candidates
+ */
 function FundedBadge() {
   return (
     <span className="rounded-full flex items-center gap-2 text-black bg-[#4ADE80] p-[6px] text-xs font-medium">
@@ -14,6 +22,9 @@ function FundedBadge() {
   );
 }
 
+/**
+ * Badge component displayed for non-funded candidates with reason tooltip
+ */
 function NotFundedBadge({ reason }: { reason: string | null }) {
   return (
     <div className="group relative inline-flex items-center">
@@ -29,10 +40,15 @@ function NotFundedBadge({ reason }: { reason: string | null }) {
   );
 }
 
+/**
+ * Election Results Table Component
+ * Displays election candidates with their ranking, funding status, and other metrics
+ */
 export function ElectionResultsTable({
   candidates,
   onShowDetails,
 }: ElectionResultsTableProps) {
+  // Find the divider row (typically "Below Threshold" or similar) to separate funded/non-funded candidates
   const dividerIndex = candidates.findIndex((candidate) =>
     candidate.name.toLowerCase().includes("below")
   );
@@ -43,14 +59,12 @@ export function ElectionResultsTable({
           <thead>
             <tr className="border-b border-lightDark">
               <th className="px-6 py-4">Rank</th>
-              <th className="px-6 py-4">Candidate</th>
-              <th className="px-6 py-4">Results</th>
+              <th className="px-6 py-4">Choice</th>
+              <th className="px-6 py-4">Budget</th>
               <th className="px-6 py-4">Wins</th>
               <th className="px-6 py-4">
                 Average ENS <br /> Support
               </th>
-              <th className="px-6 py-4">Basic Budget</th>
-              <th className="px-6 py-4">Extended Budget</th>
               <th className="px-6 py-4">Stream Duration</th>
               <th className="px-6 py-4">2Y Eligibility</th>
             </tr>
@@ -61,74 +75,57 @@ export function ElectionResultsTable({
               const beforeDivider = index < dividerIndex;
               return (
                 <tr
-                  key={candidate.name}
+                  key={candidate.name + index}
                   className={`group cursor-pointer transition-colors duration-200  font-light  hover:bg-gray-800/20 ${
                     beforeDivider ? "bg-stone-950" : "bg-stone-900"
                   }`}
                   onClick={() => onShowDetails(candidate.name)}
                 >
+                  {/* Column 1: Rank - Shows numerical ranking with funding indicator */}
                   <td
                     className={`whitespace-nowrap px-6 py-4 ${
                       candidate.allocated && "border-l-2 border-emerald-500"
                     }`}
                   >
                     <div className="flex items-center gap-4">
-                      <span className={`${candidate.allocated && "text-emerald-500"}`}>
+                      <span
+                        className={`${
+                          candidate.allocated && "text-emerald-500"
+                        }`}
+                      >
                         {index + 1}
                       </span>
                       {candidate.allocated && <FundedBadge />}
                     </div>
                   </td>
+
+                  {/* Column 2: Choice - Displays the candidate name */}
                   <td className="whitespace-nowrap px-6 py-4 text-gray-300">
                     {candidate.name}
                   </td>
+
+                  {/* Column 3: Budget - Shows allocated budget amount with visual indicators for basic budget type */}
                   <td className="whitespace-nowrap px-6 py-4">
-                    <ChevronRight className="h-5 w-5 text-gray-400 transition-all duration-300 ease-in-out group-hover:translate-x-1" />
+                    <div className="flex items-center gap-2">
+                      <span>
+                        {candidate.budget > 0
+                          ? `$${Math.round(candidate.budget).toLocaleString()}`
+                          : "-"}
+                      </span>
+                    </div>
                   </td>
+
+                  {/* Column 4: Wins - Shows the candidate's score or win count */}
                   <td className="whitespace-nowrap px-6 py-4">
                     {candidate.score}
                   </td>
+
+                  {/* Column 5: Average ENS Support - Shows the average support level from ENS holders */}
                   <td className="whitespace-nowrap px-6 py-4">
                     {Math.round(candidate.averageSupport).toLocaleString()}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`${
-                          candidate.budgetType === "basic" &&
-                          "font-medium text-emerald-500"
-                        }`}
-                      >
-                        {candidate.basicBudget > 0
-                          ? `$${Math.round(
-                              candidate.basicBudget
-                            ).toLocaleString()}`
-                          : "-"}
-                      </span>
-                      {candidate.budgetType === "basic" && (
-                        <span className="text-emerald-500">✓</span>
-                      )}
-                    </div>
-                  </td>
-                  <td className="whitespace-nowrap px-6 py-4">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`${
-                          candidate.budgetType === "extended" &&
-                          "font-medium text-emerald-500"
-                        }`}
-                      >
-                        {candidate.extendedBudget > 0
-                          ? `$${Math.round(
-                              candidate.extendedBudget
-                            ).toLocaleString()}`
-                          : "-"}
-                      </span>
-                      {candidate.budgetType === "extended" && (
-                        <span className=" text-emerald-500">✓</span>
-                      )}
-                    </div>
-                  </td>
+
+                  {/* Column 6: Stream Duration - Shows funding period (1-year/2-year) or Not Funded status */}
                   <td className="whitespace-nowrap px-6 py-4 text-gray-400">
                     {isDivider ? (
                       <span>-</span>
@@ -148,6 +145,8 @@ export function ElectionResultsTable({
                       <NotFundedBadge reason={candidate.rejectionReason} />
                     )}
                   </td>
+
+                  {/* Column 7: 2Y Eligibility - Shows whether candidate is eligible for 2-year funding (SPP1 status) */}
                   <td className="whitespace-nowrap px-6 py-4">
                     {isDivider ? (
                       <span>-</span>
@@ -162,6 +161,11 @@ export function ElectionResultsTable({
                         <span>No</span>
                       </div>
                     )}
+                  </td>
+
+                  {/* Detail indicator - Shows a chevron that animates on hover */}
+                  <td className="whitespace-nowrap px-6 py-4">
+                    <ChevronRight className="h-5 w-5 text-gray-400 transition-all duration-300 ease-in-out group-hover:translate-x-1" />
                   </td>
                 </tr>
               );
