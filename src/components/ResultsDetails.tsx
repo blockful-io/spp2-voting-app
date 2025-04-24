@@ -1,15 +1,12 @@
 import { HeadToHeadMatch } from "@/utils/voteProcessing";
-import {
-  FormattedMatch,
-  getCandidateHeadToHead,
-} from "@/utils/candidateComparisons";
+
 import { X, Trophy, ChevronDown, ChevronUp, Copy, Check } from "lucide-react";
 import { Allocation } from "@/utils/types";
 import { parseChoiceName } from "@/utils/parseChoiceName";
 import cc from "classcat";
 import { useState, useEffect } from "react";
 import { Web3Provider } from "@ethersproject/providers";
-
+import { filterHeadToHeadMatches } from "@/utils/candidateComparisons";
 // Cache for ENS names to avoid redundant lookups
 const ensCache: Record<string, string | null> = {};
 
@@ -32,11 +29,8 @@ export function ResultsDetails({
   const [ensNames, setEnsNames] = useState<Record<string, string | null>>({});
   const [provider, setProvider] = useState<Web3Provider | null>(null);
 
-  const headToHeadResults = getCandidateHeadToHead(
-    {
-      headToHeadMatches: data.headToHeadMatches,
-      candidates: data.allocations,
-    },
+  const headToHeadResults = filterHeadToHeadMatches(
+    data.headToHeadMatches,
     candidateName
   );
 
@@ -133,8 +127,8 @@ export function ResultsDetails({
   // Find the head-to-head match between basic and extended versions
   const basicVsExtMatch = data.headToHeadMatches.find(
     (match) =>
-      match.choice1 === `${parsedChoice.name} - basic` &&
-      match.choice2 === `${parsedChoice.name} - ext`
+      match.choice1.name === `${parsedChoice.name} - basic` &&
+      match.choice2.name === `${parsedChoice.name} - ext`
   );
 
   // Find the allocation data for the parsed choice name
@@ -188,13 +182,15 @@ export function ResultsDetails({
           <div className="mb-2 flex items-center justify-between">
             <span className="text-2xl font-semibold">
               {Math.round(
-                basicVsExtMatch?.choice1Votes ||
+                basicVsExtMatch?.choice1.totalVotes ||
                   allocationData?.averageSupport ||
                   0
               ).toLocaleString()}
             </span>
             <span className="text-2xl font-semibold">
-              {Math.round(basicVsExtMatch?.choice2Votes || 0).toLocaleString()}
+              {Math.round(
+                basicVsExtMatch?.choice2.totalVotes || 0
+              ).toLocaleString()}
             </span>
           </div>
           <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
@@ -204,7 +200,7 @@ export function ResultsDetails({
                 className="absolute h-full bg-blue-500 right-0"
                 style={{
                   width: `${
-                    ((basicVsExtMatch?.choice2Votes || 0) /
+                    ((basicVsExtMatch?.choice2.totalVotes || 0) /
                       (basicVsExtMatch?.totalVotes || 0)) *
                     100
                   }%`,
@@ -221,7 +217,7 @@ export function ResultsDetails({
           Head-to-head Match Results
         </h3>
         <div className="space-y-3">
-          {matches.map((match: FormattedMatch, index: number) => {
+          {matches.map((match: HeadToHeadMatch, index: number) => {
             const isExpanded = expandedMatches.includes(index);
 
             if (!match.isInternal)
@@ -248,7 +244,7 @@ export function ResultsDetails({
                             ])}
                           >
                             {Math.round(
-                              match.choice1.candidateVotes
+                              match.choice1.totalVotes
                             ).toLocaleString()}
                           </span>
                         </div>
@@ -269,7 +265,7 @@ export function ResultsDetails({
                             ])}
                           >
                             {Math.round(
-                              match.choice2.candidateVotes
+                              match.choice2.totalVotes
                             ).toLocaleString()}
                           </span>
 
@@ -303,8 +299,7 @@ export function ResultsDetails({
                         }`}
                         style={{
                           width: `${
-                            (match.choice1.candidateVotes / match.totalVotes) *
-                            100
+                            (match.choice1.totalVotes / match.totalVotes) * 100
                           }%`,
                         }}
                       />
