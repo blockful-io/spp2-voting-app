@@ -234,18 +234,19 @@ export function processCopelandRanking(
       }
 
       matchResults.push({
-        choice1: choices[i],
-        choice2: choices[j],
-        choice1Votes,
-        choice2Votes,
+        choice1: {
+          name: choices[i],
+          totalVotes: choice1Votes,
+          voters: choice1Voters
+        },
+        choice2: {
+          name: choices[j],
+          totalVotes: choice2Votes,
+          voters: choice2Voters
+        },
         totalVotes: matchesParticipated[i][j],
         winner,
-        resultType,
-        isInternal,
-        voters: {
-          choice1: choice1Voters,
-          choice2: choice2Voters,
-        },
+        isInternal
       });
     }
   }

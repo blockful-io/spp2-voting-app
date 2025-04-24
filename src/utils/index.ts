@@ -24,7 +24,7 @@ import { allocateBudgets } from './budgetAllocation';
 
 // Import the reporting module (using ES module imports)
 import { formatCurrency, displayResults, exportResults } from './reporting';
-import { getCandidateHeadToHead } from './candidateComparisons';
+import { filterHeadToHeadMatches } from './candidateComparisons';
 
 /**
  * Main function that orchestrates the entire process
@@ -87,11 +87,9 @@ export async function main(): Promise<{
       console.log("Results were not saved to a file.");
     }
     
-    const headToHeadResults = getCandidateHeadToHead({
-      headToHeadMatches,
-      candidates: allocations
-    }, "sp l - basic");
+    const headToHeadResults = filterHeadToHeadMatches(headToHeadMatches, "sp l - basic");
     console.log("Head to Head Results: ", headToHeadResults);
+
     // Return the results and filename for potential further processing
     return {
       results: formattedResults,
