@@ -12160,7 +12160,8 @@
   },
   "allocations": [
     {
-      "name": "sp d",
+      "name": "sp d - basic",
+      "provider": "sp d",
       "score": 19,
       "averageSupport": 515237.5931527662,
       "budget": 400000,
@@ -12172,7 +12173,8 @@
       "budgetType": "basic"
     },
     {
-      "name": "sp d",
+      "name": "sp d - ext",
+      "provider": "sp d",
       "score": 18,
       "averageSupport": 482512.94118811935,
       "budget": 800000,
@@ -12184,7 +12186,8 @@
       "budgetType": "extended"
     },
     {
-      "name": "sp b",
+      "name": "sp b - basic",
+      "provider": "sp b",
       "score": 15,
       "averageSupport": 462283.721760382,
       "budget": 300000,
@@ -12196,7 +12199,8 @@
       "budgetType": "basic"
     },
     {
-      "name": "sp b",
+      "name": "sp b - ext",
+      "provider": "sp b",
       "score": 14,
       "averageSupport": 428618.89654726145,
       "budget": 400000,
@@ -12209,6 +12213,7 @@
     },
     {
       "name": "sp a",
+      "provider": "sp a",
       "score": 13,
       "averageSupport": 413406.5800389487,
       "budget": 300000,
@@ -12220,7 +12225,8 @@
       "budgetType": "basic"
     },
     {
-      "name": "sp g",
+      "name": "sp g - basic",
+      "provider": "sp g",
       "score": 13,
       "averageSupport": 339992.8334617287,
       "budget": 300000,
@@ -12232,7 +12238,8 @@
       "budgetType": "basic"
     },
     {
-      "name": "sp l",
+      "name": "sp l - basic",
+      "provider": "sp l",
       "score": 12,
       "averageSupport": 340719.47604172694,
       "budget": 1100000,
@@ -12244,7 +12251,8 @@
       "budgetType": "basic"
     },
     {
-      "name": "sp g",
+      "name": "sp g - ext",
+      "provider": "sp g",
       "score": 12,
       "averageSupport": 306798.0948728451,
       "budget": 400000,
@@ -12256,7 +12264,8 @@
       "budgetType": "extended"
     },
     {
-      "name": "sp l",
+      "name": "sp l - ext",
+      "provider": "sp l",
       "score": 11,
       "averageSupport": 307994.8240770802,
       "budget": 1300000,
@@ -12269,6 +12278,7 @@
     },
     {
       "name": "sp f",
+      "provider": "sp f",
       "score": 10,
       "averageSupport": 341065.3923603004,
       "budget": 800000,
@@ -12281,6 +12291,7 @@
     },
     {
       "name": "sp c",
+      "provider": "sp c",
       "score": 10,
       "averageSupport": 326131.1543366981,
       "budget": 400000,
@@ -12292,7 +12303,8 @@
       "budgetType": "basic"
     },
     {
-      "name": "sp e",
+      "name": "sp e - basic",
+      "provider": "sp e",
       "score": 8,
       "averageSupport": 320058.7424678944,
       "budget": 400000,
@@ -12304,7 +12316,8 @@
       "budgetType": "basic"
     },
     {
-      "name": "sp i",
+      "name": "sp i - basic",
+      "provider": "sp i",
       "score": 8,
       "averageSupport": 285473.1092596886,
       "budget": 500000,
@@ -12316,7 +12329,8 @@
       "budgetType": "basic"
     },
     {
-      "name": "sp e",
+      "name": "sp e - ext",
+      "provider": "sp e",
       "score": 7,
       "averageSupport": 287334.0905032476,
       "budget": 700000,
@@ -12328,7 +12342,8 @@
       "budgetType": "extended"
     },
     {
-      "name": "sp i",
+      "name": "sp i - ext",
+      "provider": "sp i",
       "score": 7,
       "averageSupport": 252748.45729504176,
       "budget": 700000,
@@ -12341,6 +12356,7 @@
     },
     {
       "name": "none below",
+      "provider": "None Below",
       "score": 5,
       "averageSupport": 264366.53548259806,
       "budget": 0,

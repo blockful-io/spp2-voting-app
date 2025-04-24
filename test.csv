@@ -1,0 +1,11 @@
+address,votingPower,choice1,choice2,choice3,choice4,choice5,choice6,choice7,choice8,choice9,choice10
+0x1a2b3c4d5e6f7g8h9i0j,150000,sp a,sp b - basic,sp c,none below,sp d - ext,sp e - ext,sp f,sp d - basic,sp e - basic,sp b - ext
+0x2b3c4d5e6f7g8h9i0j1a,75000,sp b - ext,sp e - basic,sp d - basic,sp f,sp a,none below,sp c,sp b - basic,sp d - ext,sp e - ext
+0x3c4d5e6f7g8h9i0j1a2b,245000,none below,sp c,sp f,sp b - ext,sp d - ext,sp e - ext,sp a,sp b - basic,sp d - basic,sp e - basic
+0x4d5e6f7g8h9i0j1a2b3c,180000,sp d - basic,sp b - basic,sp a,sp e - basic,sp c,sp f,sp d - ext,sp b - ext,none below,sp e - ext
+0x5e6f7g8h9i0j1a2b3c4d,210000,sp d - ext,none below,sp e - ext,sp b - ext,sp f,sp c,sp a,sp d - basic,sp e - basic,sp b - basic
+0x6f7g8h9i0j1a2b3c4d5e,95000,sp e - basic,sp d - basic,sp c,sp b - basic,sp a,sp f,sp e - ext,none below,sp d - ext,sp b - ext
+0x7g8h9i0j1a2b3c4d5e6f,320000,sp e - ext,sp f,none below,sp a,sp b - ext,sp c,sp d - ext,sp e - basic,sp b - basic,sp d - basic
+0x8h9i0j1a2b3c4d5e6f7g,175000,sp f,sp c,sp d - ext,sp e - ext,sp b - ext,sp a,none below,sp d - basic,sp e - basic,sp b - basic
+0x9i0j1a2b3c4d5e6f7g8h,280000,sp b - basic,sp a,sp d - basic,sp e - basic,sp f,sp c,sp b - ext,sp d - ext,sp e - ext,none below
+0x0j1a2b3c4d5e6f7g8h9i,125000,none below,sp b - ext,sp d - ext,sp f,sp a,sp c,sp e - ext,sp b - basic,sp d - basic,sp e - basic
