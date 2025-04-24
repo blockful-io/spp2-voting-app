@@ -159,6 +159,7 @@ export type DataSource = "Local Data" | "Snapshot" | "API";
 
 export interface Allocation {
   name: string;
+  provider: string;
   score: number;
   averageSupport: number;
   budget: number;        // Budget amount for this specific choice
@@ -309,17 +310,7 @@ export interface ReportResults {
   };
   headToHeadMatches: HeadToHeadMatch[];
   summary: AllocationSummary;
-  allocations: {
-    name: string;
-    score: number;
-    averageSupport: number;
-    budget: number;
-    isSpp1?: boolean;
-    allocated: boolean;
-    streamDuration: StreamDuration;
-    rejectionReason: string | null;
-    isNoneBelow: boolean;
-  }[];
+  allocations: Allocation[];
   programInfo: {
     totalBudget: number;
     twoYearStreamRatio: number;
@@ -333,12 +324,12 @@ export interface ReportResults {
  * Formatted head-to-head match
  */
 export interface FormattedMatch {
-  candidate1: {
+  choice1: {
     name: string;
     candidateVotes: number;
     voters: Array<{ voter: string; vp: number }>;
   };
-  candidate2: {
+  choice2: {
     name: string;
     candidateVotes: number;
     voters: Array<{ voter: string; vp: number }>;
@@ -348,26 +339,12 @@ export interface FormattedMatch {
   isInternal: boolean;
 }
 
-/**
- * Candidate budget data
- */
-export interface CandidateBudget {
-  basic: {
-    amount: number;
-    selected: boolean;
-  };
-  extended: {
-    amount: number;
-    selected: boolean;
-  };
-}
 
 /**
  * Candidate head-to-head results
  */
 export interface CandidateHeadToHeadResults {
   matches: FormattedMatch[];
-  budget: CandidateBudget;
   wins: number;
   losses: number;
 }

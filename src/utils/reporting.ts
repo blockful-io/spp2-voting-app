@@ -136,6 +136,7 @@ export const displayResults = (
     summary: results.summary,
     allocations: results.allocations.map(a => ({
       name: a.name,
+      provider: a.provider,
       score: a.score,
       averageSupport: a.averageSupport,
       budget: a.budget,
