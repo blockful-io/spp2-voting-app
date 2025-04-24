@@ -3,7 +3,7 @@
  */
 
 // Testing configuration
-export const USE_LOCAL_DATA = false; // Set to false for production (to fetch from Snapshot API)
+export const USE_LOCAL_DATA = true; // Set to false for production (to fetch from Snapshot API)
 export const LOCAL_DATA_PATH = "mocked-votes.json"; // Path to local JSON data file
 
 // CSV file paths for dynamic data loading
@@ -18,9 +18,9 @@ export const ONE_YEAR_STREAM_RATIO = 2 / 3; // Proportion allocated to 1-year st
 export const TWO_YEAR_STREAM_CAP = 1500000; // Hard cap on 2-year stream budget
 
 // Copeland method scoring parameters
-export const WIN_POINTS: number = 1;       // Points awarded for winning a head-to-head match
-export const TIE_POINTS: number = 0.5;     // Points awarded for a tie in a head-to-head match
-export const LOSS_POINTS: number = 0;      // Points awarded for losing a head-to-head match
+export const WIN_POINTS: number = 1; // Points awarded for winning a head-to-head match
+export const TIE_POINTS: number = 0.5; // Points awarded for a tie in a head-to-head match
+export const LOSS_POINTS: number = 0; // Points awarded for losing a head-to-head match
 
 export const PROPOSAL_SPACE = "spp-test.eth";
 // Snapshot proposal ID - replace with your proposal ID

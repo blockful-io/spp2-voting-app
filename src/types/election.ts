@@ -17,5 +17,5 @@ export interface BudgetLegendItem {
   color: string;
   label: string;
   value?: string;
-  subtext?: string;
+  subtext?: React.ReactNode;
 }

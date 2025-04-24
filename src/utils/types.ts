@@ -128,8 +128,8 @@ export interface HeadToHeadMatch {
   choice2Votes: number;
   totalVotes: number;
   winner: string;
-  resultType: "win" | "loss" | "tie";  // The type of result
-  isInternal: boolean;  // Whether options are from the same provider (for information only, doesn't affect scoring)
+  resultType: "win" | "loss" | "tie"; // The type of result
+  isInternal: boolean; // Whether options are from the same provider (for information only, doesn't affect scoring)
   voters: {
     choice1: Array<{ voter: string; vp: number }>;
     choice2: Array<{ voter: string; vp: number }>;
@@ -159,10 +159,10 @@ export type DataSource = "Local Data" | "Snapshot" | "API";
 
 export interface Allocation {
   name: string;
-  provider: string;
+  provider: string; // Organization name. ex: "blockful"
   score: number;
   averageSupport: number;
-  budget: number;        // Budget amount for this specific choice
+  budget: number; // Budget amount for this specific choice
   allocated: boolean;
   streamDuration: StreamDuration;
   rejectionReason: string | null;
@@ -339,7 +339,6 @@ export interface FormattedMatch {
   isInternal: boolean;
 }
 
-
 /**
  * Candidate head-to-head results
  */
@@ -354,7 +353,12 @@ export type Space = {
   name: string;
 };
 
-export type AppState = "LOADING" | "ERROR" | "READY" | "PROCESSING" | "COMPLETE";
+export type AppState =
+  | "LOADING"
+  | "ERROR"
+  | "READY"
+  | "PROCESSING"
+  | "COMPLETE";
 
 /**
  * Snapshot API Types
@@ -401,4 +405,4 @@ export interface SnapshotAPIResponse {
   data: {
     proposal: SnapshotProposal;
   };
-} 
+}

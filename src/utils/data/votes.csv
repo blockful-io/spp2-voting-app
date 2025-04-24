@@ -1,11 +1,11 @@
 Name,Votes,Choice 1,Choice 2,Choice 3 ,Choice 4,Choice 5
-0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - basic,sp b - ext,sp a,sp c,None below
-0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - basic,sp b - ext,sp a,sp c,None below
-0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - basic ,sp b - ext,sp a,sp c,None below
-0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - ext,sp b - basic ,sp a,sp c,None below
-0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - ext,sp b - basic ,sp a,sp c,None below
-0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - ext,sp b - basic ,sp a,sp c,None below
-0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - ext,sp b - basic ,sp a,sp c,None below
-0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - ext,sp b - basic ,sp a,sp c,None below
-0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp a,sp c,None below,sp b - basic ,sp b - ext
-0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp a,sp b - basic ,sp b - ext,sp c,None below
+0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - basic,sp b - extended,sp a - basic,sp c - basic,None below
+0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - basic,sp b - extended,sp a - basic,sp c - basic,None below
+0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - basic ,sp b - extended,sp a - basic,sp c - basic,None below
+0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - extended,sp b - basic ,sp a - basic,sp c - basic,None below
+0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - extended,sp b - basic ,sp a - basic,sp c - basic,None below
+0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - extende,sp b - basic ,sp a - basic,sp c - basic,None below
+0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - extended,sp b - basic ,sp a - basic,sp c - basic,None below
+0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp b - extended,sp b - basic ,sp a - basic,sp c - basic,None below
+0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp a - basic,sp c - basic,None below,sp b - basic ,sp b - extended
+0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,1.00,sp a - basic,sp b - basic ,sp b - extended,sp c - basic,None below

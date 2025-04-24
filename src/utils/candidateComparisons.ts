@@ -1,4 +1,9 @@
-import { HeadToHeadMatch, Allocation, FormattedMatch, CandidateHeadToHeadResults } from "./types";
+import {
+  HeadToHeadMatch,
+  Allocation,
+  FormattedMatch,
+  CandidateHeadToHeadResults,
+} from "./types";
 import { parseChoiceName } from "./parseChoiceName";
 
 // Re-export types needed by components
@@ -15,9 +20,7 @@ export function getCandidateHeadToHead(
   let losses = 0;
 
   // Find the candidate's allocation
-  const candidate = data.candidates.find(
-    (c) => c.name === candidateName
-  );
+  const candidate = data.candidates.find((c) => c.name === candidateName);
   if (!candidate) return null;
 
   // Process all head-to-head matches for this exact choice
@@ -36,7 +39,7 @@ export function getCandidateHeadToHead(
         },
         totalVotes: match.totalVotes,
         winner: match.winner,
-        isInternal: match.isInternal
+        isInternal: match.isInternal,
       });
       if (match.choice1Votes > match.choice2Votes) wins++;
       else losses++;
@@ -53,9 +56,13 @@ export function getCandidateHeadToHead(
           voters: match.voters.choice1,
         },
         totalVotes: match.totalVotes,
-        winner: match.winner === match.choice1 ? match.choice1 : 
-               match.winner === match.choice2 ? match.choice2 : "Tie",
-        isInternal: match.isInternal
+        winner:
+          match.winner === match.choice1
+            ? match.choice1
+            : match.winner === match.choice2
+            ? match.choice2
+            : "Tie",
+        isInternal: match.isInternal,
       });
       if (match.choice2Votes > match.choice1Votes) wins++;
       else losses++;

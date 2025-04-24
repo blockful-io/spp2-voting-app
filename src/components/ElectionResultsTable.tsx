@@ -52,6 +52,7 @@ export function ElectionResultsTable({
   const dividerIndex = candidates.findIndex((candidate) =>
     candidate.name.toLowerCase().includes("below")
   );
+
   return (
     <div className="overflow-hidden rounded-lg border border-lightDark bg-dark">
       <div className="overflow-x-auto">

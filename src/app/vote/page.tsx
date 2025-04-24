@@ -38,7 +38,8 @@ export default function VotePage() {
 
   useEffect(() => {
     if (!fetchChoices) return;
-    setCandidates(loadChoices(fetchChoices, previousVote));
+    const choices = loadChoices(fetchChoices, previousVote);
+    setCandidates(choices);
   }, [fetchChoices, previousVote]);
 
   const handleBudgetSelection = (name: string, type: "basic" | "extended") => {

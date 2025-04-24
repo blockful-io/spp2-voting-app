@@ -93,13 +93,11 @@ export function useEnsElectionData() {
       // Transform allocation data to match our Allocation interface
       const transformedData: Allocation[] = allocationResponse.allocations.map(
         (allocation, index) => ({
-          name: allocation.name.includes(" - ")
-            ? allocation.name.split(" - ")[0]
-            : allocation.name,
+          name: allocation.name,
           score: allocation.score,
           averageSupport: allocation.averageSupport,
           budget: allocation.budget,
-
+          provider: allocation.provider,
           allocated: allocation.allocated,
           streamDuration: allocation.streamDuration || "1-year", // Default to 1-year if null
           rejectionReason: allocation.rejectionReason,

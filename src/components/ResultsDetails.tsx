@@ -61,21 +61,17 @@ export function ResultsDetails({
         const match = matches[index];
         if (!match) return;
 
-        match.candidate1.voters.forEach(
-          (voter: { voter: string; vp: number }) => {
-            if (!ensCache[voter.voter] && !addresses.includes(voter.voter)) {
-              addresses.push(voter.voter);
-            }
+        match.choice1.voters.forEach((voter: { voter: string; vp: number }) => {
+          if (!ensCache[voter.voter] && !addresses.includes(voter.voter)) {
+            addresses.push(voter.voter);
           }
-        );
+        });
 
-        match.candidate2.voters.forEach(
-          (voter: { voter: string; vp: number }) => {
-            if (!ensCache[voter.voter] && !addresses.includes(voter.voter)) {
-              addresses.push(voter.voter);
-            }
+        match.choice2.voters.forEach((voter: { voter: string; vp: number }) => {
+          if (!ensCache[voter.voter] && !addresses.includes(voter.voter)) {
+            addresses.push(voter.voter);
           }
-        );
+        });
       });
 
       // If no addresses to resolve, don't continue
@@ -156,7 +152,7 @@ export function ResultsDetails({
     );
   }
 
-  const { matches, budget, wins, losses } = headToHeadResults;
+  const { matches, wins, losses } = headToHeadResults;
 
   return (
     <div className="p-6">
@@ -177,7 +173,7 @@ export function ResultsDetails({
           Preferred Budget
         </h3>
         <div className="rounded-lg border border-lightDark bg-dark/50 p-4">
-          <div className="mb-4 flex items-center justify-between">
+          {/* <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span>Basic (${(budget.basic.amount / 1000).toFixed(0)}k)</span>
               {budget.basic.selected && <span>🏆</span>}
@@ -188,7 +184,7 @@ export function ResultsDetails({
                 Extended (${(budget.extended.amount / 1000).toFixed(0)}k)
               </span>
             </div>
-          </div>
+          </div> */}
           <div className="mb-2 flex items-center justify-between">
             <span className="text-2xl font-semibold">
               {Math.round(
@@ -239,20 +235,20 @@ export function ResultsDetails({
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
                           <span className="text-gray-100">
-                            {match.candidate1.name}
+                            {match.choice1.name}
                           </span>
-                          {match.winner.includes(match.candidate1.name) && (
+                          {match.winner.includes(match.choice1.name) && (
                             <Trophy className="text-emerald-500 h-4 w-4" />
                           )}
                           <span
                             className={cc([
-                              match.winner.includes(match.candidate1.name)
+                              match.winner.includes(match.choice1.name)
                                 ? "text-emerald-500"
                                 : "text-gray-400",
                             ])}
                           >
                             {Math.round(
-                              match.candidate1.candidateVotes
+                              match.choice1.candidateVotes
                             ).toLocaleString()}
                           </span>
                         </div>
@@ -262,23 +258,23 @@ export function ResultsDetails({
                       </div>
                       <div className="flex-1 text-right">
                         <div className="flex items-center gap-2 justify-end">
-                          {match.winner.includes(match.candidate2.name) && (
+                          {match.winner.includes(match.choice2.name) && (
                             <Trophy className="text-blue-500 h-4 w-4" />
                           )}
                           <span
                             className={cc([
-                              match.winner.includes(match.candidate2.name)
+                              match.winner.includes(match.choice2.name)
                                 ? "text-blue-500"
                                 : "text-gray-400",
                             ])}
                           >
                             {Math.round(
-                              match.candidate2.candidateVotes
+                              match.choice2.candidateVotes
                             ).toLocaleString()}
                           </span>
 
                           <span className="text-gray-100">
-                            {match.candidate2.name}
+                            {match.choice2.name}
                           </span>
                         </div>
                       </div>
@@ -301,14 +297,13 @@ export function ResultsDetails({
                       <div className="absolute h-full w-full bg-blue-500" />
                       <div
                         className={`absolute h-full ${
-                          match.winner !== match.candidate2.name
+                          match.winner !== match.choice2.name
                             ? "bg-emerald-500"
                             : "bg-blue-500"
                         }`}
                         style={{
                           width: `${
-                            (match.candidate1.candidateVotes /
-                              match.totalVotes) *
+                            (match.choice1.candidateVotes / match.totalVotes) *
                             100
                           }%`,
                         }}
@@ -323,13 +318,13 @@ export function ResultsDetails({
                           {/* Left side - Candidate 1 Voters */}
                           <div className="flex-1 mb-4 md:mb-0">
                             <h4 className="text-sm font-medium text-gray-300 mb-2">
-                              {match.candidate1.name} (
-                              {match.candidate1.voters.length})
+                              {match.choice1.name} (
+                              {match.choice1.voters.length})
                             </h4>
                             <div className="max-h-40 overflow-y-auto">
-                              {match.candidate1.voters.length > 0 ? (
+                              {match.choice1.voters.length > 0 ? (
                                 <ul className="space-y-1">
-                                  {match.candidate1.voters.map((voter, i) => (
+                                  {match.choice1.voters.map((voter, i) => (
                                     <li
                                       key={i}
                                       className="text-xs flex items-center"
@@ -367,13 +362,13 @@ export function ResultsDetails({
                           {/* Right side - Candidate 2 Voters */}
                           <div className="flex-1 md:pl-4 md:border-l border-lightDark">
                             <h4 className="text-sm font-medium text-gray-300 mb-2 md:text-right">
-                              {match.candidate2.name} (
-                              {match.candidate2.voters.length})
+                              {match.choice2.name} (
+                              {match.choice2.voters.length})
                             </h4>
                             <div className="max-h-40 overflow-y-auto">
-                              {match.candidate2.voters.length > 0 ? (
+                              {match.choice2.voters.length > 0 ? (
                                 <ul className="space-y-1">
-                                  {match.candidate2.voters.map((voter, i) => (
+                                  {match.choice2.voters.map((voter, i) => (
                                     <li
                                       key={i}
                                       className="text-xs flex items-center md:justify-end"
