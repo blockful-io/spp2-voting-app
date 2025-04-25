@@ -56,8 +56,8 @@ export interface ParsedChoice {
 }
 
 export interface Choice {
-  originalName: string; // Original full choice name (e.g., "sp a" or "sp b - basic")
-  name: string; // Base provider name without budget type (e.g., "sp a" or "sp b")
+  name: string; // Original full choice name (e.g., "sp a" or "sp b - basic")
+  providerName: string; // Base provider name without budget type (e.g., "sp a" or "sp b")
   budget: number; // Budget amount in USD
   isSpp1: boolean; // Whether provider was part of SPP1
   isNoneBelow: boolean; // Whether this is the "None Below" indicator
@@ -173,7 +173,7 @@ export type DataSource = "Local Data" | "Snapshot" | "API";
 
 export interface Allocation {
   name: string;
-  provider: string; // Organization name. ex: "blockful"
+  providerName: string; // Organization name. ex: "blockful"
   score: number;
   averageSupport: number;
   budget: number; // Budget amount for this specific choice

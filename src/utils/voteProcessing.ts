@@ -361,7 +361,7 @@ export function combineData(
 
     return {
       name: result.name,
-      provider: providerName,
+      providerName: providerName,
       score: result.score,
       averageSupport: result.averageSupport || 0,
       budget,
