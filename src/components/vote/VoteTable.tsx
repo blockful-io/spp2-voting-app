@@ -259,6 +259,16 @@ export function VoteTable({
             }
           }
 
+          if (itemsToMove.length === 0) {
+            console.error("No items found to move for combined drag", {
+              providerName,
+              active: activeDecoded,
+              over: overDecoded,
+            });
+            onDragEnd?.();
+            return;
+          }
+
           console.log(
             "Items to move:",
             JSON.stringify(
@@ -280,22 +290,71 @@ export function VoteTable({
           let insertIndex: number;
 
           if (overDecoded.budgetType === "combined") {
-            // Find the target provider's position
-            insertIndex = workingArray.findIndex(
-              (c) => c.providerName === overDecoded.provider
-            );
+            // Find the target provider's positions (all instances)
+            const targetProviderIndices = workingArray
+              .map((c, idx) =>
+                c.providerName === overDecoded.provider ? idx : -1
+              )
+              .filter((idx) => idx !== -1);
+
+            // Default to first position
+            insertIndex =
+              targetProviderIndices.length > 0 ? targetProviderIndices[0] : -1;
+
+            // Find the min original index of the items being moved
+            const minOriginalIndex = Math.min(...originalIndexes);
+
+            // Determine if we're dragging down
+            const isDraggingDown =
+              minOriginalIndex <
+              (targetProviderIndices.length > 0
+                ? targetProviderIndices[0]
+                : Infinity);
+
+            // If dragging down, place after all items of the target provider
+            if (isDraggingDown && targetProviderIndices.length > 0) {
+              insertIndex = Math.max(...targetProviderIndices) + 1;
+            }
+
             console.log(
-              `Target is combined. Looking for provider: ${overDecoded.provider}`
+              `Target is combined. Looking for provider: ${overDecoded.provider}, indices: ${targetProviderIndices}, dragging down: ${isDraggingDown}`
             );
           } else {
-            // Find the specific target item
+            // Find the specific target item and handle any merged items
             insertIndex = workingArray.findIndex(
               (c) =>
                 c.providerName === overDecoded.provider &&
                 c.budgetType === overDecoded.budgetType
             );
+
+            // Determine if target is part of a merged set (has both basic and extended)
+            const isTargetPartOfMergedSet = workingArray.some(
+              (c) =>
+                c.providerName === overDecoded.provider &&
+                c.budgetType !== overDecoded.budgetType &&
+                (c.budgetType === "basic" || c.budgetType === "extended")
+            );
+
+            if (isTargetPartOfMergedSet) {
+              // Find all indices of this provider
+              const indices = workingArray
+                .map((c, idx) =>
+                  c.providerName === overDecoded.provider ? idx : -1
+                )
+                .filter((idx) => idx !== -1);
+
+              // Check if dropping before or after
+              const minOriginalIndex = Math.min(...originalIndexes);
+              const isDraggingDown = minOriginalIndex < insertIndex;
+
+              // Place either before or after the entire merged set
+              insertIndex = isDraggingDown
+                ? Math.max(...indices) + 1
+                : Math.min(...indices);
+            }
+
             console.log(
-              `Target is regular. Looking for provider: ${overDecoded.provider} with type: ${overDecoded.budgetType}`
+              `Target is regular. Looking for provider: ${overDecoded.provider} with type: ${overDecoded.budgetType}, isPartOfMergedSet: ${isTargetPartOfMergedSet}`
             );
           }
 
@@ -303,6 +362,13 @@ export function VoteTable({
 
           // If can't find target, insert at beginning
           if (insertIndex === -1) {
+            console.warn(
+              "Target not found for combined drag, using fallback position",
+              {
+                targetProvider: overDecoded.provider,
+                targetType: overDecoded.budgetType,
+              }
+            );
             insertIndex = 0;
             console.log("Target not found, defaulting to index 0");
           }
@@ -392,17 +458,50 @@ export function VoteTable({
           console.log("Active:", activeDecoded);
           console.log("Over:", overDecoded);
 
+          // Find the active item index
           const oldIndex = candidates.findIndex(
             (c) =>
               c.providerName === activeDecoded.provider &&
               c.budgetType === activeDecoded.budgetType
           );
 
-          const newIndex = candidates.findIndex(
-            (c) =>
-              c.providerName === overDecoded.provider &&
-              c.budgetType === overDecoded.budgetType
-          );
+          // Handle differently based on target type
+          let newIndex: number;
+
+          if (overDecoded.budgetType === "combined") {
+            // When target is a combined item, we need to find the first item of that provider
+            const providerIndices = candidates
+              .map((c, idx) =>
+                c.providerName === overDecoded.provider ? idx : -1
+              )
+              .filter((idx) => idx !== -1);
+
+            // Default to the first item if found
+            newIndex = providerIndices.length > 0 ? providerIndices[0] : -1;
+
+            // If we're dragging down, place after the last item of the provider
+            if (providerIndices.length > 0) {
+              const minProviderIndex = Math.min(...providerIndices);
+              const maxProviderIndex = Math.max(...providerIndices);
+              const isDraggingDown = oldIndex < minProviderIndex;
+
+              newIndex = isDraggingDown
+                ? maxProviderIndex + 1
+                : minProviderIndex;
+            }
+
+            console.log(
+              `Target is combined, found index: ${newIndex}, indices: ${providerIndices}`
+            );
+          } else {
+            // Otherwise find the exact item
+            newIndex = candidates.findIndex(
+              (c) =>
+                c.providerName === overDecoded.provider &&
+                c.budgetType === overDecoded.budgetType
+            );
+            console.log(`Target is regular, found index: ${newIndex}`);
+          }
 
           console.log(`Moving from index ${oldIndex} to ${newIndex}`);
 
@@ -410,6 +509,8 @@ export function VoteTable({
             console.error("Could not find items for regular drag", {
               oldIndex,
               newIndex,
+              active: activeDecoded,
+              over: overDecoded,
             });
             return;
           }
@@ -450,6 +551,23 @@ export function VoteTable({
     // Get all unique provider names
     const providers = [...new Set(result.map((c) => c.providerName))];
 
+    // Track providers that need to stay merged
+    const mergedProviders = new Set<string>();
+
+    // Identify providers that should stay merged (adjacent basic+extended)
+    for (let i = 0; i < result.length - 1; i++) {
+      const current = result[i];
+      const next = result[i + 1];
+
+      if (
+        current.providerName === next.providerName &&
+        ((current.budgetType === "basic" && next.budgetType === "extended") ||
+          (current.budgetType === "extended" && next.budgetType === "basic"))
+      ) {
+        mergedProviders.add(current.providerName);
+      }
+    }
+
     // For each provider, ensure basic is before extended
     for (const provider of providers) {
       const basicIndex = result.findIndex(
@@ -471,6 +589,28 @@ export function VoteTable({
 
         // Insert it right before extended
         result.splice(extendedIndex, 0, basicItem);
+      }
+    }
+
+    // Make sure merged providers stay together - no items should be between their basic and extended
+    for (const provider of mergedProviders) {
+      const basicIndex = result.findIndex(
+        (c) => c.providerName === provider && c.budgetType === "basic"
+      );
+
+      const extendedIndex = result.findIndex(
+        (c) => c.providerName === provider && c.budgetType === "extended"
+      );
+
+      if (basicIndex !== -1 && extendedIndex !== -1) {
+        // If they're not adjacent
+        if (Math.abs(basicIndex - extendedIndex) > 1) {
+          // Remove the extended item
+          const extendedItem = result.splice(extendedIndex, 1)[0];
+
+          // Insert it right after basic
+          result.splice(basicIndex + 1, 0, extendedItem);
+        }
       }
     }
 
