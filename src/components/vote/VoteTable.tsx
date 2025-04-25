@@ -14,8 +14,8 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useCallback } from "react";
-import { Choice } from "@/utils/types";
+import { useCallback, useMemo, useState } from "react";
+import { Choice, BudgetType } from "@/utils/types";
 
 interface VoteTableProps {
   candidates: Choice[];
@@ -25,6 +25,31 @@ interface VoteTableProps {
   onDragEnd?: () => void;
 }
 
+// Interface for a combined candidate display
+interface CombinedCandidate {
+  providerName: string;
+  basicCandidate: Choice;
+  extendedCandidate: Choice;
+  isExpanded: boolean;
+}
+
+// Types for items in the display list
+type RegularDisplayItem = {
+  type: "regular";
+  candidate: Choice;
+  index: number;
+};
+
+type CombinedDisplayItem = {
+  type: "combined";
+  providerName: string;
+  basicCandidate: Choice;
+  extendedCandidate: Choice;
+  index: number;
+};
+
+type DisplayItem = RegularDisplayItem | CombinedDisplayItem;
+
 export function VoteTable({
   candidates,
   onBudgetSelect,
@@ -32,6 +57,11 @@ export function VoteTable({
   onDragStart,
   onDragEnd,
 }: VoteTableProps) {
+  // State to track which provider's view should be expanded/collapsed
+  const [combinedViews, setCombinedViews] = useState<Record<string, boolean>>(
+    {}
+  );
+
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(TouchSensor, {
@@ -41,6 +71,113 @@ export function VoteTable({
       },
     })
   );
+
+  // Find pairs of basic and extended budgets for the same provider
+  const combinedCandidates = useMemo(() => {
+    const result: Record<string, CombinedCandidate> = {};
+
+    // Group candidates by provider name
+    const groupedByProvider: Record<string, Choice[]> = {};
+    candidates.forEach((candidate) => {
+      if (!groupedByProvider[candidate.providerName]) {
+        groupedByProvider[candidate.providerName] = [];
+      }
+      groupedByProvider[candidate.providerName].push(candidate);
+    });
+
+    // Find providers with both basic and extended budgets
+    for (const [providerName, group] of Object.entries(groupedByProvider)) {
+      const basicCandidate = group.find((c) => c.budgetType === "basic");
+      const extendedCandidate = group.find((c) => c.budgetType === "extended");
+
+      if (basicCandidate && extendedCandidate) {
+        // Check if they are adjacent in the original array
+        const basicIndex = candidates.indexOf(basicCandidate);
+        const extendedIndex = candidates.indexOf(extendedCandidate);
+
+        if (Math.abs(basicIndex - extendedIndex) === 1) {
+          result[providerName] = {
+            providerName,
+            basicCandidate,
+            extendedCandidate,
+            isExpanded: combinedViews[providerName] || false,
+          };
+        }
+      }
+    }
+
+    return result;
+  }, [candidates, combinedViews]);
+
+  // Create a display list that either combines or separates items based on the current view state
+  const displayItems = useMemo(() => {
+    // Create a map to track which items should be skipped (because they're part of a collapsed pair)
+    const skipItems = new Set<Choice>();
+
+    return candidates
+      .map((candidate, index) => {
+        // If this item has already been processed as part of a combined view, skip it
+        if (skipItems.has(candidate)) {
+          return null;
+        }
+
+        const combined = combinedCandidates[candidate.providerName];
+
+        // If this provider has both budget types and they're adjacent
+        if (combined) {
+          const nextCandidate =
+            index < candidates.length - 1 ? candidates[index + 1] : null;
+
+          // Check if current and next are the pair we want to combine
+          if (
+            nextCandidate &&
+            nextCandidate.providerName === candidate.providerName &&
+            ((candidate.budgetType === "basic" &&
+              nextCandidate.budgetType === "extended") ||
+              (candidate.budgetType === "extended" &&
+                nextCandidate.budgetType === "basic"))
+          ) {
+            // If view is expanded, don't combine them
+            if (combined.isExpanded) {
+              return {
+                type: "regular",
+                candidate,
+                index,
+              } as RegularDisplayItem;
+            }
+
+            // Otherwise combine them and mark the next item to be skipped
+            skipItems.add(nextCandidate);
+
+            // Determine which is basic and which is extended
+            const basicCand =
+              candidate.budgetType === "basic" ? candidate : nextCandidate;
+            const extendedCand =
+              candidate.budgetType === "extended" ? candidate : nextCandidate;
+
+            return {
+              type: "combined",
+              providerName: candidate.providerName,
+              basicCandidate: basicCand,
+              extendedCandidate: extendedCand,
+              index,
+            } as CombinedDisplayItem;
+          }
+        }
+
+        // Default: just return this candidate as-is
+        return { type: "regular", candidate, index } as RegularDisplayItem;
+      })
+      .filter((item): item is DisplayItem => item !== null); // Type guard to remove null entries
+  }, [candidates, combinedCandidates]);
+
+  // Toggle between expanded/collapsed view for a provider
+  const toggleView = (providerName: string) => {
+    setCombinedViews((prev) => ({
+      ...prev,
+      [providerName]: !prev[providerName],
+    }));
+  };
 
   const isDivider = (candidate: Choice) =>
     candidate.providerName.toLowerCase().includes("below");
@@ -70,100 +207,283 @@ export function VoteTable({
         const overDecoded = decodeId(String(over?.id));
 
         if (!activeDecoded || !overDecoded) {
+          console.error("Failed to decode drag IDs", {
+            active: active.id,
+            over: over?.id,
+          });
           return;
         }
 
-        const oldIndex = activeDecoded.index;
-        const newIndex = overDecoded.index;
-
-        // First, do the basic move
-        const newOrder = arrayMove([...candidates], oldIndex, newIndex);
-
-        // After the drag, check if any extended budget appears above its corresponding basic budget
-        // If so, move the basic budget to be right above the extended one
-
-        // Get all provider names
-        const providerNames = [...new Set(newOrder.map((c) => c.providerName))];
-
-        let orderChanged = false;
-
-        // For each provider, check if extended is ranked above basic
-        for (const provider of providerNames) {
-          // Find the indices of basic and extended budgets for this provider
-          const indices = newOrder
-            .map((candidate, index) => ({
-              index,
-              budgetType: candidate.budgetType,
-              provider: candidate.providerName,
-            }))
-            .filter((item) => item.provider === provider);
-
-          const basicEntry = indices.find(
-            (item) => item.budgetType === "basic"
-          );
-          const extendedEntry = indices.find(
-            (item) => item.budgetType === "extended"
+        // COMBINED ITEM DRAG
+        if (activeDecoded.budgetType === "combined") {
+          console.log("===== COMBINED DRAG START =====");
+          console.log("Active:", activeDecoded);
+          console.log("Over:", overDecoded);
+          console.log(
+            "Initial candidates:",
+            JSON.stringify(
+              candidates.map((c) => ({
+                name: c.providerName,
+                type: c.budgetType,
+              }))
+            )
           );
 
-          // If both exist and the extended budget is ranked higher (has a lower index)
-          if (
-            basicEntry &&
-            extendedEntry &&
-            extendedEntry.index < basicEntry.index
-          ) {
-            // Remove the basic budget from its current position
-            const basicBudget = newOrder.splice(basicEntry.index, 1)[0];
+          // Get the provider name of what we're moving
+          const providerName = activeDecoded.provider;
+          console.log("Moving provider:", providerName);
 
-            // Insert it right above the extended budget
-            // Need to adjust the extended index if basic was before it originally
-            const insertIndex =
-              basicEntry.index < extendedEntry.index
-                ? extendedEntry.index - 1 // Basic was before extended, so extended shifts down 1
-                : extendedEntry.index; // Basic was after extended, so no shift
+          // Create a working copy
+          const workingArray = [...candidates];
 
-            newOrder.splice(insertIndex, 0, basicBudget);
-            orderChanged = true;
-          }
-        }
+          // Find and remove the items we're moving (basic and extended budgets)
+          const itemsToMove: Choice[] = [];
+          const originalIndexes: number[] = [];
 
-        // Verify that the rule has been correctly applied
-        let allValid = true;
-
-        for (const provider of providerNames) {
-          const providerEntries = newOrder
-            .map((candidate, index) => ({
-              index,
-              budgetType: candidate.budgetType,
-              provider: candidate.providerName,
-            }))
-            .filter((item) => item.provider === provider);
-
-          const basicIndex = providerEntries.find(
-            (item) => item.budgetType === "basic"
-          )?.index;
-          const extendedIndex = providerEntries.find(
-            (item) => item.budgetType === "extended"
-          )?.index;
-
-          if (basicIndex !== undefined && extendedIndex !== undefined) {
-            if (extendedIndex < basicIndex) {
-              allValid = false;
+          // Find all the items for this provider
+          for (let i = workingArray.length - 1; i >= 0; i--) {
+            const candidate = workingArray[i];
+            if (
+              candidate.providerName === providerName &&
+              (candidate.budgetType === "basic" ||
+                candidate.budgetType === "extended")
+            ) {
+              // Remove it from the working array
+              const [removed] = workingArray.splice(i, 1);
+              console.log(
+                `Removed ${removed.providerName} (${removed.budgetType}) at index ${i}`
+              );
+              // Add it to our items to move (at the beginning to maintain order)
+              itemsToMove.unshift(removed);
+              originalIndexes.unshift(i);
             }
           }
+
+          console.log(
+            "Items to move:",
+            JSON.stringify(
+              itemsToMove.map((c) => ({
+                name: c.providerName,
+                type: c.budgetType,
+              }))
+            )
+          );
+
+          // Sort the items to move so that basic is always first
+          itemsToMove.sort((a, b) =>
+            a.budgetType === "basic" ? -1 : b.budgetType === "basic" ? 1 : 0
+          );
+
+          const minOriginalIndex = Math.min(...originalIndexes);
+
+          // Find where to insert them
+          let insertIndex: number;
+
+          if (overDecoded.budgetType === "combined") {
+            // Find the target provider's position
+            insertIndex = workingArray.findIndex(
+              (c) => c.providerName === overDecoded.provider
+            );
+            console.log(
+              `Target is combined. Looking for provider: ${overDecoded.provider}`
+            );
+          } else {
+            // Find the specific target item
+            insertIndex = workingArray.findIndex(
+              (c) =>
+                c.providerName === overDecoded.provider &&
+                c.budgetType === overDecoded.budgetType
+            );
+            console.log(
+              `Target is regular. Looking for provider: ${overDecoded.provider} with type: ${overDecoded.budgetType}`
+            );
+          }
+
+          console.log("Insert index found:", insertIndex);
+
+          // If can't find target, insert at beginning
+          if (insertIndex === -1) {
+            insertIndex = 0;
+            console.log("Target not found, defaulting to index 0");
+          }
+
+          // Determine if dragging down
+          const targetOriginalIndex = candidates.findIndex(
+            (c) =>
+              c.providerName === overDecoded.provider &&
+              (overDecoded.budgetType === "combined"
+                ? true
+                : c.budgetType === overDecoded.budgetType)
+          );
+
+          console.log("Target original index:", targetOriginalIndex);
+          console.log("Min original index of moved items:", minOriginalIndex);
+
+          const isDraggingDown = targetOriginalIndex > minOriginalIndex;
+          console.log("Is dragging down:", isDraggingDown);
+
+          // If dragging down, we need to insert AFTER the target
+          if (isDraggingDown) {
+            // UPDATED FIX: For combined targets when dragging down, insert after BOTH items
+            if (overDecoded.budgetType === "combined") {
+              // When target is combined, find the last item of that provider
+              const targetProviderIndices = workingArray
+                .map((c, idx) =>
+                  c.providerName === overDecoded.provider ? idx : -1
+                )
+                .filter((idx) => idx !== -1);
+
+              if (targetProviderIndices.length > 0) {
+                // Use the last index of the target provider's items
+                insertIndex = Math.max(...targetProviderIndices) + 1;
+                console.log(
+                  "Adjusted insert index after combined target:",
+                  insertIndex
+                );
+              } else {
+                insertIndex += 1;
+              }
+            } else {
+              insertIndex += 1;
+            }
+            console.log(
+              "Adjusted insert index for downward drag:",
+              insertIndex
+            );
+          }
+
+          // Insert the items at the target position
+          workingArray.splice(insertIndex, 0, ...itemsToMove);
+
+          console.log(
+            "Final working array:",
+            JSON.stringify(
+              workingArray.map((c) => ({
+                name: c.providerName,
+                type: c.budgetType,
+              }))
+            )
+          );
+
+          // CRITICAL FIX: Reapply the combined status in final array
+          // Make sure we update the view state for items that should remain combined
+          // We'll do this by checking for provider name pairs that have both budget types
+          const finalOrder = enforceBusinessRules(workingArray);
+
+          console.log(
+            "After enforcing business rules:",
+            JSON.stringify(
+              finalOrder.map((c) => ({
+                name: c.providerName,
+                type: c.budgetType,
+              }))
+            )
+          );
+          console.log("===== COMBINED DRAG END =====");
+
+          // Update with the new order and keep the combined view state
+          onReorder(finalOrder);
+          onDragEnd?.();
+          return;
         }
+        // REGULAR ITEM DRAG
+        else {
+          console.log("===== REGULAR DRAG START =====");
+          console.log("Active:", activeDecoded);
+          console.log("Over:", overDecoded);
 
-        onReorder(newOrder);
+          const oldIndex = candidates.findIndex(
+            (c) =>
+              c.providerName === activeDecoded.provider &&
+              c.budgetType === activeDecoded.budgetType
+          );
+
+          const newIndex = candidates.findIndex(
+            (c) =>
+              c.providerName === overDecoded.provider &&
+              c.budgetType === overDecoded.budgetType
+          );
+
+          console.log(`Moving from index ${oldIndex} to ${newIndex}`);
+
+          if (oldIndex === -1 || newIndex === -1) {
+            console.error("Could not find items for regular drag", {
+              oldIndex,
+              newIndex,
+            });
+            return;
+          }
+
+          // Create new order with the dragged item at the new position
+          const newOrder = arrayMove([...candidates], oldIndex, newIndex);
+
+          // Apply business rules - basic must come before extended
+          const finalOrder = enforceBusinessRules(newOrder);
+
+          console.log(
+            "Final order after enforcing rules:",
+            JSON.stringify(
+              finalOrder.map((c) => ({
+                name: c.providerName,
+                type: c.budgetType,
+              }))
+            )
+          );
+          console.log("===== REGULAR DRAG END =====");
+
+          // Update with the new order
+          onReorder(finalOrder);
+          onDragEnd?.();
+        }
+      } else {
+        onDragEnd?.();
       }
-
-      onDragEnd?.();
     },
     [candidates, onReorder, onDragEnd]
   );
 
-  // Generate unique ID for each candidate
-  const getCandidateId = (candidate: Choice, index: number) => {
-    // Always use the same consistent format
-    return `${candidate.providerName}-${candidate.budgetType}-${index}`;
+  // Enforce business rules on the candidate order
+  const enforceBusinessRules = (candidateList: Choice[]): Choice[] => {
+    // Make a copy to avoid modifying the input
+    const result = [...candidateList];
+
+    // Get all unique provider names
+    const providers = [...new Set(result.map((c) => c.providerName))];
+
+    // For each provider, ensure basic is before extended
+    for (const provider of providers) {
+      const basicIndex = result.findIndex(
+        (c) => c.providerName === provider && c.budgetType === "basic"
+      );
+
+      const extendedIndex = result.findIndex(
+        (c) => c.providerName === provider && c.budgetType === "extended"
+      );
+
+      // If both exist and extended is before basic, move basic before extended
+      if (
+        basicIndex !== -1 &&
+        extendedIndex !== -1 &&
+        extendedIndex < basicIndex
+      ) {
+        // Remove basic from its current position
+        const basicItem = result.splice(basicIndex, 1)[0];
+
+        // Insert it right before extended
+        result.splice(extendedIndex, 0, basicItem);
+      }
+    }
+
+    return result;
+  };
+
+  // Generate unique ID for each candidate or combined item
+  const getItemId = (item: DisplayItem, index: number) => {
+    if (item.type === "combined") {
+      return `${item.providerName}-combined-${index}`;
+    } else {
+      return `${item.candidate.providerName}-${item.candidate.budgetType}-${index}`;
+    }
   };
 
   // Debug utility to decode an ID back to its components
@@ -172,11 +492,24 @@ export function VoteTable({
     if (parts.length >= 3) {
       return {
         provider: parts.slice(0, parts.length - 2).join("-"), // Handle providers with dashes in their names
-        budgetType: parts[parts.length - 2],
+        budgetType: parts[parts.length - 2] as
+          | "basic"
+          | "extended"
+          | "combined"
+          | "none",
         index: parseInt(parts[parts.length - 1]),
       };
     }
     return null;
+  };
+
+  // Format budget as currency
+  const formatBudget = (amount: number): string => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    }).format(amount);
   };
 
   return (
@@ -197,27 +530,66 @@ export function VoteTable({
           </thead>
           <tbody>
             <SortableContext
-              items={candidates.map((candidate, index) =>
-                getCandidateId(candidate, index)
-              )}
+              items={displayItems.map((item, index) => getItemId(item, index))}
               strategy={verticalListSortingStrategy}
             >
-              {candidates.map((candidate, index) => (
-                <CandidateRow
-                  key={getCandidateId(candidate, index)}
-                  id={getCandidateId(candidate, index)}
-                  name={candidate.providerName}
-                  index={index}
-                  budget={candidate.budget}
-                  isDivider={isDivider(candidate)}
-                  isBelowDivider={isBelowDivider(candidate)}
-                  isLastRow={index === candidates.length - 1}
-                  budgetType={candidate.budgetType}
-                  onBudgetSelect={(type) =>
-                    onBudgetSelect(candidate.providerName, type)
-                  }
-                />
-              ))}
+              {displayItems.map((item, index) => {
+                if (item.type === "combined") {
+                  // Render combined row
+                  return (
+                    <CandidateRow
+                      key={getItemId(item, index)}
+                      id={getItemId(item, index)}
+                      name={item.providerName}
+                      index={index}
+                      isCombined={true}
+                      basicBudget={item.basicCandidate.budget}
+                      extendedBudget={item.extendedCandidate.budget}
+                      budget={
+                        item.basicCandidate.budget +
+                        item.extendedCandidate.budget
+                      }
+                      isDivider={false}
+                      isBelowDivider={isBelowDivider(item.basicCandidate)}
+                      isLastRow={index === displayItems.length - 1}
+                      budgetType="combined"
+                      isExpanded={
+                        combinedCandidates[item.providerName]?.isExpanded
+                      }
+                      onToggleView={() => toggleView(item.providerName)}
+                      onBudgetSelect={(type) =>
+                        onBudgetSelect(item.providerName, type)
+                      }
+                    />
+                  );
+                } else {
+                  // Render regular row
+                  const { candidate } = item;
+                  const combined = combinedCandidates[candidate.providerName];
+                  return (
+                    <CandidateRow
+                      key={getItemId(item, index)}
+                      id={getItemId(item, index)}
+                      name={candidate.providerName}
+                      index={index}
+                      budget={candidate.budget}
+                      isDivider={isDivider(candidate)}
+                      isBelowDivider={isBelowDivider(candidate)}
+                      isLastRow={index === displayItems.length - 1}
+                      budgetType={candidate.budgetType}
+                      isExpanded={combined?.isExpanded}
+                      onToggleView={
+                        combined
+                          ? () => toggleView(candidate.providerName)
+                          : undefined
+                      }
+                      onBudgetSelect={(type) =>
+                        onBudgetSelect(candidate.providerName, type)
+                      }
+                    />
+                  );
+                }
+              })}
             </SortableContext>
           </tbody>
         </table>

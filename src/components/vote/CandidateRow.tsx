@@ -1,6 +1,7 @@
 import { DragHandleIcon } from "./DragHandleIcon";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 interface CandidateRowProps {
   name: string;
@@ -10,8 +11,13 @@ interface CandidateRowProps {
   isBelowDivider: boolean;
   isLastRow: boolean;
   onBudgetSelect: (type: "basic" | "extended") => void;
+  onToggleView?: () => void;
   id?: string;
-  budgetType?: "basic" | "extended" | "none";
+  budgetType?: "basic" | "extended" | "none" | "combined";
+  isCombined?: boolean;
+  basicBudget?: number;
+  extendedBudget?: number;
+  isExpanded?: boolean;
 }
 
 export function CandidateRow({
@@ -22,8 +28,13 @@ export function CandidateRow({
   isBelowDivider,
   isLastRow,
   onBudgetSelect,
+  onToggleView,
   id,
   budgetType,
+  isCombined,
+  basicBudget,
+  extendedBudget,
+  isExpanded,
 }: CandidateRowProps) {
   // Setup drag and drop functionality
   const {
@@ -53,7 +64,7 @@ export function CandidateRow({
   // Format the display name to include budget type
   const displayName = isDivider
     ? name
-    : budgetType && budgetType !== "none"
+    : budgetType && budgetType !== "none" && budgetType !== "combined"
     ? `${name} - ${budgetType}`
     : name;
 
@@ -101,7 +112,29 @@ export function CandidateRow({
                 {displayName}
               </span>
             ) : (
-              displayName
+              <div>
+                <div className="flex items-center">
+                  <span>{displayName}</span>
+                  {isCombined && (
+                    <button
+                      onClick={onToggleView}
+                      className="ml-2 p-1 text-gray-400 hover:text-white focus:outline-none"
+                      title={isExpanded ? "Collapse view" : "Expand view"}
+                    >
+                      {isExpanded ? (
+                        <ChevronUp size={16} />
+                      ) : (
+                        <ChevronDown size={16} />
+                      )}
+                    </button>
+                  )}
+                </div>
+                {isCombined && (
+                  <div className="text-sm text-gray-400">
+                    Basic + Extended Budget
+                  </div>
+                )}
+              </div>
             )}
             {isDivider && (
               <span className="text-sm text-gray-500 ml-2">
@@ -114,7 +147,18 @@ export function CandidateRow({
 
       {/* Budget column */}
       <td className={`p-4 ${isBelowDivider ? "text-gray-500" : ""} text-right`}>
-        {!isDivider && formatBudget(budget)}
+        {!isDivider && !isCombined && formatBudget(budget)}
+        {!isDivider &&
+          isCombined &&
+          basicBudget !== undefined &&
+          extendedBudget !== undefined && (
+            <div>
+              <div>{formatBudget(basicBudget + extendedBudget)}</div>
+              <div className="text-sm text-gray-400">
+                {formatBudget(basicBudget)} + {formatBudget(extendedBudget)}
+              </div>
+            </div>
+          )}
       </td>
     </tr>
   );

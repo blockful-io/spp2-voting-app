@@ -45,7 +45,7 @@ export interface MockVoteData {
 /**
  * Budget type options
  */
-export type BudgetType = "basic" | "extended" | "none";
+export type BudgetType = "basic" | "extended" | "none" | "combined";
 
 /**
  * Interface for parsed choice information
