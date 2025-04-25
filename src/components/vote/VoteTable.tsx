@@ -15,11 +15,12 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useCallback } from "react";
+import { Choice } from "@/utils/types";
 
 interface VoteTableProps {
-  candidates: VoteCandidate[];
+  candidates: Choice[];
   onBudgetSelect: (name: string, type: "basic" | "extended") => void;
-  onReorder: (newOrder: VoteCandidate[]) => void;
+  onReorder: (newOrder: Choice[]) => void;
   onDragStart?: () => void;
   onDragEnd?: () => void;
 }
@@ -41,13 +42,14 @@ export function VoteTable({
     })
   );
 
-  const isDivider = (candidate: VoteCandidate) =>
-    candidate.name.toLowerCase().includes("below");
+  const isDivider = (candidate: Choice) =>
+    candidate.originalName.toLowerCase().includes("below");
 
-  const isBelowDivider = (candidate: VoteCandidate) => {
+  const isBelowDivider = (candidate: Choice) => {
     return (
-      candidates.findIndex((c) => c.name.toLowerCase().includes("below")) <
-      candidates.findIndex((c) => c.name === candidate.name)
+      candidates.findIndex((c) =>
+        c.originalName.toLowerCase().includes("below")
+      ) < candidates.findIndex((c) => c.originalName === candidate.originalName)
     );
   };
 
@@ -58,11 +60,14 @@ export function VoteTable({
       const { active, over } = event;
 
       if (active.id !== over?.id) {
-        const oldIndex = candidates.findIndex(
-          (item) => item.name === active.id
-        );
-        const newIndex = candidates.findIndex((item) => item.name === over?.id);
+        // Extract indexes from the composite IDs
+        const activeId = String(active.id);
+        const overId = String(over?.id);
 
+        const oldIndex = parseInt(activeId.split("-").pop() || "0");
+        const newIndex = parseInt(overId.split("-").pop() || "0");
+
+        // Reorder the candidates array
         const newOrder = arrayMove(candidates, oldIndex, newIndex);
         onReorder(newOrder);
       }
@@ -71,6 +76,8 @@ export function VoteTable({
     },
     [candidates, onReorder, onDragEnd]
   );
+
+  console.log("candidates", candidates);
 
   return (
     <DndContext
@@ -85,30 +92,27 @@ export function VoteTable({
             <tr className="border-b border-gray-700">
               <th className="text-left text-gray-400 p-4 w-[50px]"></th>
               <th className="text-left text-gray-400 p-4">Candidate</th>
-              <th className="text-left text-gray-400 p-4">Preferred Budget</th>
+              <th className="text-right text-gray-400 p-4">Preferred Budget</th>
             </tr>
           </thead>
           <tbody>
             <SortableContext
-              items={candidates.map((c) => c.name)}
+              items={candidates.map(
+                (candidate, index) => `${candidate.originalName}-${index}`
+              )}
               strategy={verticalListSortingStrategy}
             >
               {candidates.map((candidate, index) => (
                 <CandidateRow
-                  key={candidate.name}
-                  name={candidate.name}
+                  key={`${candidate.originalName}-${index}`}
+                  name={candidate.originalName}
                   index={index}
-                  basicBudget={
-                    candidate.budgets.find((b) => b.type === "basic")!
-                  }
-                  extendedBudget={candidate.budgets.find(
-                    (b) => b.type === "extended"
-                  )}
+                  budget={candidate.budget}
                   isDivider={isDivider(candidate)}
                   isBelowDivider={isBelowDivider(candidate)}
                   isLastRow={index === candidates.length - 1}
                   onBudgetSelect={(type) =>
-                    onBudgetSelect(candidate.name, type)
+                    onBudgetSelect(candidate.originalName, type)
                   }
                 />
               ))}

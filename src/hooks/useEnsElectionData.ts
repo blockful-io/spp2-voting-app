@@ -76,6 +76,8 @@ export function useEnsElectionData() {
   const [allocationData, setAllocationData] =
     useState<AllocationResponse | null>(null);
 
+  console.log("allocationData", allocationData);
+
   const fetch = async () => {
     setIsLoading(true);
     setError(null);
@@ -83,11 +85,13 @@ export function useEnsElectionData() {
       const response = await window.fetch(
         `/api/allocation?proposalId=${PROPOSAL_ID}`
       );
+
       if (!response.ok) {
         throw new Error(`Failed to fetch data: ${response.statusText}`);
       }
 
       const allocationResponse: AllocationResponse = await response.json();
+      console.log("allocationResponse", allocationResponse);
       setAllocationData(allocationResponse);
 
       // Transform allocation data to match our Allocation interface
@@ -161,5 +165,6 @@ export function useEnsElectionData() {
     fetch,
     allocationData, // Also expose the full allocation data if needed
     summary, // Expose the processed summary data
+    choices: allocationData?.choices,
   };
 }

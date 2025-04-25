@@ -240,7 +240,7 @@ export interface AllocationResponse {
     rejectedProjects: number;
   };
   allocations: Allocation[];
-  choices?: Array<string>;
+  choices: Array<string>;
 }
 
 /**
