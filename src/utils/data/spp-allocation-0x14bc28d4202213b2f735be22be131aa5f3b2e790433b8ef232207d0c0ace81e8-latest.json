@@ -12342,16 +12342,16 @@
     "adjustedTwoYearBudget": 1500000,
     "adjustedOneYearBudget": 3000000,
     "remainingTwoYearBudget": 100000,
-    "remainingOneYearBudget": -100000,
-    "totalAllocated": 4500000,
-    "unspentBudget": 0,
+    "remainingOneYearBudget": 0,
+    "totalAllocated": 4400000,
+    "unspentBudget": 100000,
     "allocatedProjects": 9,
-    "rejectedProjects": 0
+    "rejectedProjects": 6
   },
   "allocations": [
     {
       "name": "sp d - basic",
-      "provider": "sp d",
+      "providerName": "sp d",
       "score": 19,
       "averageSupport": 515237.5931527662,
       "budget": 400000,
@@ -12363,8 +12363,21 @@
       "budgetType": "basic"
     },
     {
+      "name": "sp d - ext",
+      "providerName": "sp d",
+      "score": 18,
+      "averageSupport": 482512.94118811935,
+      "budget": 800000,
+      "isSpp1": false,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "rejectionReason": null,
+      "isNoneBelow": false,
+      "budgetType": "extended"
+    },
+    {
       "name": "sp b - basic",
-      "provider": "sp b",
+      "providerName": "sp b",
       "score": 15,
       "averageSupport": 462283.721760382,
       "budget": 300000,
@@ -12376,8 +12389,21 @@
       "budgetType": "basic"
     },
     {
+      "name": "sp b - ext",
+      "providerName": "sp b",
+      "score": 14,
+      "averageSupport": 428618.89654726145,
+      "budget": 400000,
+      "isSpp1": false,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "rejectionReason": null,
+      "isNoneBelow": false,
+      "budgetType": "extended"
+    },
+    {
       "name": "sp a",
-      "provider": "sp a",
+      "providerName": "sp a",
       "score": 13,
       "averageSupport": 413406.5800389487,
       "budget": 300000,
@@ -12390,7 +12416,7 @@
     },
     {
       "name": "sp g - basic",
-      "provider": "sp g",
+      "providerName": "sp g",
       "score": 13,
       "averageSupport": 339992.8334617287,
       "budget": 300000,
@@ -12403,7 +12429,7 @@
     },
     {
       "name": "sp l - basic",
-      "provider": "sp l",
+      "providerName": "sp l",
       "score": 12,
       "averageSupport": 340719.47604172694,
       "budget": 1100000,
@@ -12415,21 +12441,47 @@
       "budgetType": "basic"
     },
     {
+      "name": "sp g - ext",
+      "providerName": "sp g",
+      "score": 12,
+      "averageSupport": 306798.0948728451,
+      "budget": 400000,
+      "isSpp1": false,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "rejectionReason": null,
+      "isNoneBelow": false,
+      "budgetType": "extended"
+    },
+    {
+      "name": "sp l - ext",
+      "providerName": "sp l",
+      "score": 11,
+      "averageSupport": 307994.8240770802,
+      "budget": 1300000,
+      "isSpp1": true,
+      "allocated": false,
+      "streamDuration": null,
+      "rejectionReason": "Insufficient budget",
+      "isNoneBelow": false,
+      "budgetType": "extended"
+    },
+    {
       "name": "sp f",
-      "provider": "sp f",
+      "providerName": "sp f",
       "score": 10,
       "averageSupport": 341065.3923603004,
       "budget": 800000,
       "isSpp1": true,
-      "allocated": true,
-      "streamDuration": "1-year",
-      "rejectionReason": null,
+      "allocated": false,
+      "streamDuration": null,
+      "rejectionReason": "Insufficient budget",
       "isNoneBelow": false,
       "budgetType": "basic"
     },
     {
       "name": "sp c",
-      "provider": "sp c",
+      "providerName": "sp c",
       "score": 10,
       "averageSupport": 326131.1543366981,
       "budget": 400000,
@@ -12442,29 +12494,67 @@
     },
     {
       "name": "sp e - basic",
-      "provider": "sp e",
+      "providerName": "sp e",
       "score": 8,
       "averageSupport": 320058.7424678944,
       "budget": 400000,
       "isSpp1": true,
-      "allocated": true,
-      "streamDuration": "1-year",
-      "rejectionReason": null,
+      "allocated": false,
+      "streamDuration": null,
+      "rejectionReason": "Insufficient budget",
       "isNoneBelow": false,
       "budgetType": "basic"
     },
     {
       "name": "sp i - basic",
-      "provider": "sp i",
+      "providerName": "sp i",
       "score": 8,
       "averageSupport": 285473.1092596886,
       "budget": 500000,
       "isSpp1": true,
-      "allocated": true,
-      "streamDuration": "1-year",
-      "rejectionReason": null,
+      "allocated": false,
+      "streamDuration": null,
+      "rejectionReason": "Insufficient budget",
       "isNoneBelow": false,
       "budgetType": "basic"
+    },
+    {
+      "name": "sp e - ext",
+      "providerName": "sp e",
+      "score": 7,
+      "averageSupport": 287334.0905032476,
+      "budget": 700000,
+      "isSpp1": true,
+      "allocated": false,
+      "streamDuration": null,
+      "rejectionReason": "Insufficient budget",
+      "isNoneBelow": false,
+      "budgetType": "extended"
+    },
+    {
+      "name": "sp i - ext",
+      "providerName": "sp i",
+      "score": 7,
+      "averageSupport": 252748.45729504176,
+      "budget": 700000,
+      "isSpp1": true,
+      "allocated": false,
+      "streamDuration": null,
+      "rejectionReason": "Insufficient budget",
+      "isNoneBelow": false,
+      "budgetType": "extended"
+    },
+    {
+      "name": "none below",
+      "providerName": "None Below",
+      "score": 5,
+      "averageSupport": 264366.53548259806,
+      "budget": 0,
+      "allocated": false,
+      "streamDuration": null,
+      "rejectionReason": "None Below reached",
+      "isNoneBelow": true,
+      "budgetType": "none"
     }
   ],
   "programInfo": {
@@ -12476,6 +12566,7 @@
     {
       "originalName": "none below",
       "name": "none below",
+      "providerName": "none below",
       "budget": 0,
       "isSpp1": false,
       "isNoneBelow": true,
@@ -12483,8 +12574,9 @@
       "budgetType": "none"
     },
     {
-      "originalName": "sp a - basic",
+      "originalName": "sp a",
       "name": "sp a",
+      "providerName": "sp a",
       "budget": 300000,
       "isSpp1": true,
       "isNoneBelow": false,
@@ -12494,6 +12586,7 @@
     {
       "originalName": "sp b - basic",
       "name": "sp b",
+      "providerName": "sp b",
       "budget": 300000,
       "isSpp1": false,
       "isNoneBelow": false,
@@ -12501,17 +12594,19 @@
       "budgetType": "basic"
     },
     {
-      "originalName": "sp b - extended",
+      "originalName": "sp b - ext",
       "name": "sp b",
+      "providerName": "sp b",
       "budget": 400000,
       "isSpp1": false,
       "isNoneBelow": false,
       "choiceId": 4,
-      "budgetType": "basic"
+      "budgetType": "extended"
     },
     {
-      "originalName": "sp c - basic",
+      "originalName": "sp c",
       "name": "sp c",
+      "providerName": "sp c",
       "budget": 400000,
       "isSpp1": false,
       "isNoneBelow": false,
@@ -12521,6 +12616,7 @@
     {
       "originalName": "sp d - basic",
       "name": "sp d",
+      "providerName": "sp d",
       "budget": 400000,
       "isSpp1": false,
       "isNoneBelow": false,
@@ -12528,17 +12624,19 @@
       "budgetType": "basic"
     },
     {
-      "originalName": "sp d - extended",
+      "originalName": "sp d - ext",
       "name": "sp d",
+      "providerName": "sp d",
       "budget": 800000,
       "isSpp1": false,
       "isNoneBelow": false,
       "choiceId": 7,
-      "budgetType": "basic"
+      "budgetType": "extended"
     },
     {
       "originalName": "sp e - basic",
       "name": "sp e",
+      "providerName": "sp e",
       "budget": 400000,
       "isSpp1": true,
       "isNoneBelow": false,
@@ -12546,17 +12644,19 @@
       "budgetType": "basic"
     },
     {
-      "originalName": "sp e - extended",
+      "originalName": "sp e - ext",
       "name": "sp e",
+      "providerName": "sp e",
       "budget": 700000,
       "isSpp1": true,
       "isNoneBelow": false,
       "choiceId": 9,
-      "budgetType": "basic"
+      "budgetType": "extended"
     },
     {
-      "originalName": "sp f - basic",
+      "originalName": "sp f",
       "name": "sp f",
+      "providerName": "sp f",
       "budget": 800000,
       "isSpp1": true,
       "isNoneBelow": false,
@@ -12566,6 +12666,7 @@
     {
       "originalName": "sp g - basic",
       "name": "sp g",
+      "providerName": "sp g",
       "budget": 300000,
       "isSpp1": false,
       "isNoneBelow": false,
@@ -12573,17 +12674,19 @@
       "budgetType": "basic"
     },
     {
-      "originalName": "sp g - extended",
+      "originalName": "sp g - ext",
       "name": "sp g",
+      "providerName": "sp g",
       "budget": 400000,
       "isSpp1": false,
       "isNoneBelow": false,
       "choiceId": 12,
-      "budgetType": "basic"
+      "budgetType": "extended"
     },
     {
-      "originalName": "sp h - basic",
+      "originalName": "sp h",
       "name": "sp h",
+      "providerName": "sp h",
       "budget": 300000,
       "isSpp1": false,
       "isNoneBelow": false,
@@ -12593,6 +12696,7 @@
     {
       "originalName": "sp i - basic",
       "name": "sp i",
+      "providerName": "sp i",
       "budget": 500000,
       "isSpp1": true,
       "isNoneBelow": false,
@@ -12600,17 +12704,19 @@
       "budgetType": "basic"
     },
     {
-      "originalName": "sp i - extended",
+      "originalName": "sp i - ext",
       "name": "sp i",
+      "providerName": "sp i",
       "budget": 700000,
       "isSpp1": true,
       "isNoneBelow": false,
       "choiceId": 15,
-      "budgetType": "basic"
+      "budgetType": "extended"
     },
     {
       "originalName": "sp j - basic",
       "name": "sp j",
+      "providerName": "sp j",
       "budget": 700000,
       "isSpp1": true,
       "isNoneBelow": false,
@@ -12618,17 +12724,19 @@
       "budgetType": "basic"
     },
     {
-      "originalName": "sp j - extended",
+      "originalName": "sp j - ext",
       "name": "sp j",
+      "providerName": "sp j",
       "budget": 800000,
       "isSpp1": true,
       "isNoneBelow": false,
       "choiceId": 17,
-      "budgetType": "basic"
+      "budgetType": "extended"
     },
     {
-      "originalName": "sp k - basic",
+      "originalName": "sp k",
       "name": "sp k",
+      "providerName": "sp k",
       "budget": 300000,
       "isSpp1": false,
       "isNoneBelow": false,
@@ -12638,6 +12746,7 @@
     {
       "originalName": "sp l - basic",
       "name": "sp l",
+      "providerName": "sp l",
       "budget": 1100000,
       "isSpp1": true,
       "isNoneBelow": false,
@@ -12645,13 +12754,14 @@
       "budgetType": "basic"
     },
     {
-      "originalName": "sp l - extended",
+      "originalName": "sp l - ext",
       "name": "sp l",
+      "providerName": "sp l",
       "budget": 1300000,
       "isSpp1": true,
       "isNoneBelow": false,
       "choiceId": 20,
-      "budgetType": "basic"
+      "budgetType": "extended"
     }
   ]
 }

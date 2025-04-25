@@ -3,7 +3,7 @@
  */
 
 // Testing configuration
-export const USE_LOCAL_DATA = true; // Set to false for production (to fetch from Snapshot API)
+export const USE_LOCAL_DATA = false; // Set to false for production (to fetch from Snapshot API)
 export const LOCAL_DATA_PATH = "mocked-votes.json"; // Path to local JSON data file
 
 // CSV file paths for dynamic data loading

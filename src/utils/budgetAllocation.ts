@@ -48,7 +48,7 @@ export function allocateBudgets(
     if (choice.isNoneBelow) {
       allocations.push({
         name: choice.name,
-        provider: "None Below",
+        providerName: "None Below",
         score: choice.score,
         averageSupport: choice.averageSupport,
         budget: 0,
@@ -116,7 +116,7 @@ export function allocateBudgets(
     // Add the allocation result
     allocations.push({
       name: choice.name,
-      provider: providerName,
+      providerName,
       score: choice.score,
       averageSupport: choice.averageSupport,
       budget,
