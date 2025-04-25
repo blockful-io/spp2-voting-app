@@ -43,13 +43,18 @@ export function VoteTable({
   );
 
   const isDivider = (candidate: Choice) =>
-    candidate.originalName.toLowerCase().includes("below");
+    candidate.providerName.toLowerCase().includes("below");
 
   const isBelowDivider = (candidate: Choice) => {
     return (
       candidates.findIndex((c) =>
-        c.originalName.toLowerCase().includes("below")
-      ) < candidates.findIndex((c) => c.originalName === candidate.originalName)
+        c.providerName.toLowerCase().includes("below")
+      ) <
+      candidates.findIndex(
+        (c) =>
+          c.providerName === candidate.providerName &&
+          c.budgetType === candidate.budgetType
+      )
     );
   };
 
@@ -77,6 +82,10 @@ export function VoteTable({
     [candidates, onReorder, onDragEnd]
   );
 
+  // Generate unique ID for each candidate
+  const getCandidateId = (candidate: Choice, index: number) =>
+    `${candidate.providerName}-${candidate.budgetType}-${index}`;
+
   console.log("candidates", candidates);
 
   return (
@@ -97,22 +106,24 @@ export function VoteTable({
           </thead>
           <tbody>
             <SortableContext
-              items={candidates.map(
-                (candidate, index) => `${candidate.originalName}-${index}`
+              items={candidates.map((candidate, index) =>
+                getCandidateId(candidate, index)
               )}
               strategy={verticalListSortingStrategy}
             >
               {candidates.map((candidate, index) => (
                 <CandidateRow
-                  key={`${candidate.originalName}-${index}`}
-                  name={candidate.originalName}
+                  key={getCandidateId(candidate, index)}
+                  id={getCandidateId(candidate, index)}
+                  name={candidate.providerName}
                   index={index}
                   budget={candidate.budget}
                   isDivider={isDivider(candidate)}
                   isBelowDivider={isBelowDivider(candidate)}
                   isLastRow={index === candidates.length - 1}
+                  budgetType={candidate.budgetType}
                   onBudgetSelect={(type) =>
-                    onBudgetSelect(candidate.originalName, type)
+                    onBudgetSelect(candidate.providerName, type)
                   }
                 />
               ))}

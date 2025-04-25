@@ -35,8 +35,8 @@ export default function VotePage() {
             // Use type assertion for cleaner code
             const choiceObj = choice as Record<string, unknown>;
             return {
-              originalName: String(
-                choiceObj.originalName || choiceObj.name || ""
+              providerName: String(
+                choiceObj.providerName || choiceObj.name || ""
               ),
               name: String(choiceObj.name || ""),
               budget:
@@ -56,7 +56,7 @@ export default function VotePage() {
 
           // Handle string choices (fallback)
           return {
-            originalName:
+            providerName:
               typeof choice === "string" ? choice : `Choice ${index}`,
             name: typeof choice === "string" ? choice : `Choice ${index}`,
             budget: index,
@@ -81,7 +81,7 @@ export default function VotePage() {
   const handleBudgetSelection = (name: string, type: "basic" | "extended") => {
     setCandidates((prevCandidates) =>
       prevCandidates.map((candidate) =>
-        candidate.originalName === name
+        candidate.providerName === name
           ? {
               ...candidate,
               budgetType: type,
@@ -127,7 +127,7 @@ export default function VotePage() {
       setIsSubmitting(true);
 
       const dividerIndex = candidates.findIndex((c) =>
-        c.originalName.toLowerCase().includes("below")
+        c.providerName.toLowerCase().includes("below")
       );
 
       const allBudgetsSelected = candidates.every((c, index) =>

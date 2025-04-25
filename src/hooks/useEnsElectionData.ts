@@ -101,7 +101,7 @@ export function useEnsElectionData() {
           score: allocation.score,
           averageSupport: allocation.averageSupport,
           budget: allocation.budget,
-          provider: allocation.provider,
+          providerName: allocation.providerName,
           allocated: allocation.allocated,
           streamDuration: allocation.streamDuration || "1-year", // Default to 1-year if null
           rejectionReason: allocation.rejectionReason,
@@ -157,6 +157,8 @@ export function useEnsElectionData() {
       },
     };
   }, [allocationData]);
+
+  console.log("daallocationDatata", allocationData?.choices);
 
   return {
     data,

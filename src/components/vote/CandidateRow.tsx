@@ -10,6 +10,8 @@ interface CandidateRowProps {
   isBelowDivider: boolean;
   isLastRow: boolean;
   onBudgetSelect: (type: "basic" | "extended") => void;
+  id?: string;
+  budgetType?: "basic" | "extended" | "none";
 }
 
 export function CandidateRow({
@@ -20,6 +22,8 @@ export function CandidateRow({
   isBelowDivider,
   isLastRow,
   onBudgetSelect,
+  id,
+  budgetType,
 }: CandidateRowProps) {
   // Setup drag and drop functionality
   const {
@@ -29,7 +33,7 @@ export function CandidateRow({
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: `${name}-${index}` });
+  } = useSortable({ id: id || `${name}-${index}` });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -45,6 +49,13 @@ export function CandidateRow({
       maximumFractionDigits: 0,
     }).format(amount);
   };
+
+  // Format the display name to include budget type
+  const displayName = isDivider
+    ? name
+    : budgetType && budgetType !== "none"
+    ? `${name} - ${budgetType}`
+    : name;
 
   return (
     <tr
@@ -86,9 +97,11 @@ export function CandidateRow({
             }`}
           >
             {isDivider ? (
-              <span className="text-red-500 whitespace-nowrap">{name}</span>
+              <span className="text-red-500 whitespace-nowrap">
+                {displayName}
+              </span>
             ) : (
-              name
+              displayName
             )}
             {isDivider && (
               <span className="text-sm text-gray-500 ml-2">
