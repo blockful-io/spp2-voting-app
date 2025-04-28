@@ -21,18 +21,21 @@ The Copeland method is a rank-determination algorithm that works as follows:
 
 1. **Pairwise Comparisons**: Each candidate is compared head-to-head with every other candidate.
 2. **Voting Mechanism**:
+
    - For each pair of candidates (A, B), we count how much voting power ranked A above B.
    - "None Below" option serves as a special marker - any candidate ranked below it is considered unranked.
    - Ranked candidates always beat unranked candidates in head-to-head contests.
    - No votes are counted between two unranked candidates.
 
 3. **Scoring**:
+
    - A candidate receives 1 point for each head-to-head matchup they win.
    - No points are awarded for losses or ties.
    - Total points determine the final ranking.
    - In case of equal points, average support percentage is used as a tiebreaker.
 
 4. **Budget Allocation**:
+
    - Candidates are processed in ranking order
    - SPP1 projects can receive 2-year funding streams
    - Remaining projects are allocated 1-year funding streams
@@ -65,8 +68,8 @@ Edit `src/helpers/config.js` to set your specific parameters:
 ```javascript
 // Budget parameters
 const PROGRAM_BUDGET = 4500000; // Total budget in USD per year
-const TWO_YEAR_STREAM_RATIO = 1/3; // Proportion allocated to 2-year streams
-const ONE_YEAR_STREAM_RATIO = 2/3; // Proportion allocated to 1-year stream
+const TWO_YEAR_STREAM_RATIO = 1 / 3; // Proportion allocated to 2-year streams
+const ONE_YEAR_STREAM_RATIO = 2 / 3; // Proportion allocated to 1-year stream
 
 // Data source configuration
 const USE_LOCAL_DATA = true; // Set to false to use Snapshot API
@@ -76,7 +79,8 @@ const USE_CSV_DATA = true; // Use CSV files for service provider data
 const BIDIMENSIONAL_ENABLED = true; // Group choices from the same provider in voting ranks
 
 // Snapshot proposal ID
-const PROPOSAL_ID = "0x5dff4695ef4b5a576d132c2d278342a54b1fe5846ebcdc9a908e273611f27ee1";
+const PROPOSAL_ID =
+  "0xbbf155b669bcc99133148320ca7876d8bb53a870cd9b7f9ec51b8db29cd7a0f8";
 ```
 
 ### CSV Data Format
@@ -84,6 +88,7 @@ const PROPOSAL_ID = "0x5dff4695ef4b5a576d132c2d278342a54b1fe5846ebcdc9a908e27361
 Place your CSV files in the `src/helpers/data` directory:
 
 1. **choices.csv**: Contains service provider data
+
    ```
    choiceId,choiceName,budgetAmount,isSpp
    1,sp a,400000,FALSE
@@ -126,12 +131,14 @@ The `src/helpers` folder is the core of the application, containing modular comp
 ### Main Module Files
 
 - **index.js** (292 lines): The orchestrator that ties everything together
+
   - Contains the `main()` function that executes the full allocation workflow
   - Provides wrapper functions for CSV data handling (`getChoiceOptions()`, `getServiceProviderData()`, `prepareVotesFromCsv()`)
   - Includes detailed logging for the entire process
   - Exports all key functions for external use
 
 - **voteProcessing.js** (246 lines): The voting algorithm implementation
+
   - Implements the Copeland method in `processCopelandRanking()`
   - Handles the special "None Below" option as both a marker and a candidate
   - Calculates pairwise comparisons between all candidates
@@ -139,6 +146,7 @@ The `src/helpers` folder is the core of the application, containing modular comp
   - Combines ranking data with service provider metadata
 
 - **budgetAllocation.js** (216 lines): The budget distribution logic
+
   - Allocates budgets based on ranking order
   - Implements the two-stream allocation model (2-year and 1-year funding)
   - Handles budget transfers between streams
@@ -146,30 +154,35 @@ The `src/helpers` folder is the core of the application, containing modular comp
   - Provides detailed allocation statistics
 
 - **reporting.js** (231 lines): Output formatting and report generation
+
   - Formats allocation results for display
   - Generates structured JSON data for reporting
   - Exports results to timestamped files
   - Provides currency formatting utilities
 
 - **candidateComparisons.js** (118 lines): Head-to-head analysis tools
+
   - Extracts match data for specific candidates
   - Formats match results for frontend display
   - Calculates statistics like win percentages and vote shares
   - Sorts results by votes or other criteria
 
 - **csvUtils.js** (473 lines): Data processing utilities
+
   - Low-level CSV parsing for votes and service provider data
   - Handles complex CSV formats including quoted fields
   - Converts between CSV and JSON formats
   - Supports multiple CSV format variations
 
 - **choiceParser.ts** (~50 lines): Choice name parsing utilities
+
   - Parses service provider names and budget types from choice strings
   - Extracts provider base name from formatted options (e.g., "sp b - basic" → "sp b")
   - Determines budget type as "basic", "extended", or "none"
   - Handles special cases like "None Below" option
 
 - **snapshot.js** (~100 lines): Integration with Snapshot
+
   - Interfaces with Snapshot API for live vote data
   - Falls back to local data when configured
   - Standardizes data format from multiple sources
@@ -186,7 +199,6 @@ The `src/helpers/data` directory holds all input and output files:
 - **Input Files**:
   - `choices.csv`: Service provider options and metadata
   - `votes.csv`: Raw vote data from Snapshot or other sources
-  
 - **Generated Files**:
   - `mocked-votes.json`: Processed vote data in JSON format
   - `spp-allocation-[proposalId]-[timestamp].json`: Allocation results
@@ -194,7 +206,8 @@ The `src/helpers/data` directory holds all input and output files:
 
 ### Function Relationships
 
-- **Data Flow**: 
+- **Data Flow**:
+
   1. CSV data → JSON conversion (`csvUtils.js`)
   2. Vote processing and ranking (`voteProcessing.js`)
   3. Budget allocation (`budgetAllocation.js`)
@@ -208,18 +221,18 @@ The `src/helpers/data` directory holds all input and output files:
 
 ### Key Functions
 
-| File | Function | Description |
-|------|----------|-------------|
-| voteProcessing.js | `processCopelandRanking()` | Core algorithm for Copeland method ranking |
-| voteProcessing.js | `combineData()` | Merges rankings with provider metadata |
-| budgetAllocation.js | `allocateBudgets()` | Distributes budgets according to rules |
-| csvUtils.js | `loadServiceProvidersFromCsv()` | Low-level CSV parsing for provider data |
-| index.js | `getServiceProviderData()` | High-level wrapper for provider data loading |
-| csvUtils.js | `convertVotesFromCsv()` | Converts vote CSV data to JSON format |
-| candidateComparisons.js | `getCandidateHeadToHeadResults()` | Extracts match data for a candidate |
-| reporting.js | `displayResults()` | Formats allocation results |
-| reporting.js | `exportResults()` | Saves results to JSON file |
-| choiceParser.ts | `parseChoiceName()` | Parses service provider names and budget types |
+| File                    | Function                          | Description                                    |
+| ----------------------- | --------------------------------- | ---------------------------------------------- |
+| voteProcessing.js       | `processCopelandRanking()`        | Core algorithm for Copeland method ranking     |
+| voteProcessing.js       | `combineData()`                   | Merges rankings with provider metadata         |
+| budgetAllocation.js     | `allocateBudgets()`               | Distributes budgets according to rules         |
+| csvUtils.js             | `loadServiceProvidersFromCsv()`   | Low-level CSV parsing for provider data        |
+| index.js                | `getServiceProviderData()`        | High-level wrapper for provider data loading   |
+| csvUtils.js             | `convertVotesFromCsv()`           | Converts vote CSV data to JSON format          |
+| candidateComparisons.js | `getCandidateHeadToHeadResults()` | Extracts match data for a candidate            |
+| reporting.js            | `displayResults()`                | Formats allocation results                     |
+| reporting.js            | `exportResults()`                 | Saves results to JSON file                     |
+| choiceParser.ts         | `parseChoiceName()`               | Parses service provider names and budget types |
 
 ## Output
 
@@ -252,6 +265,7 @@ Contributions welcome! Please feel free to submit a Pull Request.
 ## CSV Format
 
 ### choices.csv
+
 The choices.csv file contains service provider data with the following columns:
 
 ```
