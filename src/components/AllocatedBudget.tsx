@@ -14,10 +14,8 @@ export function AllocatedBudget({
 }: AllocatedBudgetProps) {
   const totalAllocated =
     budgetData[0].oneYear +
-    budgetData[0].twoYears +
-    budgetData[0].oneYearRemaining +
-    budgetData[0].twoYearsRemaining;
-  const formattedTotal = (totalAllocated / 1_000_000).toFixed(1);
+    budgetData[0].twoYears
+  const formattedAllocated = (totalAllocated / 1_000_000).toFixed(1);
   const formattedBudget = (totalBudget / 1_000_000).toFixed(1);
 
   return (
@@ -28,7 +26,7 @@ export function AllocatedBudget({
       <div className="mb-6">
         <div className="flex items-baseline gap-3">
           <span className="text-xl font-bold leading-none text-gray-100">
-            ${formattedTotal}M
+            ${formattedAllocated}M
           </span>
           <span className="text-lg text-gray-500">
             / ${formattedBudget}M total

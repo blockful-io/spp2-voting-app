@@ -92,30 +92,18 @@ export default function EnsElectionPage() {
           color: "#3B82F6",
           label: `1 year allocated (${(
             summary.streamBreakdown.oneYear.allocated / 1_000_000
-          ).toFixed(1)}M)`,
-          subtext:
-            summary.streamBreakdown.oneYear.remaining > 0
-              ? `${(
-                  summary.streamBreakdown.oneYear.remaining / 1_000_000
-                ).toFixed(1)}M not allocated`
-              : "100% allocated",
-        },
-        {
-          color: "#EC4899",
-          label: `2 years allocated (${(
-            summary.streamBreakdown.twoYear.allocated / 1_000_000
-          ).toFixed(1)}M)`,
-          subtext:
-            summary.streamBreakdown.twoYear.remaining > 0
-              ? `${(
-                  summary.streamBreakdown.twoYear.remaining / 1_000_000
-                ).toFixed(1)}M not allocated`
-              : "100% allocated",
+          ).toFixed(1)}M)`
         },
         {
           color: "#93C5FD", // Lighter blue (disabled 3B82F6)
           label: `1 year remaining (${(
             summary.streamBreakdown.oneYear.remaining / 1_000_000
+          ).toFixed(1)}M)`,
+        },
+        {
+          color: "#EC4899",
+          label: `2 years allocated (${(
+            summary.streamBreakdown.twoYear.allocated / 1_000_000
           ).toFixed(1)}M)`,
         },
         {

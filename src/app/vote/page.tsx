@@ -260,7 +260,7 @@ export default function VotePage() {
             <button
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className="w-1/3 bg-white text-black rounded-lg py-3 flex items-center justify-center font-medium"
+              className="w-1/4 bg-white text-black rounded-lg py-3 flex items-center justify-center font-medium"
             >
               {isSubmitting ? (
                 "Submitting..."
