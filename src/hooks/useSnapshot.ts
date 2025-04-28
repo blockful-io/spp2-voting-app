@@ -34,6 +34,7 @@ export function useVoteOnProposal() {
       type: "ranked-choice",
       choice,
       space: PROPOSAL_SPACE,
+      app: "spp.vote",
     });
   }
 
