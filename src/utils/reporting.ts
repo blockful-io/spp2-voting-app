@@ -69,6 +69,7 @@ export const displayResults = (
   console.log(`- 2-year stream: Current SPP1 providers in the top ${TOP_RANK_THRESHOLD}, cap of ${formatCurrency(summary.twoYearStreamBudget)}`);
   console.log(`- 1-year stream: All other choices, if they fit within remaining total budget`);
   console.log(`- Allocation stops if total budget is exhausted or "None Below" is reached`);
+  console.log(`- Options ranked below "None Below" are automatically rejected`);
   
   console.log("\nPROJECT RANKINGS AND ALLOCATIONS:");
   allocations.forEach((project, index) => {

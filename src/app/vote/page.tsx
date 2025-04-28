@@ -141,7 +141,7 @@ export default function VotePage() {
       }
 
       const selectedChoiceIds = candidates.reduce(
-        (acc, candidate) => [...acc, candidate.budget],
+        (acc, candidate) => [...acc, candidate.choiceId],
         [] as number[]
       );
 

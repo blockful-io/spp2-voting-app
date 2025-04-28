@@ -58,7 +58,25 @@ export function allocateBudgets(
         isNoneBelow: true,
         budgetType: "none"
       });
-      break; // Stop allocation process
+      continue;
+    }
+    
+    // Check if this option is ranked below "None Below" - if so, reject it
+    if (noneBelowIndex !== -1 && i > noneBelowIndex) {
+      allocations.push({
+        name: choice.name,
+        providerName: parseChoiceName(choice.name).name,
+        score: choice.score,
+        averageSupport: choice.averageSupport,
+        budget: 0, // No budget for rejected options
+        allocated: false,
+        streamDuration: null,
+        rejectionReason: "Ranked below None Below threshold",
+        isNoneBelow: false,
+        budgetType: parseChoiceName(choice.name).budgetType
+      });
+      rejectedProjects++;
+      continue;
     }
     
     // Parse the choice name
@@ -66,7 +84,7 @@ export function allocateBudgets(
     
     // Find the choice data for this entry
     const choiceData = choicesData.find(c => 
-      c.name === providerName && c.budgetType === budgetType
+      c.name === choice.name
     );
     
     if (!choiceData) {
@@ -127,11 +145,6 @@ export function allocateBudgets(
       isSpp1,
       budgetType
     });
-    
-    // Rule 3: Stop if total budget is fully allocated
-    if (remainingTotalBudget <= 0) {
-      break;
-    }
   }
   
   // Calculate summary
