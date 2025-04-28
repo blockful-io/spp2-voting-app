@@ -198,6 +198,7 @@ export default function VotePage() {
           duration: 4000,
         }}
       />
+      
       <div className="container p-4 flex flex-col max-w-7xl mx-auto gap-4">
         <div className="p-4">
           <div className="flex items-center mb-4">
@@ -220,7 +221,7 @@ export default function VotePage() {
             </div>
           )}
         </div>
-        <div className="grow flex flex-col w-full">
+        <div className="grow flex flex-col w-full pb-24">
           <VoteTable
             candidates={candidates}
             onBudgetSelect={handleBudgetSelection}
@@ -228,21 +229,49 @@ export default function VotePage() {
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
           />
-          <div className="flex justify-end mt-6">
+        </div>
+      </div>
+      
+      {/* Fixed footer with submit button */}
+      <div className="fixed bottom-0 left-0 right-0 z-10 bg-gradient-to-b from-transparent via-black/70 to-black p-4">
+        <div className="container mx-auto max-w-7xl">
+          {/* Mobile: full width button */}
+          <div className="md:hidden">
             <button
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className={`
-                px-6 py-3 rounded-lg font-medium
-                ${
-                  isSubmitting
-                    ? "bg-gray-600 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700"
-                }
-                transition-colors
-              `}
+              className="w-full bg-white text-black rounded-lg py-3 flex items-center justify-center font-medium"
             >
-              {isSubmitting ? "Submitting..." : "Submit Vote"}
+              {isSubmitting ? (
+                "Submitting..."
+              ) : (
+                <>
+                  <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="currentColor" />
+                  </svg>
+                  Submit vote
+                </>
+              )}
+            </button>
+          </div>
+          
+          {/* Desktop: smaller button aligned to center */}
+          <div className="hidden md:flex justify-center">
+            <button
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className="w-1/3 bg-white text-black rounded-lg py-3 flex items-center justify-center font-medium"
+            >
+              {isSubmitting ? (
+                "Submitting..."
+              ) : (
+                <>
+                  <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="currentColor" />
+                  </svg>
+                  Submit vote
+                </>
+              )}
             </button>
           </div>
         </div>
