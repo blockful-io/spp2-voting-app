@@ -1,5 +1,6 @@
 import { Trophy, ChevronRight } from "lucide-react";
 import { Allocation } from "@/utils/types";
+import { parseChoiceName } from "@/utils/parseChoiceName";
 
 /**
  * ElectionResultsTable props interface
@@ -18,6 +19,28 @@ function FundedBadge() {
   return (
     <span className="rounded-full flex items-center gap-2 text-black bg-[#4ADE80] p-[6px] text-xs font-medium">
       <Trophy className="h-4 w-4" />
+    </span>
+  );
+}
+
+/**
+ * Badge component displayed for Basic budget type
+ */
+function BasicBadge() {
+  return (
+    <span className="rounded-full bg-stone-800 px-3 py-1 text-xs ml-2 font-medium text-white">
+      Basic
+    </span>
+  );
+}
+
+/**
+ * Badge component displayed for Extended budget type
+ */
+function ExtendedBadge() {
+  return (
+    <span className="rounded-full bg-stone-800 px-3 py-1 text-xs ml-2 font-medium text-white">
+      Extended
     </span>
   );
 }
@@ -74,6 +97,23 @@ export function ElectionResultsTable({
             {candidates.map((candidate, index) => {
               const isDivider = index === dividerIndex;
               const beforeDivider = index < dividerIndex;
+
+              // Parse the candidate name to check for "- ext" or "- basic" suffix
+              const nameEndsWithExt = candidate.name.endsWith("- ext");
+              const nameEndsWithBasic = candidate.name.endsWith("- basic");
+
+              // Remove the suffix from the name if present
+              let displayName = candidate.name;
+              let budgetType = null;
+
+              if (nameEndsWithExt) {
+                displayName = candidate.name.replace("- ext", "").trim();
+                budgetType = "extended";
+              } else if (nameEndsWithBasic) {
+                displayName = candidate.name.replace("- basic", "").trim();
+                budgetType = "basic";
+              }
+
               return (
                 <tr
                   key={candidate.name + index}
@@ -102,7 +142,11 @@ export function ElectionResultsTable({
 
                   {/* Column 2: Choice - Displays the candidate name */}
                   <td className="whitespace-nowrap px-6 py-4 text-gray-300">
-                    {candidate.name}
+                    <div className="flex items-center">
+                      {displayName}
+                      {budgetType === "basic" && <BasicBadge />}
+                      {budgetType === "extended" && <ExtendedBadge />}
+                    </div>
                   </td>
 
                   {/* Column 3: Budget - Shows allocated budget amount with visual indicators for basic budget type */}
