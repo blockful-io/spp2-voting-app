@@ -202,345 +202,183 @@ export function VoteTable({
       const { active, over } = event;
 
       if (active.id !== over?.id) {
-        // Extract indexes using our decoder
-        const activeDecoded = decodeId(String(active.id));
-        const overDecoded = decodeId(String(over?.id));
+        // Extract item identifiers from the IDs
+        const activeId = String(active.id);
+        const overId = String(over?.id);
+
+        const activeDecoded = decodeId(activeId);
+        const overDecoded = decodeId(overId);
 
         if (!activeDecoded || !overDecoded) {
-          console.error("Failed to decode drag IDs", {
-            active: active.id,
-            over: over?.id,
-          });
+          console.error("Failed to decode drag IDs", { activeId, overId });
           return;
         }
 
-        // COMBINED ITEM DRAG
+        console.log("Active:", activeDecoded);
+        console.log("Over:", overDecoded);
+
+        // Step 1: Find indices in the displayItems array
+        const activeDisplayIndex = displayItems.findIndex(
+          (item, index) => getItemId(item, index) === activeId
+        );
+
+        const overDisplayIndex = displayItems.findIndex(
+          (item, index) => getItemId(item, index) === overId
+        );
+
+        if (activeDisplayIndex === -1 || overDisplayIndex === -1) {
+          console.error("Could not find display indices");
+          return;
+        }
+
+        // Step 2: Create a new copy of the candidates array to manipulate
+        const newCandidates = [...candidates];
+
+        // Step 3: Handle by display type
         if (activeDecoded.budgetType === "combined") {
+          // --- DRAGGING A COMBINED ITEM ---
           console.log("===== COMBINED DRAG START =====");
-          console.log("Active:", activeDecoded);
-          console.log("Over:", overDecoded);
-          console.log(
-            "Initial candidates:",
-            JSON.stringify(
-              candidates.map((c) => ({
-                name: c.providerName,
-                type: c.budgetType,
-              }))
-            )
-          );
 
-          // Get the provider name of what we're moving
+          // Find the provider we're moving
           const providerName = activeDecoded.provider;
-          console.log("Moving provider:", providerName);
 
-          // Create a working copy
-          const workingArray = [...candidates];
-
-          // Find and remove the items we're moving (basic and extended budgets)
-          const itemsToMove: Choice[] = [];
-          const originalIndexes: number[] = [];
-
-          // Find all the items for this provider
-          for (let i = workingArray.length - 1; i >= 0; i--) {
-            const candidate = workingArray[i];
-            if (
-              candidate.providerName === providerName &&
-              (candidate.budgetType === "basic" ||
-                candidate.budgetType === "extended")
-            ) {
-              // Remove it from the working array
-              const [removed] = workingArray.splice(i, 1);
-              console.log(
-                `Removed ${removed.providerName} (${removed.budgetType}) at index ${i}`
-              );
-              // Add it to our items to move (at the beginning to maintain order)
-              itemsToMove.unshift(removed);
-              originalIndexes.unshift(i);
+          // Find all items for this provider in the candidates array
+          const providerItemIndices = [];
+          for (let i = 0; i < candidates.length; i++) {
+            if (candidates[i].providerName === providerName) {
+              providerItemIndices.push(i);
             }
           }
 
-          if (itemsToMove.length === 0) {
-            console.error("No items found to move for combined drag", {
-              providerName,
-              active: activeDecoded,
-              over: overDecoded,
-            });
-            onDragEnd?.();
+          if (providerItemIndices.length === 0) {
+            console.error("No provider items found");
             return;
           }
 
-          console.log(
-            "Items to move:",
-            JSON.stringify(
-              itemsToMove.map((c) => ({
-                name: c.providerName,
-                type: c.budgetType,
-              }))
-            )
-          );
+          // Remove these items from the candidates array (in reverse order to maintain indices)
+          const itemsToMove = [];
+          for (let i = providerItemIndices.length - 1; i >= 0; i--) {
+            const index = providerItemIndices[i];
+            itemsToMove.unshift(newCandidates[index]);
+            newCandidates.splice(index, 1);
+          }
 
-          // Sort the items to move so that basic is always first
-          itemsToMove.sort((a, b) =>
-            a.budgetType === "basic" ? -1 : b.budgetType === "basic" ? 1 : 0
-          );
+          // Step 4: Determine where to insert in the candidates array
+          // This is tricky, we need to translate from display index to candidate index
 
-          const minOriginalIndex = Math.min(...originalIndexes);
+          let insertIndex;
 
-          // Find where to insert them
-          let insertIndex: number;
+          // Find the item in the displayItems that comes after our target position
+          // (or use the end of the array if we're at the last position)
+          const nextDisplayIndex =
+            overDisplayIndex + (activeDisplayIndex < overDisplayIndex ? 1 : 0);
 
-          if (overDecoded.budgetType === "combined") {
-            // Find the target provider's positions (all instances)
-            const targetProviderIndices = workingArray
-              .map((c, idx) =>
-                c.providerName === overDecoded.provider ? idx : -1
-              )
-              .filter((idx) => idx !== -1);
-
-            // Default to first position
-            insertIndex =
-              targetProviderIndices.length > 0 ? targetProviderIndices[0] : -1;
-
-            // Find the min original index of the items being moved
-            const minOriginalIndex = Math.min(...originalIndexes);
-
-            // Determine if we're dragging down
-            const isDraggingDown =
-              minOriginalIndex <
-              (targetProviderIndices.length > 0
-                ? targetProviderIndices[0]
-                : Infinity);
-
-            // If dragging down, place after all items of the target provider
-            if (isDraggingDown && targetProviderIndices.length > 0) {
-              insertIndex = Math.max(...targetProviderIndices) + 1;
-            }
-
-            console.log(
-              `Target is combined. Looking for provider: ${overDecoded.provider}, indices: ${targetProviderIndices}, dragging down: ${isDraggingDown}`
-            );
+          if (nextDisplayIndex >= displayItems.length) {
+            // If dropping at the end, put at the end of candidates
+            insertIndex = newCandidates.length;
           } else {
-            // Find the specific target item and handle any merged items
-            insertIndex = workingArray.findIndex(
-              (c) =>
-                c.providerName === overDecoded.provider &&
-                c.budgetType === overDecoded.budgetType
-            );
+            // Find where the next display item is in the candidates array
+            const nextDisplayItem = displayItems[nextDisplayIndex];
 
-            // Determine if target is part of a merged set (has both basic and extended)
-            const isTargetPartOfMergedSet = workingArray.some(
-              (c) =>
-                c.providerName === overDecoded.provider &&
-                c.budgetType !== overDecoded.budgetType &&
-                (c.budgetType === "basic" || c.budgetType === "extended")
-            );
-
-            if (isTargetPartOfMergedSet) {
-              // Find all indices of this provider
-              const indices = workingArray
-                .map((c, idx) =>
-                  c.providerName === overDecoded.provider ? idx : -1
-                )
-                .filter((idx) => idx !== -1);
-
-              // Check if dropping before or after
-              const minOriginalIndex = Math.min(...originalIndexes);
-              const isDraggingDown = minOriginalIndex < insertIndex;
-
-              // Place either before or after the entire merged set
-              insertIndex = isDraggingDown
-                ? Math.max(...indices) + 1
-                : Math.min(...indices);
-            }
-
-            console.log(
-              `Target is regular. Looking for provider: ${overDecoded.provider} with type: ${overDecoded.budgetType}, isPartOfMergedSet: ${isTargetPartOfMergedSet}`
-            );
-          }
-
-          console.log("Insert index found:", insertIndex);
-
-          // If can't find target, insert at beginning
-          if (insertIndex === -1) {
-            console.warn(
-              "Target not found for combined drag, using fallback position",
-              {
-                targetProvider: overDecoded.provider,
-                targetType: overDecoded.budgetType,
-              }
-            );
-            insertIndex = 0;
-            console.log("Target not found, defaulting to index 0");
-          }
-
-          // Determine if dragging down
-          const targetOriginalIndex = candidates.findIndex(
-            (c) =>
-              c.providerName === overDecoded.provider &&
-              (overDecoded.budgetType === "combined"
-                ? true
-                : c.budgetType === overDecoded.budgetType)
-          );
-
-          console.log("Target original index:", targetOriginalIndex);
-          console.log("Min original index of moved items:", minOriginalIndex);
-
-          const isDraggingDown = targetOriginalIndex > minOriginalIndex;
-          console.log("Is dragging down:", isDraggingDown);
-
-          // If dragging down, we need to insert AFTER the target
-          if (isDraggingDown) {
-            // UPDATED FIX: For combined targets when dragging down, insert after BOTH items
-            if (overDecoded.budgetType === "combined") {
-              // When target is combined, find the last item of that provider
-              const targetProviderIndices = workingArray
-                .map((c, idx) =>
-                  c.providerName === overDecoded.provider ? idx : -1
-                )
-                .filter((idx) => idx !== -1);
-
-              if (targetProviderIndices.length > 0) {
-                // Use the last index of the target provider's items
-                insertIndex = Math.max(...targetProviderIndices) + 1;
-                console.log(
-                  "Adjusted insert index after combined target:",
-                  insertIndex
-                );
-              } else {
-                insertIndex += 1;
-              }
+            if (nextDisplayItem.type === "regular") {
+              // For regular items, find its index in the candidates array
+              insertIndex = newCandidates.findIndex(
+                (c) =>
+                  c.providerName === nextDisplayItem.candidate.providerName &&
+                  c.budgetType === nextDisplayItem.candidate.budgetType
+              );
             } else {
-              insertIndex += 1;
+              // For combined items, find the first item of that provider
+              insertIndex = newCandidates.findIndex(
+                (c) => c.providerName === nextDisplayItem.providerName
+              );
             }
-            console.log(
-              "Adjusted insert index for downward drag:",
-              insertIndex
-            );
+
+            // If somehow we didn't find it, append to the end
+            if (insertIndex === -1) {
+              insertIndex = newCandidates.length;
+            }
           }
 
           // Insert the items at the target position
-          workingArray.splice(insertIndex, 0, ...itemsToMove);
+          newCandidates.splice(insertIndex, 0, ...itemsToMove);
 
           console.log(
-            "Final working array:",
-            JSON.stringify(
-              workingArray.map((c) => ({
-                name: c.providerName,
-                type: c.budgetType,
-              }))
-            )
-          );
-
-          // CRITICAL FIX: Reapply the combined status in final array
-          // Make sure we update the view state for items that should remain combined
-          // We'll do this by checking for provider name pairs that have both budget types
-          const finalOrder = enforceBusinessRules(workingArray);
-
-          console.log(
-            "After enforcing business rules:",
-            JSON.stringify(
-              finalOrder.map((c) => ({
-                name: c.providerName,
-                type: c.budgetType,
-              }))
-            )
+            `Inserted ${itemsToMove.length} items at position ${insertIndex}`
           );
           console.log("===== COMBINED DRAG END =====");
-
-          // Update with the new order and keep the combined view state
-          onReorder(finalOrder);
-          onDragEnd?.();
-          return;
-        }
-        // REGULAR ITEM DRAG
-        else {
+        } else {
+          // --- DRAGGING A REGULAR ITEM ---
           console.log("===== REGULAR DRAG START =====");
-          console.log("Active:", activeDecoded);
-          console.log("Over:", overDecoded);
 
-          // Find the active item index
-          const oldIndex = candidates.findIndex(
+          // Find the item we're moving in the candidates array
+          const activeItemIndex = candidates.findIndex(
             (c) =>
               c.providerName === activeDecoded.provider &&
               c.budgetType === activeDecoded.budgetType
           );
 
-          // Handle differently based on target type
-          let newIndex: number;
-
-          if (overDecoded.budgetType === "combined") {
-            // When target is a combined item, we need to find the first item of that provider
-            const providerIndices = candidates
-              .map((c, idx) =>
-                c.providerName === overDecoded.provider ? idx : -1
-              )
-              .filter((idx) => idx !== -1);
-
-            // Default to the first item if found
-            newIndex = providerIndices.length > 0 ? providerIndices[0] : -1;
-
-            // If we're dragging down, place after the last item of the provider
-            if (providerIndices.length > 0) {
-              const minProviderIndex = Math.min(...providerIndices);
-              const maxProviderIndex = Math.max(...providerIndices);
-              const isDraggingDown = oldIndex < minProviderIndex;
-
-              newIndex = isDraggingDown
-                ? maxProviderIndex + 1
-                : minProviderIndex;
-            }
-
-            console.log(
-              `Target is combined, found index: ${newIndex}, indices: ${providerIndices}`
-            );
-          } else {
-            // Otherwise find the exact item
-            newIndex = candidates.findIndex(
-              (c) =>
-                c.providerName === overDecoded.provider &&
-                c.budgetType === overDecoded.budgetType
-            );
-            console.log(`Target is regular, found index: ${newIndex}`);
-          }
-
-          console.log(`Moving from index ${oldIndex} to ${newIndex}`);
-
-          if (oldIndex === -1 || newIndex === -1) {
-            console.error("Could not find items for regular drag", {
-              oldIndex,
-              newIndex,
-              active: activeDecoded,
-              over: overDecoded,
-            });
+          if (activeItemIndex === -1) {
+            console.error("Could not find active item in candidates");
             return;
           }
 
-          // Create new order with the dragged item at the new position
-          const newOrder = arrayMove([...candidates], oldIndex, newIndex);
+          // Remove it from our working copy
+          const [itemToMove] = newCandidates.splice(activeItemIndex, 1);
 
-          // Apply business rules - basic must come before extended
-          const finalOrder = enforceBusinessRules(newOrder);
+          // Step 4: Determine where to insert in the candidates array
+          let insertIndex;
 
-          console.log(
-            "Final order after enforcing rules:",
-            JSON.stringify(
-              finalOrder.map((c) => ({
-                name: c.providerName,
-                type: c.budgetType,
-              }))
-            )
-          );
+          // Similar logic to combined drag - find the next display item
+          const nextDisplayIndex =
+            overDisplayIndex + (activeDisplayIndex < overDisplayIndex ? 1 : 0);
+
+          if (nextDisplayIndex >= displayItems.length) {
+            // If dropping at the end, put at the end of candidates
+            insertIndex = newCandidates.length;
+          } else {
+            // Find where the next display item is in the candidates array
+            const nextDisplayItem = displayItems[nextDisplayIndex];
+
+            if (nextDisplayItem.type === "regular") {
+              // For regular items, find its index in the candidates array
+              insertIndex = newCandidates.findIndex(
+                (c) =>
+                  c.providerName === nextDisplayItem.candidate.providerName &&
+                  c.budgetType === nextDisplayItem.candidate.budgetType
+              );
+            } else {
+              // For combined items, find the first item of that provider
+              insertIndex = newCandidates.findIndex(
+                (c) => c.providerName === nextDisplayItem.providerName
+              );
+            }
+
+            // If somehow we didn't find it, append to the end
+            if (insertIndex === -1) {
+              insertIndex = newCandidates.length;
+            }
+          }
+
+          // Insert the item at the target position
+          newCandidates.splice(insertIndex, 0, itemToMove);
+
+          console.log(`Moved item from ${activeItemIndex} to ${insertIndex}`);
           console.log("===== REGULAR DRAG END =====");
-
-          // Update with the new order
-          onReorder(finalOrder);
-          onDragEnd?.();
         }
+
+        // Step 5: Apply business rules to ensure proper ordering
+        const finalOrder = enforceBusinessRules(newCandidates);
+
+        // Step 6: Update the state
+        onReorder(finalOrder);
+        onDragEnd?.();
       } else {
+        // No change
         onDragEnd?.();
       }
     },
-    [candidates, onReorder, onDragEnd]
+    [candidates, displayItems, onReorder, onDragEnd]
   );
 
   // Enforce business rules on the candidate order
