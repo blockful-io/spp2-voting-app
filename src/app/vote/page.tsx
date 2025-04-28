@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useChoices, VoteCandidate } from "@/hooks/useEnsElectionData";
+import { useChoices, useEnsElectionData } from "@/hooks/useEnsElectionData";
 import { VoteTable } from "@/components/vote/VoteTable";
 import { MenuIcon } from "@/components/vote/MenuIcon";
 import toast, { Toaster } from "react-hot-toast";
@@ -9,15 +9,89 @@ import { useVoteOnProposal } from "@/hooks/useSnapshot";
 import { useVotes } from "@/hooks/useVotes";
 import { useAccount } from "wagmi";
 import { loadChoices } from "@/utils/loadChoices";
+import { Choice, BudgetType } from "@/utils/types";
 
 export default function VotePage() {
   const { fetchChoices, isLoading } = useChoices();
-  const [candidates, setCandidates] = useState<VoteCandidate[]>([]);
+  const [candidates, setCandidates] = useState<Choice[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const { voteFunc } = useVoteOnProposal();
   const { address } = useAccount();
   const { data: previousVote, isLoading: isLoadingVote } = useVotes(address);
+
+  const { choices, isLoading: isLoadingAllocation } = useEnsElectionData();
+
+  console.log("Original choices from API:", choices);
+
+  // Transform choices data to Choice[] format when it changes
+  useEffect(() => {
+    if (choices && choices.length > 0) {
+      // TODO: This transformation should ideally happen on the backend
+      // Current implementation is a temporary solution until API returns properly formatted data
+      try {
+        const formattedChoices: Choice[] = choices.map((choice, index) => {
+          if (typeof choice === "object" && choice !== null) {
+            // Use type assertion for cleaner code
+            const choiceObj = choice as Record<string, unknown>;
+            return {
+              providerName: String(
+                choiceObj.providerName || choiceObj.name || ""
+              ),
+              name: String(choiceObj.name || ""),
+              budget:
+                typeof choiceObj.budget === "number" ? choiceObj.budget : index,
+              isSpp1: Boolean(choiceObj.isSpp1),
+              isNoneBelow: Boolean(choiceObj.isNoneBelow),
+              choiceId:
+                typeof choiceObj.choiceId === "number"
+                  ? choiceObj.choiceId
+                  : index,
+              budgetType:
+                typeof choiceObj.budgetType === "string"
+                  ? (choiceObj.budgetType as BudgetType)
+                  : "basic",
+            };
+          }
+
+          // Handle string choices (fallback)
+          return {
+            providerName:
+              typeof choice === "string" ? choice : `Choice ${index}`,
+            name: typeof choice === "string" ? choice : `Choice ${index}`,
+            budget: index,
+            isSpp1: false,
+            isNoneBelow:
+              typeof choice === "string" &&
+              choice.toLowerCase().includes("below"),
+            choiceId: index,
+            budgetType: "basic" as BudgetType,
+          };
+        });
+
+        setCandidates(formattedChoices);
+      } catch (error) {
+        console.error("Error formatting choices:", error);
+        setCandidates([]);
+      }
+    }
+  }, [choices]);
+
+  // Handle budget selection for candidates
+  const handleBudgetSelection = (name: string, type: "basic" | "extended") => {
+    setCandidates((prevCandidates) =>
+      prevCandidates.map((candidate) =>
+        candidate.providerName === name
+          ? {
+              ...candidate,
+              budgetType: type,
+              budget:
+                type === "basic" ? candidate.choiceId : candidate.choiceId + 1,
+            }
+          : candidate
+      )
+    );
+  };
 
   // Prevent page scrolling during drag
   useEffect(() => {
@@ -36,27 +110,7 @@ export default function VotePage() {
     };
   }, [isDragging]);
 
-  useEffect(() => {
-    if (!fetchChoices) return;
-    setCandidates(loadChoices(fetchChoices, previousVote));
-  }, [fetchChoices, previousVote]);
-
-  const handleBudgetSelection = (name: string, type: "basic" | "extended") => {
-    setCandidates(
-      candidates.map((candidate) => {
-        if (candidate.name !== name) return candidate;
-        return {
-          ...candidate,
-          budgets: candidate.budgets.map((budget) => ({
-            ...budget,
-            selected: budget.type === type,
-          })),
-        };
-      })
-    );
-  };
-
-  const handleReorder = (newOrder: VoteCandidate[]) => {
+  const handleReorder = (newOrder: Choice[]) => {
     setCandidates(newOrder);
   };
 
@@ -73,11 +127,11 @@ export default function VotePage() {
       setIsSubmitting(true);
 
       const dividerIndex = candidates.findIndex((c) =>
-        c.name.toLowerCase().includes("below")
+        c.providerName.toLowerCase().includes("below")
       );
 
       const allBudgetsSelected = candidates.every((c, index) =>
-        index < dividerIndex ? c.budgets.some((b) => b.selected) : true
+        index < dividerIndex ? c.budget : true
       );
 
       if (!allBudgetsSelected) {
@@ -87,12 +141,7 @@ export default function VotePage() {
       }
 
       const selectedChoiceIds = candidates.reduce(
-        (acc, candidate) => [
-          ...acc,
-          ...candidate.budgets
-            .sort((a, b) => (a.selected ? -1 : 1) - (b.selected ? -1 : 1))
-            .map((b) => b.id),
-        ],
+        (acc, candidate) => [...acc, candidate.budget],
         [] as number[]
       );
 

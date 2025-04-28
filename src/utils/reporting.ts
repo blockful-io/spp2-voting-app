@@ -2,7 +2,8 @@
  * Reporting functions for the Service Provider Program allocation
  */
 
-import { USE_LOCAL_DATA, PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO } from './config';
+import { USE_LOCAL_DATA, PROGRAM_BUDGET, TWO_YEAR_STREAM_RATIO, ONE_YEAR_STREAM_RATIO, WIN_POINTS, TIE_POINTS, LOSS_POINTS } from './config';
+import { TWO_YEAR_STREAM_CAP, TOP_RANK_THRESHOLD } from './budgetAllocation';
 import fs from 'fs';
 import path from 'path';
 import { AllocationSummary, Allocation, HeadToHeadMatch, Choice, ReportingProposalData, ReportingAllocationResults, ReportResults, ProposalState, DataSource } from './types';
@@ -33,6 +34,14 @@ export const displayResults = (
   console.log("\nPROGRAM SUMMARY:");
   console.log(`Voted Budget: ${formatCurrency(summary.votedBudget)} per year`);
   
+  console.log("\nCOPELAND SCORING:");
+  const winWord = WIN_POINTS === 1 ? "point" : "points";
+  const tieWord = TIE_POINTS === 1 ? "point" : "points";
+  const lossWord = LOSS_POINTS === 1 ? "point" : "points";
+  console.log(`Win: ${WIN_POINTS} ${winWord}`);
+  console.log(`Tie: ${TIE_POINTS} ${tieWord}`);
+  console.log(`Loss: ${LOSS_POINTS} ${lossWord}`);
+  
   console.log("\nINITIAL BUDGET ALLOCATION:");
   console.log(`Two-Year Stream Budget (${(TWO_YEAR_STREAM_RATIO * 100).toFixed(0)}%): ${formatCurrency(summary.twoYearStreamBudget)}`);
   console.log(`One-Year Stream Budget (${(ONE_YEAR_STREAM_RATIO * 100).toFixed(0)}%): ${formatCurrency(summary.oneYearStreamBudget)}`);
@@ -55,14 +64,11 @@ export const displayResults = (
   console.log(`Projects Rejected: ${summary.rejectedProjects}`);
   
   // Explain the budget allocation rules
-  console.log(`\nNOTE ON BUDGET ALLOCATION:`);
-  if (summary.transferredBudget === summary.twoYearStreamBudget) {
-    console.log(`- No projects qualified for the 2-year stream, so the entire 2-year budget`);
-    console.log(`  (${formatCurrency(summary.twoYearStreamBudget)}) was transferred to the 1-year stream.`);
-  } else if (summary.transferredBudget > 0) {
-    console.log(`- Remaining 2-year stream budget (${formatCurrency(summary.transferredBudget)}) was`);
-    console.log(`  transferred to the 1-year stream after all eligible projects were funded.`);
-  }
+  console.log(`\nBUDGET ALLOCATION RULES:`);
+  console.log(`- Each choice (basic or extended budget) is evaluated independently in ranking order`);
+  console.log(`- 2-year stream: Current SPP1 providers in the top ${TOP_RANK_THRESHOLD}, cap of ${formatCurrency(summary.twoYearStreamBudget)}`);
+  console.log(`- 1-year stream: All other choices, if they fit within remaining total budget`);
+  console.log(`- Allocation stops if total budget is exhausted or "None Below" is reached`);
   
   console.log("\nPROJECT RANKINGS AND ALLOCATIONS:");
   allocations.forEach((project, index) => {
@@ -76,32 +82,40 @@ export const displayResults = (
     if (project.isNoneBelow) {
       console.log(`   STATUS: ✗ NOT FUNDED - Reason: None Below indicator does not receive allocation`);
     } else if (project.allocated) {
-      console.log(`   STATUS: ✓ FUNDED - ${formatCurrency(project.allocatedBudget)} (${project.streamDuration} stream)`);
+      console.log(`   STATUS: ✓ FUNDED - ${formatCurrency(project.budget)} (${project.streamDuration} stream)`);
     } else {
       console.log(`   STATUS: ✗ NOT FUNDED - Reason: ${project.rejectionReason || "Unknown"}`);
     }
     
     // Only show budget info for real service providers
     if (!project.isNoneBelow) {
-      console.log(`   Requested: Basic ${formatCurrency(project.basicBudget)}, Extended ${formatCurrency(project.extendedBudget)}`);
+      console.log(`   Requested: ${formatCurrency(project.budget)} (${project.budgetType} budget)`);
       console.log(`   SPP1 Participant: ${project.isSpp1 ? "Yes" : "No"}`);
     }
   });
   
   console.log("\nHEAD-TO-HEAD MATCH RESULTS:");
   headToHeadMatches.forEach((match, index) => {
-    // Label None Below candidates in match results
-    const candidate1Label = match.candidate1.toLowerCase() === "none below" || 
-                          match.candidate1.toLowerCase() === "none of the below" 
-                          ? " (None Below)" : "";
-    const candidate2Label = match.candidate2.toLowerCase() === "none below" || 
-                          match.candidate2.toLowerCase() === "none of the below" 
-                          ? " (None Below)" : "";
+    // Label None Below choices in match results
+    const choice1Label = match.choice1.name.toLowerCase() === "none below" || 
+                         match.choice1.name.toLowerCase() === "none of the below" 
+                         ? " (None Below)" : "";
+    const choice2Label = match.choice2.name.toLowerCase() === "none below" || 
+                         match.choice2.name.toLowerCase() === "none of the below" 
+                         ? " (None Below)" : "";
+    
+    // Display result type icon                     
+    const resultIcon = match.winner === match.choice1.name ? "✓" : 
+                      match.winner === match.choice2.name ? "✗" : 
+                      "=";
+                      
+    // Display internal match indicator  
+    const internalLabel = match.isInternal ? " [Same Provider]" : "";
                          
-    console.log(`\nMatch ${index + 1}: ${match.candidate1}${candidate1Label} vs ${match.candidate2}${candidate2Label}`);
-    console.log(`   ${match.candidate1}: ${match.candidate1Votes} votes`);
-    console.log(`   ${match.candidate2}: ${match.candidate2Votes} votes`);
-    console.log(`   Winner: ${match.winner}`);
+    console.log(`\nMatch ${index + 1}: ${match.choice1.name}${choice1Label} vs ${match.choice2.name}${choice2Label}${internalLabel}`);
+    console.log(`   ${match.choice1.name}: ${match.choice1.totalVotes} votes ${match.winner === match.choice1.name ? resultIcon : ""}`);
+    console.log(`   ${match.choice2.name}: ${match.choice2.totalVotes} votes ${match.winner === match.choice2.name ? resultIcon : ""}`);
+    console.log(`   Result: ${match.winner === "tie" ? "Tie" : `${match.winner} wins`} ${match.winner === "tie" ? resultIcon : ""}`);
     console.log(`   Total Votes: ${match.totalVotes}`);
   });
   
@@ -122,16 +136,16 @@ export const displayResults = (
     summary: results.summary,
     allocations: results.allocations.map(a => ({
       name: a.name,
+      providerName: a.providerName,
       score: a.score,
       averageSupport: a.averageSupport,
-      basicBudget: a.basicBudget,
-      extendedBudget: a.extendedBudget,
+      budget: a.budget,
       isSpp1: a.isSpp1,
       allocated: a.allocated,
       streamDuration: a.streamDuration,
-      allocatedBudget: a.allocatedBudget,
       rejectionReason: a.rejectionReason,
       isNoneBelow: a.isNoneBelow,
+      budgetType: a.budgetType,
     })),
     programInfo: {
       totalBudget: PROGRAM_BUDGET,

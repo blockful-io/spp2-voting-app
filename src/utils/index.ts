@@ -24,6 +24,7 @@ import { allocateBudgets } from './budgetAllocation';
 
 // Import the reporting module (using ES module imports)
 import { formatCurrency, displayResults, exportResults } from './reporting';
+import { filterHeadToHeadMatches } from './candidateComparisons';
 
 /**
  * Main function that orchestrates the entire process
@@ -86,10 +87,13 @@ export async function main(): Promise<{
       console.log("Results were not saved to a file.");
     }
     
+    const headToHeadResults = filterHeadToHeadMatches(headToHeadMatches, "sp l - basic");
+    console.log("Head to Head Results: ", headToHeadResults);
+
     // Return the results and filename for potential further processing
     return {
       results: formattedResults,
-      filename: exportedFilename || undefined
+      filename: undefined
     };
   } catch (error: unknown) {
     console.error("\nERROR: Allocation process failed");

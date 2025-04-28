@@ -45,7 +45,7 @@ export interface MockVoteData {
 /**
  * Budget type options
  */
-export type BudgetType = "basic" | "extended" | "none";
+export type BudgetType = "basic" | "extended" | "none" | "combined";
 
 /**
  * Interface for parsed choice information
@@ -56,8 +56,8 @@ export interface ParsedChoice {
 }
 
 export interface Choice {
-  originalName: string; // Original full choice name (e.g., "sp a" or "sp b - basic")
-  name: string; // Base provider name without budget type (e.g., "sp a" or "sp b")
+  name: string; // Original full choice name (e.g., "sp a" or "sp b - basic")
+  providerName: string; // Base provider name without budget type (e.g., "sp a" or "sp b")
   budget: number; // Budget amount in USD
   isSpp1: boolean; // Whether provider was part of SPP1
   isNoneBelow: boolean; // Whether this is the "None Below" indicator
@@ -114,29 +114,44 @@ export interface VotingResultResponse {
 }
 
 // ===== Vote Processing Types =====
-export interface RankedCandidate {
+export interface RankedChoice {
   name: string;
   score: number;
   averageSupport: number;
   isNoneBelow: boolean;
 }
 
+/**
+ * Formatted head-to-head match
+ */
 export interface HeadToHeadMatch {
-  candidate1: string;
-  candidate2: string;
-  candidate1Votes: number;
-  candidate2Votes: number;
+  choice1: {
+    name: string;
+    totalVotes: number;
+    voters: Array<{ voter: string; vp: number }>;
+  };
+  choice2: {
+    name: string;
+    totalVotes: number;
+    voters: Array<{ voter: string; vp: number }>;
+  };
+  isInternal: boolean;
   totalVotes: number;
   winner: string;
-  isInternal: boolean; // Whether this is a match between options from the same provider
-  voters: {
-    candidate1: Array<{ voter: string; vp: number }>;
-    candidate2: Array<{ voter: string; vp: number }>;
-  };
 }
 
+export interface CandidateHeadToHeadResults {
+  matches: HeadToHeadMatch[];
+  wins: number;
+  losses: number;
+  ties: number;
+}
+
+/**
+ * Copeland results
+ */
 export interface CopelandResults {
-  rankedCandidates: RankedCandidate[];
+  rankedChoices: RankedChoice[];
   headToHeadMatches: HeadToHeadMatch[];
 }
 
@@ -158,13 +173,12 @@ export type DataSource = "Local Data" | "Snapshot" | "API";
 
 export interface Allocation {
   name: string;
+  providerName: string; // Organization name. ex: "blockful"
   score: number;
   averageSupport: number;
-  basicBudget: number;
-  extendedBudget: number;
+  budget: number; // Budget amount for this specific choice
   allocated: boolean;
   streamDuration: StreamDuration;
-  allocatedBudget: number;
   rejectionReason: string | null;
   isNoneBelow: boolean;
   isSpp1?: boolean;
@@ -226,7 +240,7 @@ export interface AllocationResponse {
     rejectedProjects: number;
   };
   allocations: Allocation[];
-  choices?: Array<string>;
+  choices: Array<string>;
 }
 
 /**
@@ -310,19 +324,7 @@ export interface ReportResults {
   };
   headToHeadMatches: HeadToHeadMatch[];
   summary: AllocationSummary;
-  allocations: {
-    name: string;
-    score: number;
-    averageSupport: number;
-    basicBudget: number;
-    extendedBudget: number;
-    isSpp1?: boolean;
-    allocated: boolean;
-    streamDuration: StreamDuration;
-    allocatedBudget: number;
-    rejectionReason: string | null;
-    isNoneBelow: boolean;
-  }[];
+  allocations: Allocation[];
   programInfo: {
     totalBudget: number;
     twoYearStreamRatio: number;
@@ -331,46 +333,61 @@ export interface ReportResults {
   choices?: Choice[];
 }
 
-// ===== Candidate Comparison Types =====
-/**
- * Formatted head-to-head match
- */
-export interface FormattedMatch {
-  candidate1: {
-    name: string;
-    candidateVotes: number;
-    voters: Array<{ voter: string; vp: number }>;
-  };
-  candidate2: {
-    name: string;
-    candidateVotes: number;
-    voters: Array<{ voter: string; vp: number }>;
-  };
-  totalVotes: number;
-  winner: string;
-  isInternal: boolean;
-}
+export type Space = {
+  id: string;
+  name: string;
+};
+
+export type AppState =
+  | "LOADING"
+  | "ERROR"
+  | "READY"
+  | "PROCESSING"
+  | "COMPLETE";
 
 /**
- * Candidate budget data
+ * Snapshot API Types
  */
-export interface CandidateBudget {
-  basic: {
-    amount: number;
-    selected: boolean;
+
+export interface SnapshotApiQuery {
+  variables: {
+    id: string;
   };
-  extended: {
-    amount: number;
-    selected: boolean;
-  };
+  query: string;
 }
 
-/**
- * Candidate head-to-head results
- */
-export interface CandidateHeadToHeadResults {
-  matches: FormattedMatch[];
-  budget: CandidateBudget;
-  wins: number;
-  losses: number;
+export interface VoteChoice {
+  [key: string]: number;
+}
+
+export interface SnapshotVote {
+  voter: string;
+  vp: number;
+  choice: VoteChoice;
+}
+
+export interface SnapshotProposal {
+  id: string;
+  title: string;
+  body: string;
+  choices: string[];
+  start: number;
+  end: number;
+  snapshot: string;
+  state: string;
+  author: string;
+  space: {
+    id: string;
+    name: string;
+  };
+  scores?: number[];
+  scores_by_strategy?: number[][];
+  scores_total?: number;
+  votes?: SnapshotVote[];
+}
+
+export interface SnapshotAPIResponse {
+  data: {
+    proposal: SnapshotProposal;
+  };
 }

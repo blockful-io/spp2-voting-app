@@ -122,8 +122,8 @@ export function getChoicesData(): Choice[] {
   return choices.map((row) => {
     const { name: parsedName, budgetType } = parseChoiceName(row.choiceName);
     return {
-      originalName: row.choiceName, // Original choice name (e.g., "sp b - basic")
-      name: parsedName, // Base provider name (e.g., "sp b")
+      name: row.choiceName, // Base provider name (e.g., "sp b")
+      providerName: parsedName, // Base provider name without budget type
       budget: Number(row.budgetAmount), // Budget amount from CSV
       isSpp1: row.isSpp1 === "TRUE", // SPP1 status from CSV
       isNoneBelow: row.choiceName.toLowerCase().includes("none below"), // Whether this is the "None Below" indicator

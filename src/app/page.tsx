@@ -8,6 +8,7 @@ import { ResultsDetails } from "@/components/ResultsDetails";
 import { useState, useEffect } from "react";
 import { LineChart } from "lucide-react";
 import { ElectionStatus } from "@/components/ElectionStatus";
+import Link from "next/link";
 
 export default function EnsElectionPage() {
   const { data, isLoading, error, summary, allocationData } =
@@ -89,8 +90,8 @@ export default function EnsElectionPage() {
     ? [
         {
           color: "#3B82F6",
-          label: `1 year (${(
-            summary.streamBreakdown.oneYear.budget / 1_000_000
+          label: `1 year allocated (${(
+            summary.streamBreakdown.oneYear.allocated / 1_000_000
           ).toFixed(1)}M)`,
           subtext:
             summary.streamBreakdown.oneYear.remaining > 0
@@ -101,8 +102,8 @@ export default function EnsElectionPage() {
         },
         {
           color: "#EC4899",
-          label: `2 years (${(
-            summary.streamBreakdown.twoYear.budget / 1_000_000
+          label: `2 years allocated (${(
+            summary.streamBreakdown.twoYear.allocated / 1_000_000
           ).toFixed(1)}M)`,
           subtext:
             summary.streamBreakdown.twoYear.remaining > 0
@@ -122,6 +123,15 @@ export default function EnsElectionPage() {
           label: `2 years remaining (${(
             summary.streamBreakdown.twoYear.remaining / 1_000_000
           ).toFixed(1)}M)`,
+          subtext: (
+            <Link
+              target="_blank"
+              href="https://discuss.ens.domains/t/what-happens-to-remainder-of-the-2-year-stream/20488"
+              className="hover:text-blue-300 hover:underline transition-all duration-300"
+            >
+              Goes to 1 year remaining
+            </Link>
+          ),
         },
       ]
     : [];
@@ -132,21 +142,20 @@ export default function EnsElectionPage() {
         {
           name: "1 year",
           value: data.filter(
-            (c) => c.streamDuration === "1-year" && c.allocatedBudget > 0
+            (c) => c.streamDuration === "1-year" && c.budget > 0 && c.allocated
           ).length,
           color: "#3B82F6",
         },
         {
           name: "2 years",
           value: data.filter(
-            (c) => c.streamDuration === "2-year" && c.allocatedBudget > 0
+            (c) => c.streamDuration === "2-year" && c.budget > 0 && c.allocated
           ).length,
           color: "#EC4899",
         },
         {
           name: "Not funded",
-          value: data.filter((c) => !c.isNoneBelow && c.allocatedBudget === 0)
-            .length,
+          value: data.filter((c) => !c.isNoneBelow && !c.allocated).length,
           color: "#374151",
         },
       ]

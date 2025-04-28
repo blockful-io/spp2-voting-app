@@ -12,12 +12,8 @@ import {
   preprocessVotes,
 } from "./voteProcessing";
 import { allocateBudgets } from "./budgetAllocation";
-import { getChoicesData } from "./choiceParser";
-import {
-  PROGRAM_BUDGET,
-  TWO_YEAR_STREAM_RATIO,
-  ONE_YEAR_STREAM_RATIO,
-} from "./config";
+import { getChoicesData } from './choiceParser';
+import { PROGRAM_BUDGET, TWO_YEAR_STREAM_CAP } from "./config";
 // Import shared types
 import { AllocationResults, VotingResultResponse } from "./types";
 
@@ -56,31 +52,23 @@ export async function getVotingResultData(
     throw new Error("Proposal data is missing required properties");
   }
 
-  // Step 2: Pre-process votes if bidimensional is enabled
-  proposalData.votes = preprocessVotes(
-    proposalData.votes,
-    proposalData.choices
-  );
+  // Step 2: Pre-process votes if needed (currently uses standard voting)
+  proposalData.votes = preprocessVotes(proposalData.votes, proposalData.choices);
 
   // Step 3: Process with Copeland method to get rankings
   const copelandResults = processCopelandRanking(proposalData);
 
-  // Step 4: Post-process rankings to handle bidimensional filtering and None Below
-  const { rankedCandidates, headToHeadMatches } =
-    postprocessRanking(copelandResults);
+  // Step 4: Post-process rankings (no special handling needed)
+  const { rankedChoices, headToHeadMatches } = postprocessRanking(copelandResults);
 
   // Step 5: Get choices data from CSV
   const choicesData = getChoicesData();
 
-  // Step 6: Allocate budgets using the original Copeland results and choices data
-  const { summary, allocations: finalAllocations } = allocateBudgets(
-    {
-      rankedCandidates,
-      headToHeadMatches,
-    },
-    PROGRAM_BUDGET,
-    choicesData
-  ) as AllocationResults;
+  // Step 6: Allocate budgets using the ranked candidates and choices data
+  const { summary, allocations: finalAllocations } = allocateBudgets({
+    rankedChoices,
+    headToHeadMatches
+  }, PROGRAM_BUDGET, choicesData) as AllocationResults;
 
   // Step 7: Prepare the response
   return {
@@ -101,8 +89,8 @@ export async function getVotingResultData(
     allocations: finalAllocations,
     programInfo: {
       totalBudget: PROGRAM_BUDGET,
-      twoYearStreamRatio: TWO_YEAR_STREAM_RATIO,
-      oneYearStreamRatio: ONE_YEAR_STREAM_RATIO,
-    },
+      twoYearStreamRatio: TWO_YEAR_STREAM_CAP / PROGRAM_BUDGET, // Now based on cap
+      oneYearStreamRatio: (PROGRAM_BUDGET - TWO_YEAR_STREAM_CAP) / PROGRAM_BUDGET // Remaining budget
+    }
   };
 }
