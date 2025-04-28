@@ -76,8 +76,6 @@ export function useEnsElectionData() {
   const [allocationData, setAllocationData] =
     useState<AllocationResponse | null>(null);
 
-  console.log("allocationData", allocationData);
-
   const fetch = async () => {
     setIsLoading(true);
     setError(null);
@@ -157,8 +155,6 @@ export function useEnsElectionData() {
       },
     };
   }, [allocationData]);
-
-  console.log("daallocationDatata", allocationData?.choices);
 
   return {
     data,
