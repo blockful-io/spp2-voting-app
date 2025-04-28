@@ -14,7 +14,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 import { Choice, BudgetType } from "@/utils/types";
 
 interface VoteTableProps {
@@ -57,10 +57,41 @@ export function VoteTable({
   onDragStart,
   onDragEnd,
 }: VoteTableProps) {
-  // State to track which provider's view should be expanded/collapsed
+  // Initialize the combined views state with a useEffect to ensure adjacent pairs start merged
   const [combinedViews, setCombinedViews] = useState<Record<string, boolean>>(
     {}
   );
+
+  // Initialize combined views for adjacent pairs
+  useEffect(() => {
+    // This should only run once on initial render
+    const initialViews: Record<string, boolean> = {};
+    let hasChanges = false;
+
+    // Find adjacent basic+extended pairs
+    for (let i = 0; i < candidates.length - 1; i++) {
+      const current = candidates[i];
+      const next = candidates[i + 1];
+
+      if (current.providerName === next.providerName) {
+        // Check if they're a basic+extended pair
+        const isBasicExtendedPair =
+          (current.budgetType === "basic" && next.budgetType === "extended") ||
+          (current.budgetType === "extended" && next.budgetType === "basic");
+
+        if (isBasicExtendedPair) {
+          // Default to combined view (not expanded)
+          initialViews[current.providerName] = false;
+          hasChanges = true;
+        }
+      }
+    }
+
+    // If we found adjacent pairs, update the state
+    if (hasChanges) {
+      setCombinedViews(initialViews);
+    }
+  }, []); // Only run once on mount
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -91,92 +122,199 @@ export function VoteTable({
       const extendedCandidate = group.find((c) => c.budgetType === "extended");
 
       if (basicCandidate && extendedCandidate) {
-        // Check if they are adjacent in the original array
-        const basicIndex = candidates.indexOf(basicCandidate);
-        const extendedIndex = candidates.indexOf(extendedCandidate);
+        // Check if this provider is explicitly expanded
+        const isExpanded = combinedViews[providerName] === true;
 
-        if (Math.abs(basicIndex - extendedIndex) === 1) {
-          result[providerName] = {
-            providerName,
-            basicCandidate,
-            extendedCandidate,
-            isExpanded: combinedViews[providerName] || false,
-          };
-        }
+        result[providerName] = {
+          providerName,
+          basicCandidate,
+          extendedCandidate,
+          isExpanded,
+        };
       }
     }
 
     return result;
   }, [candidates, combinedViews]);
 
+  // Auto-detect and merge adjacent basic+extended pairs after reordering
+  // This runs after each drag operation and updates our state to automatically merge items
+  useEffect(() => {
+    console.log("Running auto-merge detection");
+
+    // Start with a fresh state instead of copying the existing one
+    const newMergedState: Record<string, boolean> = {};
+    let hasChanges = false;
+
+    // First pass - find all providers with both budget types
+    const providersWithBoth = new Set<string>();
+
+    for (let i = 0; i < candidates.length; i++) {
+      const providerName = candidates[i].providerName;
+      if (providersWithBoth.has(providerName)) continue;
+
+      // Check if this provider has both basic and extended
+      const hasBasic = candidates.some(
+        (c) => c.providerName === providerName && c.budgetType === "basic"
+      );
+
+      const hasExtended = candidates.some(
+        (c) => c.providerName === providerName && c.budgetType === "extended"
+      );
+
+      if (hasBasic && hasExtended) {
+        providersWithBoth.add(providerName);
+        // We don't set any state in this pass - we'll handle it in the next pass
+      }
+    }
+
+    // Second pass - find adjacent basic+extended pairs and ALWAYS force them to merged state
+    // regardless of previous user choices
+    for (let i = 0; i < candidates.length - 1; i++) {
+      const current = candidates[i];
+      const next = candidates[i + 1];
+
+      if (current.providerName === next.providerName) {
+        // Check if they're a basic+extended pair
+        const isBasicExtendedPair =
+          (current.budgetType === "basic" && next.budgetType === "extended") ||
+          (current.budgetType === "extended" && next.budgetType === "basic");
+
+        if (isBasicExtendedPair) {
+          console.log(
+            `Found adjacent pair for ${current.providerName}, current state: ${
+              combinedViews[current.providerName]
+            }`
+          );
+
+          // ALWAYS force to merged state when adjacent, regardless of previous state
+          newMergedState[current.providerName] = false; // false = merged/combined
+          hasChanges = true;
+        }
+      }
+    }
+
+    // Update all provider states at once
+    setCombinedViews(newMergedState);
+    console.log("Set new combined views state:", newMergedState);
+  }, [candidates]); // Only depend on candidates, not on combinedViews
+
   // Create a display list that either combines or separates items based on the current view state
   const displayItems = useMemo(() => {
+    console.log(
+      "Recalculating displayItems, current combined views:",
+      combinedViews
+    );
+
     // Create a map to track which items should be skipped (because they're part of a collapsed pair)
     const skipItems = new Set<Choice>();
+    const result: DisplayItem[] = [];
 
-    return candidates
-      .map((candidate, index) => {
-        // If this item has already been processed as part of a combined view, skip it
-        if (skipItems.has(candidate)) {
-          return null;
+    // Track pairs we identify for debugging
+    const adjacentPairs: string[] = [];
+
+    // First identify adjacent pairs and handle them
+    for (let i = 0; i < candidates.length; i++) {
+      const candidate = candidates[i];
+
+      // If this item has already been processed as part of a combined view, skip it
+      if (skipItems.has(candidate)) {
+        continue;
+      }
+
+      // Check if this has a partner for potential combination
+      const nextCandidate =
+        i < candidates.length - 1 ? candidates[i + 1] : null;
+      const isAdjacentPair =
+        nextCandidate &&
+        nextCandidate.providerName === candidate.providerName &&
+        ((candidate.budgetType === "basic" &&
+          nextCandidate.budgetType === "extended") ||
+          (candidate.budgetType === "extended" &&
+            nextCandidate.budgetType === "basic"));
+
+      if (isAdjacentPair) {
+        adjacentPairs.push(candidate.providerName);
+      }
+
+      // Check if this provider should be displayed in combined view
+      const shouldShowCombined =
+        isAdjacentPair && combinedViews[candidate.providerName] !== true; // Show combined unless explicitly expanded
+
+      if (isAdjacentPair) {
+        console.log(
+          `Found adjacent pair for ${
+            candidate.providerName
+          }, shouldShowCombined: ${shouldShowCombined}, state: ${
+            combinedViews[candidate.providerName]
+          }`
+        );
+      }
+
+      if (shouldShowCombined) {
+        // Mark the next item to be skipped as we're showing them combined
+        skipItems.add(nextCandidate!);
+
+        // Determine which is basic and which is extended
+        let basicCand: Choice, extendedCand: Choice;
+
+        if (candidate.budgetType === "basic") {
+          basicCand = candidate;
+          extendedCand = nextCandidate!;
+        } else {
+          basicCand = nextCandidate!;
+          extendedCand = candidate;
         }
 
-        const combined = combinedCandidates[candidate.providerName];
+        // Add as a combined item
+        result.push({
+          type: "combined",
+          providerName: candidate.providerName,
+          basicCandidate: basicCand,
+          extendedCandidate: extendedCand,
+          index: i,
+        });
+      } else {
+        // Add as a regular item
+        result.push({
+          type: "regular",
+          candidate,
+          index: i,
+        });
+      }
+    }
 
-        // If this provider has both budget types and they're adjacent
-        if (combined) {
-          const nextCandidate =
-            index < candidates.length - 1 ? candidates[index + 1] : null;
+    console.log("Found adjacent pairs:", adjacentPairs);
+    console.log(
+      "Resulting displayItems types:",
+      result.map((item) => item.type)
+    );
 
-          // Check if current and next are the pair we want to combine
-          if (
-            nextCandidate &&
-            nextCandidate.providerName === candidate.providerName &&
-            ((candidate.budgetType === "basic" &&
-              nextCandidate.budgetType === "extended") ||
-              (candidate.budgetType === "extended" &&
-                nextCandidate.budgetType === "basic"))
-          ) {
-            // If view is expanded, don't combine them
-            if (combined.isExpanded) {
-              return {
-                type: "regular",
-                candidate,
-                index,
-              } as RegularDisplayItem;
-            }
-
-            // Otherwise combine them and mark the next item to be skipped
-            skipItems.add(nextCandidate);
-
-            // Determine which is basic and which is extended
-            const basicCand =
-              candidate.budgetType === "basic" ? candidate : nextCandidate;
-            const extendedCand =
-              candidate.budgetType === "extended" ? candidate : nextCandidate;
-
-            return {
-              type: "combined",
-              providerName: candidate.providerName,
-              basicCandidate: basicCand,
-              extendedCandidate: extendedCand,
-              index,
-            } as CombinedDisplayItem;
-          }
-        }
-
-        // Default: just return this candidate as-is
-        return { type: "regular", candidate, index } as RegularDisplayItem;
-      })
-      .filter((item): item is DisplayItem => item !== null); // Type guard to remove null entries
-  }, [candidates, combinedCandidates]);
+    return result;
+  }, [candidates, combinedViews]);
 
   // Toggle between expanded/collapsed view for a provider
   const toggleView = (providerName: string) => {
-    setCombinedViews((prev) => ({
-      ...prev,
-      [providerName]: !prev[providerName],
-    }));
+    console.log(
+      `Toggling view for ${providerName}, current state:`,
+      combinedViews[providerName]
+    );
+
+    // Current state: undefined/false = combined/collapsed, true = expanded
+    const isCurrentlyExpanded = combinedViews[providerName] === true;
+
+    // We always toggle to the opposite state
+    setCombinedViews((prev) => {
+      const newState = {
+        ...prev,
+        [providerName]: !isCurrentlyExpanded,
+      };
+      console.log(
+        `New combined state for ${providerName}:`,
+        newState[providerName]
+      );
+      return newState;
+    });
   };
 
   const isDivider = (candidate: Choice) =>
@@ -210,12 +348,8 @@ export function VoteTable({
         const overDecoded = decodeId(overId);
 
         if (!activeDecoded || !overDecoded) {
-          console.error("Failed to decode drag IDs", { activeId, overId });
           return;
         }
-
-        console.log("Active:", activeDecoded);
-        console.log("Over:", overDecoded);
 
         // Step 1: Find indices in the displayItems array
         const activeDisplayIndex = displayItems.findIndex(
@@ -227,7 +361,6 @@ export function VoteTable({
         );
 
         if (activeDisplayIndex === -1 || overDisplayIndex === -1) {
-          console.error("Could not find display indices");
           return;
         }
 
@@ -237,8 +370,6 @@ export function VoteTable({
         // Step 3: Handle by display type
         if (activeDecoded.budgetType === "combined") {
           // --- DRAGGING A COMBINED ITEM ---
-          console.log("===== COMBINED DRAG START =====");
-
           // Find the provider we're moving
           const providerName = activeDecoded.provider;
 
@@ -251,7 +382,6 @@ export function VoteTable({
           }
 
           if (providerItemIndices.length === 0) {
-            console.error("No provider items found");
             return;
           }
 
@@ -303,14 +433,14 @@ export function VoteTable({
           // Insert the items at the target position
           newCandidates.splice(insertIndex, 0, ...itemsToMove);
 
-          console.log(
-            `Inserted ${itemsToMove.length} items at position ${insertIndex}`
-          );
-          console.log("===== COMBINED DRAG END =====");
+          // Step 5: Apply business rules to ensure proper ordering
+          const finalOrder = enforceBusinessRules(newCandidates);
+
+          // Step 6: Update the state
+          onReorder(finalOrder);
+          onDragEnd?.();
         } else {
           // --- DRAGGING A REGULAR ITEM ---
-          console.log("===== REGULAR DRAG START =====");
-
           // Find the item we're moving in the candidates array
           const activeItemIndex = candidates.findIndex(
             (c) =>
@@ -319,7 +449,6 @@ export function VoteTable({
           );
 
           if (activeItemIndex === -1) {
-            console.error("Could not find active item in candidates");
             return;
           }
 
@@ -362,9 +491,6 @@ export function VoteTable({
 
           // Insert the item at the target position
           newCandidates.splice(insertIndex, 0, itemToMove);
-
-          console.log(`Moved item from ${activeItemIndex} to ${insertIndex}`);
-          console.log("===== REGULAR DRAG END =====");
         }
 
         // Step 5: Apply business rules to ensure proper ordering
@@ -531,9 +657,8 @@ export function VoteTable({
                       isBelowDivider={isBelowDivider(item.basicCandidate)}
                       isLastRow={index === displayItems.length - 1}
                       budgetType="combined"
-                      isExpanded={
-                        combinedCandidates[item.providerName]?.isExpanded
-                      }
+                      isExpanded={combinedViews[item.providerName] === true}
+                      canToggle={true}
                       onToggleView={() => toggleView(item.providerName)}
                       onBudgetSelect={(type) =>
                         onBudgetSelect(item.providerName, type)
@@ -544,6 +669,50 @@ export function VoteTable({
                   // Render regular row
                   const { candidate } = item;
                   const combined = combinedCandidates[candidate.providerName];
+
+                  // Check if this item could be part of a merged set
+                  const hasBothBudgetTypes = candidates.some(
+                    (c) =>
+                      c.providerName === candidate.providerName &&
+                      c.budgetType !== candidate.budgetType &&
+                      (c.budgetType === "basic" || c.budgetType === "extended")
+                  );
+
+                  // Check if the counterpart is adjacent
+                  let hasAdjacentCounterpart = false;
+                  const currentIndex = candidates.findIndex(
+                    (c) =>
+                      c.providerName === candidate.providerName &&
+                      c.budgetType === candidate.budgetType
+                  );
+
+                  if (currentIndex !== -1) {
+                    // Check if previous or next item is the counterpart
+                    const prev =
+                      currentIndex > 0 ? candidates[currentIndex - 1] : null;
+                    const next =
+                      currentIndex < candidates.length - 1
+                        ? candidates[currentIndex + 1]
+                        : null;
+
+                    const prevIsCounterpart = prev
+                      ? prev.providerName === candidate.providerName &&
+                        prev.budgetType !== candidate.budgetType &&
+                        (prev.budgetType === "basic" ||
+                          prev.budgetType === "extended")
+                      : false;
+
+                    const nextIsCounterpart = next
+                      ? next.providerName === candidate.providerName &&
+                        next.budgetType !== candidate.budgetType &&
+                        (next.budgetType === "basic" ||
+                          next.budgetType === "extended")
+                      : false;
+
+                    hasAdjacentCounterpart =
+                      prevIsCounterpart || nextIsCounterpart;
+                  }
+
                   return (
                     <CandidateRow
                       key={getItemId(item, index)}
@@ -555,9 +724,13 @@ export function VoteTable({
                       isBelowDivider={isBelowDivider(candidate)}
                       isLastRow={index === displayItems.length - 1}
                       budgetType={candidate.budgetType}
-                      isExpanded={combined?.isExpanded}
+                      isExpanded={
+                        combinedViews[candidate.providerName] === true
+                      }
+                      canToggle={hasAdjacentCounterpart}
                       onToggleView={
-                        combined
+                        // Show the toggle button only if this provider has both budget types adjacent
+                        hasAdjacentCounterpart
                           ? () => toggleView(candidate.providerName)
                           : undefined
                       }

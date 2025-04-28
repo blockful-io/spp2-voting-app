@@ -18,6 +18,7 @@ interface CandidateRowProps {
   basicBudget?: number;
   extendedBudget?: number;
   isExpanded?: boolean;
+  canToggle?: boolean;
 }
 
 export function CandidateRow({
@@ -35,6 +36,7 @@ export function CandidateRow({
   basicBudget,
   extendedBudget,
   isExpanded,
+  canToggle,
 }: CandidateRowProps) {
   // Setup drag and drop functionality
   const {
@@ -115,7 +117,7 @@ export function CandidateRow({
               <div>
                 <div className="flex items-center">
                   <span>{displayName}</span>
-                  {isCombined && (
+                  {canToggle && (
                     <button
                       onClick={onToggleView}
                       className="ml-2 p-1 text-gray-400 hover:text-white focus:outline-none"
