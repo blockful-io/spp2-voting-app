@@ -137,6 +137,12 @@ export function processCopelandRanking(
       rankedChoices.add(choiceNum - 1); // Convert to 0-indexed
     });
 
+    // Find position of None Below
+    let noneBelowPos = -1;
+    if (noneBelowIndex !== -1 && rankedChoices.has(noneBelowIndex)) {
+      noneBelowPos = vote.choice.indexOf(noneBelowIndex + 1);
+    }
+    
     // Compare each pair of choices
     for (let i = 0; i < numChoices; i++) {
       for (let j = i + 1; j < numChoices; j++) {
@@ -145,6 +151,11 @@ export function processCopelandRanking(
           // Find their positions in the ranking
           const posI = vote.choice.indexOf(i + 1);
           const posJ = vote.choice.indexOf(j + 1);
+          
+          // Skip counting if both choices are ranked below None Below
+          if (noneBelowPos !== -1 && posI > noneBelowPos && posJ > noneBelowPos) {
+            continue;
+          }
 
           // Lower position value means higher rank
           if (posI < posJ) {
@@ -161,11 +172,21 @@ export function processCopelandRanking(
         }
         // One choice ranked, one not ranked
         else if (rankedChoices.has(i) && !rankedChoices.has(j)) {
+          // If the ranked choice is below None Below, skip
+          if (noneBelowPos !== -1 && vote.choice.indexOf(i + 1) > noneBelowPos) {
+            continue;
+          }
+          
           // Ranked choice (i) wins against unranked (j)
           pairwiseMatrix[i][j] += vp;
           matchesParticipated[i][j] += vp;
           matchesParticipated[j][i] += vp;
         } else if (!rankedChoices.has(i) && rankedChoices.has(j)) {
+          // If the ranked choice is below None Below, skip
+          if (noneBelowPos !== -1 && vote.choice.indexOf(j + 1) > noneBelowPos) {
+            continue;
+          }
+          
           // Ranked choice (j) wins against unranked (i)
           pairwiseMatrix[j][i] += vp;
           matchesParticipated[i][j] += vp;
@@ -220,17 +241,13 @@ export function processCopelandRanking(
       const choice1Votes = pairwiseMatrix[i][j];
       const choice2Votes = pairwiseMatrix[j][i];
       let winner: string;
-      let resultType: "win" | "loss" | "tie";
       
       if (choice1Votes > choice2Votes) {
         winner = choices[i];
-        resultType = "win";
       } else if (choice2Votes > choice1Votes) {
         winner = choices[j];
-        resultType = "loss";
       } else {
         winner = "tie";
-        resultType = "tie";
       }
 
       matchResults.push({
