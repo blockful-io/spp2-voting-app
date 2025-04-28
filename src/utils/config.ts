@@ -25,7 +25,7 @@ export const LOSS_POINTS: number = 0; // Points awarded for losing a head-to-hea
 export const PROPOSAL_SPACE = "spp-test.eth";
 // Snapshot proposal ID - replace with your proposal ID
 export const PROPOSAL_ID =
-  "0x14bc28d4202213b2f735be22be131aa5f3b2e790433b8ef232207d0c0ace81e8";
+  "0xe6d2c80a64951c939661f0f735d6e44d420799ac0c29b87b08c5fdd4293ee4f7";
 
 // Feature flags
 // The system now treats all entries as separate candidates
