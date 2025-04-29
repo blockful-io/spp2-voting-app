@@ -17,7 +17,7 @@
     "@hello-pangea/dnd": "^18.0.1",
     "@radix-ui/react-slot": "^1.1.2",
     "@radix-ui/react-tabs": "^1.1.3",
-    "@rainbow-me/rainbowkit": "^2.0.2",
+    "@rainbow-me/rainbowkit": "^2.2.1",
     "@snapshot-labs/snapshot.js": "^0.12.57",
     "@tanstack/react-query": "^5.72.1",
     "@tanstack/react-query-devtools": "^5.71.1",
@@ -37,7 +37,7 @@
     "tailwind-merge": "^3.1.0",
     "tw-animate-css": "^1.2.5",
     "viem": "^2.25.0",
-    "wagmi": "^2.5.7"
+    "wagmi": "^2.13.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
