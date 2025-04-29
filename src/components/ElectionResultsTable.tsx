@@ -28,7 +28,7 @@ function FundedBadge() {
  */
 function BasicBadge() {
   return (
-    <span className="rounded-full bg-stone-800 px-3 py-1 text-xs ml-2 font-medium text-white">
+    <span className="rounded-full bg-stone-900 px-3 py-1 text-xs ml-2 font-medium text-gray-400">
       Basic
     </span>
   );
@@ -39,7 +39,7 @@ function BasicBadge() {
  */
 function ExtendedBadge() {
   return (
-    <span className="rounded-full bg-stone-800 px-3 py-1 text-xs ml-2 font-medium text-white">
+    <span className="rounded-full bg-stone-900 px-3 py-1 text-xs ml-2 font-medium text-gray-400">
       Extended
     </span>
   );
