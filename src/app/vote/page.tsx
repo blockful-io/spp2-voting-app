@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useChoices, useEnsElectionData } from "@/hooks/useEnsElectionData";
 import { VoteTable } from "@/components/vote/VoteTable";
 import { MenuIcon } from "@/components/vote/MenuIcon";
@@ -8,31 +8,25 @@ import toast, { Toaster } from "react-hot-toast";
 import { useVoteOnProposal } from "@/hooks/useSnapshot";
 import { useVotes } from "@/hooks/useVotes";
 import { useAccount } from "wagmi";
-import { loadChoices } from "@/utils/loadChoices";
 import { Choice, BudgetType } from "@/utils/types";
 
 export default function VotePage() {
-  const { fetchChoices, isLoading } = useChoices();
+  const { isLoading: isLoadingChoices } = useChoices();
   const [candidates, setCandidates] = useState<Choice[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [previousVoteApplied, setPreviousVoteApplied] = useState(false);
   const { voteFunc } = useVoteOnProposal();
   const { address } = useAccount();
   const { data: previousVote, isLoading: isLoadingVote } = useVotes(address);
-
   const { choices, isLoading: isLoadingAllocation } = useEnsElectionData();
-
-  console.log("Original choices from API:", choices);
-
-  // Transform choices data to Choice[] format when it changes
+  
+  // Process choices into candidates once when choices are loaded
   useEffect(() => {
     if (choices && choices.length > 0) {
-      // TODO: This transformation should ideally happen on the backend
-      // Current implementation is a temporary solution until API returns properly formatted data
       try {
         const formattedChoices: Choice[] = choices.map((choice, index) => {
           if (typeof choice === "object" && choice !== null) {
-            // Use type assertion for cleaner code
             const choiceObj = choice as Record<string, unknown>;
             return {
               providerName: String(
@@ -54,7 +48,6 @@ export default function VotePage() {
             };
           }
 
-          // Handle string choices (fallback)
           return {
             providerName:
               typeof choice === "string" ? choice : `Choice ${index}`,
@@ -69,13 +62,64 @@ export default function VotePage() {
           };
         });
 
-        setCandidates(formattedChoices);
+        // If previous vote is already loaded, apply it now
+        if (previousVote?.votes && previousVote.votes.length > 0 && !previousVoteApplied) {
+          applyPreviousVote(formattedChoices);
+        } else if (!previousVoteApplied) {
+          setCandidates(formattedChoices);
+        }
       } catch (error) {
         console.error("Error formatting choices:", error);
         setCandidates([]);
       }
     }
-  }, [choices]);
+  }, [choices, previousVote, previousVoteApplied]);
+
+  // Function to apply previous vote to a set of candidates
+  function applyPreviousVote(candidatesToOrder: Choice[]) {
+    try {
+      if (!previousVote?.votes || previousVote.votes.length === 0) {
+        return;
+      }
+      
+      // Get the most recent vote
+      const latestVote = previousVote.votes[0];
+      
+      if (!Array.isArray(latestVote.choice) || latestVote.choice.length === 0) {
+        return;
+      }
+      
+      const choiceIds = latestVote.choice;
+      
+      // Create a map of choiceId to ranking position
+      const rankMap = new Map<number, number>();
+      choiceIds.forEach((choiceId, index) => {
+        rankMap.set(choiceId, index);
+      });
+      
+      // Create a new array and sort it
+      const orderedCandidates = [...candidatesToOrder];
+      
+      orderedCandidates.sort((a, b) => {
+        const aRank = rankMap.get(a.choiceId);
+        const bRank = rankMap.get(b.choiceId);
+        
+        if (aRank === undefined && bRank === undefined) return 0;
+        if (aRank === undefined) return 1; 
+        if (bRank === undefined) return -1;
+        
+        return aRank - bRank;
+      });
+      
+      setCandidates(orderedCandidates);
+      setPreviousVoteApplied(true);
+      toast.success("Previous vote loaded successfully");
+    } catch (error) {
+      console.error("Error applying previous vote:", error);
+      toast.error("Failed to load previous vote");
+      setCandidates(candidatesToOrder);
+    }
+  }
 
   // Handle budget selection for candidates
   const handleBudgetSelection = (name: string, type: "basic" | "extended") => {
@@ -168,7 +212,9 @@ export default function VotePage() {
     }
   };
 
-  if (isLoading || isLoadingVote) {
+  const isLoading = isLoadingChoices || isLoadingVote || isLoadingAllocation;
+
+  if (isLoading) {
     return (
       <div className="min-h-screen w-full text-white flex flex-col">
         <div className="container p-4 items-center justify-center flex flex-col max-w-7xl mx-auto gap-4">
@@ -212,7 +258,7 @@ export default function VotePage() {
             won&apos;t be counted. You can also select between basic or extended
             budget for each candidate.
           </p>
-          {previousVote?.votes && previousVote.votes.length > 0 && (
+          {previousVoteApplied && (
             <div className="bg-blue-900/50 p-4 rounded-lg mb-6">
               <p className="text-blue-200">
                 Your previous vote has been loaded. You can modify your choices
