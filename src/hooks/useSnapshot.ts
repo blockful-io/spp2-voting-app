@@ -4,6 +4,11 @@ import snapshot from "@snapshot-labs/snapshot.js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAccount, useWalletClient } from "wagmi";
 
+interface VoteParams {
+  choice: number[];
+  reason?: string;
+}
+
 export function useVoteOnProposal() {
   const queryClient = useQueryClient();
   const { address } = useAccount();
@@ -16,13 +21,13 @@ export function useVoteOnProposal() {
     error,
     isPending,
   } = useMutation({
-    mutationFn: voteOnProposal,
+    mutationFn: (params: VoteParams) => voteOnProposal(params.choice, params.reason),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["snapshot-score"] });
     },
   });
 
-  async function voteOnProposal(choice: number[]) {
+  async function voteOnProposal(choice: number[], reason?: string) {
     if (!address || !walletClient) {
       throw new Error("Wallet not connected");
     }
@@ -35,6 +40,7 @@ export function useVoteOnProposal() {
       choice,
       space: PROPOSAL_SPACE,
       app: "spp.vote",
+      reason
     });
   }
 

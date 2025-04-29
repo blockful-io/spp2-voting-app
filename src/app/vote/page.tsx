@@ -16,6 +16,7 @@ export default function VotePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [previousVoteApplied, setPreviousVoteApplied] = useState(false);
+  const [reasoning, setReasoning] = useState("");
   const { voteFunc } = useVoteOnProposal();
   const { address } = useAccount();
   const { data: previousVote, isLoading: isLoadingVote } = useVotes(address);
@@ -172,7 +173,14 @@ export default function VotePage() {
         return aRank - bRank;
       });
       
+      // Set the candidates order
       setCandidates(orderedCandidates);
+      
+      // Set the reasoning if available
+      if (latestVote.reason) {
+        setReasoning(latestVote.reason);
+      }
+      
       setPreviousVoteApplied(true);
       toast.success("Previous vote loaded successfully");
     } catch (error) {
@@ -250,7 +258,10 @@ export default function VotePage() {
         [] as number[]
       );
 
-      await voteFunc(selectedChoiceIds);
+      await voteFunc({
+        choice: selectedChoiceIds,
+        reason: reasoning
+      });
       toast.success("Vote submitted successfully!");
     } catch (error) {
       // Check for no voting power error
@@ -337,6 +348,17 @@ export default function VotePage() {
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
           />
+          
+          <div className="mt-8 p-4">
+            <h2 className="text-xl font-semibold mb-2">Voting Reasoning</h2>
+            <p className="text-gray-400 mb-4">Share your reasoning for this vote (optional)</p>
+            <textarea
+              className="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 min-h-[100px]"
+              placeholder="Enter your reasoning here..."
+              value={reasoning}
+              onChange={(e) => setReasoning(e.target.value)}
+            />
+          </div>
         </div>
       </div>
       
