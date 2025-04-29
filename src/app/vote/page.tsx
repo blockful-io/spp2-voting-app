@@ -266,6 +266,7 @@ export default function VotePage() {
           "You don't have voting power. Please ensure you hold the required tokens to participate in this vote."
         );
       } else {
+        console.error(error);
         toast.error("Error submitting vote. Please try again.");
       }
     } finally {

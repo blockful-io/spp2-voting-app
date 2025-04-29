@@ -1,34 +1,36 @@
 "use client";
 
 import "@rainbow-me/rainbowkit/styles.css";
-import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { WagmiProvider } from "wagmi";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { createConfig, http, WagmiProvider } from "wagmi";
 import { mainnet } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+
+const WALLETCONNECT_ID = process.env.NEXT_PUBLIC_WALLETCONNECT_ID
+
+if (!WALLETCONNECT_ID) {
+  throw new Error('Missing NEXT_PUBLIC_WALLETCONNECT_ID')
+}
+
+const { connectors } = getDefaultWallets({
+  appName: '',
+  projectId: WALLETCONNECT_ID as string,
+})
+
+const wagmiConfig = createConfig({
+  chains: [mainnet],
+  connectors,
+  transports: {
+    [mainnet.id]: http(process.env.NEXT_PUBLIC_ETH_RPC_URL),
+  },
+})
 
 const queryClient = new QueryClient();
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = useState(false);
-  const [config] = useState(() =>
-    getDefaultConfig({
-      appName: "SPP2 voting",
-      projectId: "YOUR_PROJECT_ID",
-      chains: [mainnet],
-    })
-  );
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
-    <WagmiProvider config={config}>
+    <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>{children}</RainbowKitProvider>
       </QueryClientProvider>
