@@ -1,9 +1,9 @@
 choiceId,choiceName,budgetAmount,isSpp1
 1,none below,0,FALSE
-2,ENSRegistry,300000,TRUE
+2,Ethereum Name Improvers,300000,TRUE
 3,ResolutionProtocol - basic,300000,FALSE
 4,ResolutionProtocol - ext,100000,FALSE
-5,NameWrapper,400000,FALSE
+5,A long name foundation,400000,FALSE
 6,EthDNS - basic,400000,FALSE
 7,EthDNS - ext,400000,FALSE
 8,SubgraphIndex - basic,400000,TRUE
