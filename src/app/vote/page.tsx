@@ -66,7 +66,9 @@ export default function VotePage() {
         if (previousVote?.votes && previousVote.votes.length > 0 && !previousVoteApplied) {
           applyPreviousVote(formattedChoices);
         } else if (!previousVoteApplied) {
-          setCandidates(formattedChoices);
+          // Randomize the options below "None of the below"
+          const randomizedChoices = randomizeBelowOptions(formattedChoices);
+          setCandidates(randomizedChoices);
         }
       } catch (error) {
         console.error("Error formatting choices:", error);
@@ -74,6 +76,65 @@ export default function VotePage() {
       }
     }
   }, [choices, previousVote, previousVoteApplied]);
+
+  // Function to ensure consistent ordering of choices
+  function ensureConsistentOrder(choicesToOrder: Choice[]) {
+    // Find the "None of the below" divider
+    const dividerIndex = choicesToOrder.findIndex(c => 
+      c.isNoneBelow || c.providerName.toLowerCase().includes("below")
+    );
+    
+    if (dividerIndex === -1) return choicesToOrder;
+    
+    // Separate choices into above and below divider
+    const aboveChoices = choicesToOrder.slice(0, dividerIndex + 1);
+    let belowChoices = choicesToOrder.slice(dividerIndex + 1);
+    
+    // Sort below choices by choiceId to maintain consistent order
+    belowChoices = belowChoices.sort((a, b) => a.choiceId - b.choiceId);
+    
+    // Combine the arrays
+    return [...aboveChoices, ...belowChoices];
+  }
+
+  // Function to randomize options below "None of the below"
+  function randomizeBelowOptions(choicesToOrder: Choice[]) {
+    // Find the "None of the below" divider
+    const dividerIndex = choicesToOrder.findIndex(c => 
+      c.isNoneBelow || c.providerName.toLowerCase().includes("below")
+    );
+    
+    if (dividerIndex === -1) return choicesToOrder;
+    
+    // Separate choices into above and below divider
+    const aboveChoices = choicesToOrder.slice(0, dividerIndex + 1);
+    const belowChoices = choicesToOrder.slice(dividerIndex + 1);
+    
+    // Group by provider name
+    const groupedByProvider = belowChoices.reduce((groups, choice) => {
+      const providerName = choice.providerName.split(' - ')[0].trim(); // Get base provider name
+      if (!groups[providerName]) {
+        groups[providerName] = [];
+      }
+      groups[providerName].push(choice);
+      return groups;
+    }, {} as Record<string, Choice[]>);
+    
+    // Convert to array of provider groups
+    const providerGroups = Object.values(groupedByProvider);
+    
+    // Shuffle the provider groups
+    for (let i = providerGroups.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [providerGroups[i], providerGroups[j]] = [providerGroups[j], providerGroups[i]];
+    }
+    
+    // Flatten back to a single array
+    const randomizedBelow = providerGroups.flat();
+    
+    // Combine the arrays
+    return [...aboveChoices, ...randomizedBelow];
+  }
 
   // Function to apply previous vote to a set of candidates
   function applyPreviousVote(candidatesToOrder: Choice[]) {
