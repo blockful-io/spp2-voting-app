@@ -18,10 +18,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-2 group">
           <EnsLogo className="h-6 w-6" />
           <span className="text-xl font-normal">ENS</span>
-          <span className="text-gray-500 hidden sm:block group-hover:text-white transition-colors duration-300">
-            |
-          </span>
-          <span className="text-gray-500 group-hover:text-white transition-colors duration-300 hidden sm:block">
+          <span className="text-gray-500 group-hover:text-white transition-colors duration-300 sm:block">
             SPP2 Voting
           </span>
         </Link>
