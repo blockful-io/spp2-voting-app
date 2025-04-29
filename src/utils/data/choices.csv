@@ -1,21 +1,11 @@
 choiceId,choiceName,budgetAmount,isSpp1
 1,none below,0,FALSE
-2,sp a,300000,TRUE
-3,sp b - basic,300000,FALSE
-4,sp b - ext,100000,FALSE
-5,sp c,400000,FALSE
-6,sp d - basic,400000,FALSE
-7,sp d - ext,400000,FALSE
-8,sp e - basic,400000,TRUE
-9,sp e - ext,300000,TRUE
-10,sp f,800000,TRUE
-11,sp g - basic,300000,FALSE
-12,sp g - ext,100000,FALSE
-13,sp h,300000,FALSE
-14,sp i - basic,500000,TRUE
-15,sp i - ext,200000,TRUE
-16,sp j - basic,700000,TRUE
-17,sp j - ext,100000,TRUE
-18,sp k,300000,FALSE
-19,sp l - basic,1100000,TRUE
-20,sp l - ext,200000,TRUE
+2,ENSRegistry,300000,TRUE
+3,ResolutionProtocol - basic,300000,FALSE
+4,ResolutionProtocol - ext,100000,FALSE
+5,NameWrapper,400000,FALSE
+6,EthDNS - basic,400000,FALSE
+7,EthDNS - ext,400000,FALSE
+8,SubgraphIndex - basic,400000,TRUE
+9,SubgraphIndex - ext,300000,TRUE
+10,MetaResolver,800000,TRUE
