@@ -7,6 +7,8 @@ import cc from "classcat";
 import { useState, useEffect } from "react";
 import { Web3Provider } from "@ethersproject/providers";
 import { filterHeadToHeadMatches } from "@/utils/candidateComparisons";
+import { BasicBadge, ExtendedBadge } from "@/components/Badges";
+
 // Cache for ENS names to avoid redundant lookups
 const ensCache: Record<string, string | null> = {};
 
@@ -124,17 +126,17 @@ export function ResultsDetails({
 
   const parsedChoice = parseChoiceName(candidateName);
 
-  // Find the head-to-head match between basic and extended versions
-  const basicVsExtMatch = data.headToHeadMatches.find(
-    (match) =>
-      match.choice1.name === `${parsedChoice.name} - basic` &&
-      match.choice2.name === `${parsedChoice.name} - ext`
-  );
+  // Helper function to detect budget type from name
+  const getBudgetType = (name: string) => {
+    if (name.endsWith("- basic")) return "basic";
+    if (name.endsWith("- ext")) return "extended";
+    return null;
+  };
 
-  // Find the allocation data for the parsed choice name
-  const allocationData = data.allocations.find(
-    (allocation) => allocation.name === parsedChoice.name
-  );
+  // Extract base name without budget type suffix
+  const getBaseName = (name: string) => {
+    return name.replace(/ - (basic|ext)$/, "");
+  };
 
   if (!headToHeadResults) {
     return (
@@ -161,56 +163,6 @@ export function ResultsDetails({
         </button>
       </div>
 
-      {/* Preferred Budget */}
-      <div className="mb-8">
-        <h3 className="mb-4 text-lg font-semibold text-gray-100">
-          Preferred Budget
-        </h3>
-        <div className="rounded-lg border border-lightDark bg-dark/50 p-4">
-          {/* <div className="mb-4 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span>Basic (${(budget.basic.amount / 1000).toFixed(0)}k)</span>
-              {budget.basic.selected && <span>🏆</span>}
-            </div>
-            <div className="flex items-center gap-2">
-              {budget.extended.selected && <span>🏆</span>}
-              <span>
-                Extended (${(budget.extended.amount / 1000).toFixed(0)}k)
-              </span>
-            </div>
-          </div> */}
-          <div className="mb-2 flex items-center justify-between">
-            <span className="text-2xl font-semibold">
-              {Math.round(
-                basicVsExtMatch?.choice1.totalVotes ||
-                  allocationData?.averageSupport ||
-                  0
-              ).toLocaleString()}
-            </span>
-            <span className="text-2xl font-semibold">
-              {Math.round(
-                basicVsExtMatch?.choice2.totalVotes || 0
-              ).toLocaleString()}
-            </span>
-          </div>
-          <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
-            <div className="relative h-full w-full">
-              <div className="absolute h-full w-full bg-emerald-500" />
-              <div
-                className="absolute h-full bg-blue-500 right-0"
-                style={{
-                  width: `${
-                    ((basicVsExtMatch?.choice2.totalVotes || 0) /
-                      (basicVsExtMatch?.totalVotes || 0)) *
-                    100
-                  }%`,
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Head-to-head Match Results */}
       <div>
         <h3 className="mb-4 text-lg font-semibold text-gray-100">
@@ -219,6 +171,10 @@ export function ResultsDetails({
         <div className="space-y-3">
           {matches.map((match: HeadToHeadMatch, index: number) => {
             const isExpanded = expandedMatches.includes(index);
+            const choice1BudgetType = getBudgetType(match.choice1.name);
+            const choice2BudgetType = getBudgetType(match.choice2.name);
+            const choice1BaseName = getBaseName(match.choice1.name);
+            const choice2BaseName = getBaseName(match.choice2.name);
 
             if (!match.isInternal)
               return (
@@ -226,58 +182,71 @@ export function ResultsDetails({
                   key={index}
                   className="rounded-lg border border-lightDark bg-dark/50 p-4"
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center flex-1">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          <span className="text-gray-100">
-                            {match.choice1.name}
-                          </span>
-                          {match.winner.includes(match.choice1.name) && (
-                            <Trophy className="text-emerald-500 h-4 w-4" />
-                          )}
-                          <span
-                            className={cc([
-                              match.winner.includes(match.choice1.name)
-                                ? "text-emerald-500"
-                                : "text-gray-400",
-                            ])}
-                          >
-                            {Math.round(
-                              match.choice1.totalVotes
-                            ).toLocaleString()}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="px-4">
-                        <span className="text-gray-400">vs</span>
-                      </div>
-                      <div className="flex-1 text-right">
-                        <div className="flex items-center gap-2 justify-end">
-                          {match.winner.includes(match.choice2.name) && (
-                            <Trophy className="text-blue-500 h-4 w-4" />
-                          )}
-                          <span
-                            className={cc([
-                              match.winner.includes(match.choice2.name)
-                                ? "text-blue-500"
-                                : "text-gray-400",
-                            ])}
-                          >
-                            {Math.round(
-                              match.choice2.totalVotes
-                            ).toLocaleString()}
-                          </span>
-
-                          <span className="text-gray-100">
-                            {match.choice2.name}
-                          </span>
-                        </div>
+                  {/* New Layout with names at top */}
+                  <div className="flex justify-between mb-3">
+                    {/* Left provider name */}
+                    <div className="flex flex-col items-start">
+                      <h4 className="text-m font-medium text-gray-100 mb-1 break-words max-w-[150px] sm:max-w-xs">
+                        {choice1BaseName}
+                      </h4>
+                      <div className="flex items-center">
+                        {choice1BudgetType === "basic" && <BasicBadge />}
+                        {choice1BudgetType === "extended" && <ExtendedBadge />}
                       </div>
                     </div>
 
+                    {/* Right provider name */}
+                    <div className="flex flex-col items-end">
+                      <h4 className="text-m font-medium text-gray-100 mb-1 break-words max-w-[150px] sm:max-w-xs text-right">
+                        {choice2BaseName}
+                      </h4>
+                      <div className="flex items-center">
+                        {choice2BudgetType === "basic" && <BasicBadge />}
+                        {choice2BudgetType === "extended" && <ExtendedBadge />}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Vote results in the middle */}
+                  <div className="flex items-center justify-between mb-3 px-2">
+                    {/* Left votes with trophy if winner */}
+                    <div className="flex items-center">
+                      {match.winner.includes(match.choice1.name) && (
+                        <Trophy className="text-emerald-500 h-5 w-5 mr-2" />
+                      )}
+                      <span
+                        className={`text-m font-semibold ${
+                          match.winner.includes(match.choice1.name)
+                            ? "text-emerald-500"
+                            : "text-gray-400"
+                        }`}
+                      >
+                        {Math.round(match.choice1.totalVotes).toLocaleString()}
+                      </span>
+                    </div>
+
+                    {/* VS indicator */}
+                    <span className="text-gray-400 mx-4">vs</span>
+
+                    {/* Right votes with trophy if winner */}
+                    <div className="flex items-center">
+                      <span
+                        className={`text-m font-semibold ${
+                          match.winner.includes(match.choice2.name)
+                            ? "text-blue-500"
+                            : "text-gray-400"
+                        }`}
+                      >
+                        {Math.round(match.choice2.totalVotes).toLocaleString()}
+                      </span>
+                      {match.winner.includes(match.choice2.name) && (
+                        <Trophy className="text-blue-500 h-5 w-5 ml-2" />
+                      )}
+                    </div>
+
+                    {/* Toggle button moved to the very right */}
                     <button
-                      className="ml-2 p-1 rounded-full hover:bg-gray-700 transition-colors"
+                      className="ml-4 p-1 rounded-full hover:bg-gray-700 transition-colors"
                       onClick={() => toggleMatchExpand(index)}
                     >
                       {isExpanded ? (
@@ -288,6 +257,7 @@ export function ResultsDetails({
                     </button>
                   </div>
 
+                  {/* Progress bar */}
                   <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
                     <div className="relative h-full w-full">
                       <div className="absolute h-full w-full bg-blue-500" />

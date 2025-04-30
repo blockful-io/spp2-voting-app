@@ -318,21 +318,21 @@ export default function VotePage() {
         }}
       />
       
-      <div className="container p-4 flex flex-col max-w-7xl mx-auto gap-4">
-        <div className="p-4">
-          <div className="flex items-center mb-4">
+      <div className="container p-4 flex flex-col max-w-7xl mx-auto gap-3">
+        <div className="pb-3">
+          <div className="flex items-center mb-3">
             <MenuIcon />
             <h1 className="text-2xl font-bold">Rank Your Preferences</h1>
           </div>
 
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-400 mb-4">
             Drag and drop candidates to rank them, placing your top choice at
             the top while any candidates below &quot;None of the below&quot;
             won&apos;t be counted. You can also select between basic or extended
             budget for each candidate.
           </p>
           {previousVoteApplied && (
-            <div className="bg-blue-900/50 p-4 rounded-lg mb-6">
+            <div className="bg-blue-900/50 p-3 rounded-lg mb-4">
               <p className="text-blue-200">
                 Your previous vote has been loaded. You can modify your choices
                 and submit again if you wish.
@@ -340,7 +340,7 @@ export default function VotePage() {
             </div>
           )}
         </div>
-        <div className="grow flex flex-col w-full pb-24">
+        <div className="grow flex flex-col w-full pb-28">
           <VoteTable
             candidates={candidates}
             onBudgetSelect={handleBudgetSelection}
@@ -349,9 +349,9 @@ export default function VotePage() {
             onDragEnd={handleDragEnd}
           />
           
-          <div className="mt-8 p-4">
+          <div className="mt-5 px-2">
             <h2 className="text-xl font-semibold mb-2">Voting Reasoning</h2>
-            <p className="text-gray-400 mb-4">Share your reasoning for this vote (optional)</p>
+            <p className="text-gray-400 mb-3">Share your reasoning for this vote (optional)</p>
             <textarea
               className="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 min-h-[100px]"
               placeholder="Enter your reasoning here..."

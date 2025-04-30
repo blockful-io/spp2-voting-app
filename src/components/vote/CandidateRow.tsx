@@ -2,39 +2,7 @@ import { DragHandleIcon } from "./DragHandleIcon";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { ChevronUp, ChevronDown } from "lucide-react";
-
-/**
- * Badge component displayed for Basic budget type
- */
-function BasicBadge() {
-  return (
-    <span className="rounded-full bg-stone-900 px-3 py-1 text-xs font-medium text-gray-400">
-      Basic
-    </span>
-  );
-}
-
-/**
- * Badge component displayed for Extended budget type
- */
-function ExtendedBadge() {
-  return (
-    <span className="rounded-full bg-stone-900 px-3 py-1 text-xs ml-2 font-medium text-gray-400">
-      Extended
-    </span>
-  );
-}
-
-/**
- * Badge component displayed for Combined budget type
- */
-function CombinedBadge() {
-  return (
-    <span className="rounded-full bg-stone-900 px-3 py-1 text-xs font-medium text-gray-400  ">
-      Basic + Extended
-    </span>
-  );
-}
+import { BasicBadge, ExtendedBadge, CombinedBadge } from "@/components/Badges";
 
 interface CandidateRowProps {
   name: string;

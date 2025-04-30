@@ -1,6 +1,8 @@
+import React, { useState } from "react";
 import { Trophy, ChevronRight } from "lucide-react";
 import { Allocation } from "@/utils/types";
 import { parseChoiceName } from "@/utils/parseChoiceName";
+import { BasicBadge, ExtendedBadge, FundedBadge, NotFundedBadge } from "@/components/Badges";
 
 /**
  * ElectionResultsTable props interface
@@ -10,57 +12,6 @@ import { parseChoiceName } from "@/utils/parseChoiceName";
 interface ElectionResultsTableProps {
   candidates: Allocation[];
   onShowDetails: (candidateName: string) => void;
-}
-
-/**
- * Badge component displayed for funded/winning candidates
- */
-function FundedBadge() {
-  return (
-    <span className="rounded-full flex items-center gap-2 text-black bg-[#4ADE80] p-[6px] text-xs font-medium">
-      <Trophy className="h-4 w-4" />
-    </span>
-  );
-}
-
-/**
- * Badge component displayed for Basic budget type
- */
-function BasicBadge() {
-  return (
-    <span className="rounded-full bg-stone-900 px-3 py-1 text-xs ml-2 font-medium text-gray-400">
-      Basic
-    </span>
-  );
-}
-
-/**
- * Badge component displayed for Extended budget type
- */
-function ExtendedBadge() {
-  return (
-    <span className="rounded-full bg-stone-900 px-3 py-1 text-xs ml-2 font-medium text-gray-400">
-      Extended
-    </span>
-  );
-}
-
-/**
- * Badge component displayed for non-funded candidates with reason tooltip
- */
-function NotFundedBadge({ reason }: { reason: string | null }) {
-  return (
-    <div className="group relative inline-flex items-center">
-      <span className="rounded-xl py-1 px-2 bg-gray-700 bg-opacity-10 text-gray-400">
-        Not funded
-      </span>
-      <div className="absolute left-full ml-2 hidden group-hover:block z-50">
-        <div className="rounded-md bg-gray-800 p-2 text-xs text-gray-200 shadow-lg whitespace-nowrap">
-          {reason || "Unknown reason"}
-        </div>
-      </div>
-    </div>
-  );
 }
 
 /**
