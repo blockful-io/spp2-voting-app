@@ -3,7 +3,6 @@ import { HeadToHeadMatch } from "@/utils/voteProcessing";
 import { X, Trophy, ChevronDown, ChevronUp, Copy, Check } from "lucide-react";
 import { Allocation } from "@/utils/types";
 import { parseChoiceName } from "@/utils/parseChoiceName";
-import cc from "classcat";
 import { useState, useEffect } from "react";
 import { Web3Provider } from "@ethersproject/providers";
 import { filterHeadToHeadMatches } from "@/utils/candidateComparisons";
@@ -124,7 +123,6 @@ export function ResultsDetails({
     return ensNames[address] || ensCache[address] || truncateAddress(address);
   };
 
-  const parsedChoice = parseChoiceName(candidateName);
 
   // Helper function to detect budget type from name
   const getBudgetType = (name: string) => {
@@ -171,208 +169,215 @@ export function ResultsDetails({
         <div className="space-y-3">
           {matches.map((match: HeadToHeadMatch, index: number) => {
             const isExpanded = expandedMatches.includes(index);
-            const choice1BudgetType = getBudgetType(match.choice1.name);
-            const choice2BudgetType = getBudgetType(match.choice2.name);
-            const choice1BaseName = getBaseName(match.choice1.name);
-            const choice2BaseName = getBaseName(match.choice2.name);
+            const choice1BudgetType = parseChoiceName(match.choice1.name).budgetType;
+            const choice2BudgetType = parseChoiceName(match.choice2.name).budgetType;
+            const choice1BaseName = parseChoiceName(match.choice1.name).name;
+            const choice2BaseName = parseChoiceName(match.choice2.name).name;
 
-            if (!match.isInternal)
-              return (
-                <div
-                  key={index}
-                  className="rounded-lg border border-lightDark bg-dark/50 p-4"
-                >
-                  {/* New Layout with names at top */}
-                  <div className="flex justify-between mb-3">
-                    {/* Left provider name */}
-                    <div className="flex flex-col items-start">
-                      <h4 className="text-m font-medium text-gray-100 mb-1 break-words max-w-[150px] sm:max-w-xs">
-                        {choice1BaseName}
-                      </h4>
-                      <div className="flex items-center">
-                        {choice1BudgetType === "basic" && <BasicBadge />}
-                        {choice1BudgetType === "extended" && <ExtendedBadge />}
-                      </div>
-                    </div>
-
-                    {/* Right provider name */}
-                    <div className="flex flex-col items-end">
-                      <h4 className="text-m font-medium text-gray-100 mb-1 break-words max-w-[150px] sm:max-w-xs text-right">
-                        {choice2BaseName}
-                      </h4>
-                      <div className="flex items-center">
-                        {choice2BudgetType === "basic" && <BasicBadge />}
-                        {choice2BudgetType === "extended" && <ExtendedBadge />}
-                      </div>
+            return (
+              <div
+                key={index}
+                className="rounded-lg border border-lightDark bg-dark/50 p-4 cursor-pointer hover:bg-dark/80 hover:border-gray-600 transition-all"
+                onClick={() => toggleMatchExpand(index)}
+                aria-label={isExpanded ? "Collapse details" : "Expand details"}
+              >
+                {/* New Layout with names at top */}
+                <div className="flex justify-between mb-2 -mt-1">
+                  {/* Left provider name */}
+                  <div className="flex flex-col items-start">
+                    <h4 className="text-m font-medium text-gray-100 mb-1 break-words max-w-[150px] sm:max-w-xs">
+                      {choice1BaseName}
+                    </h4>
+                    <div className="flex items-center ml-1">
+                      {choice1BudgetType === "basic" && <BasicBadge />}
+                      {choice1BudgetType === "extended" && <ExtendedBadge />}
                     </div>
                   </div>
 
-                  {/* Vote results in the middle */}
-                  <div className="flex items-center justify-between mb-3 px-2">
-                    {/* Left votes with trophy if winner */}
-                    <div className="flex items-center">
-                      {match.winner.includes(match.choice1.name) && (
-                        <Trophy className="text-emerald-500 h-5 w-5 mr-2" />
-                      )}
-                      <span
-                        className={`text-m font-semibold ${
-                          match.winner.includes(match.choice1.name)
-                            ? "text-emerald-500"
-                            : "text-gray-400"
-                        }`}
-                      >
-                        {Math.round(match.choice1.totalVotes).toLocaleString()}
-                      </span>
+                  {/* Right provider name */}
+                  <div className="flex flex-col items-end">
+                    <h4 className="text-m font-medium text-gray-100 mb-1 break-words max-w-[150px] sm:max-w-xs text-right">
+                      {choice2BaseName}
+                    </h4>
+                    <div className="flex items-center mr-1">
+                      {choice2BudgetType === "basic" && <BasicBadge />}
+                      {choice2BudgetType === "extended" && <ExtendedBadge />}
                     </div>
+                  </div>
+                </div>
 
-                    {/* VS indicator */}
-                    <span className="text-gray-400 mx-4">vs</span>
-
-                    {/* Right votes with trophy if winner */}
-                    <div className="flex items-center">
-                      <span
-                        className={`text-m font-semibold ${
-                          match.winner.includes(match.choice2.name)
-                            ? "text-blue-500"
-                            : "text-gray-400"
-                        }`}
-                      >
-                        {Math.round(match.choice2.totalVotes).toLocaleString()}
-                      </span>
-                      {match.winner.includes(match.choice2.name) && (
-                        <Trophy className="text-blue-500 h-5 w-5 ml-2" />
-                      )}
-                    </div>
-
-                    {/* Toggle button moved to the very right */}
-                    <button
-                      className="ml-4 p-1 rounded-full hover:bg-gray-700 transition-colors"
-                      onClick={() => toggleMatchExpand(index)}
+                {/* Vote results in the middle */}
+                <div className="flex items-center mb-3 px-2">
+                  {/* Left votes with trophy if winner */}
+                  <div className="flex items-center flex-1 justify-start">
+                    {match.winner.includes(match.choice1.name) && (
+                      <Trophy className="text-emerald-500 h-5 w-5 mr-2" />
+                    )}
+                    <span
+                      className={`text-m font-semibold ${
+                        match.winner.includes(match.choice1.name)
+                          ? "text-emerald-500"
+                          : "text-gray-400"
+                      }`}
                     >
-                      {isExpanded ? (
-                        <ChevronUp className="h-4 w-4 text-gray-400" />
-                      ) : (
-                        <ChevronDown className="h-4 w-4 text-gray-400" />
-                      )}
-                    </button>
+                      {Math.round(match.choice1.totalVotes).toLocaleString()}
+                    </span>
                   </div>
 
-                  {/* Progress bar */}
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
-                    <div className="relative h-full w-full">
-                      <div className="absolute h-full w-full bg-blue-500" />
-                      <div
-                        className={`absolute h-full ${
-                          match.winner !== match.choice2.name
-                            ? "bg-emerald-500"
-                            : "bg-blue-500"
-                        }`}
-                        style={{
-                          width: `${
-                            (match.choice1.totalVotes / match.totalVotes) * 100
-                          }%`,
-                        }}
-                      />
-                    </div>
-                  </div>
+                  {/* VS indicator */}
+                  <span className="text-gray-400 text-center w-16">vs</span>
 
-                  {isExpanded && (
-                    <div className="mt-4 pt-4 border-t border-lightDark">
-                      <div className="grid grid-cols-1 gap-4">
-                        <div className="flex flex-col md:flex-row">
-                          {/* Left side - Candidate 1 Voters */}
-                          <div className="flex-1 mb-4 md:mb-0">
-                            <h4 className="text-sm font-medium text-gray-300 mb-2">
-                              {match.choice1.name} (
-                              {match.choice1.voters.length})
-                            </h4>
-                            <div className="max-h-40 overflow-y-auto">
-                              {match.choice1.voters.length > 0 ? (
-                                <ul className="space-y-1">
-                                  {match.choice1.voters.map((voter, i) => (
-                                    <li
-                                      key={i}
-                                      className="text-xs flex items-center"
+                  {/* Right votes with trophy if winner */}
+                  <div className="flex items-center flex-1 justify-end">
+                    <span
+                      className={`text-m font-semibold ${
+                        match.winner.includes(match.choice2.name)
+                          ? "text-blue-500"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {Math.round(match.choice2.totalVotes).toLocaleString()}
+                    </span>
+                    {match.winner.includes(match.choice2.name) && (
+                      <Trophy className="text-blue-500 h-5 w-5 ml-2" />
+                    )}
+                  </div>
+                </div>
+
+                {/* Progress bar */}
+                <div className="h-2 w-full overflow-hidden rounded-full bg-dark">
+                  <div className="relative h-full w-full">
+                    {/* First render the right side (choice2) background */}
+                    <div 
+                      className={`absolute right-0 h-full ${
+                        match.winner.includes(match.choice2.name) ? "bg-blue-500" : "bg-gray-600"
+                      }`} 
+                      style={{
+                        width: `${
+                          (match.choice2.totalVotes / (match.totalVotes || 1)) * 100
+                        }%`,
+                      }}
+                    />
+                    {/* Then render the left side (choice1) */}
+                    <div
+                      className={`absolute left-0 h-full ${
+                        match.winner.includes(match.choice1.name) ? "bg-emerald-500" : "bg-gray-600"
+                      }`}
+                      style={{
+                        width: `${
+                          (match.choice1.totalVotes / (match.totalVotes || 1)) * 100
+                        }%`,
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                {/* Toggle indicator centered below progress bar */}
+                <div className="flex justify-center mt-2 -mb-2">
+                  {isExpanded ? (
+                    <ChevronUp className="h-4 w-4 text-gray-400" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4 text-gray-400" />
+                  )}
+                </div>
+
+                {isExpanded && (
+                  <div className="mt-4 pt-4 border-t border-lightDark">
+                    <div className="grid grid-cols-1 gap-4">
+                      <div className="flex flex-col md:flex-row">
+                        {/* Left side - Candidate 1 Voters */}
+                        <div className="flex-1 mb-4 md:mb-0">
+                          <h4 className="text-sm font-medium text-gray-300 mb-2">
+                            {match.choice1.name} (
+                            {match.choice1.voters.length})
+                          </h4>
+                          <div className="max-h-40 overflow-y-auto">
+                            {match.choice1.voters.length > 0 ? (
+                              <ul className="space-y-1">
+                                {match.choice1.voters.map((voter, i) => (
+                                  <li
+                                    key={i}
+                                    className="text-xs flex items-center"
+                                  >
+                                    <button
+                                      onClick={() =>
+                                        copyToClipboard(voter.voter)
+                                      }
+                                      className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1 min-w-0"
+                                      title={voter.voter}
                                     >
-                                      <button
-                                        onClick={() =>
-                                          copyToClipboard(voter.voter)
-                                        }
-                                        className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1 min-w-0"
-                                        title={voter.voter}
-                                      >
-                                        <span className="font-mono truncate">
-                                          {getDisplayName(voter.voter)}
-                                        </span>
-                                        {copiedAddress === voter.voter ? (
-                                          <Check className="h-3 w-3 ml-1 text-green-500 flex-shrink-0" />
-                                        ) : (
-                                          <Copy className="h-3 w-3 ml-1 opacity-50 flex-shrink-0" />
-                                        )}
-                                      </button>
-                                      <span className="text-gray-300 ml-auto text-right w-14 md:w-16 mr-2 md:mr-4">
-                                        {Math.round(voter.vp).toLocaleString()}
+                                      <span className="font-mono truncate">
+                                        {getDisplayName(voter.voter)}
                                       </span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              ) : (
-                                <p className="text-xs text-gray-500">
-                                  No voters
-                                </p>
-                              )}
-                            </div>
+                                      {copiedAddress === voter.voter ? (
+                                        <Check className="h-3 w-3 ml-1 text-green-500 flex-shrink-0" />
+                                      ) : (
+                                        <Copy className="h-3 w-3 ml-1 opacity-50 flex-shrink-0" />
+                                      )}
+                                    </button>
+                                    <span className="text-gray-300 ml-auto text-right w-14 md:w-16 mr-2 md:mr-4">
+                                      {Math.round(voter.vp).toLocaleString()}
+                                    </span>
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className="text-xs text-gray-500">
+                                No voters
+                              </p>
+                            )}
                           </div>
+                        </div>
 
-                          {/* Right side - Candidate 2 Voters */}
-                          <div className="flex-1 md:pl-4 md:border-l border-lightDark">
-                            <h4 className="text-sm font-medium text-gray-300 mb-2 md:text-right">
-                              {match.choice2.name} (
-                              {match.choice2.voters.length})
-                            </h4>
-                            <div className="max-h-40 overflow-y-auto">
-                              {match.choice2.voters.length > 0 ? (
-                                <ul className="space-y-1">
-                                  {match.choice2.voters.map((voter, i) => (
-                                    <li
-                                      key={i}
-                                      className="text-xs flex items-center md:justify-end"
+                        {/* Right side - Candidate 2 Voters */}
+                        <div className="flex-1 md:pl-4 md:border-l border-lightDark">
+                          <h4 className="text-sm font-medium text-gray-300 mb-2 md:text-right">
+                            {match.choice2.name} (
+                            {match.choice2.voters.length})
+                          </h4>
+                          <div className="max-h-40 overflow-y-auto">
+                            {match.choice2.voters.length > 0 ? (
+                              <ul className="space-y-1">
+                                {match.choice2.voters.map((voter, i) => (
+                                  <li
+                                    key={i}
+                                    className="text-xs flex items-center md:justify-end"
+                                  >
+                                    <span className="text-gray-300 mr-auto md:ml-0 text-left w-14 md:w-16 order-2 md:order-1">
+                                      {Math.round(voter.vp).toLocaleString()}
+                                    </span>
+                                    <button
+                                      onClick={() =>
+                                        copyToClipboard(voter.voter)
+                                      }
+                                      className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1 min-w-0 md:justify-end order-1 md:order-2"
+                                      title={voter.voter}
                                     >
-                                      <span className="text-gray-300 mr-auto md:ml-0 text-left w-14 md:w-16 order-2 md:order-1">
-                                        {Math.round(voter.vp).toLocaleString()}
+                                      {copiedAddress === voter.voter ? (
+                                        <Check className="h-3 w-3 mr-1 md:mr-1 ml-1 md:ml-0 order-last md:order-first text-green-500 flex-shrink-0" />
+                                      ) : (
+                                        <Copy className="h-3 w-3 mr-1 md:mr-1 ml-1 md:ml-0 order-last md:order-first opacity-50 flex-shrink-0" />
+                                      )}
+                                      <span className={"font-mono truncate"}>
+                                        {getDisplayName(voter.voter)}
                                       </span>
-                                      <button
-                                        onClick={() =>
-                                          copyToClipboard(voter.voter)
-                                        }
-                                        className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1 min-w-0 md:justify-end order-1 md:order-2"
-                                        title={voter.voter}
-                                      >
-                                        {copiedAddress === voter.voter ? (
-                                          <Check className="h-3 w-3 mr-1 md:mr-1 ml-1 md:ml-0 order-last md:order-first text-green-500 flex-shrink-0" />
-                                        ) : (
-                                          <Copy className="h-3 w-3 mr-1 md:mr-1 ml-1 md:ml-0 order-last md:order-first opacity-50 flex-shrink-0" />
-                                        )}
-                                        <span className={"font-mono truncate"}>
-                                          {getDisplayName(voter.voter)}
-                                        </span>
-                                      </button>
-                                    </li>
-                                  ))}
-                                </ul>
-                              ) : (
-                                <p className="text-xs text-gray-500 md:text-right">
-                                  No voters
-                                </p>
-                              )}
-                            </div>
+                                    </button>
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className="text-xs text-gray-500 md:text-right">
+                                No voters
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
                     </div>
-                  )}
-                </div>
-              );
+                  </div>
+                )}
+              </div>
+            );
           })}
         </div>
         <div className="mt-4 text-right text-sm text-gray-400">

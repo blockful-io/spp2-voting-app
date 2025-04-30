@@ -7,7 +7,7 @@
  */
 export function BasicBadge() {
   return (
-    <span className="rounded-full bg-stone-900 px-3 py-1 text-xs font-medium text-gray-400">
+    <span className="rounded-full bg-stone-900 px-2 py-1 text-xs ml-2 font-medium text-gray-400">
       Basic
     </span>
   );
@@ -18,7 +18,7 @@ export function BasicBadge() {
  */
 export function ExtendedBadge() {
   return (
-    <span className="rounded-full bg-stone-900 px-3 py-1 text-xs ml-2 font-medium text-gray-400">
+    <span className="rounded-full bg-stone-900 px-2 py-1 text-xs ml-2 font-medium text-gray-400">
       Extended
     </span>
   );
@@ -29,7 +29,7 @@ export function ExtendedBadge() {
  */
 export function CombinedBadge() {
   return (
-    <span className="rounded-full bg-stone-900 px-3 py-1 text-xs font-medium text-gray-400">
+    <span className="rounded-full bg-stone-900 px-2 py-1 text-xs ml-2 font-medium text-gray-400">
       Basic + Extended
     </span>
   );

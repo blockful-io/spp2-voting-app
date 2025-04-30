@@ -16,7 +16,6 @@ import { getChoicesData } from './choiceParser';
 import { PROGRAM_BUDGET, TWO_YEAR_STREAM_CAP } from "./config";
 // Import shared types
 import { AllocationResults, VotingResultResponse } from "./types";
-import { filterHeadToHeadMatches } from "./candidateComparisons";
 
 // Re-export HeadToHeadMatch from types
 export type { HeadToHeadMatch } from "./types";
@@ -64,23 +63,6 @@ export async function getVotingResultData(
 
   // Step 5: Get choices data from CSV
   const choicesData = getChoicesData();
-
-  // print head to head matches from sp l - basic using filterHeadToHeadMatches
-  const spLBasicMatches = filterHeadToHeadMatches(headToHeadMatches, "sp l - basic");
-  console.log("spLBasicMatches", spLBasicMatches);
-  
-  // Add a table to show voting power comparison for sp l matches
-  console.log("\n=== SP L VOTING POWER COMPARISON ===");
-  console.log("Voting power sp l\tVoting power other\tDid sp - l win?\tOpponent");
-  console.log("--------------------------------------------------------------------------------");
-  spLBasicMatches?.matches.forEach(match => {
-    const spLVotingPower = match.choice1.name.includes("sp l") ? match.choice1.totalVotes : match.choice2.totalVotes;
-    const otherVotingPower = match.choice1.name.includes("sp l") ? match.choice2.totalVotes : match.choice1.totalVotes;
-    const otherName = match.choice1.name.includes("sp l") ? match.choice2.name : match.choice1.name;
-    const didSpLWin = match.winner.includes("sp l") ? "Yes" : "No";
-    console.log(`${spLVotingPower.toFixed(2)}\t${otherVotingPower.toFixed(2)}\t${didSpLWin}\t${otherName}`);
-  });
-  console.log("================================================================================\n");
 
   // Step 6: Allocate budgets using the ranked candidates and choices data
   const { summary, allocations: finalAllocations } = allocateBudgets({

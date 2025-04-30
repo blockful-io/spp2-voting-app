@@ -93,7 +93,7 @@ export function ElectionResultsTable({
 
                   {/* Column 2: Choice - Displays the candidate name */}
                   <td className="whitespace-nowrap px-6 py-4 text-gray-300">
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-x-1">
                       {displayName}
                       {budgetType === "basic" && <BasicBadge />}
                       {budgetType === "extended" && <ExtendedBadge />}
