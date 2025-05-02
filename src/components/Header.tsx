@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ClientOnly } from "./ClientOnly";
 import { EnsLogo } from "./icons/EnsLogo";
 import { ChevronRight } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { CustomConnectButton } from "./CustomConnectButton";
 
 export function Header() {
   const pathname = usePathname();
@@ -44,7 +44,7 @@ export function Header() {
         </div>
         
         <ClientOnly>
-          <ConnectButton />
+          <CustomConnectButton />
         </ClientOnly>
       </div>
       
