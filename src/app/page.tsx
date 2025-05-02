@@ -178,12 +178,14 @@ export default function EnsElectionPage() {
             </h1>
           </div>
 
-          {allocationData?.proposal?.start && (
-            <ElectionStatus
-              startDate={new Date(allocationData?.proposal?.start * 1000)}
-              endDate={new Date(allocationData?.proposal?.end * 1000)}
-            />
-          )}
+          <div className="flex items-center gap-3">
+            {allocationData?.proposal?.start && (
+              <ElectionStatus
+                startDate={new Date(allocationData?.proposal?.start * 1000)}
+                endDate={new Date(allocationData?.proposal?.end * 1000)}
+              />
+            )}
+          </div>
         </div>
       </div>
 

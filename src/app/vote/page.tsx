@@ -320,9 +320,11 @@ export default function VotePage() {
       
       <div className="container p-4 flex flex-col max-w-7xl mx-auto gap-3">
         <div className="pb-3">
-          <div className="flex items-center mb-3">
-            <MenuIcon />
-            <h1 className="text-2xl font-bold">Rank Your Preferences</h1>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center">
+              <MenuIcon />
+              <h1 className="text-2xl font-bold">Rank Your Preferences</h1>
+            </div>
           </div>
 
           <p className="text-gray-400 mb-4">

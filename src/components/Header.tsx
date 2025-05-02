@@ -10,6 +10,8 @@ import { CustomConnectButton } from "./CustomConnectButton";
 export function Header() {
   const pathname = usePathname();
   const isVotePage = pathname === "/vote";
+  const isVotesPage = pathname === "/votes";
+  const isResultsPage = pathname === "/";
 
   return (
     <div className="sticky top-0 z-50 w-full border-b border-gray-800 bg-black flex flex-col">
@@ -17,7 +19,7 @@ export function Header() {
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 text-gray-100">
         <Link href="/" className="flex items-center gap-2 group">
           <EnsLogo className="h-6 w-6" />
-          <span className="text-xl font-normal">ENS</span>
+          <span className="text-xl font-normal hidden sm:block">ENS</span>
           <span className="text-gray-500 group-hover:text-white transition-colors duration-300 sm:block">
             SPP2 Voting
           </span>
@@ -27,20 +29,27 @@ export function Header() {
         <div className="items-center relative hidden md:flex">
           <Link 
             href="/" 
-            className={`relative px-4 h-16 flex items-center text-base font-medium transition-colors duration-300 ${!isVotePage ? 'text-blue-500' : 'text-gray-400 hover:text-white'}`}
+            className={`relative px-4 h-16 flex items-center text-base font-medium transition-colors duration-300 ${isResultsPage ? 'text-blue-500' : 'text-gray-400 hover:text-white'}`}
           >
             Results
-            {!isVotePage && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500"></div>}
+            {isResultsPage && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500"></div>}
           </Link>
-          <div className={`flex items-center ${isVotePage ? 'relative' : ''}`}>
-            <Link 
-              href="/vote" 
-              className={`px-4 h-16 flex items-center text-base font-medium transition-colors duration-300 ${isVotePage ? 'text-blue-500' : 'text-gray-400 hover:text-white'}`}
-            >
-              Vote
-            </Link>
+          <span className="text-gray-700">|</span>
+          <Link 
+            href="/votes" 
+            className={`relative px-4 h-16 flex items-center text-base font-medium transition-colors duration-300 ${isVotesPage ? 'text-blue-500' : 'text-gray-400 hover:text-white'}`}
+          >
+            See votes
+            {isVotesPage && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500"></div>}
+          </Link>
+          <span className="text-gray-700">|</span>
+          <Link 
+            href="/vote" 
+            className={`relative px-4 h-16 flex items-center text-base font-medium transition-colors duration-300 ${isVotePage ? 'text-blue-500' : 'text-gray-400 hover:text-white'}`}
+          >
+            Cast your vote
             {isVotePage && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500"></div>}
-          </div>
+          </Link>
         </div>
         
         <ClientOnly>
@@ -53,22 +62,25 @@ export function Header() {
         <div className="mx-auto w-full max-w-7xl flex items-center">
           <Link 
             href="/" 
-            className={`relative w-1/2 py-2.5 flex justify-center items-center text-base font-medium transition-colors duration-300 ${!isVotePage ? 'text-blue-500' : 'text-gray-400 hover:text-white'}`}
+            className={`relative w-1/4 py-2.5 flex justify-center items-center text-base font-medium transition-colors duration-300 ${isResultsPage ? 'text-blue-500' : 'text-gray-400 hover:text-white'}`}
           >
             Results
-            {!isVotePage && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500"></div>}
+            {isResultsPage && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500"></div>}
           </Link>
-          <div className={`relative w-1/2 flex flex-col ${isVotePage ? '' : ''}`}>
-            <div className="flex items-center justify-between w-full">
-              <Link 
-                href="/vote" 
-                className={`py-2.5 flex-1 flex justify-center items-center text-base font-medium transition-colors duration-300 ${isVotePage ? 'text-blue-500' : 'text-gray-400 hover:text-white'}`}
-              >
-                Vote
-              </Link>
-            </div>
+          <Link 
+            href="/votes" 
+            className={`relative w-1/3 py-2.5 flex justify-center items-center text-base font-medium transition-colors duration-300 ${isVotesPage ? 'text-blue-500' : 'text-gray-400 hover:text-white'}`}
+          >
+            See votes
+            {isVotesPage && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500"></div>}
+          </Link>
+          <Link 
+            href="/vote" 
+            className={`relative w-2/5 py-2.5 flex justify-center items-center text-base font-medium transition-colors duration-300 ${isVotePage ? 'text-blue-500' : 'text-gray-400 hover:text-white'}`}
+          >
+            Cast your vote
             {isVotePage && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500"></div>}
-          </div>
+          </Link>
         </div>
       </div>
     </div>
