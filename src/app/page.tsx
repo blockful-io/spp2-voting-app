@@ -6,9 +6,10 @@ import { ProjectsOverview } from "@/components/ProjectsOverview";
 import { AllocatedBudget } from "@/components/AllocatedBudget";
 import { ResultsDetails } from "@/components/ResultsDetails";
 import { useState, useEffect } from "react";
-import { LineChart } from "lucide-react";
+import { LineChart, } from "lucide-react";
 import { ElectionStatus } from "@/components/ElectionStatus";
 import Link from "next/link";
+
 
 export default function EnsElectionPage() {
   const { data, isLoading, error, summary, allocationData } =
@@ -180,8 +181,8 @@ export default function EnsElectionPage() {
 
           {allocationData?.proposal?.start && (
             <ElectionStatus
-              startDate={new Date(allocationData?.proposal?.start * 1000)}
-              endDate={new Date(allocationData?.proposal?.end * 1000)}
+              startDate={new Date(Number(allocationData.proposal.start) * 1000)}
+              endDate={new Date(Number(allocationData.proposal.end) * 1000)}
             />
           )}
         </div>

@@ -1,8 +1,46 @@
 import React, { useState } from "react";
-import { Trophy, ChevronRight } from "lucide-react";
+import { ChevronRight, HelpCircle } from "lucide-react";
 import { Allocation } from "@/utils/types";
-import { parseChoiceName } from "@/utils/parseChoiceName";
 import { BasicBadge, ExtendedBadge, FundedBadge, NotFundedBadge } from "@/components/Badges";
+
+/**
+ * TableHeaderTooltip component for showing explanations of column headers
+ */
+interface TableHeaderTooltipProps {
+  title: string;
+  explanation: string | React.ReactNode;
+  children: React.ReactNode;
+  alignRight?: boolean;
+}
+
+function TableHeaderTooltip({ title, explanation, children, alignRight = false }: TableHeaderTooltipProps) {
+  const [showTooltip, setShowTooltip] = useState(false);
+  
+  return (
+    <div 
+      className="relative flex items-center"
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+    >
+      {children}
+      <HelpCircle className="ml-1 w-4 h-4 text-gray-500 cursor-help" />
+      
+      {showTooltip && (
+        <div 
+          className={`absolute z-50 mt-2 w-64 p-3 bg-gray-800 rounded-lg shadow-lg text-xs text-gray-200 ${
+            alignRight ? "right-0 top-full" : "left-0 top-full"
+          }`}
+        >
+          <div className="font-semibold mb-1">{title}</div>
+          <div className="text-gray-300">{explanation}</div>
+          <div className={`absolute bottom-full ${alignRight ? "right-4" : "left-4"} transform mt-1`}>
+            <div className="border-x-4 border-b-4 border-x-transparent border-b-gray-800"></div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 /**
  * ElectionResultsTable props interface
@@ -33,15 +71,63 @@ export function ElectionResultsTable({
         <table className="w-full text-left text-sm font-light text-gray-400">
           <thead>
             <tr className="border-b border-lightDark">
-              <th className="px-6 py-4">Rank</th>
-              <th className="px-6 py-4">Choice</th>
-              <th className="px-6 py-4">Budget</th>
-              <th className="px-6 py-4">Wins</th>
               <th className="px-6 py-4">
-                Average ENS <br /> Support
+                <TableHeaderTooltip 
+                  title="Rank" 
+                  explanation="The position of the candidate in the overall ranking based on the Copeland voting method."
+                >
+                  Rank
+                </TableHeaderTooltip>
               </th>
-              <th className="px-6 py-4">Stream Duration</th>
-              <th className="px-6 py-4">2Y Eligibility</th>
+              <th className="px-6 py-4">
+                <TableHeaderTooltip 
+                  title="Choice" 
+                  explanation="The service provider name. Some providers have both 'basic' and 'extended' budget options."
+                >
+                  Choice
+                </TableHeaderTooltip>
+              </th>
+              <th className="px-6 py-4">
+                <TableHeaderTooltip 
+                  title="Budget" 
+                  explanation="The amount of funding requested by the service provider to work on their proposed scopes. One provider can have both a basic and extended budget."
+                >
+                  Budget
+                </TableHeaderTooltip>
+              </th>
+              <th className="px-6 py-4">
+                <TableHeaderTooltip 
+                  title="Wins" 
+                  explanation="The number of pairwise comparisons this candidate won against other candidates. This is a key metric in the Copeland voting method."
+                >
+                  Wins
+                </TableHeaderTooltip>
+              </th>
+              <th className="px-6 py-4">
+                <TableHeaderTooltip 
+                  title="Average ENS Support" 
+                  explanation="The average voting power (measured in ENS tokens) that supported this candidate. This represents the average amount of ENS token weight behind this candidate in their pairwise matchups."
+                >
+                  Average ENS <br /> Support
+                </TableHeaderTooltip>
+              </th>
+              <th className="px-6 py-4">
+                <TableHeaderTooltip 
+                  title="Stream Duration" 
+                  explanation="The length of time the funding will be distributed. Service providers can receive funding for either 1 year or 2 years."
+                >
+                  Stream Duration
+                </TableHeaderTooltip>
+              </th>
+              <th className="px-6 py-4">
+                <TableHeaderTooltip 
+                  title="2Y Eligibility" 
+                  explanation="Whether the service provider is eligible for 2-year funding. Only providers who participated in SPP1 (the first Service Provider Program) can receive 2-year funding."
+                  alignRight={true}
+                >
+                  2Y Eligibility
+                </TableHeaderTooltip>
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-lightDark">
