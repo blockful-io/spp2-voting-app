@@ -16,11 +16,71 @@ export default function VotePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [previousVoteApplied, setPreviousVoteApplied] = useState(false);
+  const [hasChangedSinceLoaded, setHasChangedSinceLoaded] = useState(false);
   const [reasoning, setReasoning] = useState("");
   const { voteFunc } = useVoteOnProposal();
   const { address } = useAccount();
+  const previousAddressRef = useRef<string | undefined>(address);
   const { data: previousVote, isLoading: isLoadingVote } = useVotes(address);
-  const { choices, isLoading: isLoadingAllocation } = useEnsElectionData();
+  const { choices, isLoading: isLoadingAllocation, allocationData } = useEnsElectionData();
+  
+  // Check if voting has ended
+  const isVotingEnded = allocationData?.proposal?.state === "CLOSED" || 
+    (allocationData?.proposal?.end && new Date(Number(allocationData.proposal.end) * 1000) < new Date());
+  
+  // Reset state when wallet changes or disconnects
+  useEffect(() => {
+    if (previousAddressRef.current !== address) {
+      // Address changed or disconnected
+      if (previousAddressRef.current && !address) {
+        toast.success("Wallet disconnected");
+      } else if (previousAddressRef.current && address && previousAddressRef.current !== address) {
+        toast.success("Wallet changed");
+      }
+      
+      // Reset vote-related state
+      setPreviousVoteApplied(false);
+      setHasChangedSinceLoaded(false);
+      setReasoning("");
+      
+      // If choices are already loaded, randomize them again
+      if (choices && choices.length > 0) {
+        const randomizedChoices = randomizeBelowOptions(
+          choices.map((choice: any, index: number) => ({
+            providerName: String(
+              typeof choice === "object" && choice !== null 
+                ? choice.providerName || choice.name || "" 
+                : typeof choice === "string" ? choice : `Choice ${index}`
+            ),
+            name: String(
+              typeof choice === "object" && choice !== null 
+                ? choice.name || "" 
+                : typeof choice === "string" ? choice : `Choice ${index}`
+            ),
+            budget: index,
+            isSpp1: Boolean(
+              typeof choice === "object" && choice !== null && choice.isSpp1
+            ),
+            isNoneBelow: Boolean(
+              typeof choice === "object" && choice !== null
+                ? choice.isNoneBelow
+                : typeof choice === "string" && choice.toLowerCase().includes("below")
+            ),
+            choiceId: typeof choice === "object" && choice !== null && typeof choice.choiceId === "number"
+              ? choice.choiceId
+              : index,
+            budgetType: (typeof choice === "object" && choice !== null && typeof choice.budgetType === "string"
+              ? choice.budgetType
+              : "basic") as BudgetType,
+          }))
+        );
+        setCandidates(randomizedChoices);
+      }
+      
+      // Update ref
+      previousAddressRef.current = address;
+    }
+  }, [address, choices]);
   
   // Process choices into candidates once when choices are loaded
   useEffect(() => {
@@ -182,6 +242,7 @@ export default function VotePage() {
       }
       
       setPreviousVoteApplied(true);
+      setHasChangedSinceLoaded(false);
       toast.success("Previous vote loaded successfully");
     } catch (error) {
       console.error("Error applying previous vote:", error);
@@ -204,6 +265,7 @@ export default function VotePage() {
           : candidate
       )
     );
+    setHasChangedSinceLoaded(true);
   };
 
   // Prevent page scrolling during drag
@@ -225,6 +287,7 @@ export default function VotePage() {
 
   const handleReorder = (newOrder: Choice[]) => {
     setCandidates(newOrder);
+    setHasChangedSinceLoaded(true);
   };
 
   const handleDragStart = () => {
@@ -235,8 +298,23 @@ export default function VotePage() {
     setIsDragging(false);
   };
 
+  const handleReasoningChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setReasoning(e.target.value);
+    setHasChangedSinceLoaded(true);
+  };
+
   const handleSubmit = async () => {
     try {
+      // Check if voting has ended
+      if (isVotingEnded) {
+        return toast.error("Voting has ended. You can no longer submit votes.");
+      }
+      
+      // Check if wallet is connected
+      if (!address) {
+        return toast.error("Please connect your wallet to vote");
+      }
+      
       setIsSubmitting(true);
 
       const dividerIndex = candidates.findIndex((c) =>
@@ -248,6 +326,7 @@ export default function VotePage() {
       );
 
       if (!allBudgetsSelected) {
+        setIsSubmitting(false);
         return toast.error(
           "Please select a budget type for all candidates above 'None of the below'"
         );
@@ -263,19 +342,31 @@ export default function VotePage() {
         reason: reasoning
       });
       toast.success("Vote submitted successfully!");
+
     } catch (error) {
-      // Check for no voting power error
+      // Handle specific error cases
       if (
         error &&
-        typeof error === "object" &&
-        "error" in error &&
-        error.error === "client_error" &&
-        "error_description" in error &&
-        error.error_description === "no voting power"
+        typeof error === "object" 
       ) {
-        toast.error(
-          "You don't have voting power. Please ensure you hold the required tokens to participate in this vote."
-        );
+        if ("error" in error && error.error === "client_error" && 
+            "error_description" in error && error.error_description === "no voting power") {
+          toast.error(
+            "You don't have voting power. Please ensure you hold the required tokens to participate in this vote."
+          );
+        } else if ("message" in error && typeof error.message === "string") {
+          if (error.message.includes("Wallet not connected")) {
+            toast.error("Please connect your wallet to vote");
+          } else if (error.message.includes("hardware wallet") || error.message.includes("ledger")) {
+            toast.error("Error with hardware wallet. Please try again or use a different wallet.");
+          } else {
+            console.error(error);
+            toast.error(`Error: ${error.message}`);
+          }
+        } else {
+          console.error(error);
+          toast.error("Error submitting vote. Please try again.");
+        }
       } else {
         console.error(error);
         toast.error("Error submitting vote. Please try again.");
@@ -286,6 +377,11 @@ export default function VotePage() {
   };
 
   const isLoading = isLoadingChoices || isLoadingVote || isLoadingAllocation;
+  
+  // Determine if submit button should be disabled
+  const isSubmitDisabled = isSubmitting || 
+                          isVotingEnded || 
+                          (previousVoteApplied && !hasChangedSinceLoaded);
 
   if (isLoading) {
     return (
@@ -339,6 +435,14 @@ export default function VotePage() {
               </p>
             </div>
           )}
+          
+          {isVotingEnded && (
+            <div className="bg-red-900/50 p-3 rounded-lg mb-4">
+              <p className="text-red-200">
+                Voting has ended. You can no longer submit votes.
+              </p>
+            </div>
+          )}
         </div>
         <div className="grow flex flex-col w-full pb-28">
           <VoteTable
@@ -347,6 +451,7 @@ export default function VotePage() {
             onReorder={handleReorder}
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
+            disabled={isSubmitting}
           />
           
           <div className="mt-5 px-2">
@@ -356,7 +461,8 @@ export default function VotePage() {
               className="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 min-h-[100px]"
               placeholder="Enter your reasoning here..."
               value={reasoning}
-              onChange={(e) => setReasoning(e.target.value)}
+              onChange={handleReasoningChange}
+              disabled={isSubmitting}
             />
           </div>
         </div>
@@ -369,11 +475,17 @@ export default function VotePage() {
           <div className="md:hidden">
             <button
               onClick={handleSubmit}
-              disabled={isSubmitting}
-              className="w-full bg-white text-black rounded-lg py-3 flex items-center justify-center font-medium"
+              disabled={isSubmitDisabled}
+              className={`w-full ${
+                isSubmitDisabled ? "bg-gray-600 text-gray-400" : "bg-white text-black"
+              } rounded-lg py-3 flex items-center justify-center font-medium`}
             >
               {isSubmitting ? (
                 "Submitting..."
+              ) : isVotingEnded ? (
+                "Voting has ended"
+              ) : (previousVoteApplied && !hasChangedSinceLoaded) ? (
+                "No changes to submit"
               ) : (
                 <>
                   <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -389,11 +501,17 @@ export default function VotePage() {
           <div className="hidden md:flex justify-center">
             <button
               onClick={handleSubmit}
-              disabled={isSubmitting}
-              className="w-1/4 bg-white text-black rounded-lg py-3 flex items-center justify-center font-medium"
+              disabled={isSubmitDisabled}
+              className={`w-1/4 ${
+                isSubmitDisabled ? "bg-gray-600 text-gray-400" : "bg-white text-black"
+              } rounded-lg py-3 flex items-center justify-center font-medium`}
             >
               {isSubmitting ? (
                 "Submitting..."
+              ) : isVotingEnded ? (
+                "Voting has ended"
+              ) : (previousVoteApplied && !hasChangedSinceLoaded) ? (
+                "No changes to submit"
               ) : (
                 <>
                   <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

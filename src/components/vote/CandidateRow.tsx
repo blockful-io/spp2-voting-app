@@ -20,6 +20,7 @@ interface CandidateRowProps {
   extendedBudget?: number;
   isExpanded?: boolean;
   canToggle?: boolean;
+  disabled?: boolean;
 }
 
 export function CandidateRow({
@@ -38,6 +39,7 @@ export function CandidateRow({
   extendedBudget,
   isExpanded,
   canToggle,
+  disabled
 }: CandidateRowProps) {
   // Setup drag and drop functionality
   const {
@@ -47,7 +49,10 @@ export function CandidateRow({
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: id || `${name}-${index}` });
+  } = useSortable({ 
+    id: id || `${name}-${index}`,
+    disabled: disabled
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -79,13 +84,14 @@ export function CandidateRow({
         ${!isLastRow && "border-b border-gray-700"}
         ${isDragging && "z-10"}
         ${isBelowDivider && "opacity-70"}
+        ${disabled ? "cursor-not-allowed" : ""}
       `}
     >
       {/* Drag handle column */}
       <td className="py-2 pr-2 md:py-4 md:pr-3">
         <div className="flex items-center justify-end h-full">
           <div
-            className="text-gray-500 cursor-move"
+            className={`text-gray-500 ${disabled ? "cursor-not-allowed opacity-50" : "cursor-move"}`}
             {...attributes}
             {...listeners}
           >
@@ -167,8 +173,9 @@ export function CandidateRow({
             {canToggle ? (
               <button
                 onClick={onToggleView}
-                className="p-1 text-gray-400 hover:text-white focus:outline-none"
+                className={`p-1 text-gray-400 hover:text-white focus:outline-none ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
                 title={isExpanded ? "Collapse view" : "Expand view"}
+                disabled={disabled}
               >
                 {isExpanded ? (
                   <ChevronUp size={16} />

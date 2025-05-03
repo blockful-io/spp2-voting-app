@@ -12,7 +12,7 @@ export function CustomConnectButton() {
   // Format voting power to display with commas and 2 decimal places
   const formattedVp = votingPower ? votingPower.toLocaleString(undefined, { 
     minimumFractionDigits: 0,
-    maximumFractionDigits: 2
+    maximumFractionDigits: 0
   }) : '0';
 
   return (

@@ -23,6 +23,7 @@ interface VoteTableProps {
   onReorder: (newOrder: Choice[]) => void;
   onDragStart?: () => void;
   onDragEnd?: () => void;
+  disabled?: boolean;
 }
 
 // Interface for a combined candidate display
@@ -56,6 +57,7 @@ export function VoteTable({
   onReorder,
   onDragStart,
   onDragEnd,
+  disabled,
 }: VoteTableProps) {
   // Initialize the combined views state with a useEffect to ensure adjacent pairs start merged
   const [combinedViews, setCombinedViews] = useState<Record<string, boolean>>(
@@ -663,6 +665,7 @@ export function VoteTable({
                       onBudgetSelect={(type) =>
                         onBudgetSelect(item.providerName, type)
                       }
+                      disabled={disabled}
                     />
                   );
                 } else {
@@ -737,6 +740,7 @@ export function VoteTable({
                       onBudgetSelect={(type) =>
                         onBudgetSelect(candidate.providerName, type)
                       }
+                      disabled={disabled}
                     />
                   );
                 }
