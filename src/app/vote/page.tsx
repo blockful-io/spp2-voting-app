@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useChoices, useEnsElectionData } from "@/hooks/useEnsElectionData";
 import { VoteTable } from "@/components/vote/VoteTable";
 import { MenuIcon } from "@/components/vote/MenuIcon";
@@ -46,7 +46,7 @@ export default function VotePage() {
       // If choices are already loaded, randomize them again
       if (choices && choices.length > 0) {
         const randomizedChoices = randomizeBelowOptions(
-          choices.map((choice: any, index: number) => ({
+          choices.map((choice: Record<string, unknown> | string, index: number) => ({
             providerName: String(
               typeof choice === "object" && choice !== null 
                 ? choice.providerName || choice.name || "" 
@@ -82,6 +82,61 @@ export default function VotePage() {
     }
   }, [address, choices]);
   
+  // Function to apply previous vote to a set of candidates
+  const applyPreviousVote = useCallback((candidatesToOrder: Choice[]) => {
+    try {
+      if (!previousVote?.votes || previousVote.votes.length === 0) {
+        return;
+      }
+      
+      // Get the most recent vote
+      const latestVote = previousVote.votes[0];
+      
+      if (!Array.isArray(latestVote.choice) || latestVote.choice.length === 0) {
+        return;
+      }
+      
+      const choiceIds = latestVote.choice;
+      
+      // Create a map of choiceId to ranking position
+      const rankMap = new Map<number, number>();
+      choiceIds.forEach((choiceId, index) => {
+        rankMap.set(choiceId, index);
+      });
+      
+      // Create a new array and sort it
+      const orderedCandidates = [...candidatesToOrder];
+      
+      orderedCandidates.sort((a, b) => {
+        const aRank = rankMap.get(a.choiceId);
+        const bRank = rankMap.get(b.choiceId);
+        
+        if (aRank === undefined && bRank === undefined) return 0;
+        if (aRank === undefined) return 1; 
+        if (bRank === undefined) return -1;
+        
+        return aRank - bRank;
+      });
+      
+      // Set the candidates order
+      setCandidates(orderedCandidates);
+      
+      // Set the reasoning if available
+      if (latestVote.reason) {
+        setReasoning(latestVote.reason);
+      }
+      
+      // Mark that we've applied the previous vote
+      setPreviousVoteApplied(true);
+      setHasChangedSinceLoaded(false);
+      toast.success("Previous vote loaded successfully");
+    } catch (error) {
+      console.error("Error applying previous vote:", error);
+      toast.error("Failed to load previous vote");
+      setCandidates(candidatesToOrder);
+    }
+  }, [previousVote, setCandidates]);
+
   // Process choices into candidates once when choices are loaded
   useEffect(() => {
     if (choices && choices.length > 0) {
@@ -136,7 +191,7 @@ export default function VotePage() {
         setCandidates([]);
       }
     }
-  }, [choices, previousVote, previousVoteApplied]);
+  }, [choices, previousVote, previousVoteApplied, applyPreviousVote]);
 
   // Function to ensure consistent ordering of choices
   function ensureConsistentOrder(choicesToOrder: Choice[]) {
@@ -195,60 +250,6 @@ export default function VotePage() {
     
     // Combine the arrays
     return [...aboveChoices, ...randomizedBelow];
-  }
-
-  // Function to apply previous vote to a set of candidates
-  function applyPreviousVote(candidatesToOrder: Choice[]) {
-    try {
-      if (!previousVote?.votes || previousVote.votes.length === 0) {
-        return;
-      }
-      
-      // Get the most recent vote
-      const latestVote = previousVote.votes[0];
-      
-      if (!Array.isArray(latestVote.choice) || latestVote.choice.length === 0) {
-        return;
-      }
-      
-      const choiceIds = latestVote.choice;
-      
-      // Create a map of choiceId to ranking position
-      const rankMap = new Map<number, number>();
-      choiceIds.forEach((choiceId, index) => {
-        rankMap.set(choiceId, index);
-      });
-      
-      // Create a new array and sort it
-      const orderedCandidates = [...candidatesToOrder];
-      
-      orderedCandidates.sort((a, b) => {
-        const aRank = rankMap.get(a.choiceId);
-        const bRank = rankMap.get(b.choiceId);
-        
-        if (aRank === undefined && bRank === undefined) return 0;
-        if (aRank === undefined) return 1; 
-        if (bRank === undefined) return -1;
-        
-        return aRank - bRank;
-      });
-      
-      // Set the candidates order
-      setCandidates(orderedCandidates);
-      
-      // Set the reasoning if available
-      if (latestVote.reason) {
-        setReasoning(latestVote.reason);
-      }
-      
-      setPreviousVoteApplied(true);
-      setHasChangedSinceLoaded(false);
-      toast.success("Previous vote loaded successfully");
-    } catch (error) {
-      console.error("Error applying previous vote:", error);
-      toast.error("Failed to load previous vote");
-      setCandidates(candidatesToOrder);
-    }
   }
 
   // Handle budget selection for candidates

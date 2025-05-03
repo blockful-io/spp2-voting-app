@@ -93,7 +93,7 @@ export function VoteTable({
     if (hasChanges) {
       setCombinedViews(initialViews);
     }
-  }, []); // Only run once on mount
+  }, [candidates]); // Run once on mount and when candidates change
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -199,7 +199,7 @@ export function VoteTable({
     // Update all provider states at once
     setCombinedViews(newMergedState);
     console.log("Set new combined views state:", newMergedState);
-  }, [candidates]); // Only depend on candidates, not on combinedViews
+  }, [candidates, combinedViews]); // Depend on candidates and combinedViews
 
   // Create a display list that either combines or separates items based on the current view state
   const displayItems = useMemo(() => {
