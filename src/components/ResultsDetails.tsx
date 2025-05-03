@@ -287,15 +287,19 @@ export function ResultsDetails({
                       <div className="flex flex-col md:flex-row">
                         {/* Left side - Candidate 1 Voters */}
                         <div className="flex-1 mb-4 md:mb-0">
+                          <h4 className="text-sm font-medium text-gray-300 mb-2 md:hidden">
+                            {match.choice1.name} (
+                            {match.choice1.voters.length})
+                          </h4>
                           <div className="max-h-40 overflow-y-auto">
                             {match.choice1.voters.length > 0 ? (
                               <ul className="space-y-1">
                                 {match.choice1.voters.map((voter, i) => (
                                   <li
                                     key={i}
-                                    className="text-xs flex items-center"
+                                    className="text-xs flex items-center justify-between"
                                   >
-                                    <div className="flex items-center overflow-x-auto max-w-[70%]">
+                                    <div className="flex items-center overflow-x-auto max-w-[65%]">
                                       <span
                                         onClick={(e) => {
                                           e.stopPropagation();
@@ -307,7 +311,7 @@ export function ResultsDetails({
                                         {getDisplayName(voter.voter)}
                                       </span>
                                     </div>
-                                    <span className="text-gray-300 ml-auto text-right w-14 md:w-16 mr-2 md:mr-4">
+                                    <span className="text-gray-300 text-right w-14 md:w-16 pl-2">
                                       {Math.round(voter.vp).toLocaleString()}
                                     </span>
                                   </li>
@@ -323,18 +327,22 @@ export function ResultsDetails({
 
                         {/* Right side - Candidate 2 Voters */}
                         <div className="flex-1 md:pl-4 md:border-l border-lightDark">
+                          <h4 className="text-sm font-medium text-gray-300 mb-2 md:hidden">
+                            {match.choice2.name} (
+                            {match.choice2.voters.length})
+                          </h4>
                           <div className="max-h-40 overflow-y-auto">
                             {match.choice2.voters.length > 0 ? (
                               <ul className="space-y-1">
                                 {match.choice2.voters.map((voter, i) => (
                                   <li
                                     key={i}
-                                    className="text-xs flex items-center md:justify-end"
+                                    className="text-xs flex items-center justify-between"
                                   >
-                                    <span className="text-gray-300 mr-auto md:ml-0 text-left w-14 md:w-16 order-2 md:order-1">
+                                    <span className="text-gray-300 text-left w-14 md:w-16 pr-2 order-2 md:order-1 pl-2 md:pl-0">
                                       {Math.round(voter.vp).toLocaleString()}
                                     </span>
-                                    <div className="flex items-center overflow-x-auto max-w-[70%] order-1 md:order-2">
+                                    <div className="flex items-center overflow-x-auto max-w-[65%] order-1 md:order-2 justify-end">
                                       <span
                                         onClick={(e) => {
                                           e.stopPropagation();
