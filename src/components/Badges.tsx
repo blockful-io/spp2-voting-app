@@ -70,8 +70,24 @@ export function FundedBadge() {
 export function NotFundedBadge({ reason }: { reason: string | null }) {
   return (
     <div className="group relative inline-flex items-center">
-      <span className="rounded-xl py-1 px-2 bg-gray-700 bg-opacity-10 text-gray-400">
+      <span className="rounded-xl py-1 px-2 bg-gray-700 bg-opacity-10 text-gray-400 flex items-center gap-1">
         Not funded
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="h-3.5 w-3.5 text-gray-400"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 16v-4"></path>
+          <path d="M12 8h.01"></path>
+        </svg>
       </span>
       <div className="absolute left-full ml-2 hidden group-hover:block z-50">
         <div className="rounded-md bg-gray-800 p-2 text-xs text-gray-200 shadow-lg whitespace-nowrap">

@@ -15,7 +15,7 @@ export const USE_CSV_DATA = true; // Always use data from CSV files
 export const PROGRAM_BUDGET = 4500000; // Total budget in USD ($4.5 million)
 export const TWO_YEAR_STREAM_RATIO = 1 / 3; // Proportion allocated to 2-year streams ($1.5 million)
 export const ONE_YEAR_STREAM_RATIO = 2 / 3; // Proportion allocated to 1-year stream ($3 million)
-export const TWO_YEAR_STREAM_CAP = 1500000; // Hard cap on 2-year stream budget
+export const TWO_YEAR_STREAM_CAP = PROGRAM_BUDGET * TWO_YEAR_STREAM_RATIO; // Hard cap on 2-year stream budget
 
 // Copeland method scoring parameters
 export const WIN_POINTS: number = 1; // Points awarded for winning a head-to-head match

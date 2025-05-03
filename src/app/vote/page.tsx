@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useChoices, useEnsElectionData } from "@/hooks/useEnsElectionData";
 import { VoteTable } from "@/components/vote/VoteTable";
 import { MenuIcon } from "@/components/vote/MenuIcon";
@@ -16,12 +16,127 @@ export default function VotePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [previousVoteApplied, setPreviousVoteApplied] = useState(false);
+  const [hasChangedSinceLoaded, setHasChangedSinceLoaded] = useState(false);
   const [reasoning, setReasoning] = useState("");
   const { voteFunc } = useVoteOnProposal();
   const { address } = useAccount();
+  const previousAddressRef = useRef<string | undefined>(address);
   const { data: previousVote, isLoading: isLoadingVote } = useVotes(address);
-  const { choices, isLoading: isLoadingAllocation } = useEnsElectionData();
+  const { choices, isLoading: isLoadingAllocation, allocationData } = useEnsElectionData();
   
+  // Check if voting has ended
+  const isVotingEnded = allocationData?.proposal?.state === "CLOSED" || 
+    (allocationData?.proposal?.end && new Date(Number(allocationData.proposal.end) * 1000) < new Date());
+  
+  // Reset state when wallet changes or disconnects
+  useEffect(() => {
+    if (previousAddressRef.current !== address) {
+      // Address changed or disconnected
+      if (previousAddressRef.current && !address) {
+        toast.success("Wallet disconnected");
+      } else if (previousAddressRef.current && address && previousAddressRef.current !== address) {
+        toast.success("Wallet changed");
+      }
+      
+      // Reset vote-related state
+      setPreviousVoteApplied(false);
+      setHasChangedSinceLoaded(false);
+      setReasoning("");
+      
+      // If choices are already loaded, randomize them again
+      if (choices && choices.length > 0) {
+        const randomizedChoices = randomizeBelowOptions(
+          choices.map((choice: Record<string, unknown> | string, index: number) => ({
+            providerName: String(
+              typeof choice === "object" && choice !== null 
+                ? choice.providerName || choice.name || "" 
+                : typeof choice === "string" ? choice : `Choice ${index}`
+            ),
+            name: String(
+              typeof choice === "object" && choice !== null 
+                ? choice.name || "" 
+                : typeof choice === "string" ? choice : `Choice ${index}`
+            ),
+            budget: index,
+            isSpp1: Boolean(
+              typeof choice === "object" && choice !== null && choice.isSpp1
+            ),
+            isNoneBelow: Boolean(
+              typeof choice === "object" && choice !== null
+                ? choice.isNoneBelow
+                : typeof choice === "string" && choice.toLowerCase().includes("below")
+            ),
+            choiceId: typeof choice === "object" && choice !== null && typeof choice.choiceId === "number"
+              ? choice.choiceId
+              : index,
+            budgetType: (typeof choice === "object" && choice !== null && typeof choice.budgetType === "string"
+              ? choice.budgetType
+              : "basic") as BudgetType,
+          }))
+        );
+        setCandidates(randomizedChoices);
+      }
+      
+      // Update ref
+      previousAddressRef.current = address;
+    }
+  }, [address, choices]);
+  
+  // Function to apply previous vote to a set of candidates
+  const applyPreviousVote = useCallback((candidatesToOrder: Choice[]) => {
+    try {
+      if (!previousVote?.votes || previousVote.votes.length === 0) {
+        return;
+      }
+      
+      // Get the most recent vote
+      const latestVote = previousVote.votes[0];
+      
+      if (!Array.isArray(latestVote.choice) || latestVote.choice.length === 0) {
+        return;
+      }
+      
+      const choiceIds = latestVote.choice;
+      
+      // Create a map of choiceId to ranking position
+      const rankMap = new Map<number, number>();
+      choiceIds.forEach((choiceId, index) => {
+        rankMap.set(choiceId, index);
+      });
+      
+      // Create a new array and sort it
+      const orderedCandidates = [...candidatesToOrder];
+      
+      orderedCandidates.sort((a, b) => {
+        const aRank = rankMap.get(a.choiceId);
+        const bRank = rankMap.get(b.choiceId);
+        
+        if (aRank === undefined && bRank === undefined) return 0;
+        if (aRank === undefined) return 1; 
+        if (bRank === undefined) return -1;
+        
+        return aRank - bRank;
+      });
+      
+      // Set the candidates order
+      setCandidates(orderedCandidates);
+      
+      // Set the reasoning if available
+      if (latestVote.reason) {
+        setReasoning(latestVote.reason);
+      }
+      
+      // Mark that we've applied the previous vote
+      setPreviousVoteApplied(true);
+      setHasChangedSinceLoaded(false);
+      toast.success("Previous vote loaded successfully");
+    } catch (error) {
+      console.error("Error applying previous vote:", error);
+      toast.error("Failed to load previous vote");
+      setCandidates(candidatesToOrder);
+    }
+  }, [previousVote, setCandidates]);
+
   // Process choices into candidates once when choices are loaded
   useEffect(() => {
     if (choices && choices.length > 0) {
@@ -76,7 +191,7 @@ export default function VotePage() {
         setCandidates([]);
       }
     }
-  }, [choices, previousVote, previousVoteApplied]);
+  }, [choices, previousVote, previousVoteApplied, applyPreviousVote]);
 
   // Function to ensure consistent ordering of choices
   function ensureConsistentOrder(choicesToOrder: Choice[]) {
@@ -137,59 +252,6 @@ export default function VotePage() {
     return [...aboveChoices, ...randomizedBelow];
   }
 
-  // Function to apply previous vote to a set of candidates
-  function applyPreviousVote(candidatesToOrder: Choice[]) {
-    try {
-      if (!previousVote?.votes || previousVote.votes.length === 0) {
-        return;
-      }
-      
-      // Get the most recent vote
-      const latestVote = previousVote.votes[0];
-      
-      if (!Array.isArray(latestVote.choice) || latestVote.choice.length === 0) {
-        return;
-      }
-      
-      const choiceIds = latestVote.choice;
-      
-      // Create a map of choiceId to ranking position
-      const rankMap = new Map<number, number>();
-      choiceIds.forEach((choiceId, index) => {
-        rankMap.set(choiceId, index);
-      });
-      
-      // Create a new array and sort it
-      const orderedCandidates = [...candidatesToOrder];
-      
-      orderedCandidates.sort((a, b) => {
-        const aRank = rankMap.get(a.choiceId);
-        const bRank = rankMap.get(b.choiceId);
-        
-        if (aRank === undefined && bRank === undefined) return 0;
-        if (aRank === undefined) return 1; 
-        if (bRank === undefined) return -1;
-        
-        return aRank - bRank;
-      });
-      
-      // Set the candidates order
-      setCandidates(orderedCandidates);
-      
-      // Set the reasoning if available
-      if (latestVote.reason) {
-        setReasoning(latestVote.reason);
-      }
-      
-      setPreviousVoteApplied(true);
-      toast.success("Previous vote loaded successfully");
-    } catch (error) {
-      console.error("Error applying previous vote:", error);
-      toast.error("Failed to load previous vote");
-      setCandidates(candidatesToOrder);
-    }
-  }
-
   // Handle budget selection for candidates
   const handleBudgetSelection = (name: string, type: "basic" | "extended") => {
     setCandidates((prevCandidates) =>
@@ -204,6 +266,7 @@ export default function VotePage() {
           : candidate
       )
     );
+    setHasChangedSinceLoaded(true);
   };
 
   // Prevent page scrolling during drag
@@ -225,6 +288,7 @@ export default function VotePage() {
 
   const handleReorder = (newOrder: Choice[]) => {
     setCandidates(newOrder);
+    setHasChangedSinceLoaded(true);
   };
 
   const handleDragStart = () => {
@@ -235,8 +299,23 @@ export default function VotePage() {
     setIsDragging(false);
   };
 
+  const handleReasoningChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setReasoning(e.target.value);
+    setHasChangedSinceLoaded(true);
+  };
+
   const handleSubmit = async () => {
     try {
+      // Check if voting has ended
+      if (isVotingEnded) {
+        return toast.error("Voting has ended. You can no longer submit votes.");
+      }
+      
+      // Check if wallet is connected
+      if (!address) {
+        return toast.error("Please connect your wallet to vote");
+      }
+      
       setIsSubmitting(true);
 
       const dividerIndex = candidates.findIndex((c) =>
@@ -248,6 +327,7 @@ export default function VotePage() {
       );
 
       if (!allBudgetsSelected) {
+        setIsSubmitting(false);
         return toast.error(
           "Please select a budget type for all candidates above 'None of the below'"
         );
@@ -263,19 +343,31 @@ export default function VotePage() {
         reason: reasoning
       });
       toast.success("Vote submitted successfully!");
+
     } catch (error) {
-      // Check for no voting power error
+      // Handle specific error cases
       if (
         error &&
-        typeof error === "object" &&
-        "error" in error &&
-        error.error === "client_error" &&
-        "error_description" in error &&
-        error.error_description === "no voting power"
+        typeof error === "object" 
       ) {
-        toast.error(
-          "You don't have voting power. Please ensure you hold the required tokens to participate in this vote."
-        );
+        if ("error" in error && error.error === "client_error" && 
+            "error_description" in error && error.error_description === "no voting power") {
+          toast.error(
+            "You don't have voting power. Please ensure you hold the required tokens to participate in this vote."
+          );
+        } else if ("message" in error && typeof error.message === "string") {
+          if (error.message.includes("Wallet not connected")) {
+            toast.error("Please connect your wallet to vote");
+          } else if (error.message.includes("hardware wallet") || error.message.includes("ledger")) {
+            toast.error("Error with hardware wallet. Please try again or use a different wallet.");
+          } else {
+            console.error(error);
+            toast.error(`Error: ${error.message}`);
+          }
+        } else {
+          console.error(error);
+          toast.error("Error submitting vote. Please try again.");
+        }
       } else {
         console.error(error);
         toast.error("Error submitting vote. Please try again.");
@@ -286,6 +378,11 @@ export default function VotePage() {
   };
 
   const isLoading = isLoadingChoices || isLoadingVote || isLoadingAllocation;
+  
+  // Determine if submit button should be disabled
+  const isSubmitDisabled = isSubmitting || 
+                          isVotingEnded || 
+                          (previousVoteApplied && !hasChangedSinceLoaded);
 
   if (isLoading) {
     return (
@@ -339,6 +436,14 @@ export default function VotePage() {
               </p>
             </div>
           )}
+          
+          {isVotingEnded && (
+            <div className="bg-red-900/50 p-3 rounded-lg mb-4">
+              <p className="text-red-200">
+                Voting has ended. You can no longer submit votes.
+              </p>
+            </div>
+          )}
         </div>
         <div className="grow flex flex-col w-full pb-28">
           <VoteTable
@@ -347,6 +452,7 @@ export default function VotePage() {
             onReorder={handleReorder}
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
+            disabled={isSubmitting}
           />
           
           <div className="mt-5 px-2">
@@ -356,7 +462,8 @@ export default function VotePage() {
               className="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 min-h-[100px]"
               placeholder="Enter your reasoning here..."
               value={reasoning}
-              onChange={(e) => setReasoning(e.target.value)}
+              onChange={handleReasoningChange}
+              disabled={isSubmitting}
             />
           </div>
         </div>
@@ -369,11 +476,17 @@ export default function VotePage() {
           <div className="md:hidden">
             <button
               onClick={handleSubmit}
-              disabled={isSubmitting}
-              className="w-full bg-white text-black rounded-lg py-3 flex items-center justify-center font-medium"
+              disabled={isSubmitDisabled}
+              className={`w-full ${
+                isSubmitDisabled ? "bg-gray-600 text-gray-400" : "bg-white text-black"
+              } rounded-lg py-3 flex items-center justify-center font-medium`}
             >
               {isSubmitting ? (
                 "Submitting..."
+              ) : isVotingEnded ? (
+                "Voting has ended"
+              ) : (previousVoteApplied && !hasChangedSinceLoaded) ? (
+                "No changes to submit"
               ) : (
                 <>
                   <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -389,11 +502,17 @@ export default function VotePage() {
           <div className="hidden md:flex justify-center">
             <button
               onClick={handleSubmit}
-              disabled={isSubmitting}
-              className="w-1/4 bg-white text-black rounded-lg py-3 flex items-center justify-center font-medium"
+              disabled={isSubmitDisabled}
+              className={`w-1/4 ${
+                isSubmitDisabled ? "bg-gray-600 text-gray-400" : "bg-white text-black"
+              } rounded-lg py-3 flex items-center justify-center font-medium`}
             >
               {isSubmitting ? (
                 "Submitting..."
+              ) : isVotingEnded ? (
+                "Voting has ended"
+              ) : (previousVoteApplied && !hasChangedSinceLoaded) ? (
+                "No changes to submit"
               ) : (
                 <>
                   <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

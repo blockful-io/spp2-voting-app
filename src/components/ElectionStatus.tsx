@@ -80,6 +80,12 @@ export const ElectionStatus: React.FC<ElectionStatusProps> = ({
                 month: "long",
                 day: "numeric",
                 year: "numeric",
+              })}{" "}
+              at{" "}
+              {endDate.toLocaleTimeString("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true,
               })}
             </span>
           </div>
@@ -105,10 +111,16 @@ export const ElectionStatus: React.FC<ElectionStatusProps> = ({
             </span>
             <span className="text-gray-400">Election starts on </span>
             <span className="text-white pl-2">
-              {startDate.toLocaleDateString("en-US", {
+            {startDate.toLocaleDateString("en-US", {
                 month: "long",
                 day: "numeric",
                 year: "numeric",
+              })}{" "}
+              at{" "}
+              {startDate.toLocaleTimeString("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true,
               })}
             </span>
           </div>

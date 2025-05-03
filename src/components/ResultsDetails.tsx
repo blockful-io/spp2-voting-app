@@ -282,12 +282,12 @@ export function ResultsDetails({
                 </div>
 
                 {isExpanded && (
-                  <div className="mt-4 pt-4 border-t border-lightDark">
+                  <div className="mt-4 pt-4 border-t border-lightDark" onClick={(e) => e.stopPropagation()}>
                     <div className="grid grid-cols-1 gap-4">
                       <div className="flex flex-col md:flex-row">
                         {/* Left side - Candidate 1 Voters */}
                         <div className="flex-1 mb-4 md:mb-0">
-                          <h4 className="text-sm font-medium text-gray-300 mb-2">
+                          <h4 className="text-sm font-medium text-gray-300 mb-2 md:hidden">
                             {match.choice1.name} (
                             {match.choice1.voters.length})
                           </h4>
@@ -297,25 +297,21 @@ export function ResultsDetails({
                                 {match.choice1.voters.map((voter, i) => (
                                   <li
                                     key={i}
-                                    className="text-xs flex items-center"
+                                    className="text-xs flex items-center justify-between"
                                   >
-                                    <button
-                                      onClick={() =>
-                                        copyToClipboard(voter.voter)
-                                      }
-                                      className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1 min-w-0"
-                                      title={voter.voter}
-                                    >
-                                      <span className="font-mono truncate">
+                                    <div className="flex items-center overflow-x-auto max-w-[65%]">
+                                      <span
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          copyToClipboard(voter.voter);
+                                        }}
+                                        className="font-mono whitespace-nowrap text-gray-400 hover:text-gray-300 cursor-pointer"
+                                        title={`Click to copy: ${voter.voter}`}
+                                      >
                                         {getDisplayName(voter.voter)}
                                       </span>
-                                      {copiedAddress === voter.voter ? (
-                                        <Check className="h-3 w-3 ml-1 text-green-500 flex-shrink-0" />
-                                      ) : (
-                                        <Copy className="h-3 w-3 ml-1 opacity-50 flex-shrink-0" />
-                                      )}
-                                    </button>
-                                    <span className="text-gray-300 ml-auto text-right w-14 md:w-16 mr-2 md:mr-4">
+                                    </div>
+                                    <span className="text-gray-300 text-right w-14 md:w-16 pl-2">
                                       {Math.round(voter.vp).toLocaleString()}
                                     </span>
                                   </li>
@@ -331,7 +327,7 @@ export function ResultsDetails({
 
                         {/* Right side - Candidate 2 Voters */}
                         <div className="flex-1 md:pl-4 md:border-l border-lightDark">
-                          <h4 className="text-sm font-medium text-gray-300 mb-2 md:text-right">
+                          <h4 className="text-sm font-medium text-gray-300 mb-2 md:hidden">
                             {match.choice2.name} (
                             {match.choice2.voters.length})
                           </h4>
@@ -341,27 +337,23 @@ export function ResultsDetails({
                                 {match.choice2.voters.map((voter, i) => (
                                   <li
                                     key={i}
-                                    className="text-xs flex items-center md:justify-end"
+                                    className="text-xs flex items-center justify-between"
                                   >
-                                    <span className="text-gray-300 mr-auto md:ml-0 text-left w-14 md:w-16 order-2 md:order-1">
+                                    <span className="text-gray-300 text-left w-14 md:w-16 pr-2 order-2 md:order-1 pl-2 md:pl-0">
                                       {Math.round(voter.vp).toLocaleString()}
                                     </span>
-                                    <button
-                                      onClick={() =>
-                                        copyToClipboard(voter.voter)
-                                      }
-                                      className="flex items-center text-gray-400 hover:text-gray-300 transition-colors flex-1 min-w-0 md:justify-end order-1 md:order-2"
-                                      title={voter.voter}
-                                    >
-                                      {copiedAddress === voter.voter ? (
-                                        <Check className="h-3 w-3 mr-1 md:mr-1 ml-1 md:ml-0 order-last md:order-first text-green-500 flex-shrink-0" />
-                                      ) : (
-                                        <Copy className="h-3 w-3 mr-1 md:mr-1 ml-1 md:ml-0 order-last md:order-first opacity-50 flex-shrink-0" />
-                                      )}
-                                      <span className={"font-mono truncate"}>
+                                    <div className="flex items-center overflow-x-auto max-w-[65%] order-1 md:order-2 justify-end">
+                                      <span
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          copyToClipboard(voter.voter);
+                                        }}
+                                        className="font-mono whitespace-nowrap text-gray-400 hover:text-gray-300 cursor-pointer"
+                                        title={`Click to copy: ${voter.voter}`}
+                                      >
                                         {getDisplayName(voter.voter)}
                                       </span>
-                                    </button>
+                                    </div>
                                   </li>
                                 ))}
                               </ul>

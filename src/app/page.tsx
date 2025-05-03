@@ -6,9 +6,10 @@ import { ProjectsOverview } from "@/components/ProjectsOverview";
 import { AllocatedBudget } from "@/components/AllocatedBudget";
 import { ResultsDetails } from "@/components/ResultsDetails";
 import { useState, useEffect } from "react";
-import { LineChart } from "lucide-react";
+import { LineChart, } from "lucide-react";
 import { ElectionStatus } from "@/components/ElectionStatus";
 import Link from "next/link";
+
 
 export default function EnsElectionPage() {
   const { data, isLoading, error, summary, allocationData } =
@@ -115,9 +116,25 @@ export default function EnsElectionPage() {
             <Link
               target="_blank"
               href="https://discuss.ens.domains/t/what-happens-to-remainder-of-the-2-year-stream/20488"
-              className="hover:text-blue-300 hover:underline transition-all duration-300"
+              className="hover:text-blue-300 hover:underline transition-all duration-300 flex items-center gap-1"
             >
               Goes to 1 year remaining
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-3.5 w-3.5 text-gray-400"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4"></path>
+                <path d="M12 8h.01"></path>
+              </svg>
             </Link>
           ),
         },
@@ -164,8 +181,8 @@ export default function EnsElectionPage() {
 
           {allocationData?.proposal?.start && (
             <ElectionStatus
-              startDate={new Date(allocationData?.proposal?.start * 1000)}
-              endDate={new Date(allocationData?.proposal?.end * 1000)}
+              startDate={new Date(Number(allocationData.proposal.start) * 1000)}
+              endDate={new Date(Number(allocationData.proposal.end) * 1000)}
             />
           )}
         </div>

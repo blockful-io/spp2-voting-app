@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ClientOnly } from "./ClientOnly";
 import { EnsLogo } from "./icons/EnsLogo";
 import { ChevronRight } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { CustomConnectButton } from "./CustomConnectButton";
 
 export function Header() {
   const pathname = usePathname();
@@ -39,18 +39,12 @@ export function Header() {
             >
               Vote
             </Link>
-            <Link
-              href="/vote"
-              className="flex items-center gap-1 px-4 py-2 ml-1 text-base font-medium text-blue-400 bg-blue-950/60 rounded-full hover:bg-blue-900/60 transition-colors duration-300"
-            >
-              Cast now <ChevronRight className="h-4 w-4" />
-            </Link>
             {isVotePage && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500"></div>}
           </div>
         </div>
         
         <ClientOnly>
-          <ConnectButton />
+          <CustomConnectButton />
         </ClientOnly>
       </div>
       
@@ -71,12 +65,6 @@ export function Header() {
                 className={`py-2.5 flex-1 flex justify-center items-center text-base font-medium transition-colors duration-300 ${isVotePage ? 'text-blue-500' : 'text-gray-400 hover:text-white'}`}
               >
                 Vote
-              </Link>
-              <Link
-                href="/vote"
-                className="flex items-center gap-1 px-3 py-1.5 mr-4 text-sm font-medium text-blue-400 bg-blue-950/60 rounded-full hover:bg-blue-900/60 transition-colors duration-300"
-              >
-                Cast now <ChevronRight className="h-3.5 w-3.5" />
               </Link>
             </div>
             {isVotePage && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500"></div>}

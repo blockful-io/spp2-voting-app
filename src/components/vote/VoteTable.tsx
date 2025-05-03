@@ -23,6 +23,7 @@ interface VoteTableProps {
   onReorder: (newOrder: Choice[]) => void;
   onDragStart?: () => void;
   onDragEnd?: () => void;
+  disabled?: boolean;
 }
 
 // Interface for a combined candidate display
@@ -56,6 +57,7 @@ export function VoteTable({
   onReorder,
   onDragStart,
   onDragEnd,
+  disabled,
 }: VoteTableProps) {
   // Initialize the combined views state with a useEffect to ensure adjacent pairs start merged
   const [combinedViews, setCombinedViews] = useState<Record<string, boolean>>(
@@ -91,7 +93,7 @@ export function VoteTable({
     if (hasChanges) {
       setCombinedViews(initialViews);
     }
-  }, []); // Only run once on mount
+  }, [candidates]); // Run once on mount and when candidates change
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -197,7 +199,7 @@ export function VoteTable({
     // Update all provider states at once
     setCombinedViews(newMergedState);
     console.log("Set new combined views state:", newMergedState);
-  }, [candidates]); // Only depend on candidates, not on combinedViews
+  }, [candidates, combinedViews]); // Depend on candidates and combinedViews
 
   // Create a display list that either combines or separates items based on the current view state
   const displayItems = useMemo(() => {
@@ -663,6 +665,7 @@ export function VoteTable({
                       onBudgetSelect={(type) =>
                         onBudgetSelect(item.providerName, type)
                       }
+                      disabled={disabled}
                     />
                   );
                 } else {
@@ -737,6 +740,7 @@ export function VoteTable({
                       onBudgetSelect={(type) =>
                         onBudgetSelect(candidate.providerName, type)
                       }
+                      disabled={disabled}
                     />
                   );
                 }
