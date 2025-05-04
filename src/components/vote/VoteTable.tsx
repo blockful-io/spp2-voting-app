@@ -23,7 +23,6 @@ interface VoteTableProps {
   onReorder: (newOrder: Choice[]) => void;
   onDragStart?: () => void;
   onDragEnd?: () => void;
-  disabled?: boolean;
 }
 
 // Interface for a combined candidate display
@@ -57,7 +56,6 @@ export function VoteTable({
   onReorder,
   onDragStart,
   onDragEnd,
-  disabled,
 }: VoteTableProps) {
   // Initialize the combined views state with a useEffect to ensure adjacent pairs start merged
   const [combinedViews, setCombinedViews] = useState<Record<string, boolean>>(
@@ -93,7 +91,7 @@ export function VoteTable({
     if (hasChanges) {
       setCombinedViews(initialViews);
     }
-  }, [candidates]); // Run once on mount and when candidates change
+  }, []); // Only run once on mount
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -199,7 +197,7 @@ export function VoteTable({
     // Update all provider states at once
     setCombinedViews(newMergedState);
     console.log("Set new combined views state:", newMergedState);
-  }, [candidates, combinedViews]); // Depend on candidates and combinedViews
+  }, [candidates]); // Only depend on candidates, not on combinedViews
 
   // Create a display list that either combines or separates items based on the current view state
   const displayItems = useMemo(() => {
@@ -661,11 +659,11 @@ export function VoteTable({
                       budgetType="combined"
                       isExpanded={combinedViews[item.providerName] === true}
                       canToggle={true}
+                      hasBothBudgetTypes={true}
                       onToggleView={() => toggleView(item.providerName)}
                       onBudgetSelect={(type) =>
                         onBudgetSelect(item.providerName, type)
                       }
-                      disabled={disabled}
                     />
                   );
                 } else {
@@ -673,8 +671,11 @@ export function VoteTable({
                   const { candidate } = item;
                   const combined = combinedCandidates[candidate.providerName];
 
-                  // Check if this item could be part of a merged set
-                  const hasBothBudgetTypes = candidates.some(
+                  // Check if this provider has both budget types
+                  const hasBothBudgetTypes = combinedCandidates[candidate.providerName] !== undefined;
+
+                  // Check if this item could be part of a merged set for UI controls
+                  const canBeToggled = candidates.some(
                     (c) =>
                       c.providerName === candidate.providerName &&
                       c.budgetType !== candidate.budgetType &&
@@ -689,7 +690,7 @@ export function VoteTable({
                       c.budgetType === candidate.budgetType
                   );
 
-                  if (currentIndex !== -1) {
+                  if (currentIndex !== -1 && canBeToggled) {
                     // Check if previous or next item is the counterpart
                     const prev =
                       currentIndex > 0 ? candidates[currentIndex - 1] : null;
@@ -730,17 +731,17 @@ export function VoteTable({
                       isExpanded={
                         combinedViews[candidate.providerName] === true
                       }
-                      canToggle={hasAdjacentCounterpart}
+                      canToggle={canBeToggled}
+                      hasBothBudgetTypes={hasBothBudgetTypes}
                       onToggleView={
                         // Show the toggle button only if this provider has both budget types adjacent
-                        hasAdjacentCounterpart
+                        canBeToggled
                           ? () => toggleView(candidate.providerName)
                           : undefined
                       }
                       onBudgetSelect={(type) =>
                         onBudgetSelect(candidate.providerName, type)
                       }
-                      disabled={disabled}
                     />
                   );
                 }

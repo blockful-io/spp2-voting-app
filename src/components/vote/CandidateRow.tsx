@@ -20,6 +20,7 @@ interface CandidateRowProps {
   extendedBudget?: number;
   isExpanded?: boolean;
   canToggle?: boolean;
+  hasBothBudgetTypes?: boolean;
   disabled?: boolean;
 }
 
@@ -39,6 +40,7 @@ export function CandidateRow({
   extendedBudget,
   isExpanded,
   canToggle,
+  hasBothBudgetTypes,
   disabled
 }: CandidateRowProps) {
   // Setup drag and drop functionality
@@ -72,8 +74,9 @@ export function CandidateRow({
   // Format the display name to include budget type
   const displayName = isDivider ? name : name;
 
-  // Determine if the badge should be shown (only show Basic badge if candidate has both options)
-  const showBasicBadge = budgetType === "basic" && canToggle;
+  // Only show badges if this provider has both basic and extended options
+  const showBasicBadge = budgetType === "basic" && hasBothBudgetTypes;
+  const showExtendedBadge = budgetType === "extended" && hasBothBudgetTypes;
 
   return (
     <tr
@@ -126,7 +129,7 @@ export function CandidateRow({
                   <span className={`font-bold ${isBelowDivider ? "text-gray-400" : "text-white"}`}>{displayName}</span>
                   <div className="flex mt-1 pl-0">
                     {showBasicBadge && <BasicBadge />}
-                    {budgetType === "extended" && <ExtendedBadge />}
+                    {showExtendedBadge && <ExtendedBadge />}
                     {budgetType === "combined" && <CombinedBadge />}
                   </div>
                 </div>
