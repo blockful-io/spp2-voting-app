@@ -17,6 +17,7 @@ import {
 
 // Import modules
 import { prepareVotesFromCsv } from './csvUtils';
+import { convertSnapshotVotesToCSV } from './snapshotToCSV';
 import { getVotingResultData } from './votingResults';
 import { VotingResultResponse, ReportResults } from './types';
 import { processCopelandRanking, combineData } from './voteProcessing';
@@ -43,6 +44,10 @@ export async function main(): Promise<{
     // Check if we need to prepare votes from CSV
     if (USE_LOCAL_DATA) {
       await prepareVotesFromCsv();
+    } else {
+      // Generate CSV from Snapshot API when not using local data
+      console.log("Generating snapshot-votes.csv from Snapshot API...");
+      await convertSnapshotVotesToCSV(PROPOSAL_ID);
     }
     
     // Get the voting result data using the votingResults module
@@ -112,7 +117,8 @@ export {
   getVotingResultData,
   formatCurrency,
   displayResults,
-  exportResults
+  exportResults,
+  convertSnapshotVotesToCSV
 };
 
 // Execute the script if directly run (not imported)

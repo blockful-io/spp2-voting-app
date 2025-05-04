@@ -1,0 +1,24 @@
+address,votingPower,choice1,choice2,choice3,choice4,choice5,choice6,choice7,choice8,choice9,choice10
+0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390,233509.78611265865,A long name foundation,EthDNS - basic,EthDNS - ext,Ethereum Name Improvers,MetaResolver,none below,,,,
+0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5,159711.66226635975,EthDNS - basic,SubgraphIndex - basic,MetaResolver,Ethereum Name Improvers,ResolutionProtocol - basic,ResolutionProtocol - ext,A long name foundation,none below,,
+0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12,125203.17297533501,A long name foundation,ResolutionProtocol - basic,SubgraphIndex - basic,SubgraphIndex - ext,EthDNS - basic,none below,,,,
+0x983110309620D911731Ac0932219af06091b6744,108420.95149666208,Ethereum Name Improvers,EthDNS - basic,SubgraphIndex - basic,SubgraphIndex - ext,EthDNS - ext,ResolutionProtocol - basic,ResolutionProtocol - ext,none below,,
+0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF,101108.13548029313,EthDNS - basic,EthDNS - ext,SubgraphIndex - basic,Ethereum Name Improvers,MetaResolver,ResolutionProtocol - basic,ResolutionProtocol - ext,none below,,
+0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359,100392.63602356019,SubgraphIndex - basic,SubgraphIndex - ext,A long name foundation,Ethereum Name Improvers,none below,,,,,
+0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e,99385.44386178473,EthDNS - basic,MetaResolver,SubgraphIndex - basic,ResolutionProtocol - basic,Ethereum Name Improvers,EthDNS - ext,SubgraphIndex - ext,ResolutionProtocol - ext,none below,
+0x839395e20bbB182fa440d08F850E6c7A8f6F0780,65394.275782537334,Ethereum Name Improvers,SubgraphIndex - basic,MetaResolver,ResolutionProtocol - basic,ResolutionProtocol - ext,EthDNS - basic,EthDNS - ext,none below,,
+0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6,63735.90634894694,MetaResolver,EthDNS - basic,Ethereum Name Improvers,A long name foundation,SubgraphIndex - basic,SubgraphIndex - ext,ResolutionProtocol - basic,ResolutionProtocol - ext,EthDNS - ext,none below
+0x8787FC2De4De95c53e5E3a4e5459247D9773ea52,60298.88,A long name foundation,none below,,,,,,,,
+0xB352bB4E2A4f27683435f153A259f1B207218b1b,60000,EthDNS - basic,EthDNS - ext,MetaResolver,Ethereum Name Improvers,SubgraphIndex - basic,SubgraphIndex - ext,A long name foundation,none below,,
+0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E,46351.83687742236,A long name foundation,EthDNS - basic,Ethereum Name Improvers,SubgraphIndex - basic,EthDNS - ext,SubgraphIndex - ext,ResolutionProtocol - basic,ResolutionProtocol - ext,MetaResolver,none below
+0xBcE35d5A3e89995730B3C979a01319D06E41776f,35081.35204855378,EthDNS - basic,EthDNS - ext,SubgraphIndex - basic,MetaResolver,Ethereum Name Improvers,ResolutionProtocol - basic,none below,,,
+0x1F3D3A7A9c548bE39539b39D7400302753E20591,25685.714731308697,EthDNS - basic,EthDNS - ext,SubgraphIndex - basic,SubgraphIndex - ext,MetaResolver,ResolutionProtocol - basic,ResolutionProtocol - ext,A long name foundation,none below,
+0xf3427890604BC8BE673517B9Dde1bab548aE3329,12765.341651604538,ResolutionProtocol - basic,EthDNS - basic,MetaResolver,Ethereum Name Improvers,none below,,,,,
+0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b,10741.040572278844,Ethereum Name Improvers,EthDNS - basic,EthDNS - ext,A long name foundation,MetaResolver,SubgraphIndex - basic,none below,,,
+0x1d921dff757610FbDB0073479e12c0a07d382677,10000,Ethereum Name Improvers,SubgraphIndex - basic,SubgraphIndex - ext,MetaResolver,EthDNS - basic,ResolutionProtocol - basic,ResolutionProtocol - ext,EthDNS - ext,none below,
+0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039,2000,Ethereum Name Improvers,ResolutionProtocol - basic,ResolutionProtocol - ext,A long name foundation,none below,,,,,
+0x8dA48e5846c06B558970ACd42EDc7Da8799481E4,1786.3291721,EthDNS - basic,ResolutionProtocol - basic,SubgraphIndex - basic,MetaResolver,Ethereum Name Improvers,none below,,,,
+0x179A862703a4adfb29896552DF9e307980D19285,1700,ResolutionProtocol - basic,MetaResolver,SubgraphIndex - basic,A long name foundation,none below,,,,,
+0x76A6D08b82034b397E7e09dAe4377C18F132BbB8,517.44003482,EthDNS - basic,EthDNS - ext,MetaResolver,SubgraphIndex - basic,SubgraphIndex - ext,none below,,,,
+0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18,190.1770219327841,MetaResolver,ResolutionProtocol - basic,ResolutionProtocol - ext,EthDNS - basic,EthDNS - ext,SubgraphIndex - basic,SubgraphIndex - ext,Ethereum Name Improvers,A long name foundation,none below
+0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea,0.7,ResolutionProtocol - basic,ResolutionProtocol - ext,SubgraphIndex - basic,EthDNS - basic,none below,,,,,
