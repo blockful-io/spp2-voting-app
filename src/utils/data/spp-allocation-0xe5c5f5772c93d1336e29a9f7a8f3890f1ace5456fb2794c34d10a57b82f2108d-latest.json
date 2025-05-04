@@ -1,0 +1,5155 @@
+{
+  "proposal": {
+    "id": "0xe5c5f5772c93d1336e29a9f7a8f3890f1ace5456fb2794c34d10a57b82f2108d",
+    "title": "[TEST] Select providers for Service Provider Program Season II",
+    "space": "SPP2 vote",
+    "totalVotes": 23,
+    "totalVotingPower": 1323980.7824581587,
+    "state": "CLOSED",
+    "dataSource": "Snapshot"
+  },
+  "headToHeadMatches": [
+    {
+      "choice1": {
+        "name": "none below",
+        "totalVotes": 213405.90774146368,
+        "voters": [
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "Ethereum Name Improvers",
+        "totalVotes": 1110574.8747166952,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          }
+        ]
+      },
+      "totalVotes": 1323980.7824581587,
+      "winner": "Ethereum Name Improvers",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "none below",
+        "totalVotes": 465459.78274331766,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          }
+        ]
+      },
+      "choice2": {
+        "name": "ResolutionProtocol - basic",
+        "totalVotes": 858520.9997148414,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1323980.7824581587,
+      "winner": "ResolutionProtocol - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "none below",
+        "totalVotes": 641995.978590911,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          }
+        ]
+      },
+      "choice2": {
+        "name": "ResolutionProtocol - ext",
+        "totalVotes": 681984.8038672479,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1323980.7824581587,
+      "winner": "ResolutionProtocol - ext",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "none below",
+        "totalVotes": 434459.96952835564,
+        "voters": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "A long name foundation",
+        "totalVotes": 889520.8129298033,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          }
+        ]
+      },
+      "totalVotes": 1323980.7824581587,
+      "winner": "A long name foundation",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "none below",
+        "totalVotes": 164391.5160235602,
+        "voters": [
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          }
+        ]
+      },
+      "choice2": {
+        "name": "EthDNS - basic",
+        "totalVotes": 1159589.2664345985,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1323980.7824581587,
+      "winner": "EthDNS - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "none below",
+        "totalVotes": 463858.7220889595,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "EthDNS - ext",
+        "totalVotes": 860122.0603691994,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          }
+        ]
+      },
+      "totalVotes": 1323980.7824581587,
+      "winner": "EthDNS - ext",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "none below",
+        "totalVotes": 308574.0077642632,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - basic",
+        "totalVotes": 1015406.7746938958,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1323980.7824581587,
+      "winner": "SubgraphIndex - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "none below",
+        "totalVotes": 684097.503086386,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - ext",
+        "totalVotes": 639883.2793717728,
+        "voters": [
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          }
+        ]
+      },
+      "totalVotes": 1323980.7824581587,
+      "winner": "none below",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "none below",
+        "totalVotes": 396316.3404955573,
+        "voters": [
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "MetaResolver",
+        "totalVotes": 927664.4419626016,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          }
+        ]
+      },
+      "totalVotes": 1323980.7824581587,
+      "winner": "MetaResolver",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "A long name foundation",
+        "totalVotes": 569456.3119889762,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          }
+        ]
+      },
+      "choice2": {
+        "name": "EthDNS - basic",
+        "totalVotes": 754524.4704691827,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1323980.7824581587,
+      "winner": "EthDNS - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "ResolutionProtocol - basic",
+        "totalVotes": 623230.0835131368,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "A long name foundation",
+        "totalVotes": 700233.258910202,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          }
+        ]
+      },
+      "totalVotes": 1323463.3424233387,
+      "winner": "A long name foundation",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "Ethereum Name Improvers",
+        "totalVotes": 730320.615703054,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "A long name foundation",
+        "totalVotes": 593142.026720285,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          }
+        ]
+      },
+      "totalVotes": 1323462.6424233387,
+      "winner": "Ethereum Name Improvers",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "A long name foundation",
+        "totalVotes": 541840.6228866418,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - basic",
+        "totalVotes": 769374.8179199125,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1311215.4408065542,
+      "winner": "SubgraphIndex - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "A long name foundation",
+        "totalVotes": 792903.880604283,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          }
+        ]
+      },
+      "choice2": {
+        "name": "EthDNS - ext",
+        "totalVotes": 516524.53103017143,
+        "voters": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1309428.411634454,
+      "winner": "A long name foundation",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "ResolutionProtocol - ext",
+        "totalVotes": 571897.0606408785,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "A long name foundation",
+        "totalVotes": 701933.258910202,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          }
+        ]
+      },
+      "totalVotes": 1273830.3195510805,
+      "winner": "A long name foundation",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "Ethereum Name Improvers",
+        "totalVotes": 612919.1388421108,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - basic",
+        "totalVotes": 650762.7636160481,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1263681.9024581588,
+      "winner": "SubgraphIndex - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "Ethereum Name Improvers",
+        "totalVotes": 996447.583009273,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          }
+        ]
+      },
+      "choice2": {
+        "name": "ResolutionProtocol - basic",
+        "totalVotes": 266716.87941406574,
+        "voters": [
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1263164.4624233388,
+      "winner": "Ethereum Name Improvers",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "Ethereum Name Improvers",
+        "totalVotes": 296948.90387503844,
+        "voters": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          }
+        ]
+      },
+      "choice2": {
+        "name": "EthDNS - basic",
+        "totalVotes": 965032.9985831205,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1261981.9024581588,
+      "winner": "EthDNS - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "Ethereum Name Improvers",
+        "totalVotes": 1009992.0616712022,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - ext",
+        "totalVotes": 251989.14078695668,
+        "voters": [
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1261981.2024581588,
+      "winner": "Ethereum Name Improvers",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "EthDNS - basic",
+        "totalVotes": 958991.1176767265,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - basic",
+        "totalVotes": 302690.78478143254,
+        "voters": [
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1261681.9024581588,
+      "winner": "EthDNS - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "SubgraphIndex - basic",
+        "totalVotes": 779136.7668541324,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "MetaResolver",
+        "totalVotes": 482545.1356040265,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          }
+        ]
+      },
+      "totalVotes": 1261681.9024581588,
+      "winner": "SubgraphIndex - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "SubgraphIndex - ext",
+        "totalVotes": 416054.3121042884,
+        "voters": [
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          }
+        ]
+      },
+      "choice2": {
+        "name": "MetaResolver",
+        "totalVotes": 845626.8903538705,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1261681.2024581588,
+      "winner": "MetaResolver",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "EthDNS - basic",
+        "totalVotes": 1024386.0934592637,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - ext",
+        "totalVotes": 235595.8089988952,
+        "voters": [
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          }
+        ]
+      },
+      "totalVotes": 1259981.9024581588,
+      "winner": "EthDNS - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "EthDNS - ext",
+        "totalVotes": 466833.6460018459,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - basic",
+        "totalVotes": 782082.9148047084,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1248916.5608065543,
+      "winner": "SubgraphIndex - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "A long name foundation",
+        "totalVotes": 578497.3525612551,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          }
+        ]
+      },
+      "choice2": {
+        "name": "MetaResolver",
+        "totalVotes": 637061.7784002417,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1215559.1309614966,
+      "winner": "MetaResolver",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "ResolutionProtocol - basic",
+        "totalVotes": 207253.66743140965,
+        "voters": [
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "EthDNS - basic",
+        "totalVotes": 956035.599003189,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          }
+        ]
+      },
+      "totalVotes": 1163289.2664345985,
+      "winner": "EthDNS - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "ResolutionProtocol - basic",
+        "totalVotes": 541873.0090806012,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "EthDNS - ext",
+        "totalVotes": 621416.2573539976,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          }
+        ]
+      },
+      "totalVotes": 1163289.2664345985,
+      "winner": "EthDNS - ext",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "ResolutionProtocol - basic",
+        "totalVotes": 298228.33217312396,
+        "voters": [
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "MetaResolver",
+        "totalVotes": 865060.9342614748,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          }
+        ]
+      },
+      "totalVotes": 1163289.2664345985,
+      "winner": "MetaResolver",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "ResolutionProtocol - ext",
+        "totalVotes": 67585.15280447011,
+        "voters": [
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "EthDNS - basic",
+        "totalVotes": 1094004.1136301288,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          }
+        ]
+      },
+      "totalVotes": 1161589.2664345985,
+      "winner": "EthDNS - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "EthDNS - basic",
+        "totalVotes": 1020268.9072811818,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "MetaResolver",
+        "totalVotes": 141020.35915341706,
+        "voters": [
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          }
+        ]
+      },
+      "totalVotes": 1161289.2664345985,
+      "winner": "EthDNS - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "EthDNS - basic",
+        "totalVotes": 1159589.2664345985,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "EthDNS - ext",
+        "totalVotes": 0,
+        "voters": []
+      },
+      "totalVotes": 1159589.2664345985,
+      "winner": "EthDNS - basic",
+      "isInternal": true
+    },
+    {
+      "choice1": {
+        "name": "Ethereum Name Improvers",
+        "totalVotes": 677918.6623454127,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          }
+        ]
+      },
+      "choice2": {
+        "name": "MetaResolver",
+        "totalVotes": 460559.36713741126,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1138478.029482824,
+      "winner": "Ethereum Name Improvers",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "Ethereum Name Improvers",
+        "totalVotes": 680685.4240532569,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "EthDNS - ext",
+        "totalVotes": 456092.60542956705,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          }
+        ]
+      },
+      "totalVotes": 1136778.029482824,
+      "winner": "Ethereum Name Improvers",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "Ethereum Name Improvers",
+        "totalVotes": 1110384.6976947624,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          }
+        ]
+      },
+      "choice2": {
+        "name": "ResolutionProtocol - ext",
+        "totalVotes": 25876.591753241482,
+        "voters": [
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1136261.289448004,
+      "winner": "Ethereum Name Improvers",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "A long name foundation",
+        "totalVotes": 703252.2851530015,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - ext",
+        "totalVotes": 404592.3631700685,
+        "voters": [
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1107844.64832307,
+      "winner": "A long name foundation",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "EthDNS - ext",
+        "totalVotes": 677965.2025235904,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - ext",
+        "totalVotes": 407752.6668445042,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1085717.8693680945,
+      "winner": "EthDNS - ext",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "ResolutionProtocol - ext",
+        "totalVotes": 156773.48837408444,
+        "voters": [
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "MetaResolver",
+        "totalVotes": 881312.6050851792,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          }
+        ]
+      },
+      "totalVotes": 1038086.0934592637,
+      "winner": "MetaResolver",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "EthDNS - ext",
+        "totalVotes": 621416.2573539976,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          }
+        ]
+      },
+      "choice2": {
+        "name": "MetaResolver",
+        "totalVotes": 414669.13610526605,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "totalVotes": 1036085.3934592637,
+      "winner": "EthDNS - ext",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "ResolutionProtocol - basic",
+        "totalVotes": 143645.72082097232,
+        "voters": [
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - basic",
+        "totalVotes": 886526.395524528,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          }
+        ]
+      },
+      "totalVotes": 1030172.1163455003,
+      "winner": "SubgraphIndex - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "ResolutionProtocol - ext",
+        "totalVotes": 301032.72141977685,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "EthDNS - ext",
+        "totalVotes": 720801.7012157823,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          }
+        ]
+      },
+      "totalVotes": 1021834.4226355592,
+      "winner": "EthDNS - ext",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "ResolutionProtocol - basic",
+        "totalVotes": 604326.590260501,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - ext",
+        "totalVotes": 415104.4855127203,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          }
+        ]
+      },
+      "totalVotes": 1019431.0757732214,
+      "winner": "ResolutionProtocol - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "ResolutionProtocol - ext",
+        "totalVotes": 2190.8770219327844,
+        "voters": [
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - basic",
+        "totalVotes": 1015215.8976719629,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          }
+        ]
+      },
+      "totalVotes": 1017406.7746938958,
+      "winner": "SubgraphIndex - basic",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "SubgraphIndex - basic",
+        "totalVotes": 1015406.7746938958,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - ext",
+        "totalVotes": 0,
+        "voters": []
+      },
+      "totalVotes": 1015406.7746938958,
+      "winner": "SubgraphIndex - basic",
+      "isInternal": true
+    },
+    {
+      "choice1": {
+        "name": "ResolutionProtocol - ext",
+        "totalVotes": 328404.950551123,
+        "voters": [
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "SubgraphIndex - ext",
+        "totalVotes": 639693.10234984,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          }
+        ]
+      },
+      "totalVotes": 968098.052900963,
+      "winner": "SubgraphIndex - ext",
+      "isInternal": false
+    },
+    {
+      "choice1": {
+        "name": "ResolutionProtocol - basic",
+        "totalVotes": 858520.9997148414,
+        "voters": [
+          {
+            "voter": "0x5BFCB4BE4d7B43437d5A0c57E908c048a4418390",
+            "vp": 233509.78611265865
+          },
+          {
+            "voter": "0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5",
+            "vp": 159711.66226635975
+          },
+          {
+            "voter": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+            "vp": 125203.17297533501
+          },
+          {
+            "voter": "0x983110309620D911731Ac0932219af06091b6744",
+            "vp": 108420.95149666208
+          },
+          {
+            "voter": "0x534631Bcf33BDb069fB20A93d2fdb9e4D4dD42CF",
+            "vp": 101108.13548029313
+          },
+          {
+            "voter": "0x1D5460F896521aD685Ea4c3F2c679Ec0b6806359",
+            "vp": 100392.63602356019
+          },
+          {
+            "voter": "0x809FA673fe2ab515FaA168259cB14E2BeDeBF68e",
+            "vp": 99385.44386178473
+          },
+          {
+            "voter": "0x839395e20bbB182fa440d08F850E6c7A8f6F0780",
+            "vp": 65394.275782537334
+          },
+          {
+            "voter": "0x54BeCc7560a7Be76d72ED76a1f5fee6C5a2A7Ab6",
+            "vp": 63735.90634894694
+          },
+          {
+            "voter": "0x8787FC2De4De95c53e5E3a4e5459247D9773ea52",
+            "vp": 60298.88
+          },
+          {
+            "voter": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+            "vp": 60000
+          },
+          {
+            "voter": "0x2D7d6Ec6198ADFD5850D00BD601958F6E316b05E",
+            "vp": 46351.83687742236
+          },
+          {
+            "voter": "0xBcE35d5A3e89995730B3C979a01319D06E41776f",
+            "vp": 35081.35204855378
+          },
+          {
+            "voter": "0x1F3D3A7A9c548bE39539b39D7400302753E20591",
+            "vp": 25685.714731308697
+          },
+          {
+            "voter": "0xf3427890604BC8BE673517B9Dde1bab548aE3329",
+            "vp": 12765.341651604538
+          },
+          {
+            "voter": "0x7Ae94d7712b7EDB9BB2C0Ee6D71081a6D8710c0b",
+            "vp": 10741.040572278844
+          },
+          {
+            "voter": "0x1d921dff757610FbDB0073479e12c0a07d382677",
+            "vp": 10000
+          },
+          {
+            "voter": "0xAC50cE326de14dDF9b7e9611Cd2F33a1Af8aC039",
+            "vp": 2000
+          },
+          {
+            "voter": "0x8dA48e5846c06B558970ACd42EDc7Da8799481E4",
+            "vp": 1786.3291721
+          },
+          {
+            "voter": "0x179A862703a4adfb29896552DF9e307980D19285",
+            "vp": 1700
+          },
+          {
+            "voter": "0x76A6D08b82034b397E7e09dAe4377C18F132BbB8",
+            "vp": 517.44003482
+          },
+          {
+            "voter": "0x50b6a9BA0b1cA77Ce67c22b30aFC0a5BbBDB5a18",
+            "vp": 190.1770219327841
+          },
+          {
+            "voter": "0xcC0B26236AFa80673b0859312a7eC16d2b72C1ea",
+            "vp": 0.7
+          }
+        ]
+      },
+      "choice2": {
+        "name": "ResolutionProtocol - ext",
+        "totalVotes": 0,
+        "voters": []
+      },
+      "totalVotes": 858520.9997148414,
+      "winner": "ResolutionProtocol - basic",
+      "isInternal": true
+    }
+  ],
+  "summary": {
+    "votedBudget": 4500000,
+    "twoYearStreamBudget": 1500000,
+    "oneYearStreamBudget": 3000000,
+    "transferredBudget": 0,
+    "adjustedTwoYearBudget": 1500000,
+    "adjustedOneYearBudget": 3000000,
+    "remainingTwoYearBudget": 0,
+    "remainingOneYearBudget": 1500000,
+    "totalAllocated": 3000000,
+    "unspentBudget": 1500000,
+    "allocatedProjects": 7,
+    "rejectedProjects": 2
+  },
+  "allocations": [
+    {
+      "name": "EthDNS - basic",
+      "providerName": "EthDNS",
+      "score": 9,
+      "averageSupport": 1010269.0925524434,
+      "budget": 400000,
+      "isSpp1": false,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "rejectionReason": null,
+      "isNoneBelow": false,
+      "budgetType": "basic"
+    },
+    {
+      "name": "SubgraphIndex - basic",
+      "providerName": "SubgraphIndex",
+      "score": 8,
+      "averageSupport": 801844.8767289463,
+      "budget": 400000,
+      "isSpp1": true,
+      "allocated": true,
+      "streamDuration": "2-year",
+      "rejectionReason": null,
+      "isNoneBelow": false,
+      "budgetType": "basic"
+    },
+    {
+      "name": "Ethereum Name Improvers",
+      "providerName": "Ethereum Name Improvers",
+      "score": 7,
+      "averageSupport": 802910.2179900894,
+      "budget": 300000,
+      "isSpp1": true,
+      "allocated": true,
+      "streamDuration": "2-year",
+      "rejectionReason": null,
+      "isNoneBelow": false,
+      "budgetType": "basic"
+    },
+    {
+      "name": "A long name foundation",
+      "providerName": "A long name foundation",
+      "score": 5,
+      "averageSupport": 674531.09007385,
+      "budget": 400000,
+      "isSpp1": false,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "rejectionReason": null,
+      "isNoneBelow": false,
+      "budgetType": "basic"
+    },
+    {
+      "name": "MetaResolver",
+      "providerName": "MetaResolver",
+      "score": 5,
+      "averageSupport": 628391.1831181655,
+      "budget": 800000,
+      "isSpp1": true,
+      "allocated": true,
+      "streamDuration": "2-year",
+      "rejectionReason": null,
+      "isNoneBelow": false,
+      "budgetType": "basic"
+    },
+    {
+      "name": "EthDNS - ext",
+      "providerName": "EthDNS",
+      "score": 5,
+      "averageSupport": 549019.1401420169,
+      "budget": 400000,
+      "isSpp1": false,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "rejectionReason": null,
+      "isNoneBelow": false,
+      "budgetType": "extended"
+    },
+    {
+      "name": "ResolutionProtocol - basic",
+      "providerName": "ResolutionProtocol",
+      "score": 3,
+      "averageSupport": 489146.253569277,
+      "budget": 300000,
+      "isSpp1": false,
+      "allocated": true,
+      "streamDuration": "1-year",
+      "rejectionReason": null,
+      "isNoneBelow": false,
+      "budgetType": "basic"
+    },
+    {
+      "name": "none below",
+      "providerName": "None Below",
+      "score": 1,
+      "averageSupport": 419173.303118086,
+      "budget": 0,
+      "allocated": false,
+      "streamDuration": null,
+      "rejectionReason": "None Below reached",
+      "isNoneBelow": true,
+      "budgetType": "none"
+    },
+    {
+      "name": "SubgraphIndex - ext",
+      "providerName": "SubgraphIndex",
+      "score": 1,
+      "averageSupport": 378962.79545989406,
+      "budget": 0,
+      "allocated": false,
+      "streamDuration": null,
+      "rejectionReason": "Ranked below None Below threshold",
+      "isNoneBelow": false,
+      "budgetType": "extended"
+    },
+    {
+      "name": "ResolutionProtocol - ext",
+      "providerName": "ResolutionProtocol",
+      "score": 1,
+      "averageSupport": 237305.07182586167,
+      "budget": 0,
+      "allocated": false,
+      "streamDuration": null,
+      "rejectionReason": "Ranked below None Below threshold",
+      "isNoneBelow": false,
+      "budgetType": "extended"
+    }
+  ],
+  "programInfo": {
+    "totalBudget": 4500000,
+    "twoYearStreamRatio": 0.3333333333333333,
+    "oneYearStreamRatio": 0.6666666666666666
+  },
+  "choices": [
+    {
+      "name": "none below",
+      "providerName": "none below",
+      "budget": 0,
+      "isSpp1": false,
+      "isNoneBelow": true,
+      "choiceId": 1,
+      "budgetType": "none"
+    },
+    {
+      "name": "Ethereum Name Improvers",
+      "providerName": "Ethereum Name Improvers",
+      "budget": 300000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 2,
+      "budgetType": "basic"
+    },
+    {
+      "name": "ResolutionProtocol - basic",
+      "providerName": "ResolutionProtocol",
+      "budget": 300000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 3,
+      "budgetType": "basic"
+    },
+    {
+      "name": "ResolutionProtocol - ext",
+      "providerName": "ResolutionProtocol",
+      "budget": 100000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 4,
+      "budgetType": "extended"
+    },
+    {
+      "name": "A long name foundation",
+      "providerName": "A long name foundation",
+      "budget": 400000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 5,
+      "budgetType": "basic"
+    },
+    {
+      "name": "EthDNS - basic",
+      "providerName": "EthDNS",
+      "budget": 400000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 6,
+      "budgetType": "basic"
+    },
+    {
+      "name": "EthDNS - ext",
+      "providerName": "EthDNS",
+      "budget": 400000,
+      "isSpp1": false,
+      "isNoneBelow": false,
+      "choiceId": 7,
+      "budgetType": "extended"
+    },
+    {
+      "name": "SubgraphIndex - basic",
+      "providerName": "SubgraphIndex",
+      "budget": 400000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 8,
+      "budgetType": "basic"
+    },
+    {
+      "name": "SubgraphIndex - ext",
+      "providerName": "SubgraphIndex",
+      "budget": 300000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 9,
+      "budgetType": "extended"
+    },
+    {
+      "name": "MetaResolver",
+      "providerName": "MetaResolver",
+      "budget": 800000,
+      "isSpp1": true,
+      "isNoneBelow": false,
+      "choiceId": 10,
+      "budgetType": "basic"
+    }
+  ]
+}

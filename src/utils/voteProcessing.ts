@@ -29,64 +29,96 @@ export type { HeadToHeadMatch };
  */
 export function preprocessVotes(votes: Vote[], choices: string[]): Vote[] {
   return votes.map(vote => {
-    // Create a map of providers to their basic and extended budget positions
-    const providerBudgets = new Map<string, { basic: number, extended: number }>();
+    // Skip processing if this is not an array of choices
+    if (!Array.isArray(vote.choice) || vote.choice.length === 0) {
+      return vote;
+    }
     
-    // Track the position of each budget type for each provider
-    vote.choice.forEach((choiceIndex, position) => {
-      const choiceName = choices[choiceIndex - 1];
+    // Map choices to their details for easier processing
+    const choiceDetails = vote.choice.map((choiceNum, position) => {
+      const choiceName = choices[choiceNum - 1];
       const { name, budgetType } = parseChoiceName(choiceName);
-      
-      if (!providerBudgets.has(name)) {
-        providerBudgets.set(name, { basic: -1, extended: -1 });
+      return {
+        choiceNum,
+        choiceName,
+        position,
+        provider: name,
+        budgetType
+      };
+    });
+    
+    // Identify providers with both budget types where extended comes before basic
+    const providersToReorder = new Set<string>();
+    
+    // Group choices by provider
+    const choicesByProvider = new Map<string, Array<typeof choiceDetails[0]>>();
+    choiceDetails.forEach(choice => {
+      if (!choicesByProvider.has(choice.provider)) {
+        choicesByProvider.set(choice.provider, []);
       }
+      choicesByProvider.get(choice.provider)!.push(choice);
+    });
+    
+    // Check each provider
+    choicesByProvider.forEach((choices, provider) => {
+      const basic = choices.find(c => c.budgetType === "basic");
+      const extended = choices.find(c => c.budgetType === "extended");
       
-      const entry = providerBudgets.get(name)!;
-      if (budgetType === "basic") {
-        entry.basic = position;
-      } else if (budgetType === "extended") {
-        entry.extended = position;
+      // If provider has both budget types and extended comes before basic
+      if (basic && extended && extended.position < basic.position) {
+        providersToReorder.add(provider);
       }
     });
     
-    // Create a new array for the reordered choices
-    const newChoice = [...vote.choice];
+    // If no reordering needed, return original vote
+    if (providersToReorder.size === 0) {
+      return vote;
+    }
     
-    // Apply reordering rule: if extended is ranked higher than basic, move basic above extended
-    for (const [provider, positions] of providerBudgets.entries()) {
-      if (positions.basic !== -1 && positions.extended !== -1) {
-        // If extended is ranked higher (lower position number) than basic
-        if (positions.extended < positions.basic) {
-          // Find the actual choice indices
-          const basicIndex = vote.choice.findIndex((c, i) => {
-            const choiceName = choices[c - 1];
-            const parsed = parseChoiceName(choiceName);
-            return parsed.name === provider && parsed.budgetType === "basic";
-          });
-          
-          const extendedIndex = vote.choice.findIndex((c, i) => {
-            const choiceName = choices[c - 1];
-            const parsed = parseChoiceName(choiceName);
-            return parsed.name === provider && parsed.budgetType === "extended";
-          });
-          
-          // Move basic choice right above extended by rearranging the array
-          if (basicIndex !== -1 && extendedIndex !== -1) {
-            const basicValue = newChoice[basicIndex];
-            // Remove the basic entry
-            newChoice.splice(basicIndex, 1);
-            // Insert it right before the extended entry
-            // If extended was before basic, the extended index has now decreased by 1
-            const adjustedExtendedIndex = extendedIndex > basicIndex ? extendedIndex - 1 : extendedIndex;
-            newChoice.splice(adjustedExtendedIndex, 0, basicValue);
-          }
+    // Create a new array for the result
+    const result: number[] = [];
+    
+    // Keep track of which choices have been added
+    const added = new Set<number>();
+    
+    // First pass: Go through the original order and handle providers that need reordering
+    let i = 0;
+    while (i < choiceDetails.length) {
+      const choice = choiceDetails[i];
+      
+      // If this is a provider that needs reordering and we haven't processed it yet
+      if (providersToReorder.has(choice.provider) && !added.has(choice.choiceNum)) {
+        const providerChoices = choicesByProvider.get(choice.provider)!;
+        const basic = providerChoices.find(c => c.budgetType === "basic")!;
+        const extended = providerChoices.find(c => c.budgetType === "extended")!;
+        
+        // Add basic first, then extended
+        result.push(basic.choiceNum);
+        result.push(extended.choiceNum);
+        
+        // Mark both as added
+        added.add(basic.choiceNum);
+        added.add(extended.choiceNum);
+        
+        // Skip to the next choice that hasn't been added yet
+        i++;
+        while (i < choiceDetails.length && added.has(choiceDetails[i].choiceNum)) {
+          i++;
         }
+      } else if (!added.has(choice.choiceNum)) {
+        // Add choices that don't need reordering
+        result.push(choice.choiceNum);
+        added.add(choice.choiceNum);
+        i++;
+      } else {
+        // Skip choices that have already been added
+        i++;
       }
     }
-    // Return vote with correctly ordered choices
+    
     return {
       ...vote,
-      choice: newChoice,
+      choice: result
     };
   });
 }
