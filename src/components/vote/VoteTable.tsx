@@ -23,6 +23,7 @@ interface VoteTableProps {
   onReorder: (newOrder: Choice[]) => void;
   onDragStart?: () => void;
   onDragEnd?: () => void;
+  disabled?: boolean;
 }
 
 // Interface for a combined candidate display
@@ -56,6 +57,7 @@ export function VoteTable({
   onReorder,
   onDragStart,
   onDragEnd,
+  disabled,
 }: VoteTableProps) {
   // Initialize the combined views state with a useEffect to ensure adjacent pairs start merged
   const [combinedViews, setCombinedViews] = useState<Record<string, boolean>>(
@@ -142,8 +144,8 @@ export function VoteTable({
   useEffect(() => {
     console.log("Running auto-merge detection");
 
-    // Start with a fresh state instead of copying the existing one
-    const newMergedState: Record<string, boolean> = {};
+    // Copy existing state to preserve user choices
+    const newMergedState: Record<string, boolean> = {...combinedViews};
     let hasChanges = false;
 
     // First pass - find all providers with both budget types
@@ -164,12 +166,10 @@ export function VoteTable({
 
       if (hasBasic && hasExtended) {
         providersWithBoth.add(providerName);
-        // We don't set any state in this pass - we'll handle it in the next pass
       }
     }
 
-    // Second pass - find adjacent basic+extended pairs and ALWAYS force them to merged state
-    // regardless of previous user choices
+    // Second pass - find adjacent basic+extended pairs
     for (let i = 0; i < candidates.length - 1; i++) {
       const current = candidates[i];
       const next = candidates[i + 1];
@@ -187,9 +187,11 @@ export function VoteTable({
             }`
           );
 
-          // ALWAYS force to merged state when adjacent, regardless of previous state
-          newMergedState[current.providerName] = false; // false = merged/combined
-          hasChanges = true;
+          // Only set to merged state if user hasn't explicitly chosen expanded
+          if (combinedViews[current.providerName] !== true) {
+            newMergedState[current.providerName] = false; // false = merged/combined
+            hasChanges = true;
+          }
         }
       }
     }
@@ -664,6 +666,7 @@ export function VoteTable({
                       onBudgetSelect={(type) =>
                         onBudgetSelect(item.providerName, type)
                       }
+                      disabled={disabled}
                     />
                   );
                 } else {
@@ -742,6 +745,7 @@ export function VoteTable({
                       onBudgetSelect={(type) =>
                         onBudgetSelect(candidate.providerName, type)
                       }
+                      disabled={disabled}
                     />
                   );
                 }
