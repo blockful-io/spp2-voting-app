@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getVotingResultData } from "@/utils/votingResults";
+import { VotingResultResponse } from "@/utils/types";
+
+// In-memory cache implementation
+const cache = new Map<string, { data: VotingResultResponse; timestamp: number }>();
+const CACHE_TTL = process.env.NEXT_PUBLIC_CACHE * 1000;
 
 export async function GET(request: NextRequest) {
   try {
@@ -14,8 +19,23 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Get voting results data from the helper function
+    // Check if we have a valid cached response
+    const cachedResponse = cache.get(proposalId);
+    const now = Date.now();
+    
+    if (cachedResponse && (now - cachedResponse.timestamp) < CACHE_TTL) {
+      console.log("Returning cached response");
+      return NextResponse.json(cachedResponse.data);
+    }
+
+    // If no valid cache, get fresh data
     const response = await getVotingResultData(proposalId);
+    
+    // Store in cache
+    cache.set(proposalId, {
+      data: response,
+      timestamp: now
+    });
 
     return NextResponse.json(response);
   } catch (error: unknown) {
