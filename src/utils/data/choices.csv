@@ -1,11 +1,37 @@
 choiceId,choiceName,budgetAmount,isSpp1
-1,none below,0,FALSE
-2,Ethereum Name Improvers,300000,TRUE
-3,ResolutionProtocol - basic,300000,FALSE
-4,ResolutionProtocol - ext,100000,FALSE
-5,A long name foundation,400000,FALSE
-6,EthDNS - basic,400000,FALSE
-7,EthDNS - ext,400000,FALSE
-8,SubgraphIndex - basic,400000,TRUE
-9,SubgraphIndex - ext,300000,TRUE
-10,MetaResolver,800000,TRUE
+1,NONE BELOW,0,FALSE
+2,Web3bio,"500,000",FALSE
+3,Lighthouse Labs,"300,000",FALSE
+4,Agora - basic,"300,000",FALSE
+5,Agora - ext,"100,000",FALSE
+6,Ethereum Identity Fnd - basic,"500,000",TRUE
+7,Ethereum Identity Fnd - ext,"200,000",TRUE
+8,Tally,"300,000",FALSE
+9,Wildcard Labs - basic,"300,000",TRUE
+10,Wildcard Labs - ext,"100,000",TRUE
+11,Decent,"300,000",FALSE
+12,Enscribe,"400,000",FALSE
+13,dWeb.host - basic,"300,000",FALSE
+14,dWeb.host - ext,"100,000",FALSE
+15,GovPal,"300,000",FALSE
+16,Curia Lab,"300,000",FALSE
+17,WebHash,"300,000",FALSE
+18,PYOR,"300,000",FALSE
+19,Namespace,"400,000",TRUE
+20,Unruggable - basic,"400,000",TRUE
+21,Unruggable - ext,"300,000",TRUE
+22,Unicorn.eth,"300,000",TRUE
+23,Namestone,"800,000",TRUE
+24,eth.limo - basic,"700,000",TRUE
+25,eth.limo - ext,"100,000",TRUE
+26,blockful - basic,"700,000",TRUE
+27,blockful - ext,"100,000",TRUE
+28,ZK Email - basic,"400,000",FALSE
+29,ZK Email - ext,"400,000",FALSE
+30,3DNS - basic,"500,000",FALSE
+31,3DNS - ext,"200,000",FALSE
+32,x23.ai,"300,000",FALSE
+33,AlphaGrowth - basic,"400,000",FALSE
+34,AlphaGrowth - ext,"400,000",FALSE
+35,NameHash Labs,"1,100,000",TRUE
+36,JustaName,"300,000",FALSE
