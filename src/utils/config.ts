@@ -24,4 +24,4 @@ export const LOSS_POINTS: number = 0; // Points awarded for losing a head-to-hea
 
 export const PROPOSAL_SPACE = process.env.NEXT_PUBLIC_PROPOSAL_SPACE;
 // Snapshot proposal ID - loaded from environment variable
-export const PROPOSAL_ID = process.env.NEXT_PUBLIC_PROPOSAL_ID;
+export const PROPOSAL_ID = process.env.NEXT_PUBLIC_PROPOSAL_ID || "0x98c65ac02f738ddb430fcd723ea5852a45168550b3daf20f75d5d508ecf28aa1";

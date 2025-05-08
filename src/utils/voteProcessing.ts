@@ -248,19 +248,27 @@ export function processCopelandRanking(
         const vp = vote.vp;
         const posI = vote.choice.indexOf(i + 1);
         const posJ = vote.choice.indexOf(j + 1);
+        
+        // Find position of None Below in this vote
+        const noneBelowPos = noneBelowIndex !== -1 
+          ? vote.choice.indexOf(noneBelowIndex + 1) 
+          : -1;
 
-        // If both choices are ranked
-        if (posI !== -1 && posJ !== -1) {
+        // Helper function to check if a choice position is valid (ranked and above None Below)
+        const isValidPosition = (pos: number) => pos !== -1 && (noneBelowPos === -1 || pos < noneBelowPos);
+        
+        // Both choices must be validly positioned to be compared
+        if (isValidPosition(posI) && isValidPosition(posJ)) {
           if (posI < posJ) {
             choice1Voters.push({ voter: vote.voter, vp });
           } else if (posJ < posI) {
             choice2Voters.push({ voter: vote.voter, vp });
           }
-        }
-        // If only one choice is ranked
-        else if (posI !== -1) {
+        } 
+        // Single choice comparisons - only count if validly positioned
+        else if (isValidPosition(posI)) {
           choice1Voters.push({ voter: vote.voter, vp });
-        } else if (posJ !== -1) {
+        } else if (isValidPosition(posJ)) {
           choice2Voters.push({ voter: vote.voter, vp });
         }
       });
