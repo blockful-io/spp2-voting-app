@@ -17,6 +17,7 @@ export default function VotePage() {
   const [isDragging, setIsDragging] = useState(false);
   const [previousVoteApplied, setPreviousVoteApplied] = useState(false);
   const [hasChangedSinceLoaded, setHasChangedSinceLoaded] = useState(false);
+  const [previousVoteExists, setPreviousVoteExists] = useState(false);
   const [reasoning, setReasoning] = useState("");
   const { voteFunc } = useVoteOnProposal();
   const { address } = useAccount();
@@ -28,115 +29,35 @@ export default function VotePage() {
   const isVotingEnded = allocationData?.proposal?.state === "CLOSED" || 
     (allocationData?.proposal?.end && new Date(Number(allocationData.proposal.end) * 1000) < new Date());
   
-  // Reset state when wallet changes or disconnects
+  // Handle wallet connection/disconnection events
   useEffect(() => {
     if (previousAddressRef.current !== address) {
-      // Address changed or disconnected
+      // Show appropriate toast message
       if (previousAddressRef.current && !address) {
         toast.success("Wallet disconnected");
+      } else if (!previousAddressRef.current && address) {
+        toast.success("Wallet connected");
       } else if (previousAddressRef.current && address && previousAddressRef.current !== address) {
         toast.success("Wallet changed");
       }
       
-      // Reset vote-related state
+      // Reset the previous vote applied flag to ensure we check for a previous vote
       setPreviousVoteApplied(false);
-      setHasChangedSinceLoaded(false);
-      setReasoning("");
       
-      // If choices are already loaded, randomize them again
-      if (choices && choices.length > 0) {
-        const randomizedChoices = randomizeBelowOptions(
-          choices.map((choice: Record<string, unknown> | string, index: number) => ({
-            providerName: String(
-              typeof choice === "object" && choice !== null 
-                ? choice.providerName || choice.name || "" 
-                : typeof choice === "string" ? choice : `Choice ${index}`
-            ),
-            name: String(
-              typeof choice === "object" && choice !== null 
-                ? choice.name || "" 
-                : typeof choice === "string" ? choice : `Choice ${index}`
-            ),
-            budget: index,
-            isSpp1: Boolean(
-              typeof choice === "object" && choice !== null && choice.isSpp1
-            ),
-            isNoneBelow: Boolean(
-              typeof choice === "object" && choice !== null
-                ? choice.isNoneBelow
-                : typeof choice === "string" && choice.toLowerCase().includes("below")
-            ),
-            choiceId: typeof choice === "object" && choice !== null && typeof choice.choiceId === "number"
-              ? choice.choiceId
-              : index,
-            budgetType: (typeof choice === "object" && choice !== null && typeof choice.budgetType === "string"
-              ? choice.budgetType
-              : "basic") as BudgetType,
-          }))
-        );
-        setCandidates(randomizedChoices);
-      }
-      
-      // Update ref
+      // Update the address reference
       previousAddressRef.current = address;
     }
-  }, [address, choices]);
+  }, [address]);
   
-  // Function to apply previous vote to a set of candidates
-  const applyPreviousVote = useCallback((candidatesToOrder: Choice[]) => {
-    try {
-      if (!previousVote?.votes || previousVote.votes.length === 0) {
-        return;
-      }
-      
-      // Get the most recent vote
-      const latestVote = previousVote.votes[0];
-      
-      if (!Array.isArray(latestVote.choice) || latestVote.choice.length === 0) {
-        return;
-      }
-      
-      const choiceIds = latestVote.choice;
-      
-      // Create a map of choiceId to ranking position
-      const rankMap = new Map<number, number>();
-      choiceIds.forEach((choiceId, index) => {
-        rankMap.set(choiceId, index);
-      });
-      
-      // Create a new array and sort it
-      const orderedCandidates = [...candidatesToOrder];
-      
-      orderedCandidates.sort((a, b) => {
-        const aRank = rankMap.get(a.choiceId);
-        const bRank = rankMap.get(b.choiceId);
-        
-        if (aRank === undefined && bRank === undefined) return 0;
-        if (aRank === undefined) return 1; 
-        if (bRank === undefined) return -1;
-        
-        return aRank - bRank;
-      });
-      
-      // Set the candidates order
-      setCandidates(orderedCandidates);
-      
-      // Set the reasoning if available
-      if (latestVote.reason) {
-        setReasoning(latestVote.reason);
-      }
-      
-      // Mark that we've applied the previous vote
-      setPreviousVoteApplied(true);
-      setHasChangedSinceLoaded(false);
-      toast.success("Previous vote loaded successfully");
-    } catch (error) {
-      console.error("Error applying previous vote:", error);
-      toast.error("Failed to load previous vote");
-      setCandidates(candidatesToOrder);
+  // Check if current wallet has previous votes
+  useEffect(() => {
+    if (previousVote?.votes && previousVote.votes.length > 0 && address) {
+      setPreviousVoteExists(true);
+    } else {
+      setPreviousVoteExists(false);
     }
-  }, [previousVote, setCandidates]);
-
+  }, [previousVote, address]);
+  
   // Process choices into candidates once when choices are loaded
   useEffect(() => {
     if (choices && choices.length > 0) {
@@ -178,11 +99,9 @@ export default function VotePage() {
           };
         });
 
-        // If previous vote is already loaded, apply it now
-        if (previousVote?.votes && previousVote.votes.length > 0 && !previousVoteApplied) {
-          applyPreviousVote(formattedChoices);
-        } else if (!previousVoteApplied) {
-          // Randomize the options below "None of the below"
+        // Only initialize candidates if we don't have any yet
+        // This preserves ballot state when switching wallets
+        if (candidates.length === 0) {
           const randomizedChoices = randomizeBelowOptions(formattedChoices);
           setCandidates(randomizedChoices);
         }
@@ -191,7 +110,7 @@ export default function VotePage() {
         setCandidates([]);
       }
     }
-  }, [choices, previousVote, previousVoteApplied, applyPreviousVote]);
+  }, [choices, candidates.length]);
 
   // Function to ensure consistent ordering of choices
   function ensureConsistentOrder(choicesToOrder: Choice[]) {
@@ -428,6 +347,76 @@ export default function VotePage() {
             won&apos;t be counted. You can also select between basic or extended
             budget for each candidate.
           </p>
+          
+          {previousVoteExists && !previousVoteApplied && (
+            <div className="bg-blue-900/50 p-3 rounded-lg mb-4 flex justify-between items-center">
+              <p className="text-blue-200">
+                This wallet has a previous vote. Would you like to load it?
+              </p>
+              <div className="flex gap-2">
+                <button 
+                  onClick={() => {
+                    if (previousVote?.votes && previousVote.votes.length > 0) {
+                      try {
+                        // Get the most recent vote
+                        const latestVote = previousVote.votes[0];
+                        
+                        if (Array.isArray(latestVote.choice) && latestVote.choice.length > 0) {
+                          const choiceIds = latestVote.choice;
+                          
+                          // Create a map of choiceId to ranking position
+                          const rankMap = new Map<number, number>();
+                          choiceIds.forEach((choiceId, index) => {
+                            rankMap.set(choiceId, index);
+                          });
+                          
+                          // Create a new array and sort it
+                          const orderedCandidates = [...candidates];
+                          
+                          orderedCandidates.sort((a, b) => {
+                            const aRank = rankMap.get(a.choiceId);
+                            const bRank = rankMap.get(b.choiceId);
+                            
+                            if (aRank === undefined && bRank === undefined) return 0;
+                            if (aRank === undefined) return 1; 
+                            if (bRank === undefined) return -1;
+                            
+                            return aRank - bRank;
+                          });
+                          
+                          // Set the candidates order
+                          setCandidates(orderedCandidates);
+                          
+                          // Set the reasoning if available
+                          if (latestVote.reason) {
+                            setReasoning(latestVote.reason);
+                          }
+                          
+                          // Mark that we've applied the previous vote
+                          setPreviousVoteApplied(true);
+                          setHasChangedSinceLoaded(false);
+                          toast.success("Previous vote loaded successfully");
+                        }
+                      } catch (error) {
+                        console.error("Error loading previous vote:", error);
+                        toast.error("Failed to load previous vote");
+                      }
+                    }
+                  }}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded-md text-sm"
+                >
+                  Load Vote
+                </button>
+                <button 
+                  onClick={() => setPreviousVoteApplied(true)}
+                  className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-1 rounded-md text-sm"
+                >
+                  Ignore
+                </button>
+              </div>
+            </div>
+          )}
+          
           {previousVoteApplied && (
             <div className="bg-blue-900/50 p-3 rounded-lg mb-4">
               <p className="text-blue-200">

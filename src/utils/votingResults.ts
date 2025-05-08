@@ -40,8 +40,6 @@ export async function getVotingResultData(
   // Step 1: Fetch results from Snapshot
   const proposalData = await fetchSnapshotResults(proposalId);
 
-  console.log("proposalData", proposalData);
-
   // Check if proposal exists
   if (!proposalData) {
     throw new Error("Proposal not found");
