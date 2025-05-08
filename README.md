@@ -4,6 +4,75 @@
 
 This application implements a Service Provider Program (SPP) allocation system using the Copeland method for ranked choice voting. It processes voting data from Snapshot, ranks candidates, and allocates budgets based on configurable rules.
 
+## Quick Start Guide
+
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- npm or yarn package manager
+- A modern web browser
+
+### Frontend Setup
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/spp2-voting-app.git
+cd spp2-voting-app
+```
+
+2. Install dependencies:
+```bash
+# Using npm
+npm install
+
+# Using yarn
+yarn install
+```
+
+3. Create a `.env` file in the root directory by copying .env.example:
+```bash
+# Copy the example environment file
+cp .env.example .env
+```
+
+Content of `.env.example`:
+```bash
+NEXT_PUBLIC_ETH_RPC_URL=https://eth.drpc.org
+NEXT_PUBLIC_WALLETCONNECT_ID=
+NEXT_PUBLIC_PROPOSAL_ID=0x98c65ac02f738ddb430fcd723ea5852a45168550b3daf20f75d5d508ecf28aa1
+NEXT_PUBLIC_PROPOSAL_SPACE=ens.eth
+NEXT_PUBLIC_CACHE=5
+```
+
+Make sure to set `NEXT_PUBLIC_WALLETCONNECT_ID` in your `.env` file. This is required if you plan to vote using a multisig wallet or WalletConnect.
+
+4. Start the development server:
+```bash
+# Using npm
+npm run dev
+
+# Using yarn
+yarn dev
+```
+
+The application will be available at `http://localhost:3000` (or your configured PORT).
+
+### Environment Variables
+
+- `NEXT_PUBLIC_ETH_RPC_URL`: Ethereum RPC URL for blockchain interactions (default provided)
+- `NEXT_PUBLIC_WALLETCONNECT_ID`: Required for WalletConnect integration, especially for multisig wallets. Get it from [WalletConnect Cloud](https://cloud.walletconnect.com/)
+- `NEXT_PUBLIC_PROPOSAL_ID`: The Snapshot proposal ID to interact with
+- `NEXT_PUBLIC_PROPOSAL_SPACE`: The Snapshot space name (e.g., 'ens.eth')
+- `NEXT_PUBLIC_CACHE`: Cache duration in minutes for API responses
+
+### Available Scripts
+
+- `yarn dev` or `npm run dev`: Starts the development server with hot-reload
+- `yarn build` or `npm run build`: Creates a production build
+- `yarn start` or `npm start`: Runs the production build
+- `yarn lint` or `npm run lint`: Runs the linter
+- `yarn script` or `npm run script`: Runs the Copeland ranking script
+
 ## Features
 
 - Processes ranked choice voting data from Snapshot or CSV files
