@@ -33,6 +33,21 @@ export function filterHeadToHeadMatches(
     return match;
   });
 
+  // Filter to only keep voters with more than 100 VP in each choice
+  matches = matches.map(match => {
+    return {
+      ...match,
+      choice1: {
+        ...match.choice1,
+        voters: match.choice1.voters.filter(voter => voter.vp > 100),
+      },
+      choice2: {
+        ...match.choice2,
+        voters: match.choice2.voters.filter(voter => voter.vp > 100),
+      }
+    };
+  });
+
   // sort matches by total votes
   matches.sort((a, b) => b.choice1.totalVotes - a.choice1.totalVotes);
 

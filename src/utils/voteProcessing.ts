@@ -255,7 +255,7 @@ export function processCopelandRanking(
           : -1;
 
         // Helper function to check if a choice position is valid (ranked and above None Below)
-        const isValidPosition = (pos: number) => pos !== -1 && (noneBelowPos === -1 || pos < noneBelowPos);
+        const isValidPosition = (pos: number) => pos !== -1 && (noneBelowPos === -1 || pos <= noneBelowPos);
         
         // Both choices must be validly positioned to be compared
         if (isValidPosition(posI) && isValidPosition(posJ)) {

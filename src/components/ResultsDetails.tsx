@@ -319,7 +319,7 @@ export function ResultsDetails({
                               </ul>
                             ) : (
                               <p className="text-xs text-gray-500">
-                                No voters
+                                No voters above 100 ENS vp
                               </p>
                             )}
                           </div>
@@ -359,7 +359,7 @@ export function ResultsDetails({
                               </ul>
                             ) : (
                               <p className="text-xs text-gray-500 md:text-right">
-                                No voters
+                                No voters above 100 ENS vp
                               </p>
                             )}
                           </div>
