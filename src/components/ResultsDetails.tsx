@@ -5,6 +5,7 @@ import { Allocation } from "@/utils/types";
 import { parseChoiceName } from "@/utils/parseChoiceName";
 import { useState, useEffect } from "react";
 import { Web3Provider } from "@ethersproject/providers";
+import { JsonRpcProvider } from "@ethersproject/providers";
 import { filterHeadToHeadMatches } from "@/utils/candidateComparisons";
 import { BasicBadge, ExtendedBadge } from "@/components/Badges";
 
@@ -39,6 +40,9 @@ export function ResultsDetails({
   useEffect(() => {
     if (window.ethereum) {
       setProvider(new Web3Provider(window.ethereum));
+    } else if (process.env.NEXT_PUBLIC_ETH_RPC_URL) {
+      // Fallback to RPC URL from environment variables
+      setProvider(new JsonRpcProvider(process.env.NEXT_PUBLIC_ETH_RPC_URL) as Web3Provider);
     }
   }, []);
 
