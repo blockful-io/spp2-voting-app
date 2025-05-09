@@ -98,7 +98,7 @@ export default function EnsElectionPage() {
         {
           color: "#93C5FD", // Lighter blue (disabled 3B82F6)
           label: `1 year remaining (${(
-            summary.streamBreakdown.oneYear.remaining / 1_000_000
+            Math.max(0, summary.streamBreakdown.oneYear.remaining) / 1_000_000
           ).toFixed(1)}M)`,
         },
         {
@@ -110,7 +110,7 @@ export default function EnsElectionPage() {
         {
           color: "#F9A8D4", // Lighter pink (disabled EC4899)
           label: `2 years remaining (${(
-            summary.streamBreakdown.twoYear.remaining / 1_000_000
+            Math.max(0, summary.streamBreakdown.twoYear.remaining) / 1_000_000
           ).toFixed(1)}M)`,
           subtext: (
             <Link
