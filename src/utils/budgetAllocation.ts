@@ -98,10 +98,29 @@ export function allocateBudgets(
     // Get budget amount for this specific choice
     const budget = choiceData.budget;
     
+    // Check if this provider fits within the total remaining budget
+    if (budget > remainingTotalBudget) {
+      allocations.push({
+        name: choice.name,
+        providerName,
+        score: choice.score,
+        averageSupport: choice.averageSupport,
+        budget,
+        allocated: false,
+        streamDuration: null,
+        rejectionReason: "Insufficient total budget",
+        isNoneBelow: false,
+        isSpp1,
+        budgetType
+      });
+      rejectedProjects++;
+      continue;
+    }
+    
     // Determine stream assignment according to the rules:
     let streamDuration: StreamDuration = null;
     let allocated = false;
-    let rejectionReason: string | null = null;
+    const rejectionReason: string | null = null;
     
     // Rule 1: Assign to 2-year stream if:
     // - Current service provider (SPP1)
@@ -116,8 +135,8 @@ export function allocateBudgets(
       allocated = true;
       allocatedProjects++;
     } 
-    // Rule 2: Otherwise, assign to 1-year stream if budget fits in remaining total
-    else if (budget <= remainingTotalBudget) {
+    // Rule 2: Otherwise, assign to 1-year stream if there's enough in total budget
+    else {
       streamDuration = "1-year";
       remainingTotalBudget -= budget;
       oneYearAllocated += budget;
@@ -125,12 +144,8 @@ export function allocateBudgets(
       allocated = true;
       allocatedProjects++;
     }
-    // Rule 3: Reject if budget doesn't fit in remaining total
-    else {
-      rejectionReason = "Insufficient budget";
-      rejectedProjects++;
-    }
     
+    console.log(choice.name, streamDuration, allocated, budget, remainingTwoYearBudget, remainingTotalBudget);
     // Add the allocation result
     allocations.push({
       name: choice.name,
